@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kulma — Panificadora Aurora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="app">
+
+    <header class="detail-bar">
+        <a class="icon-btn" href="index.html" aria-label="Voltar">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <span class="detail-bar__title">Panificadora Aurora</span>
+        <!-- Nav de conta: só ícones, à direita. -->
+        <nav class="topnav" aria-label="Sua conta">
+            <span class="topnav__group">
+                <a class="topnav__btn" href="#" aria-label="Notificações, 2 não lidas">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+                    <span class="topnav__dot"></span>
+                </a>
+                <a class="topnav__btn" href="#" aria-label="Carrinho, 3 itens">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H5"/></svg>
+                    <span class="topnav__count">3</span>
+                </a>
+                <a class="topnav__btn" href="#" aria-label="Pedidos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></a>
+            </span>
+            <a class="topnav__me" href="#" aria-label="Perfil"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></a>
+        </nav>
+    </header>
+
+    <!-- Capa: navy com padrão pontilhado de rota. -->
+    <div class="cover">
+        <div class="cover__mark">🥖</div>
+        <button class="float-btn" type="button" aria-label="Compartilhar">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+        </button>
+    </div>
+
+    <div class="store-head">
+        <h1 class="store-head__name">Panificadora Aurora</h1>
+        <p class="store-head__company">Sede Vila Mariana · Aurora Alimentos Ltda.</p>
+        <div class="store-head__meta">
+            <span class="rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg>
+                4,8
+            </span>
+            <span>· 312 avaliações</span>
+            <span class="dot-sep">•</span>
+            <span class="pill pill--open"><span class="pill__led"></span> Aberta · fecha às 20h</span>
+        </div>
+    </div>
+
+    <!-- A sede tem um único endereço (1:1 com address). -->
+    <div class="address">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+        <div>
+            <p class="address__line">Rua Domingos de Morais, 1420 — Vila Mariana</p>
+            <p class="address__sub">São Paulo, SP · 800 m de você · entrega em rondas a cada 2h</p>
+        </div>
+    </div>
+
+    <!-- Assinatura é sempre por sede; o valor é definido pela empresa (4.8). -->
+    <section class="subscribe">
+        <h2 class="subscribe__title">Inscreva-se nesta sede</h2>
+        <p class="subscribe__text">
+            Inscritos recebem as propagandas desta loja no feed e nas notificações.
+            A assinatura paga libera também as ofertas exclusivas.
+        </p>
+        <button class="btn btn--primary btn--block btn--stack" type="button">
+            Assinar por R$ 9,90/mês
+            <span class="btn__note">ou inscreva-se grátis</span>
+        </button>
+    </section>
+
+    <nav class="tabs" aria-label="Seções da loja">
+        <a class="is-active" href="#produtos">Produtos</a>
+        <a href="#propagandas">Propagandas</a>
+        <a href="#sobre">Sobre</a>
+    </nav>
+
+    <!-- Propagandas ativas desta sede -->
+    <section class="section" id="propagandas">
+        <div class="section__head">
+            <div>
+                <h2 class="section__title">Propagandas ativas</h2>
+                <p class="section__sub">2 campanhas nesta sede</p>
+            </div>
+        </div>
+
+        <div class="rail">
+            <article class="ad">
+                <div class="ad__media">
+                    <span class="badge badge--discount badge--float">-20%</span>
+                    🥐
+                </div>
+                <div class="ad__body">
+                    <h3 class="ad__title">Semana do café da manhã</h3>
+                    <p class="ad__store">Até 31/08 · 6 produtos</p>
+                    <div class="ad__foot">
+                        <span class="price">a partir de R$ 5,52</span>
+                        <span class="badge badge--urgent">2 dias</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="ad">
+                <div class="ad__media">
+                    <span class="badge badge--discount badge--float">-10%</span>
+                    🎂
+                </div>
+                <div class="ad__body">
+                    <h3 class="ad__title">Encomendas de bolo</h3>
+                    <p class="ad__store">Sem data de término · 4 produtos</p>
+                    <div class="ad__foot">
+                        <span class="price">R$ 62,10</span>
+                        <span class="badge badge--soft">Exclusiva de assinante</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="route" role="presentation">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+    </div>
+
+    <!-- Catálogo desta sede: só o que ela puxou do catálogo da empresa,
+         com o preço efetivo (preço da sede ou, sem ele, o da empresa). -->
+    <section class="section" id="produtos">
+        <div class="section__head">
+            <div>
+                <h2 class="section__title">Produtos desta loja</h2>
+                <p class="section__sub">86 itens disponíveis</p>
+            </div>
+            <a class="section__link" href="#">Ver tudo</a>
+        </div>
+
+        <div class="grid">
+            <a class="product" href="produto.html">
+                <div class="product__media">
+                    <span class="badge badge--discount badge--float">-20%</span>
+                    🥐
+                </div>
+                <div class="product__body">
+                    <h3 class="product__name">Croissant de manteiga</h3>
+                    <p class="product__store">12 em estoque</p>
+                    <p class="product__price">
+                        <span class="price-old">R$ 6,90</span>
+                        <span class="price price--sm">R$ 5,52</span>
+                    </p>
+                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span> (128)</p>
+                </div>
+            </a>
+
+            <a class="product" href="produto.html">
+                <div class="product__media">🍞</div>
+                <div class="product__body">
+                    <h3 class="product__name">Pão de forma integral</h3>
+                    <p class="product__store">7 em estoque</p>
+                    <p class="product__price"><span class="price price--sm">R$ 12,50</span></p>
+                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span> (203)</p>
+                </div>
+            </a>
+
+            <a class="product" href="produto.html">
+                <div class="product__media">
+                    <span class="badge badge--discount badge--float">-20%</span>
+                    🧁
+                </div>
+                <div class="product__body">
+                    <h3 class="product__name">Muffin de fubá</h3>
+                    <p class="product__store">
+                        <span class="badge badge--urgent">Últimas 3 unidades</span>
+                    </p>
+                    <p class="product__price">
+                        <span class="price-old">R$ 8,00</span>
+                        <span class="price price--sm">R$ 6,40</span>
+                    </p>
+                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,3</span> (39)</p>
+                </div>
+            </a>
+
+            <a class="product" href="produto.html">
+                <div class="product__media">🥧</div>
+                <div class="product__body">
+                    <h3 class="product__name">Torta de frango · fatia</h3>
+                    <p class="product__store">18 em estoque</p>
+                    <p class="product__price"><span class="price price--sm">R$ 14,90</span></p>
+                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span> (64)</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Horário por dia da semana, com exceção de data (4.2). -->
+    <section class="section" id="sobre">
+        <div class="section__head">
+            <div>
+                <h2 class="section__title">Horário de atendimento</h2>
+                <p class="section__sub">Hoje, segunda-feira</p>
+            </div>
+        </div>
+
+        <ul class="hours">
+            <li class="is-today"><span>Segunda</span><span>07:00 – 20:00</span></li>
+            <li><span>Terça a sexta</span><span>07:00 – 20:00</span></li>
+            <li><span>Sábado</span><span>07:00 – 18:00 · almoço 12:00 – 13:00</span></li>
+            <li class="is-closed"><span>Domingo</span><span>Fechada</span></li>
+            <li class="is-closed"><span>07/09 · feriado</span><span>Fechada</span></li>
+        </ul>
+
+        <p class="prose">
+            Padaria de bairro desde 1998. Produção própria de pães e confeitaria,
+            com entrega em rondas ao longo do dia e retirada no balcão.
+        </p>
+    </section>
+
+    <p class="proto-foot">
+        Protótipo estático · Perfil de sede —
+        <a href="index.html">menu principal</a> ·
+        <a href="produto.html">produto</a>
+    </p>
+
+    <!-- Navegação inferior: só descoberta. Início ao centro; ativa em azul meia-noite. -->
+    <nav class="tabbar" aria-label="Navegação principal">
+        <a class="tab" href="#">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3"/></svg></span>
+            Ofertas
+        </a>
+        <a class="tab" href="#">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg></span>
+            Produtos
+        </a>
+        <a class="tab" href="index.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
+            Início
+        </a>
+        <a class="tab is-active" href="#" aria-current="page">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-1.6-4.5A2 2 0 0 0 17.5 3h-11a2 2 0 0 0-1.9 1.5Z"/><path d="M5 9v10a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V9"/><path d="M9.5 20.5V14h5v6.5"/></svg></span>
+            Lojas
+        </a>
+        <a class="tab" href="#">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></span>
+            Favoritos
+        </a>
+    </nav>
+
+</main>
+</body>
+</html>

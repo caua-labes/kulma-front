@@ -1,0 +1,1759 @@
+/* =====================================================================
+   Kulma — App do cliente · protótipo HTML/CSS
+   Identidade (seção 7 do documento de projeto):
+   fundo branco · detalhes em #132A45 (navy) e #D6293B (vermelho).
+   O vermelho fica restrito a preço, botão principal, badge de urgência
+   e contador do carrinho. O navy carrega texto, ícones, bordas e o
+   estado ativo.
+   ===================================================================== */
+
+:root {
+    --navy:        #132A45;
+    --navy-700:    #1D3A5C;
+    --navy-300:    #7C90A8;
+    --navy-050:    #EDF1F7;
+    --red:         #D6293B;
+    --red-700:     #B41F30;
+    --red-050:     #FDECEE;
+
+    --ink:         #132A45;
+    --muted:       #66788E;
+    --line:        #E3E8EF;
+    --surface:     #FFFFFF;
+    --canvas:      #E9EDF2;
+
+    --radius:      14px;
+    --radius-sm:   10px;
+    --shadow:      0 1px 2px rgba(19, 42, 69, .05), 0 10px 30px rgba(19, 42, 69, .07);
+
+    --display: "Space Grotesk", "Inter", system-ui, sans-serif;
+    --body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; color: inherit; }
+
+/* O cliente é mobile-first (React Native); no desktop a tela vira um
+   aparelho centralizado sobre o canvas. */
+.app {
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding-bottom: 88px;
+    position: relative;
+}
+
+/* ---------- Topo ---------- */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 18px 12px;
+}
+
+.topbar--flat { border-bottom: none; }
+
+.topbar__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* A cidade consultada é o que identifica o topo da home. */
+.city {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.city strong {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--navy);
+}
+
+.city svg { align-self: center; color: var(--navy); }
+
+.icon-btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+/* ---------- Nav superior, só ícones, alinhada à direita ---------- */
+/* Carrinho · Pedidos · Perfil. O perfil é a âncora: círculo maior com
+   borda azul meia-noite, e os outros dois saem dele como uma extensão —
+   uma pastilha de mesma borda que corre por baixo do círculo. */
+
+.topnav {
+    display: flex;
+    align-items: center;
+}
+
+.topnav__group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 36px;
+    padding: 0 20px 0 5px;
+    margin-right: -16px;
+    border: 1px solid var(--navy);
+    /* Reta no lado que encosta no perfil; curva só na outra ponta. */
+    border-radius: 999px 0 0 999px;
+    background: var(--surface);
+}
+
+.topnav__btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: var(--navy);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav__btn:hover { background: var(--navy-050); }
+
+/* Perfil: maior que os demais e com borda própria. */
+.topnav__me {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--navy);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.topnav__me:hover { background: var(--navy-050); }
+
+/* Contador do carrinho — vermelho, conforme a regra de detalhes. */
+.topnav__count {
+    position: absolute;
+    top: -1px;
+    right: -3px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 4px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid var(--surface);
+}
+
+/* Notificações não lidas — ponto simples, sem número. */
+.topnav__dot {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--surface);
+}
+
+/* Ação contextual flutuando sobre a capa da sede / foto do produto. */
+.float-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .92);
+    border: 1px solid rgba(19, 42, 69, .10);
+    color: var(--navy);
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+}
+
+.float-btn.is-on { color: var(--red); }
+.float-btn.is-on svg { fill: var(--red); }
+
+
+/* ---------- Carrossel de ofertas ---------- */
+/* Nome da sede em cima, fora da imagem. A imagem ocupa a tela inteira
+   menos 20px de cada borda — o gap é maior que essa margem, então a
+   oferta vizinha nunca aparece de lado. Abaixo dela: nome da promoção
+   rolando à esquerda e prazo restante à direita; depois uma linha e as
+   bolinhas de quantidade, centralizadas. */
+
+.promos {
+    display: flex;
+    gap: 32px;
+    padding: 16px 20px 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.promos::-webkit-scrollbar { display: none; }
+
+.promo {
+    flex: none;
+    width: 100%;
+    scroll-snap-align: center;
+}
+
+.promo__store {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 8px 2px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.promo__store span {
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.promo__media {
+    position: relative;
+    height: 200px;
+    display: grid;
+    place-items: center;
+    font-size: 66px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 1px 1px, rgba(19,42,69,.09) 1px, transparent 1.5px) 0 0 / 13px 13px,
+        linear-gradient(140deg, var(--navy-050), #F8FAFC);
+}
+
+/* Descrição e prazo, abaixo da imagem. */
+.promo__foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 11px 2px 0;
+}
+
+/* Nome da promoção rolando da esquerda. */
+.promo__marquee {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+    mask-image: linear-gradient(90deg, #000 82%, transparent);
+}
+
+.promo__track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: promo-roll 14s linear infinite;
+}
+
+.promo__track span {
+    padding-right: 56px;
+    font-family: var(--display);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+@keyframes promo-roll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .promo__track { animation: none; }
+}
+
+/* Contagem regressiva da oferta — badge de urgência, em vermelho. */
+.promo__days {
+    flex: none;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--red-050);
+    color: var(--red-700);
+    font-size: 11.5px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ---------- Cartão de oferta (aba Ofertas) ---------- */
+/* Mesma linguagem do carrossel do topo — nome da sede fora da imagem,
+   imagem retangular — só que empilhado numa lista vertical, com o
+   cartão fechado por uma barra com seta em vez do preço: aqui não
+   aparece valor, só o desconto máximo da campanha. */
+
+.deals { display: grid; gap: 20px; }
+
+.deal__store {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 12px 14px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.deal__store span { font-weight: 400; color: var(--muted); }
+
+.deal {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+/* Retângulo menor que o do carrossel (200px). */
+.deal__media {
+    position: relative;
+    height: 176px;
+    display: grid;
+    place-items: center;
+    font-size: 52px;
+    background:
+        radial-gradient(circle at 1px 1px, rgba(19,42,69,.09) 1px, transparent 1.5px) 0 0 / 13px 13px,
+        linear-gradient(140deg, var(--navy-050), #F8FAFC);
+}
+
+/* Só a porcentagem máxima da campanha — sem valor em reais. */
+.deal__off {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 11px;
+    border-radius: 9px;
+    background: var(--red);
+    color: #fff;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+}
+
+/* Barra fechando o cartão embaixo da imagem: título centralizado, com
+   folga maior nas bordas. A seta (à direita) abre a linha de produtos —
+   uma coluna fantasma do mesmo tamanho do lado esquerdo é o que deixa
+   o título centralizado na barra inteira, não só no espaço sobrando. */
+.deal__bar {
+    display: grid;
+    grid-template-columns: 34px 1fr 34px;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 22px;
+    border-top: 1px solid var(--line);
+}
+
+.deal__bar-text {
+    grid-column: 2;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+/* Abre/fecha a linha de produtos da propaganda. */
+.deal__arrow {
+    grid-column: 3;
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    color: var(--navy-300);
+    cursor: pointer;
+}
+
+.deal__arrow:hover { background: var(--navy-050); color: var(--navy); }
+
+.deal__arrow svg { transition: transform .18s ease; }
+
+.deal-toggle:checked ~ .deal__bar .deal__arrow {
+    background: var(--navy-050);
+    color: var(--navy);
+}
+
+.deal-toggle:checked ~ .deal__bar .deal__arrow svg { transform: rotate(90deg); }
+
+/* Linha de produtos da propaganda: rolagem horizontal, até 10 itens e
+   depois um "Ver mais" — só aparece com a seta aberta. */
+
+/* Divisor cinza claro, como uma div à parte — separa a barra da lista
+   de produtos, só quando ela está aberta. Mesmo tom usado no resto da
+   interface (var(--line)), não mais navy. */
+.deal__divider {
+    display: none;
+    height: 2px;
+    background-image: radial-gradient(circle, var(--navy-300) 1px, transparent 1.4px);
+    background-size: 7px 2px;
+}
+
+.deal-toggle:checked ~ .deal__divider { display: block; }
+
+.deal-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Sem caixa ao redor do grupo — os produtos ficam soltos no fundo do
+   cartão, separados um do outro só por uma linha vermelha fina. */
+.deal__products {
+    display: none;
+    gap: 14px;
+    padding: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.deal__products::-webkit-scrollbar { display: none; }
+
+.deal-toggle:checked ~ .deal__products { display: flex; }
+
+.deal-item {
+    flex: none;
+    width: 100px;
+    padding-right: 14px;
+    border-right: 1px dotted var(--line);
+}
+
+.deal-item:last-of-type {
+    padding-right: 0;
+    border-right: none;
+}
+
+.deal-item__media {
+    height: 76px;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    border-radius: 8px;
+    background: var(--navy-050);
+}
+
+.deal-item__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 2.4em;
+    margin: 7px 0 0;
+    overflow: hidden;
+    font-size: 11.5px;
+    line-height: 1.3;
+    color: var(--navy);
+}
+
+/* Nota primeiro, depois o valor e só então o desconto: nessa ordem. */
+.deal-item__rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 5px 0 0;
+    font-size: 10.5px;
+    color: var(--muted);
+}
+
+.deal-item__rating svg { color: var(--navy); flex: none; }
+
+.deal-item__price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: 4px 0 0;
+    flex-wrap: wrap;
+}
+
+.deal-item__price .price-old { font-size: 10.5px; }
+
+.deal-item__off {
+    display: inline-block;
+    margin: 4px 0 0;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Fecha a lista — sempre o 11º item da rolagem, centralizado na
+   vertical (os produtos ao lado são mais altos, por causa da nota,
+   preço e desconto abaixo da imagem). */
+/* Sem caixa nem borda — só o texto e a seta, em navy. */
+.deal-more {
+    flex: none;
+    align-self: center;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 76px;
+    margin-top: 0;
+    border-radius: 10px;
+    color: var(--navy);
+    font-family: var(--display);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.deal-more:hover { background: var(--navy-050); }
+
+.promos__line {
+    height: 1px;
+    margin: 14px 18px 0;
+    background: var(--line);
+}
+
+/* Uma bolinha por oferta, no máximo 7. */
+.promos__dots {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 13px;
+}
+
+.promos__dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--navy-300);
+    opacity: .32;
+}
+
+.promos__dots span.is-active {
+    width: 7px;
+    height: 7px;
+    background: var(--navy);
+    opacity: 1;
+}
+
+/* ---------- Busca ---------- */
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 18px 0;
+    padding: 0 0 0 15px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--navy-050);
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.search__text {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Lupa no fim, em quadrado vermelho encostado nas bordas do campo. */
+.search__go {
+    flex: none;
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    border: none;
+    border-radius: 0;
+    background: var(--navy);
+    color: #fff;
+    cursor: pointer;
+}
+
+.search__go:hover { background: var(--navy-700); }
+
+.search__hint {
+    margin: 8px 20px 0;
+    font-size: 11.5px;
+    color: var(--navy-300);
+}
+
+/* ---------- Chips de categoria ---------- */
+
+/* Categorias em pirâmide: só 3 linhas, cada uma mais estreita que a
+   anterior. As três rolam juntas — um carrossel só, com as linhas
+   centralizadas dentro dele, em vez de cada linha rolar por conta
+   própria. */
+.chips {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    /* Trava em 3 linhas de categoria — nunca cresce além disso, mesmo
+       que uma quarta linha seja adicionada por engano no futuro. */
+    max-height: 132px; /* 3 linhas de chip + os 2 vãos entre elas + o padding vertical */
+    padding: 10px 18px 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar { display: none; }
+
+.chips__row {
+    display: flex;
+    flex: none;
+    gap: 6px;
+}
+
+.chips__row:nth-child(2) { margin-left: 26px; }
+.chips__row:nth-child(3) { margin-left: 52px; }
+
+/* Cada categoria é um checkbox escondido + label: clicar ativa o
+   filtro (fundo navy), clicar de novo desativa e volta a mostrar tudo.
+   Mais de uma categoria pode ficar ativa ao mesmo tempo. */
+.chip-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.chip {
+    flex: none;
+    scroll-snap-align: start;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 12.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.chip-toggle:checked + .chip {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+    font-weight: 500;
+}
+
+.chip-toggle:focus-visible + .chip {
+    outline: 2px solid var(--navy);
+    outline-offset: 1px;
+}
+
+/* ---------- Abas Produtos / Ofertas / Lojas ---------- */
+/* Troca de conteúdo sem JavaScript: três radios escondidos comandam a
+   aba ativa e qual lista aparece. A aba selecionada é vermelha. */
+
+.tabsw__radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tabsw__bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin: 10px 18px 0;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--navy-050);
+}
+
+.tabsw__bar label {
+    padding: 9px 8px;
+    border-radius: 9px;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.tabsw__bar label:hover { color: var(--navy); }
+
+#aba-produtos:checked ~ .tabsw__bar label[for="aba-produtos"],
+#aba-ofertas:checked  ~ .tabsw__bar label[for="aba-ofertas"],
+#aba-lojas:checked    ~ .tabsw__bar label[for="aba-lojas"] {
+    background: var(--navy);
+    color: #fff;
+}
+
+.tabsw__radio:focus-visible ~ .tabsw__bar label[for="aba-produtos"],
+.tabsw__radio:focus-visible ~ .tabsw__bar label[for="aba-ofertas"],
+.tabsw__radio:focus-visible ~ .tabsw__bar label[for="aba-lojas"] {
+    outline: 2px solid var(--navy);
+    outline-offset: 1px;
+}
+
+.pane { display: none; padding: 18px 18px 0; }
+
+#aba-produtos:checked ~ #pane-produtos,
+#aba-ofertas:checked  ~ #pane-ofertas,
+#aba-lojas:checked    ~ #pane-lojas { display: block; }
+
+/* ---------- Seções ---------- */
+
+.section { padding: 22px 18px 0; }
+
+.section__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.section__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+.section__sub {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+.section__link {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy);
+    border-bottom: 1px solid var(--navy-300);
+    padding-bottom: 1px;
+}
+
+/* Divisor pontilhado — assinatura visual de rota (seção 7). */
+.route {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 18px 0;
+    color: var(--navy-300);
+}
+
+.route::before,
+.route::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background-image: radial-gradient(circle, var(--navy-300) 1px, transparent 1.4px);
+    background-size: 7px 2px;
+}
+
+.route svg { color: var(--red); }
+
+/* ---------- Propagandas (carrossel) ---------- */
+
+.rail {
+    display: flex;
+    gap: 12px;
+    padding: 2px 18px 6px;
+    margin: 0 -18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.rail::-webkit-scrollbar { display: none; }
+
+.ad {
+    flex: none;
+    width: 252px;
+    scroll-snap-align: start;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.ad__media {
+    position: relative;
+    height: 108px;
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    background:
+        radial-gradient(circle at 1px 1px, rgba(19,42,69,.10) 1px, transparent 1.5px) 0 0 / 12px 12px,
+        linear-gradient(135deg, var(--navy-050), #F7F9FC);
+}
+
+.ad__body { padding: 12px 13px 14px; }
+
+.ad__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.ad__store {
+    margin: 3px 0 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+.ad__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ---------- Badges ---------- */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+
+/* Vermelho: desconto e urgência. */
+.badge--discount { background: var(--red); color: #fff; }
+.badge--urgent   { background: var(--red-050); color: var(--red-700); }
+/* Navy: informação neutra e exclusividade de assinante. */
+.badge--navy     { background: var(--navy); color: #fff; }
+.badge--soft     { background: var(--navy-050); color: var(--navy-700); }
+
+.badge--float {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* ---------- Preço ---------- */
+
+.price {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: -.01em;
+}
+
+.price--lg { font-size: 27px; }
+.price--sm { font-size: 15px; }
+
+.price-old {
+    margin-right: 6px;
+    font-size: 12.5px;
+    color: var(--navy-300);
+    text-decoration: line-through;
+}
+
+/* ---------- Cartão de sede ---------- */
+
+.stores { display: grid; gap: 10px; }
+
+.store {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+/* Imagem da empresa: quadrado à esquerda, centralizado na vertical. */
+.store__mark {
+    flex: none;
+    align-self: center;
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--navy-050);
+    font-size: 29px;
+}
+
+.store__name a { color: inherit; }
+
+.store__name a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* Inscrever-se na sede — pessoa com "+", no canto superior direito. */
+.store__sub {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.store__sub:hover { background: var(--navy-050); }
+
+/* Já inscrito. */
+.store__sub.is-on {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+}
+
+.store__body { flex: 1; min-width: 0; }
+
+.store__name {
+    margin: 0;
+    padding-right: 38px;
+    font-family: var(--display);
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.store__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+.dot-sep { color: var(--line); }
+
+.rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.rating svg { color: var(--navy); }
+
+.store__tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 9px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+.pill__led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--navy-300);
+}
+
+.pill--open { border-color: rgba(19,42,69,.22); color: var(--navy); }
+.pill--open .pill__led { background: var(--navy); }
+
+.pill--closed { color: var(--navy-300); }
+
+/* ---------- Grade de produtos ---------- */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    gap: 12px;
+}
+
+/* Escada: as duas colunas correm em multi-coluna e o rótulo "Buscando
+   em" abre a da esquerda. Como a coluna da direita começa no topo, o
+   produto dela sobe — aparece um pedaço dele ao lado do rótulo e a
+   lista desce na diagonal, em vez de ficar em fila. */
+.grid--escada {
+    display: block;
+    column-count: 2;
+    column-gap: 12px;
+}
+
+.grid--escada > * {
+    break-inside: avoid;
+    margin-bottom: 12px;
+}
+
+/* Rótulo da busca: duas linhas, ocupando só a coluna da esquerda, com o
+   botão de cidade centralizado na vertical ao lado das duas. */
+.grid__lead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 0 12px;
+    padding: 3px 2px 0;
+}
+
+.grid__lead-text { min-width: 0; }
+
+/* Abre o seletor de cidade. */
+.lead__pin {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.lead__pin:hover { background: var(--navy-050); }
+
+.grid__lead span {
+    display: block;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+.grid__lead strong {
+    display: block;
+    margin-top: 1px;
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--navy);
+}
+
+.product {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+/* O nome estica o link por cima do cartão inteiro, deixando os botões
+   de ação clicáveis por cima dele. */
+.product__name a { color: inherit; }
+
+.product__name a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* Favoritar · adicionar ao carrinho · buscar similares. */
+.product__acts {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    display: flex;
+    gap: 4px;
+}
+
+.product__act {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(19, 42, 69, .10);
+    background: rgba(255, 255, 255, .94);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+
+.product__act.is-on { color: var(--red); border-color: rgba(214, 41, 59, .35); }
+.product__act.is-on svg { fill: var(--red); }
+
+.product__media {
+    position: relative;
+    height: 158px;
+    display: grid;
+    place-items: center;
+    font-size: 44px;
+    background: linear-gradient(160deg, var(--navy-050), #F8FAFC);
+}
+
+.product__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 11px 12px;
+}
+
+.product__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 2.7em;
+    margin: 0 0 2px;
+    overflow: hidden;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.35;
+}
+
+.product__store {
+    margin: 0 0 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+.product__price { display: flex; align-items: baseline; flex-wrap: wrap; }
+
+/* Nota do produto, abaixo do preço. Agrega as avaliações de todas as
+   sedes da empresa que vendem o item (regra 4.7). */
+.product__rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: auto 0 0;      /* empurra a nota para o rodapé do cartão */
+    padding-top: 7px;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+.product__rating .rating { font-size: 12px; }
+
+/* ---------- Botões ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 18px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    cursor: pointer;
+}
+
+.btn--block { width: 100%; }
+
+/* Botão com legenda em segunda linha. */
+.btn--stack {
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+/* Botão principal: o único vermelho cheio da tela. */
+.btn--primary { background: var(--red); color: #fff; }
+.btn--primary:hover { background: var(--red-700); }
+
+.btn--outline {
+    background: var(--surface);
+    border-color: var(--navy);
+    color: var(--navy);
+}
+
+.btn--outline:hover { background: var(--navy-050); }
+
+.btn--quiet {
+    background: var(--navy-050);
+    border-color: var(--navy-050);
+    color: var(--navy);
+}
+
+.btn__note {
+    display: block;
+    font-family: var(--body);
+    font-size: 11.5px;
+    font-weight: 400;
+    opacity: .85;
+}
+
+/* ---------- Pop-up de cidade ---------- */
+/* Abre e fecha sem JavaScript: um checkbox escondido comanda o estado.
+   A busca é sempre filtrada por cidade (seção 1 do documento). */
+
+.modal__toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal { display: none; }
+
+#modal-cidade:checked ~ .modal { display: block; }
+
+.modal__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(19, 42, 69, .45);
+    cursor: pointer;
+}
+
+.modal__box {
+    position: fixed;
+    z-index: 41;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 36px);
+    max-width: 380px;
+    padding: 16px 16px 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: 0 18px 50px rgba(19, 42, 69, .28);
+}
+
+.modal__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.modal__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* X vermelho para fechar. */
+.modal__close {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--red-050);
+    color: var(--red);
+    cursor: pointer;
+}
+
+.modal__close:hover { background: var(--red); color: #fff; }
+
+.modal .search { margin: 13px 0 0; }
+
+.modal__list {
+    max-height: 40vh;
+    margin-top: 6px;
+    overflow-y: auto;
+}
+
+.city-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 4px;
+    border: none;
+    border-bottom: 1px dashed var(--line);
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.modal__list li:last-child .city-opt { border-bottom: none; }
+
+.city-opt:hover { background: var(--navy-050); }
+
+.city-opt__body { flex: 1; min-width: 0; }
+
+.city-opt__name {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.city-opt__meta {
+    display: block;
+    margin-top: 1px;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+.city-opt.is-current .city-opt__name { font-weight: 600; }
+.city-opt.is-current svg { color: var(--navy); }
+
+/* Usar a localização do aparelho — cobre o rodapé do pop-up. */
+.modal__geo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: calc(100% + 32px);
+    margin: 8px -16px 0;
+    padding: 15px;
+    border: none;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--display);
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    cursor: pointer;
+}
+
+.modal__geo:hover { background: var(--navy-700); }
+
+/* ---------- Navegação inferior ---------- */
+/* Ofertas · Produtos · Início · Lojas · Favoritos — só descoberta.
+   Início fica no centro exato; a aba ativa é marcada em azul meia-noite
+   (ícone, rótulo e a pastilha atrás do ícone), sem nenhum vermelho. */
+
+.tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding: 7px 4px calc(7px + env(safe-area-inset-bottom, 0px));
+    z-index: 30;
+}
+
+.tab {
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+    padding: 2px 0;
+    font-size: 10px;
+    letter-spacing: -.01em;
+    color: var(--navy-300);
+}
+
+.tab__icon {
+    display: grid;
+    place-items: center;
+    height: 26px;
+}
+
+.tab.is-active { color: var(--navy); font-weight: 600; }
+
+.tab.is-active svg { stroke-width: 2.1; }
+
+/* ---------- Cabeçalho de detalhe (sede e produto) ---------- */
+
+.detail-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+}
+
+.detail-bar__title {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/* ---------- Capa da sede ---------- */
+
+.cover {
+    position: relative;
+    height: 140px;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.16) 1px, transparent 1.6px) 0 0 / 14px 14px,
+        linear-gradient(135deg, var(--navy) 0%, var(--navy-700) 100%);
+}
+
+.cover__mark {
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.22);
+    font-size: 32px;
+}
+
+.store-head { padding: 16px 18px 0; }
+
+.store-head__name {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--navy);
+}
+
+.store-head__company {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.store-head__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+/* ---------- Bloco de endereço ---------- */
+
+.address {
+    display: flex;
+    gap: 11px;
+    margin: 14px 18px 0;
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.address svg { flex: none; color: var(--red); margin-top: 2px; }
+
+.address__line { margin: 0; font-size: 13.5px; color: var(--navy); }
+
+.address__sub { margin: 3px 0 0; font-size: 12.5px; color: var(--muted); }
+
+/* ---------- Assinatura da sede ---------- */
+
+.subscribe {
+    margin: 16px 18px 0;
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--navy-050);
+}
+
+.subscribe__title {
+    margin: 0 0 4px;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.subscribe__text {
+    margin: 0 0 13px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+/* ---------- Âncoras em formato de abas ---------- */
+
+.tabs {
+    display: flex;
+    gap: 22px;
+    margin: 20px 18px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.tabs a {
+    padding: 0 0 10px;
+    font-size: 13.5px;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.tabs a.is-active {
+    color: var(--navy);
+    font-weight: 600;
+    border-bottom-color: var(--red);
+}
+
+[id] { scroll-margin-top: 64px; }
+
+/* ---------- Horário de atendimento ---------- */
+
+.hours { display: grid; gap: 0; margin-top: 4px; }
+
+.hours li {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 2px;
+    font-size: 13px;
+    border-bottom: 1px dashed var(--line);
+}
+
+.hours li:last-child { border-bottom: none; }
+
+.hours span:first-child { color: var(--muted); }
+.hours span:last-child  { color: var(--navy); font-weight: 500; }
+
+.hours li.is-today span { color: var(--navy); font-weight: 600; }
+.hours li.is-closed span:last-child { color: var(--navy-300); font-weight: 400; }
+
+/* ---------- Tela de produto ---------- */
+
+.hero {
+    position: relative;
+    height: 250px;
+    display: grid;
+    place-items: center;
+    font-size: 86px;
+    background: linear-gradient(160deg, var(--navy-050), #F8FAFC);
+    border-bottom: 1px solid var(--line);
+}
+
+.product-head { padding: 18px 18px 0; }
+
+.eyebrow {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--navy-300);
+}
+
+.product-head__name {
+    margin: 6px 0 0;
+    font-family: var(--display);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    color: var(--navy);
+}
+
+.price-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.price-note {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+.sold-by {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin: 16px 18px 0;
+    padding: 12px 13px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.sold-by__mark {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: var(--navy-050);
+    font-size: 21px;
+}
+
+.sold-by__body { flex: 1; min-width: 0; }
+
+.sold-by__name {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.sold-by__meta { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
+
+.prose {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #3D5470;
+    line-height: 1.65;
+}
+
+.specs { margin-top: 12px; }
+
+.specs li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 2px;
+    font-size: 13px;
+    border-bottom: 1px dashed var(--line);
+}
+
+.specs li:last-child { border-bottom: none; }
+.specs span:first-child { color: var(--muted); }
+.specs span:last-child { color: var(--navy); font-weight: 500; }
+
+/* Outras sedes que vendem o mesmo produto do catálogo. */
+.offers { display: grid; gap: 8px; margin-top: 4px; }
+
+.offer {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+.offer__body { flex: 1; min-width: 0; }
+.offer__name { margin: 0; font-size: 13.5px; font-weight: 500; color: var(--navy); }
+.offer__meta { margin: 2px 0 0; font-size: 11.5px; color: var(--muted); }
+
+/* ---------- Barra de ação fixa ---------- */
+
+.actionbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    z-index: 30;
+}
+
+.actionbar .btn--outline { flex: none; padding: 13px 14px; }
+.actionbar .btn--primary { flex: 1; }
+
+.app--action { padding-bottom: 96px; }
+
+/* ---------- Rodapé do protótipo ---------- */
+
+.proto-foot {
+    margin: 26px 18px 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 11.5px;
+    color: var(--navy-300);
+    text-align: center;
+}
+
+.proto-foot a { color: var(--navy); font-weight: 600; }
