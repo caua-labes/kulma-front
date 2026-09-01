@@ -12,29 +12,17 @@
 <body>
 <main class="app">
 
-    <!-- Topo: só a cidade consultada (a busca é filtrada por ela) + conta. -->
-    <header class="topbar topbar--flat">
-        <div class="topbar__row">
-            <p class="city">
-                <strong>São Paulo, SP</strong>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </p>
-        <nav class="topnav" aria-label="Sua conta">
-            <span class="topnav__group">
-                <a class="topnav__btn" href="#" aria-label="Notificações, 2 não lidas">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-                    <span class="topnav__dot"></span>
-                </a>
-                <a class="topnav__btn" href="#" aria-label="Carrinho, 3 itens">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H5"/></svg>
-                    <span class="topnav__count">3</span>
-                </a>
-                <a class="topnav__btn" href="#" aria-label="Pedidos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></a>
-            </span>
-            <a class="topnav__me" href="#" aria-label="Perfil"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></a>
-        </nav>
-        </div>
-    </header>
+    <!-- Conta: avatar abre o painel inferior; carrinho fica de fora dele,
+         porque comprar é fluxo de compra e o contador precisa ficar à vista. -->
+    <div class="account">
+        <a class="account__cart" href="#" aria-label="Carrinho, 3 itens">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H5"/></svg>
+            <span class="account__count">3</span>
+        </a>
+        <label class="account__avatar has-news" for="sheet-conta" role="button" tabindex="0" aria-label="Sua conta, 2 notificações não lidas">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+        </label>
+    </div>
 
     <!-- Carrossel de ofertas das sedes em que o cliente é inscrito (4.8):
          nome da sede fora da imagem; abaixo dela, promoção rolando e prazo. -->
@@ -138,46 +126,19 @@
         <span></span>
     </div>
 
-    <div class="search">
-        <span class="search__text">Buscar produtos, lojas ou ofertas</span>
-        <button class="search__go" type="button" aria-label="Buscar">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-        </button>
+    <div class="search-row">
+        <div class="search">
+            <span class="search__text">Buscar produtos, lojas ou ofertas</span>
+            <button class="search__go" type="button" aria-label="Buscar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            </button>
+        </div>
+        <label class="filter-btn" for="modal-filtro" role="button" tabindex="0" aria-label="Filtros, 2 aplicados">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            <span class="filter-btn__count">2</span>
+        </label>
     </div>
     <p class="search__hint">Uma busca só cobre todas as lojas da sua cidade.</p>
-
-    <!-- Categorias: clique ativa o filtro; clicar de novo desativa e
-         volta a listar tudo. Três linhas, rolando juntas de lado. -->
-    <nav class="chips" aria-label="Categorias">
-        <div class="chips__row">
-            <input class="chip-toggle" type="checkbox" id="cat-1">
-            <label class="chip" for="cat-1">Padaria</label>
-            <input class="chip-toggle" type="checkbox" id="cat-2">
-            <label class="chip" for="cat-2">Mercado</label>
-            <input class="chip-toggle" type="checkbox" id="cat-3">
-            <label class="chip" for="cat-3">Hortifrúti</label>
-            <input class="chip-toggle" type="checkbox" id="cat-4">
-            <label class="chip" for="cat-4">Açougue</label>
-            <input class="chip-toggle" type="checkbox" id="cat-5">
-            <label class="chip" for="cat-5">Farmácia</label>
-        </div>
-        <div class="chips__row">
-            <input class="chip-toggle" type="checkbox" id="cat-6">
-            <label class="chip" for="cat-6">Bebidas</label>
-            <input class="chip-toggle" type="checkbox" id="cat-7">
-            <label class="chip" for="cat-7">Pet</label>
-            <input class="chip-toggle" type="checkbox" id="cat-8">
-            <label class="chip" for="cat-8">Doces</label>
-            <input class="chip-toggle" type="checkbox" id="cat-9">
-            <label class="chip" for="cat-9">Congelados</label>
-        </div>
-        <div class="chips__row">
-            <input class="chip-toggle" type="checkbox" id="cat-10">
-            <label class="chip" for="cat-10">Limpeza</label>
-            <input class="chip-toggle" type="checkbox" id="cat-11">
-            <label class="chip" for="cat-11">Papelaria</label>
-        </div>
-    </nav>
 
     <!-- Duas abas comandando a lista vertical da home: Produtos ou Lojas.
          A aba selecionada fica com fundo vermelho. -->
@@ -194,14 +155,6 @@
 
         <section class="pane" id="pane-produtos" aria-label="Produtos">
             <div class="grid grid--escada">
-                <div class="grid__lead">
-                    <div class="grid__lead-text">
-                        <span>Buscando em:</span>
-                        <strong>São Paulo, SP</strong>
-                    </div>
-                    <label class="lead__pin" for="modal-cidade" title="Trocar cidade" role="button" tabindex="0"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></label>
-                </div>
-
             <article class="product">
                 <div class="product__media">
                 <span class="badge badge--discount badge--float">-20%</span>
@@ -305,14 +258,6 @@
         </section>
 
         <section class="pane" id="pane-ofertas" aria-label="Ofertas">
-            <div class="grid__lead">
-                <div class="grid__lead-text">
-                    <span>Buscando em:</span>
-                    <strong>São Paulo, SP</strong>
-                </div>
-                <label class="lead__pin" for="modal-cidade" title="Trocar cidade" role="button" tabindex="0"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></label>
-            </div>
-
             <div class="deals">
                 <article class="deal">
                     <p class="deal__store">Panificadora Aurora <span>· Vila Mariana</span></p>
@@ -955,14 +900,6 @@
         </section>
 
         <section class="pane" id="pane-lojas" aria-label="Lojas">
-            <div class="grid__lead">
-                <div class="grid__lead-text">
-                    <span>Buscando em:</span>
-                    <strong>São Paulo, SP</strong>
-                </div>
-                <label class="lead__pin" for="modal-cidade" title="Trocar cidade" role="button" tabindex="0"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></label>
-            </div>
-
             <div class="stores">
                 <article class="store">
                     <div class="store__mark">🥖</div>
@@ -1042,9 +979,94 @@
     </p>
 
 
+    <!-- Painel de conta: sobe da base, perto do polegar. Mesma mecânica de
+         checkbox do pop-up de cidade — sem JavaScript. A troca de cidade,
+         que ficou órfã, volta a ter dono como uma linha daqui. -->
+    <input class="sheet-toggle" type="checkbox" id="sheet-conta">
+    <label class="sheet__scrim" for="sheet-conta" aria-label="Fechar"></label>
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Sua conta">
+        <div class="sheet__head">
+            <div class="sheet__mark">
+                <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+            </div>
+            <div>
+                <p class="sheet__name">Cauã Labes</p>
+                <p class="sheet__mail">caua@email.com</p>
+            </div>
+            <label class="sheet__close" for="sheet-conta" title="Fechar" role="button" tabindex="0">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </label>
+        </div>
+
+        <button class="sheet__row" type="button">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></i>
+            <span class="sheet__label">Meu perfil</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <button class="sheet__row" type="button">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></i>
+            <span class="sheet__label">Notificações</span>
+            <span class="badge badge--discount">2</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <button class="sheet__row" type="button">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></i>
+            <span class="sheet__label">Meus pedidos</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <button class="sheet__row" type="button">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></i>
+            <span class="sheet__label">Favoritos</span>
+            <span class="sheet__value">9 produtos</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <div class="sheet__sep"></div>
+
+        <!-- Abre o pop-up de cidade que já existe; fecha este painel junto. -->
+        <label class="sheet__row" for="modal-cidade" role="button" tabindex="0">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></i>
+            <span class="sheet__label">Cidade</span>
+            <span class="sheet__value">São Paulo, SP</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </label>
+
+        <button class="sheet__row" type="button">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-1.6-4.5A2 2 0 0 0 17.5 3h-11a2 2 0 0 0-1.9 1.5Z"/><path d="M5 9v10a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V9"/><path d="M9.5 20.5V14h5v6.5"/></svg></i>
+            <span class="sheet__label">Minhas assinaturas</span>
+            <span class="sheet__value">4 lojas</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <button class="sheet__row" type="button">
+            <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="3.6"/></svg></i>
+            <span class="sheet__label">Configurações</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <div class="sheet__sep"></div>
+
+        <div class="sheet__foot">
+            <button class="sheet__row sheet__row--out" type="button">
+                <i><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></i>
+                <span class="sheet__label">Sair da conta</span>
+            </button>
+
+            <!-- Idioma do cliente: herdado do país no cadastro (seção 5). -->
+            <label class="sheet__lang" for="modal-idioma" role="button" tabindex="0" aria-label="Trocar idioma, atual Português">
+                <span class="flag">🇧🇷</span>
+                Português
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </label>
+        </div>
+    </div>
+
     <!-- Pop-up de troca de cidade: input em cima, lista embaixo. -->
     <input class="modal__toggle" type="checkbox" id="modal-cidade">
-    <div class="modal">
+    <div class="modal modal--cidade">
         <label class="modal__backdrop" for="modal-cidade" aria-label="Fechar"></label>
         <div class="modal__box" role="dialog" aria-modal="true" aria-label="Trocar cidade">
             <div class="modal__head">
@@ -1127,6 +1149,223 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.6"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></svg>
                 Usar minha localização
             </button>
+        </div>
+    </div>
+
+
+    <!-- Pop-up de idioma: bandeira ao lado do país, mesma mecânica da cidade. -->
+    <input class="modal__toggle" type="checkbox" id="modal-idioma">
+    <div class="modal modal--idioma">
+        <label class="modal__backdrop" for="modal-idioma" aria-label="Fechar"></label>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-label="Trocar idioma">
+            <div class="modal__head">
+                <h2 class="modal__title">Idioma</h2>
+                <label class="modal__close" for="modal-idioma" title="Fechar" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+            </div>
+
+            <div class="search">
+                <span class="search__text">Buscar idioma</span>
+                <button class="search__go" type="button" aria-label="Buscar idioma"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+            </div>
+
+            <ul class="modal__list">
+                <li>
+                    <button class="city-opt is-current" type="button">
+                        <span class="opt-flag">🇧🇷</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Português</span>
+                            <span class="city-opt__meta">Brasil · pt-BR</span>
+                        </span>
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5"/></svg>
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇺🇸</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">English</span>
+                            <span class="city-opt__meta">Estados Unidos · en-US</span>
+                        </span>
+                        
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇪🇸</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Español</span>
+                            <span class="city-opt__meta">Espanha · es-ES</span>
+                        </span>
+                        
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇦🇷</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Español</span>
+                            <span class="city-opt__meta">Argentina · es-AR</span>
+                        </span>
+                        
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇵🇹</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Português</span>
+                            <span class="city-opt__meta">Portugal · pt-PT</span>
+                        </span>
+                        
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇫🇷</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Français</span>
+                            <span class="city-opt__meta">França · fr-FR</span>
+                        </span>
+                        
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇮🇹</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Italiano</span>
+                            <span class="city-opt__meta">Itália · it-IT</span>
+                        </span>
+                        
+                    </button>
+                </li>
+                <li>
+                    <button class="city-opt" type="button">
+                        <span class="opt-flag">🇩🇪</span>
+                        <span class="city-opt__body">
+                            <span class="city-opt__name">Deutsch</span>
+                            <span class="city-opt__meta">Alemanha · de-DE</span>
+                        </span>
+                        
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Pop-up de filtros da busca. As categorias, que saíram da home,
+         voltam a ter lugar aqui dentro. -->
+    <input class="modal__toggle" type="checkbox" id="modal-filtro">
+    <div class="modal modal--filtro">
+        <label class="modal__backdrop" for="modal-filtro" aria-label="Fechar"></label>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-label="Filtros">
+            <div class="modal__head">
+                <h2 class="modal__title">Filtros</h2>
+                <label class="modal__close" for="modal-filtro" title="Fechar" role="button" tabindex="0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+            </div>
+
+            <div class="filtro__body">
+                <p class="filtro__legend">Ordenar por</p>
+                <div class="filtro__chips">
+                    <input class="fchip-input" type="radio" name="f-ord" id="f-ord-0" checked>
+                    <label class="fchip" for="f-ord-0">Relevância</label>
+                    <input class="fchip-input" type="radio" name="f-ord" id="f-ord-1">
+                    <label class="fchip" for="f-ord-1">Menor preço</label>
+                    <input class="fchip-input" type="radio" name="f-ord" id="f-ord-2">
+                    <label class="fchip" for="f-ord-2">Maior nota</label>
+                    <input class="fchip-input" type="radio" name="f-ord" id="f-ord-3">
+                    <label class="fchip" for="f-ord-3">Mais perto</label>
+                </div>
+
+                <div class="cat-head">
+                    <p class="filtro__legend">Categoria</p>
+                    <input class="fchip-input" type="checkbox" id="cat-busca">
+                    <div class="cat-search">
+                        <label class="cat-search__go" for="cat-busca" role="button" tabindex="0" aria-label="Buscar categoria">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+                        </label>
+                        <span class="cat-search__text">Buscar categoria</span>
+                    </div>
+                </div>
+                <div class="filtro__chips filtro__chips--scroll">
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-0">
+                    <label class="fchip" for="f-cat-0">Padaria</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-1" checked>
+                    <label class="fchip" for="f-cat-1">Mercado</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-2">
+                    <label class="fchip" for="f-cat-2">Hortifrúti</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-3">
+                    <label class="fchip" for="f-cat-3">Açougue</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-4">
+                    <label class="fchip" for="f-cat-4">Peixaria</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-5">
+                    <label class="fchip" for="f-cat-5">Farmácia</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-6">
+                    <label class="fchip" for="f-cat-6">Bebidas</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-7">
+                    <label class="fchip" for="f-cat-7">Adega</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-8">
+                    <label class="fchip" for="f-cat-8">Pet</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-9">
+                    <label class="fchip" for="f-cat-9">Doces</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-10">
+                    <label class="fchip" for="f-cat-10">Congelados</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-11">
+                    <label class="fchip" for="f-cat-11">Limpeza</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-12">
+                    <label class="fchip" for="f-cat-12">Papelaria</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-13">
+                    <label class="fchip" for="f-cat-13">Café</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-14">
+                    <label class="fchip" for="f-cat-14">Lanches</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-15">
+                    <label class="fchip" for="f-cat-15">Massas</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-16">
+                    <label class="fchip" for="f-cat-16">Naturais</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-17">
+                    <label class="fchip" for="f-cat-17">Cosméticos</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-18">
+                    <label class="fchip" for="f-cat-18">Bazar</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-19">
+                    <label class="fchip" for="f-cat-19">Floricultura</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-20">
+                    <label class="fchip" for="f-cat-20">Eletrônicos</label>
+                    <input class="fchip-input" type="checkbox" name="f-cat" id="f-cat-21">
+                    <label class="fchip" for="f-cat-21">Livraria</label>
+                </div>
+
+                <!-- Alcance, não distância: dois dos três recortes são
+                     administrativos (cidade, estado), não raio em km. -->
+                <p class="filtro__legend">Alcance da busca</p>
+                <div class="filtro__chips">
+                    <input class="fchip-input" type="radio" name="f-dist" id="f-dist-0">
+                    <label class="fchip" for="f-dist-0">Até 5 km</label>
+                    <input class="fchip-input" type="radio" name="f-dist" id="f-dist-1" checked>
+                    <label class="fchip" for="f-dist-1">Toda a cidade</label>
+                    <input class="fchip-input" type="radio" name="f-dist" id="f-dist-2">
+                    <label class="fchip" for="f-dist-2">Cidades vizinhas · SP</label>
+                </div>
+                <p class="filtro__note">Vizinhas cobre outras cidades do mesmo estado.</p>
+
+                <p class="filtro__legend">Mostrar só</p>
+                <input class="fchip-input" type="checkbox" id="f-aberta" checked>
+                <label class="filtro__switch" for="f-aberta">
+                    <span>Lojas abertas agora</span>
+                    <span class="switch-track"></span>
+                </label>
+
+                <input class="fchip-input" type="checkbox" id="f-desconto">
+                <label class="filtro__switch" for="f-desconto">
+                    <span>Produtos com desconto</span>
+                    <span class="switch-track"></span>
+                </label>
+            </div>
+
+            <div class="filtro__foot">
+                <button class="btn btn--outline" type="button">Limpar</button>
+                <label class="btn btn--primary" for="modal-filtro" role="button" tabindex="0">Ver resultados</label>
+            </div>
         </div>
     </div>
 

@@ -60,46 +60,6 @@ button { font: inherit; color: inherit; }
     position: relative;
 }
 
-/* ---------- Topo ---------- */
-
-.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-    padding: 14px 18px 12px;
-}
-
-.topbar--flat { border-bottom: none; }
-
-.topbar__row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-/* A cidade consultada é o que identifica o topo da home. */
-.city {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin: 0;
-    font-size: 13px;
-    color: var(--muted);
-}
-
-.city strong {
-    font-family: var(--display);
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -.02em;
-    color: var(--navy);
-}
-
-.city svg { align-self: center; color: var(--navy); }
-
 .icon-btn {
     position: relative;
     display: grid;
@@ -569,7 +529,7 @@ button { font: inherit; color: inherit; }
 .promos__dots {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 8px;
     margin-top: 13px;
 }
 
@@ -590,11 +550,56 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Busca ---------- */
 
+/* Linha da busca na home: campo + botão de filtro ao lado. O .search
+   sozinho continua servindo aos pop-ups, que não têm filtro. */
+.search-row {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin: 28px 18px 0;
+}
+
+.search-row .search { flex: 1; min-width: 0; margin: 0; }
+
+.filter-btn {
+    flex: none;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 50px;
+    border: 1px solid var(--navy);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.filter-btn:hover { background: var(--navy-050); }
+
+/* Marca quantos filtros estão aplicados. */
+.filter-btn__count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid var(--surface);
+}
+
 .search {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 16px 18px 0;
+    margin: 28px 18px 0;
     padding: 0 0 0 15px;
     border: 1px solid var(--line);
     border-radius: 12px;
@@ -633,74 +638,6 @@ button { font: inherit; color: inherit; }
     margin: 8px 20px 0;
     font-size: 11.5px;
     color: var(--navy-300);
-}
-
-/* ---------- Chips de categoria ---------- */
-
-/* Categorias em pirâmide: só 3 linhas, cada uma mais estreita que a
-   anterior. As três rolam juntas — um carrossel só, com as linhas
-   centralizadas dentro dele, em vez de cada linha rolar por conta
-   própria. */
-.chips {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    /* Trava em 3 linhas de categoria — nunca cresce além disso, mesmo
-       que uma quarta linha seja adicionada por engano no futuro. */
-    max-height: 132px; /* 3 linhas de chip + os 2 vãos entre elas + o padding vertical */
-    padding: 10px 18px 2px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-}
-
-.chips::-webkit-scrollbar { display: none; }
-
-.chips__row {
-    display: flex;
-    flex: none;
-    gap: 6px;
-}
-
-.chips__row:nth-child(2) { margin-left: 26px; }
-.chips__row:nth-child(3) { margin-left: 52px; }
-
-/* Cada categoria é um checkbox escondido + label: clicar ativa o
-   filtro (fundo navy), clicar de novo desativa e volta a mostrar tudo.
-   Mais de uma categoria pode ficar ativa ao mesmo tempo. */
-.chip-toggle {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.chip {
-    flex: none;
-    scroll-snap-align: start;
-    padding: 6px 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--surface);
-    font-size: 12.5px;
-    color: var(--muted);
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.chip-toggle:checked + .chip {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: #fff;
-    font-weight: 500;
-}
-
-.chip-toggle:focus-visible + .chip {
-    outline: 2px solid var(--navy);
-    outline-offset: 1px;
 }
 
 /* ---------- Abas Produtos / Ofertas / Lojas ---------- */
@@ -1063,50 +1000,6 @@ button { font: inherit; color: inherit; }
     margin-bottom: 12px;
 }
 
-/* Rótulo da busca: duas linhas, ocupando só a coluna da esquerda, com o
-   botão de cidade centralizado na vertical ao lado das duas. */
-.grid__lead {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin: 0 0 12px;
-    padding: 3px 2px 0;
-}
-
-.grid__lead-text { min-width: 0; }
-
-/* Abre o seletor de cidade. */
-.lead__pin {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--surface);
-    color: var(--navy);
-    cursor: pointer;
-}
-
-.lead__pin:hover { background: var(--navy-050); }
-
-.grid__lead span {
-    display: block;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-.grid__lead strong {
-    display: block;
-    margin-top: 1px;
-    font-family: var(--display);
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -.02em;
-    color: var(--navy);
-}
 
 .product {
     position: relative;
@@ -1261,12 +1154,270 @@ button { font: inherit; color: inherit; }
     opacity: .85;
 }
 
+/* ---------- Conta: avatar flutuante + painel inferior ---------- */
+/* O avatar é a única âncora de conta na home. Fica sobre o carrossel,
+   no canto superior direito, e abre um painel que sobe da base — perto
+   do polegar. O carrinho fica de fora do painel: comprar é fluxo de
+   compra, não de conta, e precisa do contador sempre visível. */
+
+.account {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.account__cart {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--navy);
+    box-shadow: 0 2px 10px rgba(19, 42, 69, .12);
+}
+
+.account__count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid var(--surface);
+}
+
+.account__avatar {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    border: 2px solid var(--surface);
+    box-shadow: 0 3px 14px rgba(19, 42, 69, .3);
+    cursor: pointer;
+}
+
+/* Ponto de notificação não lida — dispensa um sino separado. */
+.account__avatar.has-news::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--surface);
+}
+
+/* fixed, não absolute: o checkbox mora no fim do documento e, em
+   absolute, dar foco nele fazia o navegador rolar a página até lá. */
+.sheet-toggle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sheet__scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 44;
+    background: rgba(19, 42, 69, .45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    cursor: pointer;
+}
+
+.sheet {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    z-index: 45;
+    width: 100%;
+    max-width: 430px;
+    padding: 8px 0 calc(12px + env(safe-area-inset-bottom, 0px));
+    border-radius: 18px 18px 0 0;
+    background: var(--surface);
+    box-shadow: 0 -10px 34px rgba(19, 42, 69, .22);
+    transform: translate(-50%, 102%);
+    transition: transform .26s ease;
+}
+
+#sheet-conta:checked ~ .sheet__scrim { opacity: 1; pointer-events: auto; }
+#sheet-conta:checked ~ .sheet { transform: translate(-50%, 0); }
+
+/* Alça de arrasto. */
+.sheet::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 4px;
+    margin: 2px auto 12px;
+    border-radius: 999px;
+    background: var(--line);
+}
+
+.sheet__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 18px 14px;
+}
+
+.sheet__mark {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+}
+
+.sheet__name {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.sheet__mail {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+.sheet__close {
+    margin-left: auto;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--red-050);
+    color: var(--red);
+    cursor: pointer;
+}
+
+.sheet__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 18px;
+    border: none;
+    background: none;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sheet__row:hover { background: var(--navy-050); }
+
+.sheet__row i {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--navy-050);
+    color: var(--navy);
+}
+
+.sheet__label { flex: 1; font-size: 14px; font-weight: 500; color: var(--navy); }
+
+.sheet__value { font-size: 12.5px; color: var(--muted); }
+
+.sheet__row > svg:last-child { flex: none; color: var(--navy-300); }
+
+.sheet__sep { height: 1px; margin: 7px 18px; background: var(--line); }
+
+/* Rodapé do painel: sair de um lado, idioma do outro. */
+.sheet__foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 14px;
+}
+
+.sheet__foot .sheet__row { flex: 1; width: auto; }
+
+.sheet__lang {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sheet__lang:hover { background: var(--navy-050); }
+
+.sheet__lang svg { color: var(--navy-300); }
+
+/* Bandeira do país, nos botões e na lista de idiomas. */
+.flag {
+    font-size: 17px;
+    line-height: 1;
+}
+
+.opt-flag {
+    flex: none;
+    font-size: 22px;
+    line-height: 1;
+}
+
+/* Sair da conta — única linha em vermelho do painel. */
+.sheet__row--out .sheet__label { color: var(--red); }
+
+.sheet__row--out i {
+    background: var(--red-050);
+    color: var(--red);
+}
+
+.sheet__row--out:hover { background: var(--red-050); }
+
 /* ---------- Pop-up de cidade ---------- */
 /* Abre e fecha sem JavaScript: um checkbox escondido comanda o estado.
    A busca é sempre filtrada por cidade (seção 1 do documento). */
 
 .modal__toggle {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 1px;
     height: 1px;
     opacity: 0;
@@ -1275,19 +1426,25 @@ button { font: inherit; color: inherit; }
 
 .modal { display: none; }
 
-#modal-cidade:checked ~ .modal { display: block; }
+/* Escopado por modificador: sem isso, qualquer .modal irmã abriria
+   junto com a de cidade. */
+#modal-cidade:checked ~ .modal--cidade { display: block; }
+#modal-idioma:checked ~ .modal--idioma { display: block; }
+#modal-filtro:checked ~ .modal--filtro { display: block; }
 
+/* Acima do painel de conta (45): a cidade pode ser aberta de dentro
+   dele, e precisa ficar por cima, não atrás. */
 .modal__backdrop {
     position: fixed;
     inset: 0;
-    z-index: 40;
+    z-index: 50;
     background: rgba(19, 42, 69, .45);
     cursor: pointer;
 }
 
 .modal__box {
     position: fixed;
-    z-index: 41;
+    z-index: 51;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1394,6 +1551,202 @@ button { font: inherit; color: inherit; }
 }
 
 .modal__geo:hover { background: var(--navy-700); }
+
+/* ---------- Pop-up de filtros ---------- */
+
+.filtro__body {
+    max-height: 46vh;
+    padding: 4px 2px 0;
+    overflow-y: auto;
+}
+
+.filtro__legend {
+    margin: 14px 0 8px;
+    font-family: var(--display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--navy-300);
+}
+
+.filtro__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Categorias: duas linhas que correm para a direita, em vez de
+   empilhar dez linhas na vertical. O fade na borda avisa que há mais. */
+.filtro__chips--scroll {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+    justify-content: start;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+/* Sem mask-image aqui: dentro do modal fixed ela apagava o painel
+   inteiro. O chip cortado na borda já sinaliza que há mais ao lado. */
+.filtro__chips--scroll::-webkit-scrollbar { display: none; }
+
+/* Lupa ao lado do rótulo Categoria: colapsada mostra só o botão navy;
+   ao clicar, o campo se estende para a esquerda a partir dele. */
+.cat-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 8px;
+}
+
+.cat-head .filtro__legend { margin: 0; }
+
+.cat-search {
+    position: relative;
+    flex: none;
+    margin-left: auto;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: transparent;
+    transition: width .22s ease, background .22s ease;
+}
+
+#cat-busca:checked ~ .cat-search {
+    width: 214px;
+    background: var(--navy-050);
+}
+
+/* Fechado: só o contorno azul. Aberto: preenchido de azul, virando o
+   botão de confirmar a busca. */
+.cat-search__go {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background .22s ease, color .22s ease, border-color .22s ease;
+}
+
+.cat-search__go:hover { background: var(--navy-050); }
+
+#cat-busca:checked ~ .cat-search .cat-search__go {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: #fff;
+}
+
+#cat-busca:checked ~ .cat-search .cat-search__go:hover { background: var(--navy-700); }
+
+/* Escondido quando fechado: com o botão sem preenchimento, o texto
+   apareceria por baixo dele dentro do círculo. */
+.cat-search__text {
+    display: block;
+    padding: 8px 42px 8px 14px;
+    font-size: 12.5px;
+    line-height: 18px;
+    color: var(--muted);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .18s ease;
+}
+
+#cat-busca:checked ~ .cat-search .cat-search__text { opacity: 1; }
+
+.filtro__note {
+    margin: 8px 0 0;
+    font-size: 11.5px;
+    color: var(--navy-300);
+}
+
+.fchip-input {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fchip {
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 12.5px;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.fchip-input:checked + .fchip {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Interruptores de sim/não. */
+.filtro__switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 2px;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+/* Só o rótulo estica. Antes, `.filtro__switch span` também pegava a
+   pista do interruptor e a esticava pela linha inteira. */
+.filtro__switch > span:first-child { flex: 1; }
+
+.switch-track {
+    flex: none;
+    width: 40px;
+    height: 23px;
+    border-radius: 999px;
+    background: var(--line);
+    padding: 3px;
+    transition: background .18s ease;
+}
+
+.switch-track::after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .18s ease;
+}
+
+.fchip-input:checked + .filtro__switch .switch-track { background: var(--navy); }
+.fchip-input:checked + .filtro__switch .switch-track::after { transform: translateX(17px); }
+
+.filtro__foot {
+    display: flex;
+    gap: 8px;
+    margin: 0 -16px;
+    padding: 14px 16px 6px;
+    border-top: 1px solid var(--line);
+}
+
+.filtro__foot .btn { flex: 1; padding: 12px; font-size: 14px; }
 
 /* ---------- Navegação inferior ---------- */
 /* Ofertas · Produtos · Início · Lojas · Favoritos — só descoberta.
