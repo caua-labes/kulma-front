@@ -1,0 +1,1206 @@
+/* =====================================================================
+   Kulma — Início (index.html)
+   Formato da Início do iFood: cabeçalho com a cidade e o sino, busca
+   presa no topo, atalhos de categoria, banners, "Suas lojas" e a
+   listagem com abas sublinhadas (Produtos / Ofertas / Lojas) e chips
+   de filtro. Painel da conta e pop-ups sobem da base (bottom sheets).
+   Carrega depois de styles.css, que traz tokens, reset e componentes
+   compartilhados — por isso nada aqui redefine cor ou fonte.
+   ===================================================================== */
+
+:root {
+    /* Altura da busca presa no topo. Num token só porque três coisas
+       dependem do mesmo número: a própria barra, a linha em que as abas
+       da listagem grudam (--utabs-top) e a folga das âncoras (#busca). */
+    --topbar-h: 60px;
+    --utabs-top: var(--topbar-h);
+    --anchor-offset: var(--topbar-h);
+}
+
+
+/* ---------- Busca (barra presa no topo) ---------- */
+/* Primeira coisa da tela: um campo só, em pílula cinza-clara, com a lupa
+   à esquerda e o filtro e o pin de cidade dentro, à direita (a busca é
+   sempre filtrada por cidade, seção 1).
+   Altura fixa (--topbar-h) porque o JS e as abas sticky contam com ela.
+   Abaixo das camadas do painel de conta (44/45) e dos pop-ups (50/51),
+   que precisam cobri-la. */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: var(--topbar-h);
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: 0 4px 12px -6px rgba(19, 42, 69, .18); /* leve sombra embaixo */
+}
+
+/* Também serve aos pop-ups de cidade e idioma, dentro de .modal__search. */
+.search {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    background: var(--navy-050);
+    color: var(--navy);
+    font-size: 14.5px;
+}
+
+.search:focus-within { box-shadow: inset 0 0 0 1px var(--navy-300); }
+
+.search__icon { flex: none; }
+
+.search__input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+}
+
+.search__input::placeholder { color: var(--muted); opacity: 1; }
+
+/* O "x" nativo do type=search some: o campo é curto e o teclado do
+   aparelho já apaga. */
+.search__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* Na barra do topo o campo vira pílula e sobra pouco respiro à direita:
+   os botões têm o próprio alvo de toque. */
+.search--bar {
+    height: 46px;
+    padding: 0 6px 0 16px;
+    border-radius: 999px;
+}
+
+.search__sep {
+    flex: none;
+    width: 1px;
+    height: 20px;
+    background: var(--navy-300);
+    opacity: .5;
+}
+
+/* Filtro e pin: só o ícone, sem caixa — o fundo aparece no toque. */
+.search__action {
+    position: relative;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin-left: -6px;
+    border-radius: 50%;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.search__sep + .search__action { margin-left: 0; }
+
+.search__action:hover { background: var(--line); }
+
+/* Contador de filtros em navy, não vermelho — vermelho é só para preço,
+   ação principal, urgência, sacola e notificação. */
+.search__count {
+    position: absolute;
+    top: 1px;
+    right: -1px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 4px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    box-shadow: 0 0 0 2px var(--navy-050);
+    background: var(--navy);
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+
+/* ---------- Banners (carrossel) ---------- */
+/* Ofertas das sedes em que o cliente é inscrito (4.8). Nome da sede em
+   cima, fora da imagem; desconto e prazo DENTRO dela, no rodapé; título
+   da promoção rolando abaixo. Cada banner ocupa a largura toda menos a
+   margem; o gap é maior que essa margem, então o vizinho não aparece. */
+
+.promos {
+    display: flex;
+    gap: 32px;
+    padding: 20px var(--gutter) 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.promos::-webkit-scrollbar { display: none; }
+
+.promo {
+    flex: none;
+    width: 100%;
+    scroll-snap-align: center;
+}
+
+.promo__store {
+    margin: 0 0 8px 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.promo__store span { font-weight: 400; color: var(--muted); }
+
+.promo__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9; /* foto widescreen de celular na horizontal */
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--photo);
+    font-size: 68px;
+    line-height: 1;
+}
+
+/* Desconto (vermelho cheio) e prazo (vermelho suave), no rodapé da
+   imagem. O prazo ganha fundo branco para não sumir sobre a textura. */
+.promo__tags {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    gap: 6px;
+}
+
+.promo__tags .badge--urgent,
+.promo__tags .badge--soft { background: var(--surface); }
+
+/* Título da promoção rolando da esquerda, abaixo da imagem. */
+.promo__marquee {
+    margin: 8px 2px 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+}
+
+.promo__track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: promo-roll 14s linear infinite;
+}
+
+.promo__track span {
+    padding-right: 56px;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+@keyframes promo-roll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .promo__track { animation: none; }
+}
+
+/* Slide de "carregar mais": sem nome de sede em cima, então a caixa
+   desce o mesmo tanto para alinhar com as imagens vizinhas. Sem fundo
+   nem borda — no lugar do banner fica só o botão central. */
+.promo--more .promo__media {
+    margin-top: 28px;
+    border-color: transparent;
+    background: none;
+}
+
+/* "Carregar mais" do carrossel e "Ver mais" no fim de cada oferta:
+   sem caixa nem borda, só o texto e a seta, em navy. */
+.deal-more {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--navy);
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+
+.deal-more:hover { background: var(--navy-050); }
+
+/* Indicador em janela deslizante: mostra cinco vagas e a trilha desliza
+   para manter a ativa sempre no centro — o o O o o. A seta do fim marca
+   o slide de carregar mais. Cada vaga tem 18px: o JS conta com isso. */
+/* Faixa navy acima das bolinhas: da largura da janela de 5 bolinhas,
+   sumindo em degradê nas duas pontas. */
+.promos__line {
+    width: calc(5 * 18px);
+    height: 1.5px;
+    margin: 12px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--navy) 15%, var(--navy) 85%, transparent);
+    opacity: .25;
+}
+
+.promos__dots {
+    width: calc(5 * 18px);
+    margin: 8px auto 0;
+    overflow: hidden;
+}
+
+.promos__dots-track {
+    display: flex;
+    transition: transform .3s ease;
+}
+
+.promos__dots-track > * {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 16px;
+}
+
+.promos__dots-track > span:not(.promos__arrow)::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--navy-300);
+    opacity: .38;
+    transition: width .22s ease, height .22s ease, background .22s ease, opacity .22s ease;
+}
+
+.promos__dots-track > span.is-active:not(.promos__arrow)::before {
+    width: 9px;
+    height: 9px;
+    background: var(--navy);
+    opacity: 1;
+}
+
+/* Seta no lugar da bolinha, do mesmo tamanho das cinzas. */
+.promos__arrow {
+    color: var(--navy-300);
+    opacity: .38;
+    transition: opacity .22s ease, color .22s ease, transform .22s ease;
+}
+
+/* Ativa: mesmo destaque da bolinha selecionada — navy cheio e maior. */
+.promos__arrow.is-active {
+    color: var(--navy);
+    opacity: 1;
+    transform: scale(1.35);
+}
+
+
+/* ---------- Projetos ---------- */
+/* Listas de compra por objetivo, logo abaixo do carrossel. Cartões
+   horizontais com a "foto", o nome, quantos itens já foram comprados e
+   uma barra de progresso em navy. O último cria um projeto novo. */
+
+.proj {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.proj__art {
+    display: grid;
+    place-items: center;
+    height: 52px;
+    margin-bottom: 8px;
+    border-radius: var(--radius-sm);
+    background: var(--photo);
+    font-size: 30px;
+    line-height: 1;
+}
+
+.proj__name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 2.5em;
+    overflow: hidden;
+    font-family: var(--display);
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--navy);
+}
+
+.proj__meta {
+    margin-top: 4px;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+.proj__bar {
+    display: flex;
+    height: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--navy-050);
+}
+
+.proj__bar span {
+    flex: none;
+    height: 100%;
+    background: var(--navy);
+}
+
+.proj__bar span:last-child { border-radius: 0 999px 999px 0; }
+
+/* Trecho do que falta comprar e está em promoção: vem logo depois do já
+   comprado, em vermelho (detalhe de oferta). */
+.proj__bar .proj__bar-oferta { background: var(--red); }
+
+/* Selo de oferta: algum item do projeto está em promoção. Círculo
+   vermelho com etiqueta branca, montado sobre a borda no canto superior
+   direito. O trilho ganha folga no topo, senão a rolagem o cortaria. */
+.projects { padding-top: 16px; }
+.projects .sec-head { margin-bottom: 4px; }
+.projects .hrail { padding-top: 12px; }
+
+.proj__offer {
+    position: absolute;
+    top: -10px;
+    right: -6px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 0 0 2px var(--surface);
+}
+
+/* Adicionar projeto: tracejado, sem progresso. */
+.proj--novo { border-style: dashed; border-color: var(--navy-300); }
+
+.proj--novo .proj__art {
+    background: none;
+    border: 1px dashed var(--navy-300);
+    font-family: var(--display);
+    font-size: 26px;
+    color: var(--navy);
+}
+
+.proj--novo .proj__name { min-height: 0; }
+
+
+/* ---------- Listagem: abas Produtos / Ofertas / Lojas ---------- */
+/* Gancho da listagem (id="busca"): o JS rola até ela e o #busca da nav
+   aponta para cá. A altura mínima de uma tela (menos a busca) garante
+   que, mesmo na aba mais curta, dê para rolar até as abas grudarem
+   logo abaixo da busca — e trocar de aba não faz a página pular. */
+.tabsw {
+    display: block;
+    margin-top: 24px;
+    min-height: calc(100vh - var(--topbar-h));
+}
+
+@supports (min-height: 100dvh) {
+    .tabsw { min-height: calc(100dvh - var(--topbar-h)); }
+}
+
+/* Troca de conteúdo sem JavaScript: três radios escondidos (.ui-toggle)
+   comandam a aba ativa e qual lista aparece. As abas são .utabs presas
+   logo abaixo da busca (--utabs-top); o estado ativo precisa ser
+   repetido aqui, porque vem do radio e não de uma classe. */
+#aba-produtos:checked ~ .tabsw__bar label[for="aba-produtos"],
+#aba-ofertas:checked  ~ .tabsw__bar label[for="aba-ofertas"],
+#aba-lojas:checked    ~ .tabsw__bar label[for="aba-lojas"] {
+    color: var(--navy);
+    font-weight: 700;
+}
+
+#aba-produtos:checked ~ .tabsw__bar label[for="aba-produtos"]::after,
+#aba-ofertas:checked  ~ .tabsw__bar label[for="aba-ofertas"]::after,
+#aba-lojas:checked    ~ .tabsw__bar label[for="aba-lojas"]::after { transform: scaleX(1); }
+
+/* Foco de teclado no radio aparece na aba correspondente. */
+#aba-produtos:focus-visible ~ .tabsw__bar label[for="aba-produtos"],
+#aba-ofertas:focus-visible  ~ .tabsw__bar label[for="aba-ofertas"],
+#aba-lojas:focus-visible    ~ .tabsw__bar label[for="aba-lojas"] {
+    outline: 2px solid var(--navy);
+    outline-offset: -6px;
+    border-radius: 8px;
+}
+
+/* Chips logo abaixo das abas. Respiro em cima e embaixo para o contorno
+   de foco não ser cortado pela rolagem lateral. */
+.tabsw__chips {
+    padding-top: 12px;
+    padding-bottom: 4px;
+}
+
+.pane { display: none; padding-top: 14px; }
+
+#aba-produtos:checked ~ #pane-produtos,
+#aba-ofertas:checked  ~ #pane-ofertas,
+#aba-lojas:checked    ~ #pane-lojas { display: block; }
+
+
+/* Do "Ordenar" para baixo tudo fica sobre fundo cinza, e cada item —
+   produto, campanha ou loja — num cartão branco por cima, como as
+   vitrines do iFood. */
+.tabsw__chips,
+.pane { background: var(--surface-alt); }
+
+/* Sem rodapé: o cinza desce até a barra de navegação inferior. A folga
+   para a barra sai do .app e vai para o painel, que é o que encosta nela. */
+.app { padding-bottom: 0; }
+
+.pane { padding-bottom: calc(var(--tabbar-h) + 16px + env(safe-area-inset-bottom, 0px)); }
+
+#pane-produtos .grid { gap: 10px; align-items: stretch; }
+
+#pane-produtos .pcard {
+    padding: 8px 8px 10px;
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+#pane-produtos .pcard__media { border-color: transparent; }
+
+/* Ofertas e lojas: o cartão ocupa a largura menos a margem, e dentro dele
+   a margem interna (--gutter) encolhe para 12px — o conteúdo, que já se
+   alinha por --gutter, acompanha sozinho. Os cartões se separam pelo
+   cinza, então as divisórias entre itens saem. */
+#pane-ofertas .deal,
+#pane-lojas .store-row {
+    --gutter: 12px;
+    margin: 0 16px 10px;
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+#pane-ofertas .deal { padding: 14px 0 16px; }
+
+#pane-ofertas .deal + .deal::before,
+#pane-lojas .store-row + .store-row::before { display: none; }
+
+
+/* ---------- Ofertas (aba Ofertas) ---------- */
+/* Cada oferta é um bloco sem cartão, separado do vizinho por uma linha
+   fina: cabeçalho da sede (logo, nome, bairro, desconto máximo e
+   prazo), o banner da campanha e a barra com o título. A seta abre a
+   linha de produtos — só a porcentagem máxima aparece antes disso,
+   sem valor em reais. */
+
+.deal {
+    position: relative;
+    padding: 18px 0 22px;
+}
+
+.deal:first-child { padding-top: 6px; }
+
+.deal + .deal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: var(--gutter);
+    right: var(--gutter);
+    height: 1px;
+    background: var(--line);
+}
+
+.deal__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 var(--gutter);
+}
+
+.deal__logo {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--photo);
+    font-size: 20px;
+    line-height: 1;
+}
+
+.deal__who { flex: 1; min-width: 0; }
+
+.deal__store,
+.deal__where {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.deal__store {
+    font-family: var(--display);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--navy);
+}
+
+.deal__store a { color: inherit; }
+
+.deal__where {
+    margin-top: 1px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+/* Desconto máximo em cima, prazo embaixo, alinhados à direita. */
+.deal__tags {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.deal__media {
+    height: 168px;
+    margin: 12px var(--gutter) 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: 56px;
+}
+
+/* Título à esquerda e seta à direita, como as linhas do iFood. */
+.deal__bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px var(--gutter) 0;
+}
+
+.deal__text { flex: 1; min-width: 0; }
+
+.deal__title {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--display);
+    font-size: 15.5px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 1.3;
+    color: var(--navy);
+}
+
+.deal__count {
+    margin: 1px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+/* Abre/fecha a linha de produtos da propaganda. */
+.deal__arrow {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.deal__arrow:hover { background: var(--navy-050); }
+
+.deal__arrow svg { transition: transform .18s ease; }
+
+.deal-toggle:checked ~ .deal__bar .deal__arrow {
+    border-color: var(--navy-050);
+    background: var(--navy-050);
+}
+
+.deal-toggle:checked ~ .deal__bar .deal__arrow svg { transform: rotate(90deg); }
+
+.deal-toggle:focus-visible ~ .deal__bar .deal__arrow {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+}
+
+/* Divisor pontilhado de rota — separa a barra da lista de produtos, só
+   quando ela está aberta. */
+.deal__divider {
+    display: none;
+    height: 2px;
+    margin: 14px var(--gutter) 0;
+    background-image: radial-gradient(circle, var(--navy-300) 1px, transparent 1.4px);
+    background-size: 7px 2px;
+}
+
+.deal-toggle:checked ~ .deal__divider { display: block; }
+
+/* Linha de produtos da propaganda: um .hrail de .pcard, até 10 itens e
+   depois um "Ver mais" — só aparece com a seta aberta. Corre até a
+   borda da tela, como os trilhos do iFood. */
+.deal__products {
+    display: none;
+    padding-top: 14px;
+}
+
+.deal-toggle:checked ~ .deal__products { display: flex; }
+
+/* O "Ver mais" fica na altura da foto quadrada dos cartões (132px). */
+.deal__products .deal-more {
+    align-self: flex-start;
+    width: 88px;
+    height: 132px;
+}
+
+/* Exclusiva de assinante, vista por quem é inscrito grátis: no lugar
+   dos itens, o mesmo aviso tracejado do cupom trancado da sede, com o
+   caminho até a assinatura (4.8). Só abre com a seta, como os itens. */
+.deal__lock {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin: 14px var(--gutter) 0;
+    padding: 12px 14px;
+    border: 1px dashed var(--navy-300);
+    border-radius: var(--radius);
+    color: var(--navy);
+}
+
+.deal-toggle:checked ~ .deal__lock { display: flex; }
+
+.deal__lock svg { flex: none; }
+
+.deal__lock-text {
+    flex: 1;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--muted);
+}
+
+
+/* ---------- Conta: painel inferior ---------- */
+/* Aberto pelo sino, pela aba Conta da navegação inferior ou por
+   index.html#conta. Sobe da base, perto do polegar. O checkbox que o
+   comanda (#sheet-conta) é um .ui-toggle: fixed, para que dar foco nele
+   não role a página até o fim do documento, onde ele mora. */
+
+.sheet__scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 44;
+    background: rgba(19, 42, 69, .45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    cursor: pointer;
+}
+
+/* Fechado, o painel fica fora da tela e invisível: sem visibility, o
+   Tab do teclado ainda entraria nas linhas escondidas. O visibility
+   espera a descida terminar para sumir. */
+.sheet {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 430px;
+    max-height: 85vh;
+    padding-top: 8px;
+    border-radius: 20px 20px 0 0;
+    background: var(--surface);
+    box-shadow: 0 -10px 34px rgba(19, 42, 69, .22);
+    transform: translate(-50%, 102%);
+    visibility: hidden;
+    transition: transform .26s ease, visibility 0s linear .26s;
+}
+
+#sheet-conta:checked ~ .sheet__scrim { opacity: 1; pointer-events: auto; }
+
+#sheet-conta:checked ~ .sheet {
+    transform: translate(-50%, 0);
+    visibility: visible;
+    transition: transform .26s ease;
+}
+
+/* Alça de arrasto, no painel e nos pop-ups. */
+.sheet::before,
+.modal__box::before {
+    content: "";
+    flex: none;
+    display: block;
+    width: 36px;
+    height: 4px;
+    margin: 0 auto 6px;
+    border-radius: 999px;
+    background: var(--line);
+}
+
+/* Cabeçalho comum do painel e dos pop-ups: título à esquerda, X navy
+   à direita (.icon-btn--plain). */
+.sheet__head,
+.modal__head {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 8px 6px var(--gutter);
+}
+
+.sheet__title,
+.modal__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--navy);
+}
+
+/* Só o miolo rola; cabeçalho e rodapé ficam no lugar. */
+.sheet__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.sheet__profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px var(--gutter) 14px;
+}
+
+.sheet__mark {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+}
+
+.sheet__name {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.sheet__mail {
+    margin: 1px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+/* Linha do perfil do iFood: ícone solto, rótulo, valor e seta, com
+   divisória fina a partir do texto. Serve a <button> e a <label>. */
+.sheet__row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 52px;
+    padding: 12px var(--gutter);
+    border: none;
+    background: none;
+    color: var(--navy);
+    text-align: left;
+    cursor: pointer;
+}
+
+.sheet__row + .sheet__row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(var(--gutter) + 36px);
+    right: var(--gutter);
+    height: 1px;
+    background: var(--line);
+}
+
+.sheet__row:hover { background: var(--navy-050); }
+
+.sheet__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 22px;
+    color: var(--navy);
+}
+
+.sheet__label { flex: 1; font-size: 14.5px; font-weight: 500; }
+
+.sheet__value { font-size: 12.5px; color: var(--muted); }
+
+.sheet__chev { flex: none; color: var(--navy-300); }
+
+/* Faixa entre os grupos de linhas. */
+.sheet__sep {
+    height: 8px;
+    margin: 4px 0;
+    background: var(--navy-050);
+}
+
+/* Rodapé fixo: sair de um lado, idioma do outro. Sem vermelho — não é
+   preço, compra nem urgência. */
+.sheet__foot {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+}
+
+/* Idioma do cliente: herdado do país no cadastro (seção 5). */
+.sheet__lang { gap: 6px; }
+
+.sheet__lang svg { color: var(--navy-300); }
+
+/* Bandeira do país, no botão de idioma e na lista de idiomas. */
+.flag {
+    font-size: 17px;
+    line-height: 1;
+}
+
+.opt-flag {
+    flex: none;
+    width: 24px;
+    font-size: 22px;
+    line-height: 1;
+    text-align: center;
+}
+
+
+/* ---------- Pop-ups (cidade, idioma, filtros) ---------- */
+/* Bottom sheets do iFood: sobem da base, com alça, cantos de cima
+   arredondados e no máximo 85% da tela, rolando por dentro. Abrem e
+   fecham sem JavaScript: um checkbox escondido (.ui-toggle) antes de
+   cada um comanda o estado. Aparecem por display, então a subida é
+   uma animação (transição não roda saindo de display: none). */
+
+.modal { display: none; }
+
+/* Escopado por modificador: sem isso, qualquer .modal irmã abriria
+   junto com a de cidade. */
+#modal-cidade:checked ~ .modal--cidade { display: block; }
+#modal-idioma:checked ~ .modal--idioma { display: block; }
+#modal-filtro:checked ~ .modal--filtro { display: block; }
+
+/* Acima do painel de conta (45): a cidade pode ser aberta de dentro
+   dele, e precisa ficar por cima, não atrás. */
+.modal__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(19, 42, 69, .45);
+    cursor: pointer;
+    animation: modal-fade .2s ease;
+}
+
+.modal__box {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    z-index: 51;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 430px;
+    max-height: 85vh;
+    padding-top: 8px;
+    border-radius: 20px 20px 0 0;
+    background: var(--surface);
+    box-shadow: 0 -10px 34px rgba(19, 42, 69, .22);
+    transform: translateX(-50%);
+    animation: modal-up .26s ease;
+}
+
+@keyframes modal-up {
+    from { transform: translate(-50%, 100%); }
+    to   { transform: translate(-50%, 0); }
+}
+
+@keyframes modal-fade {
+    from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal__box,
+    .modal__backdrop { animation: none; }
+    .sheet,
+    .sheet__scrim { transition: none; }
+}
+
+/* Busca da lista (cidade, idioma): fica parada enquanto a lista rola. */
+.modal__search {
+    flex: none;
+    padding: 4px var(--gutter) 6px;
+}
+
+.modal__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--gutter) 16px;
+}
+
+/* Sem rodapé (idioma), o fim da lista respeita a área segura. */
+.modal__body:last-child { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+
+.modal__foot {
+    flex: none;
+    display: flex;
+    gap: 10px;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+}
+
+.modal__foot .btn { flex: 1; }
+
+/* Linha de cidade ou idioma: ícone (pin ou bandeira), nome e detalhe,
+   e o check navy na escolha atual. */
+.city-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 58px;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.modal__list li:last-child .city-opt { border-bottom: none; }
+
+.city-opt:hover .city-opt__name { text-decoration: underline; text-underline-offset: 3px; }
+
+.city-opt__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    color: var(--navy-300);
+}
+
+.city-opt__body { flex: 1; min-width: 0; }
+
+.city-opt__name {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.city-opt__meta {
+    display: block;
+    margin-top: 1px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.city-opt.is-current .city-opt__name { font-weight: 700; }
+.city-opt.is-current .city-opt__icon,
+.city-opt.is-current > svg { color: var(--navy); }
+
+
+/* ---------- Pop-up de filtros ---------- */
+
+.filtro__legend {
+    margin: 18px 0 10px;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+.modal__body > .filtro__legend:first-child { margin-top: 4px; }
+
+/* Categorias: duas linhas que correm para a direita, em vez de
+   empilhar onze linhas na vertical. Vai até a borda do pop-up, como
+   os trilhos da página. Sem mask-image aqui: dentro do pop-up fixed ela
+   apagava o painel inteiro. O chip cortado na borda já sinaliza que há
+   mais ao lado. Os inputs (fixed) não ocupam célula da grade. */
+.filtro__cats {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+    justify-content: start;
+    gap: 8px;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 2px var(--gutter) 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.filtro__cats::-webkit-scrollbar { display: none; }
+
+/* Lupa ao lado do título Categoria: colapsada mostra só o círculo com
+   contorno navy; ao tocar, o campo se estende para a esquerda a partir
+   dele e o botão vira navy cheio, o de confirmar a busca. */
+.cat-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 0 10px;
+}
+
+.cat-head .filtro__legend { margin: 0; }
+
+.cat-search {
+    position: relative;
+    flex: none;
+    margin-left: auto;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: transparent;
+    transition: width .22s ease, background .22s ease;
+}
+
+#cat-busca:checked ~ .cat-search {
+    width: 214px;
+    background: var(--navy-050);
+}
+
+.cat-search__go {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+    transition: background .22s ease, color .22s ease;
+}
+
+.cat-search__go:hover { background: var(--navy-050); }
+
+#cat-busca:checked ~ .cat-search .cat-search__go {
+    background: var(--navy);
+    color: #fff;
+}
+
+#cat-busca:checked ~ .cat-search .cat-search__go:hover { background: var(--navy-700); }
+
+/* Escondido quando fechado: com o botão sem preenchimento, o texto
+   apareceria por baixo dele dentro do círculo. */
+.cat-search__text {
+    display: block;
+    padding: 8px 42px 8px 14px;
+    font-size: 12.5px;
+    line-height: 18px;
+    color: var(--muted);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .18s ease;
+}
+
+#cat-busca:checked ~ .cat-search .cat-search__text { opacity: 1; }
+
+.filtro__note {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Interruptores de sim/não, em linhas com divisória. */
+.filtro__switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+/* Só o rótulo estica; a pista do interruptor mantém a largura. */
+.filtro__switch > span:first-child { flex: 1; }
+
+.switch-track {
+    flex: none;
+    width: 40px;
+    height: 23px;
+    padding: 3px;
+    border-radius: 999px;
+    background: var(--line);
+    transition: background .18s ease;
+}
+
+.switch-track::after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .18s ease;
+}
+
+.ui-toggle:checked + .filtro__switch .switch-track { background: var(--navy); }
+.ui-toggle:checked + .filtro__switch .switch-track::after { transform: translateX(17px); }
+.ui-toggle:focus-visible + .filtro__switch .switch-track { outline: 2px solid var(--navy); outline-offset: 2px; }

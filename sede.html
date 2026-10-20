@@ -2,223 +2,504 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kulma — Panificadora Aurora</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="sede.css">
 </head>
 <body>
-<main class="app">
+<!-- Página da loja no formato do iFood: abre na capa, sem barra de topo
+     e sem nav inferior; quem leva de volta é o botão redondo da capa e,
+     depois de rolar, a barra compacta. No rodapé fica só a sacola. -->
+<main class="app app--cartbar">
 
-    <header class="detail-bar">
-        <a class="icon-btn" href="index.html" aria-label="Voltar">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    <!-- Barra compacta: escondida até a capa sair da tela (o script no
+         fim da página liga .is-compact no .app). Sem JS ela nunca aparece
+         e a página continua inteira. -->
+    <header class="sede-bar">
+        <a class="icon-btn icon-btn--plain" href="index.html" aria-label="Voltar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
         </a>
-        <span class="detail-bar__title">Panificadora Aurora</span>
-        <!-- Nav de conta: só ícones, à direita. -->
-        <nav class="topnav" aria-label="Sua conta">
-            <span class="topnav__group">
-                <a class="topnav__btn" href="#" aria-label="Notificações, 2 não lidas">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-                    <span class="topnav__dot"></span>
-                </a>
-                <a class="topnav__btn" href="#" aria-label="Carrinho, 3 itens">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H5"/></svg>
-                    <span class="topnav__count">3</span>
-                </a>
-                <a class="topnav__btn" href="#" aria-label="Pedidos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></a>
-            </span>
-            <a class="topnav__me" href="#" aria-label="Perfil"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></a>
-        </nav>
+        <span class="sede-bar__title">Panificadora Aurora</span>
+        <button class="icon-btn icon-btn--plain" type="button" aria-label="Buscar na loja">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
     </header>
 
-    <!-- Capa: navy com padrão pontilhado de rota. -->
-    <div class="cover">
-        <div class="cover__mark">🥖</div>
-        <button class="float-btn" type="button" aria-label="Compartilhar">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
-        </button>
-    </div>
-
-    <div class="store-head">
-        <h1 class="store-head__name">Panificadora Aurora</h1>
-        <p class="store-head__company">Sede Vila Mariana · Aurora Alimentos Ltda.</p>
-        <div class="store-head__meta">
-            <span class="rating">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg>
-                4,8
-            </span>
-            <span>· 312 avaliações</span>
-            <span class="dot-sep">•</span>
-            <span class="pill pill--open"><span class="pill__led"></span> Aberta · fecha às 20h</span>
+    <!-- Capa: navy com o pontilhado de rota da identidade e o emoji como
+         marca d'água. Os botões redondos flutuam sobre ela. -->
+    <div class="sede-cover">
+        <span class="sede-cover__art" aria-hidden="true">🥖</span>
+        <div class="round-bar">
+            <div class="round-bar__group">
+                <a class="round-btn" href="index.html" aria-label="Voltar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+            </div>
+            <div class="round-bar__group">
+                <button class="round-btn" type="button" aria-label="Buscar na loja">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                </button>
+                <button class="round-btn" type="button" aria-label="Compartilhar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+                </button>
+                <button class="round-btn" type="button" aria-pressed="false" aria-label="Favoritar loja">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- A sede tem um único endereço (1:1 com address). -->
-    <div class="address">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-        <div>
-            <p class="address__line">Rua Domingos de Morais, 1420 — Vila Mariana</p>
-            <p class="address__sub">São Paulo, SP · 800 m de você · entrega em rondas a cada 2h</p>
+    <!-- Identidade da sede. O logo morde a base da capa, como no iFood, e
+         leva o anel de novidade: a Aurora tem oferta nova ainda não vista
+         (a mesma marca que ela tem em "Minhas lojas", na home). -->
+    <section class="sede-id" aria-labelledby="sede-nome">
+        <div class="sede-id__logo story-ring" role="img" aria-label="Panificadora Aurora, com novidade">🥖</div>
+        <div class="sede-id__top">
+            <h1 class="sede-id__name" id="sede-nome">Panificadora Aurora</h1>
+            <a class="sec-head__link" href="#sobre">
+                Ver mais
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
         </div>
-    </div>
-
-    <!-- Assinatura é sempre por sede; o valor é definido pela empresa (4.8). -->
-    <section class="subscribe">
-        <h2 class="subscribe__title">Inscreva-se nesta sede</h2>
-        <p class="subscribe__text">
-            Inscritos recebem as propagandas desta loja no feed e nas notificações.
-            A assinatura paga libera também as ofertas exclusivas.
+        <!-- A nota é da sede, não da empresa (4.7). -->
+        <p class="sede-id__meta">
+            <span><span class="rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span> (312)</span>
+            <span>Padaria</span>
+            <span>800 m</span>
         </p>
-        <button class="btn btn--primary btn--block btn--stack" type="button">
-            Assinar por R$ 9,90/mês
-            <span class="btn__note">ou inscreva-se grátis</span>
-        </button>
+        <p class="sede-id__company"><span>Aurora Alimentos</span><span>Sede Vila Mariana</span></p>
     </section>
 
-    <nav class="tabs" aria-label="Seções da loja">
-        <a class="is-active" href="#produtos">Produtos</a>
-        <a href="#propagandas">Propagandas</a>
-        <a href="#sobre">Sobre</a>
-    </nav>
+    <!-- Entrega | Retirada, como a alternância do iFood. Dois radios
+         escondidos trocam o texto de baixo sem JS: na entrega a sede roda
+         em horários fixos (rondas, 4.4); na retirada o item fica reservado
+         no balcão pelo prazo da empresa (3 h, 4.5). -->
+    <section class="sede-mode" aria-label="Como receber">
+        <input class="ui-toggle" type="radio" name="modo" id="modo-entrega" checked>
+        <input class="ui-toggle" type="radio" name="modo" id="modo-retirada">
 
-    <!-- Propagandas ativas desta sede -->
-    <section class="section" id="propagandas">
-        <div class="section__head">
+        <div class="sede-mode__row">
+            <div class="sede-mode__switch">
+                <label class="sede-mode__opt" for="modo-entrega">Entrega</label>
+                <label class="sede-mode__opt" for="modo-retirada">Retirada</label>
+            </div>
+            <span class="pill pill--open"><span class="pill__led"></span> Aberta até 20h</span>
+        </div>
+
+        <div class="sede-mode__info sede-mode__info--entrega">
+            <svg class="sede-mode__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
             <div>
-                <h2 class="section__title">Propagandas ativas</h2>
-                <p class="section__sub">2 campanhas nesta sede</p>
+                <p class="sede-mode__title">Entrega em rondas · próxima às 14h</p>
+                <p class="sede-mode__sub">Uma ronda a cada 2 h, das 8h às 18h</p>
             </div>
         </div>
 
-        <div class="rail">
-            <article class="ad">
-                <div class="ad__media">
-                    <span class="badge badge--discount badge--float">-20%</span>
-                    🥐
-                </div>
-                <div class="ad__body">
-                    <h3 class="ad__title">Semana do café da manhã</h3>
-                    <p class="ad__store">Até 31/08 · 6 produtos</p>
-                    <div class="ad__foot">
-                        <span class="price">a partir de R$ 5,52</span>
-                        <span class="badge badge--urgent">2 dias</span>
-                    </div>
-                </div>
-            </article>
+        <div class="sede-mode__info sede-mode__info--retirada">
+            <svg class="sede-mode__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 4.5 4h15L21 9.5"/><path d="M3 9.5a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12.5V20h14v-7.5"/><path d="M10 20v-5h4v5"/></svg>
+            <div>
+                <p class="sede-mode__title">Retire no balcão · reserva vale 3 h</p>
+                <p class="sede-mode__sub">Rua Domingos de Morais, 1420 · 800 m</p>
+            </div>
+        </div>
+    </section>
 
-            <article class="ad">
-                <div class="ad__media">
-                    <span class="badge badge--discount badge--float">-10%</span>
-                    🎂
-                </div>
-                <div class="ad__body">
-                    <h3 class="ad__title">Encomendas de bolo</h3>
-                    <p class="ad__store">Sem data de término · 4 produtos</p>
-                    <div class="ad__foot">
-                        <span class="price">R$ 62,10</span>
-                        <span class="badge badge--soft">Exclusiva de assinante</span>
+    <!-- Assinatura: conceito do Kulma sem par no iFood, vestido como o
+         cartão de clube dele. É sempre por sede e o valor vem da empresa
+         (4.8). A inscrição grátis já traz as propagandas normais para o
+         feed; a assinatura paga libera também as exclusivas. O cliente
+         já é inscrito grátis nesta sede (ela está em "Suas lojas" e na
+         aba Lojas da Início), então o cartão oferece só o passo pago, e
+         o estado da inscrição grátis fica embaixo do botão. -->
+    <section class="sede-plan" id="assinatura" aria-labelledby="sede-plan-titulo">
+        <span class="sede-plan__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4.5 4L12 5l4.5 7L21 8l-2 11H5Z"/></svg>
+        </span>
+        <div class="sede-plan__body">
+            <h2 class="sede-plan__title" id="sede-plan-titulo">Assine a Panificadora Aurora</h2>
+            <p class="sede-plan__text">Ofertas exclusivas · <strong>R$ 9,90/mês</strong></p>
+        </div>
+        <div class="sede-plan__acts">
+            <button class="btn btn--primary btn--sm" type="button">Assinar</button>
+            <button class="sede-plan__free" type="button" aria-pressed="true" aria-label="Inscrito grátis nesta loja">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+                Inscrito grátis
+            </button>
+        </div>
+    </section>
+
+    <!-- Propagandas ativas desta sede, no formato dos cupons do iFood.
+         Cada cupom é o <label> de um checkbox escondido que abre, abaixo
+         do trilho, a lista de produtos da oferta (o mesmo conceito dos
+         cartões de oferta da home). Os inputs vêm antes do trilho e das
+         listas, no mesmo pai, para os seletores "~" alcançarem os dois. -->
+    <section class="sec" id="ofertas" aria-labelledby="ofertas-titulo">
+        <div class="sec-head">
+            <div>
+                <h2 class="sec-head__title" id="ofertas-titulo">Ofertas da loja</h2>
+                <p class="sec-head__sub">2 campanhas nesta sede</p>
+            </div>
+        </div>
+
+        <input class="ui-toggle" type="checkbox" id="oferta-cafe" aria-controls="oferta-cafe-lista" aria-label="Ver os produtos da oferta Semana do café da manhã">
+        <input class="ui-toggle" type="checkbox" id="oferta-bolo" aria-controls="oferta-bolo-lista" aria-label="Ver os produtos da oferta Encomendas de bolo">
+
+        <div class="hrail sede-coupons">
+            <label class="sede-coupon" for="oferta-cafe">
+                <span class="sede-coupon__stub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg>
+                    <span class="badge badge--discount">-20%</span>
+                </span>
+                <span class="sede-coupon__body">
+                    <span class="sede-coupon__title">Semana do café da manhã</span>
+                    <span class="sede-coupon__meta">Até 31/08 · 6 produtos</span>
+                    <span class="badge badge--urgent">Termina em 2 dias</span>
+                </span>
+                <svg class="sede-coupon__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+
+            <label class="sede-coupon" for="oferta-bolo">
+                <span class="sede-coupon__stub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg>
+                    <span class="badge badge--discount">-10%</span>
+                </span>
+                <span class="sede-coupon__body">
+                    <span class="sede-coupon__title">Encomendas de bolo</span>
+                    <span class="sede-coupon__meta">Sem data de término · 4 produtos</span>
+                    <span class="badge badge--soft">Só para assinantes</span>
+                </span>
+                <svg class="sede-coupon__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+        </div>
+
+        <!-- Produtos da oferta aberta. A mais barata dá o "a partir de". -->
+        <div class="sede-offer sede-offer--cafe" id="oferta-cafe-lista">
+            <p class="sede-offer__head">20% off em 6 produtos · a partir de <span class="price price--sm">R$ 5,52</span></p>
+            <div class="hrail">
+                <article class="pcard">
+                    <div class="pcard__media">🥐
+                        <span class="badge badge--discount pcard__badge">-20%</span>
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Croissant de manteiga à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span></p>
+                    <h3 class="pcard__name"><a href="produto.html">Croissant de manteiga</a></h3>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media">🧁
+                        <span class="badge badge--discount pcard__badge">-20%</span>
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Muffin de fubá à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span></p>
+                    <h3 class="pcard__name"><a href="produto.html">Muffin de fubá</a></h3>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media">🧀
+                        <span class="badge badge--discount pcard__badge">-20%</span>
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de queijo à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 7,12</span><span class="price-old">R$ 8,90</span></p>
+                    <h3 class="pcard__name"><a href="produto.html">Pão de queijo · 4 unidades</a></h3>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media">🧈
+                        <span class="badge badge--discount pcard__badge">-20%</span>
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão na chapa à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span></p>
+                    <h3 class="pcard__name"><a href="produto.html">Pão na chapa</a></h3>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media">☕
+                        <span class="badge badge--discount pcard__badge">-20%</span>
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Café coado à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span></p>
+                    <h3 class="pcard__name"><a href="produto.html">Café coado · 300 ml</a></h3>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media">🍊
+                        <span class="badge badge--discount pcard__badge">-20%</span>
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Suco de laranja à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span></p>
+                    <h3 class="pcard__name"><a href="produto.html">Suco de laranja · 500 ml</a></h3>
+                </article>
+            </div>
+        </div>
+
+        <!-- Oferta exclusiva: quem não assina vê o cupom, mas não os itens
+             nem o preço com desconto (só assinantes pagos, 4.8). -->
+        <div class="sede-offer sede-offer--bolo" id="oferta-bolo-lista">
+            <div class="sede-offer__lock">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <p class="sede-offer__lock-text">Os 4 produtos desta oferta aparecem para quem assina a loja.</p>
+                <a class="sec-head__link" href="#assinatura">Assinar</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="band" role="presentation"></div>
+
+    <!-- Abas do cardápio: presas no topo ao rolar e rolando de lado. São
+         âncoras para as seções abaixo; o script marca a aba da seção que
+         está passando sob elas. Ficam como filhas diretas do .app para o
+         sticky valer na página inteira. -->
+    <nav class="utabs utabs--sticky sede-tabs" aria-label="Cardápio">
+        <a class="utabs__item is-active" href="#cat-destaques" aria-current="true">Destaques</a>
+        <a class="utabs__item" href="#cat-paes">Pães</a>
+        <a class="utabs__item" href="#cat-doces">Doces e bolos</a>
+        <a class="utabs__item" href="#cat-salgados">Salgados</a>
+        <a class="utabs__item" href="#cat-bebidas">Bebidas</a>
+    </nav>
+
+    <!-- Catálogo desta sede: só o que ela puxou do catálogo da empresa,
+         com o preço efetivo (preço da sede ou, sem ele, o da empresa, 4.1). -->
+    <section class="sec" id="cat-destaques" aria-labelledby="cat-destaques-titulo">
+        <div class="sec-head">
+            <h2 class="sec-head__title" id="cat-destaques-titulo">Destaques</h2>
+        </div>
+        <div class="hrail">
+            <article class="pcard">
+                <div class="pcard__media">🥐
+                    <span class="badge badge--discount pcard__badge">-20%</span>
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Croissant de manteiga à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                 </div>
+                <p class="pcard__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span></p>
+                <h3 class="pcard__name"><a href="produto.html">Croissant de manteiga</a></h3>
+            </article>
+            <article class="pcard">
+                <div class="pcard__media">🍞
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de forma integral à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+                <p class="pcard__price"><span class="price price--sm">R$ 12,50</span></p>
+                <h3 class="pcard__name"><a href="produto.html">Pão de forma integral</a></h3>
+            </article>
+            <article class="pcard">
+                <div class="pcard__media">🧁
+                    <span class="badge badge--discount pcard__badge">-20%</span>
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Muffin de fubá à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+                <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span></p>
+                <h3 class="pcard__name"><a href="produto.html">Muffin de fubá</a></h3>
+            </article>
+            <article class="pcard">
+                <div class="pcard__media">🥧
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Torta de frango à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+                <p class="pcard__price"><span class="price price--sm">R$ 14,90</span></p>
+                <h3 class="pcard__name"><a href="produto.html">Torta de frango · fatia</a></h3>
             </article>
         </div>
+    </section>
+
+    <!-- Daqui em diante, o cardápio em linhas, como no iFood: texto à
+         esquerda (nome, descrição de 2 linhas, preço) e foto à direita.
+         O nome estica o link por cima da linha inteira. -->
+    <section class="sec" id="cat-paes" aria-labelledby="cat-paes-titulo">
+        <div class="sec-head">
+            <h2 class="sec-head__title" id="cat-paes-titulo">Pães</h2>
+        </div>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Croissant de manteiga</a></h3>
+                <p class="sede-item__desc">Massa folhada com manteiga francesa e fermentação lenta de 18 horas. Assado várias vezes ao dia.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span><span class="badge badge--discount">-20%</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🥐</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Pão de forma integral</a></h3>
+                <p class="sede-item__desc">Fatiado, 500 g. Farinha integral, aveia e linhaça, sem conservantes.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 12,50</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🍞</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Pão francês · 6 unidades</a></h3>
+                <p class="sede-item__desc">Casca crocante e miolo macio. Sai do forno de hora em hora, das 7h às 19h.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 5,40</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🥖</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Baguete tradicional</a></h3>
+                <p class="sede-item__desc">Fermentação natural de 24 horas, casca fina e estalando. Cerca de 250 g.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 9,90</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🥖</div>
+        </article>
+    </section>
+
+    <section class="sec" id="cat-doces" aria-labelledby="cat-doces-titulo">
+        <div class="sec-head">
+            <h2 class="sec-head__title" id="cat-doces-titulo">Doces e bolos</h2>
+        </div>
+
+        <!-- Estoque baixo vira urgência, em vermelho claro. -->
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Muffin de fubá</a></h3>
+                <p class="sede-item__desc">Fubá cremoso com pedaços de goiabada. Massa úmida, assado no dia.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount">-20%</span></p>
+                <p class="sede-item__flag"><span class="badge badge--urgent">Últimas 3 unidades</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🧁</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Bolo de cenoura · fatia</a></h3>
+                <p class="sede-item__desc">Cobertura de brigadeiro feita na casa. Fatia de cerca de 120 g.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 9,50</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🍰</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Sonho de creme</a></h3>
+                <p class="sede-item__desc">Massa frita na hora, recheio de creme de baunilha e açúcar de confeiteiro.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 7,90</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🍩</div>
+        </article>
+
+        <!-- Item da oferta exclusiva: quem não assina vê o preço cheio e,
+             ao lado, o que pagaria assinando. -->
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Encomenda de bolo · 1 kg</a></h3>
+                <p class="sede-item__desc">Escolha massa, recheio e cobertura. Fica pronto em 24 h para retirar ou receber na ronda.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 69,00</span><span class="badge badge--soft">Assinante: R$ 62,10</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🎂</div>
+        </article>
+    </section>
+
+    <section class="sec" id="cat-salgados" aria-labelledby="cat-salgados-titulo">
+        <div class="sec-head">
+            <h2 class="sec-head__title" id="cat-salgados-titulo">Salgados</h2>
+        </div>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Torta de frango · fatia</a></h3>
+                <p class="sede-item__desc">Frango desfiado com requeijão e milho, em massa podre amanteigada.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 14,90</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🥧</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Pão de queijo · 4 unidades</a></h3>
+                <p class="sede-item__desc">Polvilho azedo e queijo meia-cura de Minas. Sai quentinho do forno.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 7,12</span><span class="price-old">R$ 8,90</span><span class="badge badge--discount">-20%</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🧀</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Pão na chapa</a></h3>
+                <p class="sede-item__desc">Pão francês na chapa com manteiga, feito na hora do pedido.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount">-20%</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🧈</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Coxinha de frango</a></h3>
+                <p class="sede-item__desc">Massa de batata e recheio de frango com requeijão cremoso. Cerca de 110 g.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 7,50</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🍗</div>
+        </article>
+    </section>
+
+    <section class="sec" id="cat-bebidas" aria-labelledby="cat-bebidas-titulo">
+        <div class="sec-head">
+            <h2 class="sec-head__title" id="cat-bebidas-titulo">Bebidas</h2>
+        </div>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Café coado · 300 ml</a></h3>
+                <p class="sede-item__desc">Grãos do sul de Minas, torra média, coado na hora.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount">-20%</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">☕</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Suco de laranja · 500 ml</a></h3>
+                <p class="sede-item__desc">Laranja-pera espremida na hora, sem açúcar e sem gelo.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount">-20%</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🍊</div>
+        </article>
+
+        <article class="sede-item">
+            <div class="sede-item__body">
+                <h3 class="sede-item__name"><a href="produto.html">Cappuccino · 240 ml</a></h3>
+                <p class="sede-item__desc">Espresso, leite vaporizado, cacau e uma pitada de canela.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 9,50</span></p>
+            </div>
+            <div class="sede-item__photo" aria-hidden="true">🥛</div>
+        </article>
     </section>
 
     <div class="route" role="presentation">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
     </div>
 
-    <!-- Catálogo desta sede: só o que ela puxou do catálogo da empresa,
-         com o preço efetivo (preço da sede ou, sem ele, o da empresa). -->
-    <section class="section" id="produtos">
-        <div class="section__head">
+    <!-- O "Ver mais" do topo traz para cá, como a página de informações
+         da loja do iFood: descrição, endereço e horário. -->
+    <section class="sec" id="sobre" aria-labelledby="sobre-titulo">
+        <div class="sec-head">
             <div>
-                <h2 class="section__title">Produtos desta loja</h2>
-                <p class="section__sub">86 itens disponíveis</p>
-            </div>
-            <a class="section__link" href="#">Ver tudo</a>
-        </div>
-
-        <div class="grid">
-            <a class="product" href="produto.html">
-                <div class="product__media">
-                    <span class="badge badge--discount badge--float">-20%</span>
-                    🥐
-                </div>
-                <div class="product__body">
-                    <h3 class="product__name">Croissant de manteiga</h3>
-                    <p class="product__store">12 em estoque</p>
-                    <p class="product__price">
-                        <span class="price-old">R$ 6,90</span>
-                        <span class="price price--sm">R$ 5,52</span>
-                    </p>
-                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span> (128)</p>
-                </div>
-            </a>
-
-            <a class="product" href="produto.html">
-                <div class="product__media">🍞</div>
-                <div class="product__body">
-                    <h3 class="product__name">Pão de forma integral</h3>
-                    <p class="product__store">7 em estoque</p>
-                    <p class="product__price"><span class="price price--sm">R$ 12,50</span></p>
-                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span> (203)</p>
-                </div>
-            </a>
-
-            <a class="product" href="produto.html">
-                <div class="product__media">
-                    <span class="badge badge--discount badge--float">-20%</span>
-                    🧁
-                </div>
-                <div class="product__body">
-                    <h3 class="product__name">Muffin de fubá</h3>
-                    <p class="product__store">
-                        <span class="badge badge--urgent">Últimas 3 unidades</span>
-                    </p>
-                    <p class="product__price">
-                        <span class="price-old">R$ 8,00</span>
-                        <span class="price price--sm">R$ 6,40</span>
-                    </p>
-                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,3</span> (39)</p>
-                </div>
-            </a>
-
-            <a class="product" href="produto.html">
-                <div class="product__media">🥧</div>
-                <div class="product__body">
-                    <h3 class="product__name">Torta de frango · fatia</h3>
-                    <p class="product__store">18 em estoque</p>
-                    <p class="product__price"><span class="price price--sm">R$ 14,90</span></p>
-                    <p class="product__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span> (64)</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- Horário por dia da semana, com exceção de data (4.2). -->
-    <section class="section" id="sobre">
-        <div class="section__head">
-            <div>
-                <h2 class="section__title">Horário de atendimento</h2>
-                <p class="section__sub">Hoje, segunda-feira</p>
+                <h2 class="sec-head__title" id="sobre-titulo">Sobre a loja</h2>
+                <p class="sec-head__sub">Aurora Alimentos Ltda. · Sede Vila Mariana</p>
             </div>
         </div>
 
-        <ul class="hours">
-            <li class="is-today"><span>Segunda</span><span>07:00 – 20:00</span></li>
-            <li><span>Terça a sexta</span><span>07:00 – 20:00</span></li>
-            <li><span>Sábado</span><span>07:00 – 18:00 · almoço 12:00 – 13:00</span></li>
-            <li class="is-closed"><span>Domingo</span><span>Fechada</span></li>
-            <li class="is-closed"><span>07/09 · feriado</span><span>Fechada</span></li>
-        </ul>
+        <div class="gutter">
+            <p class="sede-about">
+                Padaria de bairro desde 1998. Produção própria de pães e confeitaria,
+                com entrega em rondas ao longo do dia e retirada no balcão.
+            </p>
 
-        <p class="prose">
-            Padaria de bairro desde 1998. Produção própria de pães e confeitaria,
-            com entrega em rondas ao longo do dia e retirada no balcão.
-        </p>
+            <!-- A sede tem um único endereço (1:1 com address). -->
+            <div class="sede-addr">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+                <div>
+                    <p class="sede-addr__line">Rua Domingos de Morais, 1420 — Vila Mariana</p>
+                    <p class="sede-addr__sub">São Paulo, SP · 800 m de você</p>
+                </div>
+            </div>
+
+            <!-- Horário por dia da semana, com exceção de data (4.2). -->
+            <h3 class="sede-info__label">Horário de atendimento</h3>
+            <ul class="sede-hours">
+                <li class="is-today"><span>Segunda <span class="badge badge--soft">Hoje</span></span><span>07:00 – 20:00</span></li>
+                <li><span>Terça a sexta</span><span>07:00 – 20:00</span></li>
+                <li><span>Sábado</span><span>07:00 – 18:00 · almoço 12:00 – 13:00</span></li>
+                <li class="is-closed"><span>Domingo</span><span>Fechada</span></li>
+                <li class="is-closed"><span>07/09 · feriado</span><span>Fechada</span></li>
+            </ul>
+        </div>
     </section>
 
     <p class="proto-foot">
@@ -227,30 +508,91 @@
         <a href="produto.html">produto</a>
     </p>
 
-    <!-- Navegação inferior: só descoberta. Início ao centro; ativa em azul meia-noite. -->
-    <nav class="tabbar" aria-label="Navegação principal">
-        <a class="tab" href="#">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3"/></svg></span>
-            Ofertas
+    <!-- Sacola presa no rodapé, sem a nav inferior: na loja o iFood troca
+         a navegação pela sacola. 3 itens: 1 croissant e 2 pães de forma. -->
+    <div class="cartbar">
+        <a class="cartbar__btn" href="#" aria-label="Ver sacola, 3 itens, R$ 30,52">
+            <span class="cartbar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbar__count">3</span></span>
+            <span class="cartbar__label">Ver sacola</span>
+            <span class="cartbar__total">R$ 30,52</span>
         </a>
-        <a class="tab" href="#">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg></span>
-            Produtos
-        </a>
-        <a class="tab" href="index.html">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
-            Início
-        </a>
-        <a class="tab is-active" href="#" aria-current="page">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-1.6-4.5A2 2 0 0 0 17.5 3h-11a2 2 0 0 0-1.9 1.5Z"/><path d="M5 9v10a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V9"/><path d="M9.5 20.5V14h5v6.5"/></svg></span>
-            Lojas
-        </a>
-        <a class="tab" href="#">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></span>
-            Favoritos
-        </a>
-    </nav>
+    </div>
 
 </main>
+
+<script>
+/* Dois comportamentos que dependem da posição de rolagem em tempo real,
+   coisa que checkbox e radio não resolvem:
+   1. Barra compacta. Quando a capa (com os botões redondos) sai por
+      baixo da barra, liga .is-compact no .app: a barra desce e as abas
+      do cardápio passam a prender logo abaixo dela (--utabs-top, no
+      sede.css). Um IntersectionObserver na capa decide, sem ouvir scroll.
+   2. Aba ativa do cardápio. A pergunta é "qual seção já passou da linha
+      das abas", e não "qual está visível": com seções curtas, duas
+      aparecem ao mesmo tempo e o IntersectionObserver não diz qual
+      vale. Por isso aqui é scroll + requestAnimationFrame, uma leitura
+      por quadro.
+   Sem JS a página continua inteira: a barra não aparece, as abas
+   prendem em top: 0 e "Destaques" fica marcada. */
+(function () {
+    var app = document.querySelector('.app');
+    var cover = document.querySelector('.sede-cover');
+    var tabs = document.querySelector('.sede-tabs');
+    if (!app || !cover || !tabs) return;
+
+    // Os dois números moram no CSS. A capa "sai" quando a base dela passa
+    // por baixo da barra (--sede-bar-h), não do topo da tela. A linha que
+    // decide a aba ativa é a mesma folga das âncoras (--anchor-offset),
+    // e não a base das abas medida ao vivo: as abas descem 56 px com
+    // transição quando a barra aparece, e nesse meio-tempo não há evento
+    // de scroll para corrigir a leitura (ao tocar "Pães" lá do topo, a
+    // aba ficava em "Destaques").
+    var rootStyle = getComputedStyle(document.documentElement);
+    var barH = parseFloat(rootStyle.getPropertyValue('--sede-bar-h')) || 56;
+    var line = (parseFloat(rootStyle.getPropertyValue('--anchor-offset')) || 104) + 8;
+
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+            app.classList.toggle('is-compact', !entries[0].isIntersecting);
+        }, { rootMargin: '-' + barH + 'px 0px 0px 0px' }).observe(cover);
+    }
+
+    var links = Array.prototype.slice.call(tabs.querySelectorAll('.utabs__item'));
+    var sections = links.map(function (a) {
+        return document.querySelector(a.getAttribute('href'));
+    });
+    var current = 0;
+
+    // aria-current sai do link (e não vira "false"): o CSS compartilhado
+    // marca como ativa qualquer aba que tenha o atributo.
+    function setActive(i) {
+        if (i === current) return;
+        current = i;
+        links.forEach(function (a, j) {
+            a.classList.toggle('is-active', j === i);
+            if (j === i) a.setAttribute('aria-current', 'true');
+            else a.removeAttribute('aria-current');
+        });
+        // Rola a fileira de abas de lado para a ativa ficar no meio.
+        var a = links[i];
+        tabs.scrollTo({ left: a.offsetLeft - (tabs.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+    }
+
+    var queued = false;
+    function update() {
+        queued = false;
+        var i = 0;
+        sections.forEach(function (s, j) {
+            if (s && s.getBoundingClientRect().top <= line) i = j;
+        });
+        setActive(i);
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!queued) { queued = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+})();
+</script>
 </body>
 </html>

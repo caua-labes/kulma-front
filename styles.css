@@ -2,9 +2,19 @@
    Kulma — App do cliente · protótipo HTML/CSS
    Identidade (seção 7 do documento de projeto):
    fundo branco · detalhes em #132A45 (navy) e #D6293B (vermelho).
-   O vermelho fica restrito a preço, botão principal, badge de urgência
-   e contador do carrinho. O navy carrega texto, ícones, bordas e o
-   estado ativo.
+   O vermelho fica restrito a preço, botão principal, badge de desconto
+   ou urgência, contador da sacola, ponto de notificação e o anel de
+   "stories" das lojas com novidade. O navy carrega texto, ícones, bordas
+   e o estado ativo — onde o iFood pinta o ativo de vermelho, aqui é navy.
+
+   Formato: o do iFood (posição dos elementos, forma dos componentes,
+   bottom sheets, abas sublinhadas, lojas em linha sem cartão, barra da
+   sacola). As cores e as fontes continuam as do Kulma.
+
+   Este arquivo é só a base compartilhada pelas três páginas: tokens,
+   reset, o "aparelho" (.app) e os componentes de uso geral. O que só
+   uma página usa mora no CSS dela (home.css, sede.css, produto.css),
+   que carrega logo depois deste e pode sobrescrever qualquer regra.
    ===================================================================== */
 
 :root {
@@ -21,10 +31,33 @@
     --line:        #E3E8EF;
     --surface:     #FFFFFF;
     --canvas:      #E9EDF2;
+    --surface-alt: #F3F5F8;
 
     --radius:      14px;
     --radius-sm:   10px;
     --shadow:      0 1px 2px rgba(19, 42, 69, .05), 0 10px 30px rgba(19, 42, 69, .07);
+
+    /* Sombra dos botões que flutuam sobre foto: precisa descolar do
+       branco e do navy da capa ao mesmo tempo, então é curta e escura. */
+    --shadow-float: 0 1px 2px rgba(19, 42, 69, .12), 0 3px 10px rgba(19, 42, 69, .14);
+
+    /* Margem lateral do formato iFood: as três páginas e todos os
+       componentes usam este token, para tudo alinhar na mesma coluna. */
+    --gutter:      16px;
+
+    /* Alturas das barras fixas do rodapé. Moram aqui porque a própria
+       barra e quem reserva espaço no fim da página (.app, .app--cartbar)
+       precisam do mesmo número. */
+    --tabbar-h:    60px;
+    --cartbar-h:   73px;
+
+    /* "Foto" do protótipo: não há arquivos de imagem, então todo lugar
+       que teria foto mostra um emoji sobre navy claro com textura
+       pontilhada (o padrão de rota da identidade). Um token só, para que
+       logo, cartão e capa tenham exatamente o mesmo fundo. */
+    --photo:
+        radial-gradient(circle at 1px 1px, rgba(19,42,69,.09) 1px, transparent 1.5px) 0 0 / 13px 13px,
+        linear-gradient(140deg, var(--navy-050), #F8FAFC);
 
     --display: "Space Grotesk", "Inter", system-ui, sans-serif;
     --body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -48,8 +81,18 @@ a { color: inherit; text-decoration: none; }
 ul { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; color: inherit; }
 
+/* Toque sem o retângulo cinza do navegador móvel: o retorno visual de
+   cada componente já vem do próprio componente. */
+a, button, label { -webkit-tap-highlight-color: transparent; }
+
+/* Âncora não para escondida atrás de barra fixa. Cada página ajusta o
+   valor ao que fica preso no topo dela (ex.: abas do cardápio). */
+[id] { scroll-margin-top: var(--anchor-offset, 64px); }
+
 /* O cliente é mobile-first (React Native); no desktop a tela vira um
-   aparelho centralizado sobre o canvas. */
+   aparelho centralizado sobre o canvas. O respiro no fim é o espaço da
+   nav inferior (Início); páginas com outra barra fixa trocam pelo
+   modificador (.app--cartbar na sede, .app--action no item). */
 .app {
     max-width: 430px;
     margin: 0 auto;
@@ -60,12 +103,116 @@ button { font: inherit; color: inherit; }
     position: relative;
 }
 
+/* Sem nav, só a barra da sacola (sede). */
+.app--cartbar {
+    padding-bottom: calc(var(--cartbar-h) + 24px + env(safe-area-inset-bottom, 0px));
+}
+
+
+/* ---------- Utilitários ---------- */
+
+/* Respiro lateral padrão, para blocos que não são componentes. */
+.gutter { padding-left: var(--gutter); padding-right: var(--gutter); }
+
+/* Caixa de "foto" com emoji: o tamanho vem de quem usa. */
+.photo {
+    display: grid;
+    place-items: center;
+    background: var(--photo);
+    line-height: 1;
+}
+
+/* Faixa cinza entre blocos grandes, como o iFood separa o cabeçalho
+   da loja do cardápio. Use com moderação: o padrão é separar por
+   espaço, não por linha. */
+.band {
+    height: 8px;
+    margin: 24px 0 0;
+    background: var(--navy-050);
+}
+
+/* Inputs escondidos que comandam a interface sem JS (chips, abas,
+   alternâncias). Sempre fixed no canto: em absolute, dar foco num
+   deles fazia o navegador rolar a página até onde ele mora. O input
+   precisa vir ANTES do alvo e no MESMO pai (seletores + e ~). */
+.ui-toggle,
+.chip-toggle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ---------- Botões ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--navy);
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+.btn--block { width: 100%; }
+
+/* Compacto, para ação dentro de linha ou cartão (ex.: "Assinar"). */
+.btn--sm {
+    min-height: 36px;
+    padding: 7px 14px;
+    font-size: 13.5px;
+}
+
+/* Botão principal: o único vermelho cheio da tela. */
+.btn--primary { background: var(--red); color: #fff; }
+.btn--primary:hover { background: var(--red-700); }
+
+.btn--outline {
+    background: var(--surface);
+    border-color: var(--navy);
+    color: var(--navy);
+}
+
+.btn--outline:hover { background: var(--navy-050); }
+
+.btn--quiet {
+    background: var(--navy-050);
+    border-color: var(--navy-050);
+    color: var(--navy);
+}
+
+.btn--quiet:hover { background: var(--line); border-color: var(--line); }
+
+/* Item obrigatório ainda sem escolha, sede fechada etc. */
+.btn:disabled,
+.btn[aria-disabled="true"] { opacity: .45; cursor: default; }
+
+/* Botão de ícone sobre fundo branco (topo, linhas, cabeçalhos). */
 .icon-btn {
     position: relative;
     display: grid;
     place-items: center;
     width: 38px;
     height: 38px;
+    padding: 0;
     border: 1px solid var(--line);
     border-radius: 50%;
     background: var(--surface);
@@ -73,738 +220,88 @@ button { font: inherit; color: inherit; }
     cursor: pointer;
 }
 
-/* ---------- Nav superior, só ícones, alinhada à direita ---------- */
-/* Carrinho · Pedidos · Perfil. O perfil é a âncora: círculo maior com
-   borda azul meia-noite, e os outros dois saem dele como uma extensão —
-   uma pastilha de mesma borda que corre por baixo do círculo. */
+.icon-btn:hover { background: var(--navy-050); }
 
-.topnav {
-    display: flex;
-    align-items: center;
-}
+/* Só o ícone, como o sino no topo da Início do iFood. */
+.icon-btn--plain { border-color: transparent; background: none; }
 
-.topnav__group {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    height: 36px;
-    padding: 0 20px 0 5px;
-    margin-right: -16px;
-    border: 1px solid var(--navy);
-    /* Reta no lado que encosta no perfil; curva só na outra ponta. */
-    border-radius: 999px 0 0 999px;
-    background: var(--surface);
-}
+.icon-btn--sm { width: 32px; height: 32px; }
 
-.topnav__btn {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    color: var(--navy);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.topnav__btn:hover { background: var(--navy-050); }
-
-/* Perfil: maior que os demais e com borda própria. */
-.topnav__me {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border: 1.5px solid var(--navy);
-    border-radius: 50%;
-    background: var(--surface);
-    color: var(--navy);
-    cursor: pointer;
-}
-
-.topnav__me:hover { background: var(--navy-050); }
-
-/* Contador do carrinho — vermelho, conforme a regra de detalhes. */
-.topnav__count {
-    position: absolute;
-    top: -1px;
-    right: -3px;
-    min-width: 15px;
-    height: 15px;
-    padding: 0 4px;
-    display: grid;
-    place-items: center;
-    border-radius: 999px;
-    background: var(--red);
+/* Ligado (ex.: inscrito na sede): navy cheio, nunca vermelho. */
+.icon-btn.is-on {
+    background: var(--navy);
+    border-color: var(--navy);
     color: #fff;
-    font-size: 9.5px;
-    font-weight: 700;
-    line-height: 1;
-    border: 2px solid var(--surface);
 }
 
-/* Notificações não lidas — ponto simples, sem número. */
-.topnav__dot {
+/* Notificação não lida no canto do ícone (sino). */
+.icon-btn__dot {
     position: absolute;
-    top: 1px;
-    right: 1px;
-    width: 8px;
-    height: 8px;
+    top: 6px;
+    right: 7px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: var(--red);
-    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--surface);
 }
 
-/* Ação contextual flutuando sobre a capa da sede / foto do produto. */
-.float-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
+/* Botão redondo branco sobre imagem: voltar, buscar, compartilhar e
+   favoritar na capa da loja e na foto do item. Sem borda e com sombra
+   curta, porque a foto pode ser clara ou escura. */
+.round-btn {
+    position: relative;
+    flex: none;
     display: grid;
     place-items: center;
     width: 38px;
     height: 38px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .92);
-    border: 1px solid rgba(19, 42, 69, .10);
-    color: var(--navy);
-    cursor: pointer;
-    backdrop-filter: blur(6px);
-}
-
-.float-btn.is-on { color: var(--red); }
-.float-btn.is-on svg { fill: var(--red); }
-
-
-/* ---------- Carrossel de ofertas ---------- */
-/* Nome da sede em cima, fora da imagem. A imagem ocupa a tela inteira
-   menos 20px de cada borda — o gap é maior que essa margem, então a
-   oferta vizinha nunca aparece de lado. Abaixo dela: nome da promoção
-   rolando à esquerda e prazo restante à direita; depois uma linha e as
-   bolinhas de quantidade, centralizadas. */
-
-.promos {
-    display: flex;
-    gap: 32px;
-    padding: 16px 20px 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-}
-
-.promos::-webkit-scrollbar { display: none; }
-
-.promo {
-    flex: none;
-    width: 100%;
-    scroll-snap-align: center;
-}
-
-.promo__store {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0 0 8px 2px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.promo__store span {
-    font-weight: 400;
-    color: var(--muted);
-}
-
-.promo__media {
-    position: relative;
-    height: 200px;
-    display: grid;
-    place-items: center;
-    font-size: 66px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 1px 1px, rgba(19,42,69,.09) 1px, transparent 1.5px) 0 0 / 13px 13px,
-        linear-gradient(140deg, var(--navy-050), #F8FAFC);
-}
-
-/* Descrição e prazo, abaixo da imagem. */
-.promo__foot {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 11px 2px 0;
-}
-
-/* Nome da promoção rolando da esquerda. */
-.promo__marquee {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
-    mask-image: linear-gradient(90deg, #000 82%, transparent);
-}
-
-.promo__track {
-    display: inline-flex;
-    white-space: nowrap;
-    animation: promo-roll 14s linear infinite;
-}
-
-.promo__track span {
-    padding-right: 56px;
-    font-family: var(--display);
-    font-size: 13.5px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    color: var(--navy);
-}
-
-@keyframes promo-roll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .promo__track { animation: none; }
-}
-
-/* Contagem regressiva da oferta — badge de urgência, em vermelho. */
-.promo__days {
-    flex: none;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: var(--red-050);
-    color: var(--red-700);
-    font-size: 11.5px;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-/* ---------- Cartão de oferta (aba Ofertas) ---------- */
-/* Mesma linguagem do carrossel do topo — nome da sede fora da imagem,
-   imagem retangular — só que empilhado numa lista vertical, com o
-   cartão fechado por uma barra com seta em vez do preço: aqui não
-   aparece valor, só o desconto máximo da campanha. */
-
-.deals { display: grid; gap: 20px; }
-
-.deal__store {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 12px 14px 10px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.deal__store span { font-weight: 400; color: var(--muted); }
-
-.deal {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--surface);
-}
-
-/* Retângulo menor que o do carrossel (200px). */
-.deal__media {
-    position: relative;
-    height: 176px;
-    display: grid;
-    place-items: center;
-    font-size: 52px;
-    background:
-        radial-gradient(circle at 1px 1px, rgba(19,42,69,.09) 1px, transparent 1.5px) 0 0 / 13px 13px,
-        linear-gradient(140deg, var(--navy-050), #F8FAFC);
-}
-
-/* Só a porcentagem máxima da campanha — sem valor em reais. */
-.deal__off {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px 11px;
-    border-radius: 9px;
-    background: var(--red);
-    color: #fff;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -.01em;
-}
-
-/* Barra fechando o cartão embaixo da imagem: título centralizado, com
-   folga maior nas bordas. A seta (à direita) abre a linha de produtos —
-   uma coluna fantasma do mesmo tamanho do lado esquerdo é o que deixa
-   o título centralizado na barra inteira, não só no espaço sobrando. */
-.deal__bar {
-    display: grid;
-    grid-template-columns: 34px 1fr 34px;
-    align-items: center;
-    gap: 8px;
-    padding: 18px 22px;
-    border-top: 1px solid var(--line);
-}
-
-.deal__bar-text {
-    grid-column: 2;
-    min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: center;
-    font-family: var(--display);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    color: var(--navy);
-}
-
-/* Abre/fecha a linha de produtos da propaganda. */
-.deal__arrow {
-    grid-column: 3;
-    justify-self: end;
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    color: var(--navy-300);
-    cursor: pointer;
-}
-
-.deal__arrow:hover { background: var(--navy-050); color: var(--navy); }
-
-.deal__arrow svg { transition: transform .18s ease; }
-
-.deal-toggle:checked ~ .deal__bar .deal__arrow {
-    background: var(--navy-050);
-    color: var(--navy);
-}
-
-.deal-toggle:checked ~ .deal__bar .deal__arrow svg { transform: rotate(90deg); }
-
-/* Linha de produtos da propaganda: rolagem horizontal, até 10 itens e
-   depois um "Ver mais" — só aparece com a seta aberta. */
-
-/* Divisor cinza claro, como uma div à parte — separa a barra da lista
-   de produtos, só quando ela está aberta. Mesmo tom usado no resto da
-   interface (var(--line)), não mais navy. */
-.deal__divider {
-    display: none;
-    height: 2px;
-    background-image: radial-gradient(circle, var(--navy-300) 1px, transparent 1.4px);
-    background-size: 7px 2px;
-}
-
-.deal-toggle:checked ~ .deal__divider { display: block; }
-
-.deal-toggle {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Sem caixa ao redor do grupo — os produtos ficam soltos no fundo do
-   cartão, separados um do outro só por uma linha vermelha fina. */
-.deal__products {
-    display: none;
-    gap: 14px;
-    padding: 14px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.deal__products::-webkit-scrollbar { display: none; }
-
-.deal-toggle:checked ~ .deal__products { display: flex; }
-
-.deal-item {
-    flex: none;
-    width: 100px;
-    padding-right: 14px;
-    border-right: 1px dotted var(--line);
-}
-
-.deal-item:last-of-type {
-    padding-right: 0;
-    border-right: none;
-}
-
-.deal-item__media {
-    height: 76px;
-    display: grid;
-    place-items: center;
-    font-size: 28px;
-    border-radius: 8px;
-    background: var(--navy-050);
-}
-
-.deal-item__name {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    min-height: 2.4em;
-    margin: 7px 0 0;
-    overflow: hidden;
-    font-size: 11.5px;
-    line-height: 1.3;
-    color: var(--navy);
-}
-
-/* Nota primeiro, depois o valor e só então o desconto: nessa ordem. */
-.deal-item__rating {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    margin: 5px 0 0;
-    font-size: 10.5px;
-    color: var(--muted);
-}
-
-.deal-item__rating svg { color: var(--navy); flex: none; }
-
-.deal-item__price {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-    margin: 4px 0 0;
-    flex-wrap: wrap;
-}
-
-.deal-item__price .price-old { font-size: 10.5px; }
-
-.deal-item__off {
-    display: inline-block;
-    margin: 4px 0 0;
-    padding: 2px 6px;
-    border-radius: 999px;
-    background: var(--red);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-}
-
-/* Fecha a lista — sempre o 11º item da rolagem, centralizado na
-   vertical (os produtos ao lado são mais altos, por causa da nota,
-   preço e desconto abaixo da imagem). */
-/* Sem caixa nem borda — só o texto e a seta, em navy. */
-.deal-more {
-    flex: none;
-    align-self: center;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    height: 76px;
-    margin-top: 0;
-    border-radius: 10px;
-    color: var(--navy);
-    font-family: var(--display);
-    font-size: 12.5px;
-    font-weight: 700;
-    text-align: center;
-}
-
-.deal-more:hover { background: var(--navy-050); }
-
-.promos__line {
-    height: 1px;
-    margin: 14px 18px 0;
-    background: var(--line);
-}
-
-/* Uma bolinha por oferta, no máximo 7. */
-.promos__dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 13px;
-}
-
-.promos__dots span {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--navy-300);
-    opacity: .32;
-}
-
-.promos__dots span.is-active {
-    width: 7px;
-    height: 7px;
-    background: var(--navy);
-    opacity: 1;
-}
-
-/* ---------- Busca ---------- */
-
-/* Linha da busca na home: campo + botão de filtro ao lado. O .search
-   sozinho continua servindo aos pop-ups, que não têm filtro. */
-.search-row {
-    display: flex;
-    align-items: stretch;
-    gap: 8px;
-    margin: 28px 18px 0;
-}
-
-.search-row .search { flex: 1; min-width: 0; margin: 0; }
-
-.filter-btn {
-    flex: none;
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 50px;
-    border: 1px solid var(--navy);
-    border-radius: 12px;
-    background: var(--surface);
-    color: var(--navy);
-    cursor: pointer;
-}
-
-.filter-btn:hover { background: var(--navy-050); }
-
-/* Marca quantos filtros estão aplicados. */
-.filter-btn__count {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 5px;
-    display: grid;
-    place-items: center;
-    border-radius: 999px;
-    background: var(--red);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 1;
-    border: 2px solid var(--surface);
-}
-
-.search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 28px 18px 0;
-    padding: 0 0 0 15px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--navy-050);
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.search__text {
-    flex: 1;
-    min-width: 0;
-    padding: 13px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-/* Lupa no fim, em quadrado vermelho encostado nas bordas do campo. */
-.search__go {
-    flex: none;
-    align-self: stretch;
-    display: grid;
-    place-items: center;
-    width: 52px;
+    padding: 0;
     border: none;
-    border-radius: 0;
-    background: var(--navy);
-    color: #fff;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+    box-shadow: var(--shadow-float);
     cursor: pointer;
+    transition: transform .12s ease;
 }
 
-.search__go:hover { background: var(--navy-700); }
+.round-btn:active { transform: scale(.94); }
 
-.search__hint {
-    margin: 8px 20px 0;
-    font-size: 11.5px;
-    color: var(--navy-300);
-}
+.round-btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
 
-/* ---------- Abas Produtos / Ofertas / Lojas ---------- */
-/* Troca de conteúdo sem JavaScript: três radios escondidos comandam a
-   aba ativa e qual lista aparece. A aba selecionada é vermelha. */
+/* Versão do cartão de produto: o cartão é pequeno, o botão também. */
+.round-btn--sm { width: 30px; height: 30px; }
 
-.tabsw__radio {
+/* Favoritado: o coração fica preenchido em navy. No iFood ele é
+   vermelho, mas favoritar é estado ativo, e o ativo do Kulma é navy —
+   o vermelho fica com preço, compra e urgência. O fill no <svg> vence
+   o fill="none" do atributo e desce para o <path>. */
+.round-btn.is-on { color: var(--navy); }
+.round-btn.is-on svg { fill: currentColor; }
+
+/* Fileira de botões redondos presa ao topo de uma capa ou foto: um
+   grupo à esquerda (voltar) e outro à direita (buscar, compartilhar,
+   favoritar). A faixa deixa o toque passar; só os botões o recebem.
+   O pai precisa de position: relative. */
+.round-bar {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 12px 0;
     pointer-events: none;
 }
 
-.tabsw__bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px;
-    margin: 10px 18px 0;
-    padding: 4px;
-    border-radius: 12px;
-    background: var(--navy-050);
-}
+.round-bar > * { pointer-events: auto; }
 
-.tabsw__bar label {
-    padding: 9px 8px;
-    border-radius: 9px;
-    text-align: center;
-    font-family: var(--display);
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--muted);
-    cursor: pointer;
-}
+.round-bar__group { display: flex; gap: 8px; }
 
-.tabsw__bar label:hover { color: var(--navy); }
-
-#aba-produtos:checked ~ .tabsw__bar label[for="aba-produtos"],
-#aba-ofertas:checked  ~ .tabsw__bar label[for="aba-ofertas"],
-#aba-lojas:checked    ~ .tabsw__bar label[for="aba-lojas"] {
-    background: var(--navy);
-    color: #fff;
-}
-
-.tabsw__radio:focus-visible ~ .tabsw__bar label[for="aba-produtos"],
-.tabsw__radio:focus-visible ~ .tabsw__bar label[for="aba-ofertas"],
-.tabsw__radio:focus-visible ~ .tabsw__bar label[for="aba-lojas"] {
-    outline: 2px solid var(--navy);
-    outline-offset: 1px;
-}
-
-.pane { display: none; padding: 18px 18px 0; }
-
-#aba-produtos:checked ~ #pane-produtos,
-#aba-ofertas:checked  ~ #pane-ofertas,
-#aba-lojas:checked    ~ #pane-lojas { display: block; }
-
-/* ---------- Seções ---------- */
-
-.section { padding: 22px 18px 0; }
-
-.section__head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
-
-.section__title {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    color: var(--navy);
-}
-
-.section__sub {
-    margin: 2px 0 0;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-.section__link {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--navy);
-    border-bottom: 1px solid var(--navy-300);
-    padding-bottom: 1px;
-}
-
-/* Divisor pontilhado — assinatura visual de rota (seção 7). */
-.route {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 18px 18px 0;
-    color: var(--navy-300);
-}
-
-.route::before,
-.route::after {
-    content: "";
-    flex: 1;
-    height: 2px;
-    background-image: radial-gradient(circle, var(--navy-300) 1px, transparent 1.4px);
-    background-size: 7px 2px;
-}
-
-.route svg { color: var(--red); }
-
-/* ---------- Propagandas (carrossel) ---------- */
-
-.rail {
-    display: flex;
-    gap: 12px;
-    padding: 2px 18px 6px;
-    margin: 0 -18px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-}
-
-.rail::-webkit-scrollbar { display: none; }
-
-.ad {
-    flex: none;
-    width: 252px;
-    scroll-snap-align: start;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--surface);
-}
-
-.ad__media {
-    position: relative;
-    height: 108px;
-    display: grid;
-    place-items: center;
-    font-size: 40px;
-    background:
-        radial-gradient(circle at 1px 1px, rgba(19,42,69,.10) 1px, transparent 1.5px) 0 0 / 12px 12px,
-        linear-gradient(135deg, var(--navy-050), #F7F9FC);
-}
-
-.ad__body { padding: 12px 13px 14px; }
-
-.ad__title {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.ad__store {
-    margin: 3px 0 10px;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-.ad__foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 /* ---------- Badges ---------- */
 
@@ -816,21 +313,18 @@ button { font: inherit; color: inherit; }
     border-radius: 999px;
     font-size: 11px;
     font-weight: 600;
+    line-height: 1.35;
     letter-spacing: .01em;
+    white-space: nowrap;
 }
 
 /* Vermelho: desconto e urgência. */
 .badge--discount { background: var(--red); color: #fff; }
 .badge--urgent   { background: var(--red-050); color: var(--red-700); }
-/* Navy: informação neutra e exclusividade de assinante. */
+/* Navy: informação neutra, selo "Obrigatório" e exclusividade de assinante. */
 .badge--navy     { background: var(--navy); color: #fff; }
 .badge--soft     { background: var(--navy-050); color: var(--navy-700); }
 
-.badge--float {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
 
 /* ---------- Preço ---------- */
 
@@ -852,91 +346,10 @@ button { font: inherit; color: inherit; }
     text-decoration: line-through;
 }
 
-/* ---------- Cartão de sede ---------- */
 
-.stores { display: grid; gap: 10px; }
+/* ---------- Nota e estado ---------- */
 
-.store {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 13px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface);
-}
-
-/* Imagem da empresa: quadrado à esquerda, centralizado na vertical. */
-.store__mark {
-    flex: none;
-    align-self: center;
-    width: 62px;
-    height: 62px;
-    display: grid;
-    place-items: center;
-    border-radius: 12px;
-    background: var(--navy-050);
-    font-size: 29px;
-}
-
-.store__name a { color: inherit; }
-
-.store__name a::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-}
-
-/* Inscrever-se na sede — pessoa com "+", no canto superior direito. */
-.store__sub {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--navy);
-    cursor: pointer;
-}
-
-.store__sub:hover { background: var(--navy-050); }
-
-/* Já inscrito. */
-.store__sub.is-on {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: #fff;
-}
-
-.store__body { flex: 1; min-width: 0; }
-
-.store__name {
-    margin: 0;
-    padding-right: 38px;
-    font-family: var(--display);
-    font-size: 15.5px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.store__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-    margin-top: 5px;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-.dot-sep { color: var(--line); }
-
+/* Estrela navy, não amarela: a nota é informação, não destaque. */
 .rating {
     display: inline-flex;
     align-items: center;
@@ -946,12 +359,6 @@ button { font: inherit; color: inherit; }
 }
 
 .rating svg { color: var(--navy); }
-
-.store__tags {
-    display: flex;
-    gap: 6px;
-    margin-top: 9px;
-}
 
 .pill {
     display: inline-flex;
@@ -974,143 +381,546 @@ button { font: inherit; color: inherit; }
 .pill--open { border-color: rgba(19,42,69,.22); color: var(--navy); }
 .pill--open .pill__led { background: var(--navy); }
 
-.pill--closed { color: var(--navy-300); }
 
-/* ---------- Grade de produtos ---------- */
+/* ---------- Título de seção ---------- */
+/* Como no iFood: título forte à esquerda e "Ver mais" à direita, sem
+   linha embaixo — as seções se separam por espaço. O .sec dá esse
+   espaço; o .sec-head já traz a margem lateral, então pode abrir uma
+   seção cujo conteúdo rola de lado até a borda (.hrail, .chips-row). */
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: start;
+.sec { padding-top: 28px; }
+
+.sec-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 12px;
+    margin: 0 0 12px;
+    padding: 0 var(--gutter);
 }
 
-/* Escada: as duas colunas correm em multi-coluna e o rótulo "Buscando
-   em" abre a da esquerda. Como a coluna da direita começa no topo, o
-   produto dela sobe — aparece um pedaço dele ao lado do rótulo e a
-   lista desce na diagonal, em vez de ficar em fila. */
-.grid--escada {
-    display: block;
-    column-count: 2;
-    column-gap: 12px;
+.sec-head__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.25;
+    color: var(--navy);
 }
 
-.grid--escada > * {
-    break-inside: avoid;
-    margin-bottom: 12px;
+/* Linha de apoio sob o título; título e sub vão juntos num <div>. */
+.sec-head__sub {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--muted);
 }
 
-
-.product {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--surface);
-}
-
-/* O nome estica o link por cima do cartão inteiro, deixando os botões
-   de ação clicáveis por cima dele. */
-.product__name a { color: inherit; }
-
-.product__name a::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-}
-
-/* Favoritar · adicionar ao carrinho · buscar similares. */
-.product__acts {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 2;
-    display: flex;
-    gap: 4px;
-}
-
-.product__act {
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: 1px solid rgba(19, 42, 69, .10);
-    background: rgba(255, 255, 255, .94);
+/* Navy, não vermelho: é navegação, não ação de compra. */
+.sec-head__link {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 0;
+    border: none;
+    background: none;
+    font-family: var(--body);
+    font-size: 13.5px;
+    font-weight: 600;
     color: var(--navy);
     cursor: pointer;
 }
 
 
-.product__act.is-on { color: var(--red); border-color: rgba(214, 41, 59, .35); }
-.product__act.is-on svg { fill: var(--red); }
+/* ---------- Trilho horizontal ---------- */
+/* Atalhos de categoria, últimas lojas, cupons, destaques: tudo que no
+   iFood rola de lado. O respiro lateral fica DENTRO do trilho, para o
+   conteúdo correr até a borda da tela e o primeiro item alinhar com
+   o título da seção. */
 
-.product__media {
-    position: relative;
-    height: 158px;
+.hrail {
+    display: flex;
+    gap: 12px;
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+    scroll-padding: 0 var(--gutter);
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+}
+
+.hrail::-webkit-scrollbar { display: none; }
+
+.hrail > * { flex: none; scroll-snap-align: start; }
+
+
+/* ---------- Chips de filtro ---------- */
+/* A fileira acima da lista de lojas do iFood: "Ordenar ▾", filtros
+   rápidos e "Filtros". Chip ativo em navy cheio. Com checkbox ou radio
+   escondido (.chip-toggle) o chip liga sem JS; o input vem logo antes
+   do <label class="chip">. Um <button class="chip"> liga por
+   aria-pressed="true". */
+
+.chips-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.chips-row::-webkit-scrollbar { display: none; }
+
+/* Quebrando linha em vez de rolar (dentro de bottom sheet). */
+.chips-row--wrap {
+    flex-wrap: wrap;
+    padding: 0;
+    overflow: visible;
+}
+
+.chip {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--navy);
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.chip:hover { border-color: var(--navy-300); }
+
+.chip svg { flex: none; }
+
+/* "Ordenar ▾": a seta pede um respiro menor do lado dela. */
+.chip--sort { padding-right: 10px; }
+
+.chip__chev { color: var(--navy-300); }
+
+.chip[aria-pressed="true"],
+.chip-toggle:checked + .chip {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+}
+
+.chip[aria-pressed="true"] .chip__chev,
+.chip-toggle:checked + .chip .chip__chev { color: inherit; }
+
+/* Quantos filtros aplicados, no chip "Filtros". Navy, não vermelho —
+   vermelho é só para preço, ação principal, urgência e sacola. */
+.chip__count {
     display: grid;
     place-items: center;
-    font-size: 44px;
-    background: linear-gradient(160deg, var(--navy-050), #F8FAFC);
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
 }
 
-.product__body {
-    flex: 1;
+.chip[aria-pressed="true"] .chip__count,
+.chip-toggle:checked + .chip .chip__count { background: #fff; color: var(--navy); }
+
+.chip:focus-visible,
+.chip-toggle:focus-visible + .chip { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+
+/* ---------- Abas sublinhadas ---------- */
+/* Abas de texto com traço embaixo da ativa, como os resultados de busca
+   e o cardápio do iFood — só que o ativo é navy. O traço é um ::after
+   que cresce do centro; fica em bottom: 0 (e não -1px) porque a barra
+   rola de lado, e overflow corta tudo que sai da caixa.
+   Ativa por .is-active, aria-selected="true" ou aria-current. Abas
+   comandadas por radio repetem esses dois efeitos no CSS da página, com
+   o seletor "#aba-x:checked ~ ... label[for=aba-x]". */
+
+.utabs {
+    display: flex;
+    gap: 24px;
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.utabs::-webkit-scrollbar { display: none; }
+
+/* Abas que dividem a largura toda (Produtos | Ofertas | Lojas). */
+.utabs--fill { gap: 0; }
+.utabs--fill .utabs__item { flex: 1; }
+
+/* Presa no topo ao rolar (cardápio da sede). A página diz a altura do
+   que já estiver preso acima, se houver. */
+.utabs--sticky {
+    position: sticky;
+    top: var(--utabs-top, 0px);
+    z-index: 20;
+}
+
+.utabs__item {
+    position: relative;
+    flex: none;
+    display: block;
+    padding: 13px 0 12px;
+    border: none;
+    background: none;
+    font-family: var(--body);
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--muted);
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.utabs__item:hover { color: var(--navy); }
+
+.utabs__item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: var(--navy);
+    transform: scaleX(0);
+    transition: transform .2s ease;
+}
+
+.utabs__item.is-active,
+.utabs__item[aria-selected="true"],
+.utabs__item[aria-current] {
+    color: var(--navy);
+    font-weight: 700;
+}
+
+.utabs__item.is-active::after,
+.utabs__item[aria-selected="true"]::after,
+.utabs__item[aria-current]::after { transform: scaleX(1); }
+
+
+/* ---------- Loja em linha ---------- */
+/* A lista de lojas do iFood: sem cartão, cada loja é uma linha com o
+   logo quadrado à esquerda, três linhas de texto e uma ação opcional
+   à direita, separada da vizinha por uma divisória fina. O nome estica
+   o link por cima da linha inteira; a ação (__side) fica por cima dele.
+   Os itens de __meta e __info vão em <span> e ganham o "•" sozinhos. */
+
+.store-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px var(--gutter);
+}
+
+/* Divisória entre linhas, alinhada às margens, não à borda da tela. */
+.store-row + .store-row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: var(--gutter);
+    right: var(--gutter);
+    height: 1px;
+    background: var(--line);
+}
+
+.store-row__logo {
+    position: relative;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--photo);
+    font-size: 28px;
+    line-height: 1;
+}
+
+.store-row__body { flex: 1; min-width: 0; }
+
+.store-row__name {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--navy);
+}
+
+.store-row__name a { color: inherit; }
+
+.store-row__name a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* "★ 4,8 • Padaria • 800 m" e, embaixo, entrega / estado. */
+.store-row__meta,
+.store-row__info {
+    display: flex;
+    align-items: center;
+    margin: 3px 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: var(--muted);
+}
+
+.store-row__info { margin-top: 2px; }
+
+.store-row__meta > * + *::before,
+.store-row__info > * + *::before {
+    content: "•";
+    margin: 0 6px;
+    font-size: .8em;
+    color: var(--navy-300);
+}
+
+/* Trecho que importa na linha de entrega ("Aberta até 20h"). */
+.store-row__info strong { font-weight: 600; color: var(--navy); }
+
+.store-row__side {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Fechada: o iFood apaga a loja em vez de escondê-la. */
+.store-row.is-closed .store-row__logo { filter: grayscale(1); opacity: .55; }
+.store-row.is-closed .store-row__name { color: var(--muted); }
+
+
+/* ---------- Grade e cartão de produto ---------- */
+/* minmax(0, 1fr), não 1fr: com texto em uma linha só (loja do cartão)
+   a coluna 1fr cresceria até caber a frase inteira. */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 20px 12px;
+}
+
+/* Cartão de produto no formato de mercado do iFood: sem caixa em volta,
+   a foto quadrada é o cartão. Preço primeiro, em vermelho, com o antigo
+   riscado ao lado; depois o nome em até duas linhas, a loja e a nota
+   presa no rodapé — na grade os cartões esticam até a altura do maior,
+   e as notas ficam na mesma linha. */
+.pcard {
+    position: relative;
     display: flex;
     flex-direction: column;
-    padding: 10px 11px 12px;
+    align-self: stretch;
+    min-width: 0;
 }
 
-.product__name {
+/* Sem overflow: hidden, para não cortar a sombra dos botões. */
+.pcard__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 8px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--photo);
+    font-size: 46px;
+    line-height: 1;
+}
+
+.pcard__badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+/* Favoritar · buscar similares, empilhados no canto. Acima do link
+   esticado do nome (z-index), para receberem o toque. */
+.pcard__acts {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* O "+" de adicionar à sacola, no canto de baixo da foto. */
+.pcard__add {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    z-index: 2;
+}
+
+.pcard__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0 6px;
+    margin: 0;
+    line-height: 1.25;
+}
+
+.pcard__price .price-old { margin-right: 0; }
+
+.pcard__name {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     min-height: 2.7em;
-    margin: 0 0 2px;
+    margin: 3px 0 0;
     overflow: hidden;
+    font-family: var(--body);
     font-size: 13.5px;
     font-weight: 500;
-    color: var(--navy);
     line-height: 1.35;
+    color: var(--navy);
 }
 
-.product__store {
-    margin: 0 0 8px;
+.pcard__name a { color: inherit; }
+
+.pcard__name a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.pcard__store {
+    margin: 3px 0 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--muted);
 }
 
-.product__price { display: flex; align-items: baseline; flex-wrap: wrap; }
-
-/* Nota do produto, abaixo do preço. Agrega as avaliações de todas as
-   sedes da empresa que vendem o item (regra 4.7). */
-.product__rating {
+/* Nota do produto: agrega as avaliações de todas as sedes da empresa
+   que vendem o item (regra 4.7). margin-top: auto a empurra para baixo. */
+.pcard__rating {
     display: flex;
     align-items: center;
     gap: 5px;
-    margin: auto 0 0;      /* empurra a nota para o rodapé do cartão */
-    padding-top: 7px;
+    margin: auto 0 0;
+    padding-top: 6px;
     font-size: 11.5px;
     color: var(--muted);
 }
 
-.product__rating .rating { font-size: 12px; }
+.pcard__rating .rating { font-size: 12px; }
 
-/* ---------- Botões ---------- */
+/* No trilho horizontal (Destaques) o cartão tem largura fixa. */
+.hrail > .pcard { width: 132px; }
 
-.btn {
+
+/* ---------- Contador de quantidade ---------- */
+/* − 1 +, como na barra de adicionar do item. Botões redondos com
+   contorno e ícone navy; no mínimo, o "−" fica apagado (disabled). */
+
+.stepper {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 4px;
+}
+
+.stepper__btn {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--navy-300);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.stepper__btn:hover { border-color: var(--navy); }
+
+.stepper__btn:disabled {
+    border-color: var(--line);
+    color: var(--navy-300);
+    cursor: default;
+}
+
+.stepper__value {
+    min-width: 28px;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--navy);
+}
+
+
+/* ---------- Barra da sacola ---------- */
+/* "Ver sacola" presa no rodapé: ícone com contador à esquerda, texto no
+   centro, total à direita. Navy, porque o vermelho cheio da tela é do
+   botão principal da página; o vermelho aqui fica no contador.
+   A faixa externa é a que fica fixa (padrão de 430px); o botão vai
+   dentro dela, com respiro, e respeita a área segura do aparelho. */
+
+.cartbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    z-index: 31;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+}
+
+/* Três colunas, as das pontas iguais: assim "Ver sacola" fica no centro
+   da barra inteira, não no espaço que sobra entre ícone e total. */
+.cartbar__btn {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
     gap: 8px;
-    padding: 13px 18px;
-    border: 1px solid transparent;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 14px;
+    border: none;
     border-radius: 12px;
+    background: var(--navy);
+    color: #fff;
     font-family: var(--display);
     font-size: 15px;
     font-weight: 600;
@@ -1118,640 +928,55 @@ button { font: inherit; color: inherit; }
     cursor: pointer;
 }
 
-.btn--block { width: 100%; }
+.cartbar__btn:hover { background: var(--navy-700); }
 
-/* Botão com legenda em segunda linha. */
-.btn--stack {
-    flex-direction: column;
-    gap: 2px;
-    padding-top: 11px;
-    padding-bottom: 11px;
-}
+.cartbar__btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
 
-/* Botão principal: o único vermelho cheio da tela. */
-.btn--primary { background: var(--red); color: #fff; }
-.btn--primary:hover { background: var(--red-700); }
-
-.btn--outline {
-    background: var(--surface);
-    border-color: var(--navy);
-    color: var(--navy);
-}
-
-.btn--outline:hover { background: var(--navy-050); }
-
-.btn--quiet {
-    background: var(--navy-050);
-    border-color: var(--navy-050);
-    color: var(--navy);
-}
-
-.btn__note {
-    display: block;
-    font-family: var(--body);
-    font-size: 11.5px;
-    font-weight: 400;
-    opacity: .85;
-}
-
-/* ---------- Conta: avatar flutuante + painel inferior ---------- */
-/* O avatar é a única âncora de conta na home. Fica sobre o carrossel,
-   no canto superior direito, e abre um painel que sobe da base — perto
-   do polegar. O carrinho fica de fora do painel: comprar é fluxo de
-   compra, não de conta, e precisa do contador sempre visível. */
-
-.account {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    z-index: 25;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.account__cart {
+.cartbar__icon {
     position: relative;
+    justify-self: start;
     display: grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    color: var(--navy);
-    box-shadow: 0 2px 10px rgba(19, 42, 69, .12);
+    width: 32px;
+    height: 32px;
 }
 
-.account__count {
+/* Contorno navy, não branco: o contador está sobre a barra. */
+.cartbar__count {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    min-width: 17px;
-    height: 17px;
-    padding: 0 4px;
+    top: -3px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
     display: grid;
     place-items: center;
     border-radius: 999px;
     background: var(--red);
     color: #fff;
-    font-size: 10px;
+    font-family: var(--body);
+    font-size: 10.5px;
     font-weight: 700;
     line-height: 1;
-    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--navy);
 }
 
-.account__avatar {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: #fff;
-    border: 2px solid var(--surface);
-    box-shadow: 0 3px 14px rgba(19, 42, 69, .3);
-    cursor: pointer;
-}
+.cartbar__label { text-align: center; white-space: nowrap; }
 
-/* Ponto de notificação não lida — dispensa um sino separado. */
-.account__avatar.has-news::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--red);
-    border: 2px solid var(--surface);
-}
-
-/* fixed, não absolute: o checkbox mora no fim do documento e, em
-   absolute, dar foco nele fazia o navegador rolar a página até lá. */
-.sheet-toggle {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.sheet__scrim {
-    position: fixed;
-    inset: 0;
-    z-index: 44;
-    background: rgba(19, 42, 69, .45);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .2s ease;
-    cursor: pointer;
-}
-
-.sheet {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    z-index: 45;
-    width: 100%;
-    max-width: 430px;
-    padding: 8px 0 calc(12px + env(safe-area-inset-bottom, 0px));
-    border-radius: 18px 18px 0 0;
-    background: var(--surface);
-    box-shadow: 0 -10px 34px rgba(19, 42, 69, .22);
-    transform: translate(-50%, 102%);
-    transition: transform .26s ease;
-}
-
-#sheet-conta:checked ~ .sheet__scrim { opacity: 1; pointer-events: auto; }
-#sheet-conta:checked ~ .sheet { transform: translate(-50%, 0); }
-
-/* Alça de arrasto. */
-.sheet::before {
-    content: "";
-    display: block;
-    width: 36px;
-    height: 4px;
-    margin: 2px auto 12px;
-    border-radius: 999px;
-    background: var(--line);
-}
-
-.sheet__head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 4px 18px 14px;
-}
-
-.sheet__mark {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: #fff;
-}
-
-.sheet__name {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.sheet__mail {
-    margin: 2px 0 0;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-.sheet__close {
-    margin-left: auto;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--red-050);
-    color: var(--red);
-    cursor: pointer;
-}
-
-.sheet__row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    padding: 11px 18px;
-    border: none;
-    background: none;
-    color: inherit;
-    text-align: left;
-    cursor: pointer;
-}
-
-.sheet__row:hover { background: var(--navy-050); }
-
-.sheet__row i {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    background: var(--navy-050);
-    color: var(--navy);
-}
-
-.sheet__label { flex: 1; font-size: 14px; font-weight: 500; color: var(--navy); }
-
-.sheet__value { font-size: 12.5px; color: var(--muted); }
-
-.sheet__row > svg:last-child { flex: none; color: var(--navy-300); }
-
-.sheet__sep { height: 1px; margin: 7px 18px; background: var(--line); }
-
-/* Rodapé do painel: sair de um lado, idioma do outro. */
-.sheet__foot {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-right: 14px;
-}
-
-.sheet__foot .sheet__row { flex: 1; width: auto; }
-
-.sheet__lang {
-    flex: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 10px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: var(--surface);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--navy);
-    cursor: pointer;
+.cartbar__total {
+    justify-self: end;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
-.sheet__lang:hover { background: var(--navy-050); }
-
-.sheet__lang svg { color: var(--navy-300); }
-
-/* Bandeira do país, nos botões e na lista de idiomas. */
-.flag {
-    font-size: 17px;
-    line-height: 1;
-}
-
-.opt-flag {
-    flex: none;
-    font-size: 22px;
-    line-height: 1;
-}
-
-/* Sair da conta — única linha em vermelho do painel. */
-.sheet__row--out .sheet__label { color: var(--red); }
-
-.sheet__row--out i {
-    background: var(--red-050);
-    color: var(--red);
-}
-
-.sheet__row--out:hover { background: var(--red-050); }
-
-/* ---------- Pop-up de cidade ---------- */
-/* Abre e fecha sem JavaScript: um checkbox escondido comanda o estado.
-   A busca é sempre filtrada por cidade (seção 1 do documento). */
-
-.modal__toggle {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.modal { display: none; }
-
-/* Escopado por modificador: sem isso, qualquer .modal irmã abriria
-   junto com a de cidade. */
-#modal-cidade:checked ~ .modal--cidade { display: block; }
-#modal-idioma:checked ~ .modal--idioma { display: block; }
-#modal-filtro:checked ~ .modal--filtro { display: block; }
-
-/* Acima do painel de conta (45): a cidade pode ser aberta de dentro
-   dele, e precisa ficar por cima, não atrás. */
-.modal__backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    background: rgba(19, 42, 69, .45);
-    cursor: pointer;
-}
-
-.modal__box {
-    position: fixed;
-    z-index: 51;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% - 36px);
-    max-width: 380px;
-    padding: 16px 16px 0;
-    border-radius: 16px;
-    overflow: hidden;
-    background: var(--surface);
-    box-shadow: 0 18px 50px rgba(19, 42, 69, .28);
-}
-
-.modal__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.modal__title {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-/* X vermelho para fechar. */
-.modal__close {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--red-050);
-    color: var(--red);
-    cursor: pointer;
-}
-
-.modal__close:hover { background: var(--red); color: #fff; }
-
-.modal .search { margin: 13px 0 0; }
-
-.modal__list {
-    max-height: 40vh;
-    margin-top: 6px;
-    overflow-y: auto;
-}
-
-.city-opt {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 11px 4px;
-    border: none;
-    border-bottom: 1px dashed var(--line);
-    background: none;
-    text-align: left;
-    cursor: pointer;
-}
-
-.modal__list li:last-child .city-opt { border-bottom: none; }
-
-.city-opt:hover { background: var(--navy-050); }
-
-.city-opt__body { flex: 1; min-width: 0; }
-
-.city-opt__name {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--navy);
-}
-
-.city-opt__meta {
-    display: block;
-    margin-top: 1px;
-    font-size: 11.5px;
-    color: var(--muted);
-}
-
-.city-opt.is-current .city-opt__name { font-weight: 600; }
-.city-opt.is-current svg { color: var(--navy); }
-
-/* Usar a localização do aparelho — cobre o rodapé do pop-up. */
-.modal__geo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    width: calc(100% + 32px);
-    margin: 8px -16px 0;
-    padding: 15px;
-    border: none;
-    background: var(--navy);
-    color: #fff;
-    font-family: var(--display);
-    font-size: 14.5px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    cursor: pointer;
-}
-
-.modal__geo:hover { background: var(--navy-700); }
-
-/* ---------- Pop-up de filtros ---------- */
-
-.filtro__body {
-    max-height: 46vh;
-    padding: 4px 2px 0;
-    overflow-y: auto;
-}
-
-.filtro__legend {
-    margin: 14px 0 8px;
-    font-family: var(--display);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--navy-300);
-}
-
-.filtro__chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-/* Categorias: duas linhas que correm para a direita, em vez de
-   empilhar dez linhas na vertical. O fade na borda avisa que há mais. */
-.filtro__chips--scroll {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(2, auto);
-    justify-content: start;
-    flex-wrap: nowrap;
-    padding-bottom: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-/* Sem mask-image aqui: dentro do modal fixed ela apagava o painel
-   inteiro. O chip cortado na borda já sinaliza que há mais ao lado. */
-.filtro__chips--scroll::-webkit-scrollbar { display: none; }
-
-/* Lupa ao lado do rótulo Categoria: colapsada mostra só o botão navy;
-   ao clicar, o campo se estende para a esquerda a partir dele. */
-.cat-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 14px 0 8px;
-}
-
-.cat-head .filtro__legend { margin: 0; }
-
-.cat-search {
-    position: relative;
-    flex: none;
-    margin-left: auto;
-    width: 34px;
-    height: 34px;
-    overflow: hidden;
-    border-radius: 999px;
-    background: transparent;
-    transition: width .22s ease, background .22s ease;
-}
-
-#cat-busca:checked ~ .cat-search {
-    width: 214px;
-    background: var(--navy-050);
-}
-
-/* Fechado: só o contorno azul. Aberto: preenchido de azul, virando o
-   botão de confirmar a busca. */
-.cat-search__go {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    width: 34px;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--navy);
-    border-radius: 50%;
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: background .22s ease, color .22s ease, border-color .22s ease;
-}
-
-.cat-search__go:hover { background: var(--navy-050); }
-
-#cat-busca:checked ~ .cat-search .cat-search__go {
-    border-color: var(--navy);
-    background: var(--navy);
-    color: #fff;
-}
-
-#cat-busca:checked ~ .cat-search .cat-search__go:hover { background: var(--navy-700); }
-
-/* Escondido quando fechado: com o botão sem preenchimento, o texto
-   apareceria por baixo dele dentro do círculo. */
-.cat-search__text {
-    display: block;
-    padding: 8px 42px 8px 14px;
-    font-size: 12.5px;
-    line-height: 18px;
-    color: var(--muted);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity .18s ease;
-}
-
-#cat-busca:checked ~ .cat-search .cat-search__text { opacity: 1; }
-
-.filtro__note {
-    margin: 8px 0 0;
-    font-size: 11.5px;
-    color: var(--navy-300);
-}
-
-.fchip-input {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.fchip {
-    padding: 7px 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--surface);
-    font-size: 12.5px;
-    color: var(--muted);
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.fchip-input:checked + .fchip {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: #fff;
-    font-weight: 500;
-}
-
-/* Interruptores de sim/não. */
-.filtro__switch {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 2px;
-    border-top: 1px solid var(--line);
-    font-size: 13.5px;
-    color: var(--navy);
-    cursor: pointer;
-}
-
-/* Só o rótulo estica. Antes, `.filtro__switch span` também pegava a
-   pista do interruptor e a esticava pela linha inteira. */
-.filtro__switch > span:first-child { flex: 1; }
-
-.switch-track {
-    flex: none;
-    width: 40px;
-    height: 23px;
-    border-radius: 999px;
-    background: var(--line);
-    padding: 3px;
-    transition: background .18s ease;
-}
-
-.switch-track::after {
-    content: "";
-    display: block;
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    background: #fff;
-    transition: transform .18s ease;
-}
-
-.fchip-input:checked + .filtro__switch .switch-track { background: var(--navy); }
-.fchip-input:checked + .filtro__switch .switch-track::after { transform: translateX(17px); }
-
-.filtro__foot {
-    display: flex;
-    gap: 8px;
-    margin: 0 -16px;
-    padding: 14px 16px 6px;
-    border-top: 1px solid var(--line);
-}
-
-.filtro__foot .btn { flex: 1; padding: 12px; font-size: 14px; }
 
 /* ---------- Navegação inferior ---------- */
-/* Ofertas · Produtos · Início · Lojas · Favoritos — só descoberta.
-   Início fica no centro exato; a aba ativa é marcada em azul meia-noite
-   (ícone, rótulo e a pastilha atrás do ícone), sem nenhum vermelho. */
+/* Início · Explorar · Sacola · Pedidos · Conta, na ordem do iFood.
+   Ícone com rótulo embaixo; a aba ativa é navy (no iFood seria
+   vermelha). O vermelho aparece só no contador da sacola e no ponto de
+   notificação da conta. A altura vem do token, o mesmo que reserva o
+   espaço do fim da página (.app). */
 
 .tabbar {
     position: fixed;
@@ -1760,11 +985,14 @@ button { font: inherit; color: inherit; }
     transform: translateX(-50%);
     width: 100%;
     max-width: 430px;
+    height: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    background: var(--surface);
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: center;
+    padding: 0 4px env(safe-area-inset-bottom, 0px);
     border-top: 1px solid var(--line);
-    padding: 7px 4px calc(7px + env(safe-area-inset-bottom, 0px));
+    background: var(--surface);
     z-index: 30;
 }
 
@@ -1772,336 +1000,105 @@ button { font: inherit; color: inherit; }
     display: grid;
     justify-items: center;
     gap: 3px;
-    padding: 2px 0;
-    font-size: 10px;
+    padding: 4px 0;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
     letter-spacing: -.01em;
     color: var(--navy-300);
 }
 
 .tab__icon {
+    position: relative;
     display: grid;
     place-items: center;
     height: 26px;
 }
 
-.tab.is-active { color: var(--navy); font-weight: 600; }
+/* Conta é um <label> (abre o painel); herda o mesmo visual das <a>. */
+label.tab { cursor: pointer; }
 
-.tab.is-active svg { stroke-width: 2.1; }
-
-/* ---------- Cabeçalho de detalhe (sede e produto) ---------- */
-
-.detail-bar {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 12px 14px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-}
-
-.detail-bar__title {
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--navy);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-
-/* ---------- Capa da sede ---------- */
-
-.cover {
-    position: relative;
-    height: 140px;
+/* Contador da sacola. */
+.tab__count {
+    position: absolute;
+    top: -3px;
+    left: calc(50% + 6px);
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
     display: grid;
     place-items: center;
-    background:
-        radial-gradient(circle at 1px 1px, rgba(255,255,255,.16) 1px, transparent 1.6px) 0 0 / 14px 14px,
-        linear-gradient(135deg, var(--navy) 0%, var(--navy-700) 100%);
-}
-
-.cover__mark {
-    width: 68px;
-    height: 68px;
-    display: grid;
-    place-items: center;
-    border-radius: 18px;
-    background: rgba(255,255,255,.10);
-    border: 1px solid rgba(255,255,255,.22);
-    font-size: 32px;
-}
-
-.store-head { padding: 16px 18px 0; }
-
-.store-head__name {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 22px;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 9.5px;
     font-weight: 700;
-    letter-spacing: -.02em;
-    color: var(--navy);
+    line-height: 1;
+    border: 2px solid var(--surface);
 }
 
-.store-head__company {
-    margin: 3px 0 0;
-    font-size: 13px;
-    color: var(--muted);
+/* Notificação não lida, no ícone da conta. */
+.tab__dot {
+    position: absolute;
+    top: 1px;
+    left: calc(50% + 4px);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--surface);
 }
 
-.store-head__meta {
+.tab.is-active,
+.tab[aria-current="page"] { color: var(--navy); font-weight: 600; }
+
+.tab.is-active svg,
+.tab[aria-current="page"] svg { stroke-width: 2.1; }
+
+
+/* ---------- Anel de novidade ---------- */
+/* Anel vermelho, como os stories do Instagram: marca a loja com oferta
+   nova ainda não vista. Vai no logo (redondo ou quadrado — o anel segue
+   o border-radius). Um vão branco separa o anel do logo. Fica no fim
+   do arquivo para vencer a borda dos logos daqui; o trilho que mostra
+   o logo precisa de ~6px de folga em cima, ou o overflow corta o anel. */
+
+.story-ring {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--surface), 0 0 0 4.5px var(--red);
+}
+
+
+/* ---------- Divisor de rota ---------- */
+/* Pontilhado com o pin no meio — assinatura visual da identidade
+   (seção 7). Separa blocos que não são seções de lista. O pin é navy:
+   ele marca lugar, e lugar não está entre os usos do vermelho (preço,
+   compra, urgência, sacola, notificação, novidade). */
+
+.route {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    margin-top: 10px;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-/* ---------- Bloco de endereço ---------- */
-
-.address {
-    display: flex;
-    gap: 11px;
-    margin: 14px 18px 0;
-    padding: 13px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-}
-
-.address svg { flex: none; color: var(--red); margin-top: 2px; }
-
-.address__line { margin: 0; font-size: 13.5px; color: var(--navy); }
-
-.address__sub { margin: 3px 0 0; font-size: 12.5px; color: var(--muted); }
-
-/* ---------- Assinatura da sede ---------- */
-
-.subscribe {
-    margin: 16px 18px 0;
-    padding: 15px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--navy-050);
-}
-
-.subscribe__title {
-    margin: 0 0 4px;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.subscribe__text {
-    margin: 0 0 13px;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-/* ---------- Âncoras em formato de abas ---------- */
-
-.tabs {
-    display: flex;
-    gap: 22px;
-    margin: 20px 18px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.tabs a {
-    padding: 0 0 10px;
-    font-size: 13.5px;
-    color: var(--muted);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-}
-
-.tabs a.is-active {
-    color: var(--navy);
-    font-weight: 600;
-    border-bottom-color: var(--red);
-}
-
-[id] { scroll-margin-top: 64px; }
-
-/* ---------- Horário de atendimento ---------- */
-
-.hours { display: grid; gap: 0; margin-top: 4px; }
-
-.hours li {
-    display: flex;
-    justify-content: space-between;
-    padding: 9px 2px;
-    font-size: 13px;
-    border-bottom: 1px dashed var(--line);
-}
-
-.hours li:last-child { border-bottom: none; }
-
-.hours span:first-child { color: var(--muted); }
-.hours span:last-child  { color: var(--navy); font-weight: 500; }
-
-.hours li.is-today span { color: var(--navy); font-weight: 600; }
-.hours li.is-closed span:last-child { color: var(--navy-300); font-weight: 400; }
-
-/* ---------- Tela de produto ---------- */
-
-.hero {
-    position: relative;
-    height: 250px;
-    display: grid;
-    place-items: center;
-    font-size: 86px;
-    background: linear-gradient(160deg, var(--navy-050), #F8FAFC);
-    border-bottom: 1px solid var(--line);
-}
-
-.product-head { padding: 18px 18px 0; }
-
-.eyebrow {
-    font-size: 11.5px;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+    margin: 18px var(--gutter) 0;
     color: var(--navy-300);
 }
 
-.product-head__name {
-    margin: 6px 0 0;
-    font-family: var(--display);
-    font-size: 23px;
-    font-weight: 700;
-    letter-spacing: -.02em;
-    line-height: 1.2;
-    color: var(--navy);
+.route::before,
+.route::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background-image: radial-gradient(circle, var(--navy-300) 1px, transparent 1.4px);
+    background-size: 7px 2px;
 }
 
-.price-block {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    margin-top: 14px;
-}
+.route svg { color: var(--navy); }
 
-.price-note {
-    margin: 6px 0 0;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.stock {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 12px;
-    font-size: 12.5px;
-    color: var(--muted);
-}
-
-.sold-by {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    margin: 16px 18px 0;
-    padding: 12px 13px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-}
-
-.sold-by__mark {
-    flex: none;
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border-radius: 11px;
-    background: var(--navy-050);
-    font-size: 21px;
-}
-
-.sold-by__body { flex: 1; min-width: 0; }
-
-.sold-by__name {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-}
-
-.sold-by__meta { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
-
-.prose {
-    margin: 10px 0 0;
-    font-size: 14px;
-    color: #3D5470;
-    line-height: 1.65;
-}
-
-.specs { margin-top: 12px; }
-
-.specs li {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 9px 2px;
-    font-size: 13px;
-    border-bottom: 1px dashed var(--line);
-}
-
-.specs li:last-child { border-bottom: none; }
-.specs span:first-child { color: var(--muted); }
-.specs span:last-child { color: var(--navy); font-weight: 500; }
-
-/* Outras sedes que vendem o mesmo produto do catálogo. */
-.offers { display: grid; gap: 8px; margin-top: 4px; }
-
-.offer {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 11px 12px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-}
-
-.offer__body { flex: 1; min-width: 0; }
-.offer__name { margin: 0; font-size: 13.5px; font-weight: 500; color: var(--navy); }
-.offer__meta { margin: 2px 0 0; font-size: 11.5px; color: var(--muted); }
-
-/* ---------- Barra de ação fixa ---------- */
-
-.actionbar {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 430px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
-    background: var(--surface);
-    border-top: 1px solid var(--line);
-    z-index: 30;
-}
-
-.actionbar .btn--outline { flex: none; padding: 13px 14px; }
-.actionbar .btn--primary { flex: 1; }
-
-.app--action { padding-bottom: 96px; }
 
 /* ---------- Rodapé do protótipo ---------- */
 
 .proto-foot {
-    margin: 26px 18px 0;
+    margin: 26px var(--gutter) 0;
     padding-top: 14px;
     border-top: 1px dashed var(--line);
     font-size: 11.5px;

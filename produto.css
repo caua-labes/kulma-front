@@ -1,0 +1,343 @@
+/* =====================================================================
+   Kulma — Tela do item (produto.html)
+   Formato da página de item do iFood: foto grande no topo com botões
+   redondos flutuando, nome, descrição e preço, a sede que vende, grupos
+   de opção com cabeçalho cinza e rádio/checkbox à direita, "Alguma
+   observação?" e a barra fixa com contador e "Adicionar". Sem barra de
+   título e sem nav inferior, como lá.
+   Carrega depois de styles.css, que traz tokens, reset e os componentes
+   compartilhados usados aqui (.photo, .round-btn, .store-row, .stepper,
+   .btn, .badge, .price, .sec-head). Este arquivo só posiciona e acrescenta
+   o que é exclusivo do item.
+   ===================================================================== */
+
+:root {
+    /* Altura real da barra de adicionar: 1px de linha + 12px + botão de
+       48px + 12px. O fim da página reserva esse mesmo espaço. */
+    --addbar-h: 73px;
+}
+
+/* Sem nav inferior: o respiro do fim é o da barra de adicionar. */
+.app--action {
+    padding-bottom: calc(var(--addbar-h) + 24px + env(safe-area-inset-bottom, 0px));
+}
+
+
+/* ---------- Foto ---------- */
+/* Sangra até as bordas, sem raio nem borda, como a foto do item no
+   iFood. Os botões redondos (.round-bar) ficam por cima dela. */
+
+.item-photo {
+    position: relative;
+    height: 260px;
+    font-size: 96px;
+}
+
+
+/* ---------- Cabeçalho do item ---------- */
+
+.item-head { padding-top: 18px; }
+
+.item-head__name {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.25;
+    color: var(--navy);
+}
+
+/* Categoria e empresa dona do catálogo, discretas sob o nome. */
+.item-head__by {
+    margin: 3px 0 0;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--navy-300);
+}
+
+/* Descrição inteira, sem cortar: na página do item ela é o conteúdo. */
+.item-head__desc {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.item-head__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    margin: 14px 0 0;
+    line-height: 1.1;
+}
+
+/* O espaço vem do gap, como em .pcard__price. */
+.item-head__price .price-old { margin-right: 0; font-size: 14px; }
+
+.item-head__promo { margin: 10px 0 0; }
+
+/* Linhas de apoio: nota e "80 g • validade • estoque". Cada trecho num
+   <span>, que ganha o "•" sozinho, no mesmo desenho de .store-row__meta. */
+.item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--muted);
+}
+
+.item-meta + .item-meta { margin-top: 4px; }
+
+.item-meta > * + *::before {
+    content: "•";
+    margin: 0 6px;
+    font-size: .8em;
+    color: var(--navy-300);
+}
+
+
+/* ---------- Vendido por ---------- */
+/* Uma .store-row entre duas linhas finas. Toda a linha é o link do nome
+   (esticado); a seta à direita não recebe toque, senão o __side, que
+   fica acima do link, engoliria o clique naquele canto. */
+
+.item-seller {
+    margin-top: 20px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.item-seller__label {
+    margin: 0 0 1px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--navy-300);
+}
+
+.item-seller .store-row__side,
+.item-stores .store-row__side { pointer-events: none; }
+
+.item-seller .store-row__side { color: var(--navy-300); }
+
+
+/* ---------- Grupos de opção ---------- */
+/* Cabeçalho cinza-claro de ponta a ponta com título, regra ("Escolha 1")
+   e selo à direita; embaixo, linhas com o indicador à direita. Dois
+   grupos seguidos não ganham espaço entre si: o próprio cabeçalho cinza
+   separa, como no iFood. O input escondido (.ui-toggle) vem logo antes
+   do <label class="opt">, no mesmo pai, e comanda o indicador. */
+
+.optg { margin-top: 24px; }
+.optg + .optg { margin-top: 0; }
+
+.optg__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px var(--gutter);
+    background: var(--navy-050);
+}
+
+.optg__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 1.25;
+    color: var(--navy);
+}
+
+.optg__sub {
+    margin: 1px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
+/* O selo suave ("Opcional") tem o mesmo navy-050 do cabeçalho e
+   sumiria nele; aqui ele vira pílula branca. */
+.optg__head .badge--soft { background: var(--surface); }
+
+/* A divisória fica dentro das margens porque a margem lateral é do
+   próprio label, não de um wrapper. */
+.opt {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 var(--gutter);
+    padding: 14px 0;
+    cursor: pointer;
+}
+
+.opt ~ .opt { border-top: 1px solid var(--line); }
+
+.opt__body {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: 2px;
+}
+
+.opt__name {
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--navy);
+}
+
+.opt__desc {
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--muted);
+}
+
+/* Preço do adicional em navy, não vermelho: é acréscimo, não oferta. */
+.opt__extra {
+    margin-top: 2px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* Indicador: círculo (rádio) ou quadrado arredondado (checkbox).
+   Ligado fica navy — onde o iFood pinta de vermelho. */
+.opt__mark {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--navy-300);
+    border-radius: 50%;
+    background: var(--surface);
+    color: #fff;
+    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.opt__mark--check { border-radius: 6px; }
+
+.opt__mark svg { opacity: 0; }
+
+.ui-toggle:checked + .opt .opt__mark { border-color: var(--navy); }
+
+/* Rádio marcado: um vão branco dentro do anel deixa o miolo navy. */
+.ui-toggle:checked + .opt .opt__mark:not(.opt__mark--check) {
+    background: var(--navy);
+    box-shadow: inset 0 0 0 4px var(--surface);
+}
+
+.ui-toggle:checked + .opt .opt__mark--check { background: var(--navy); }
+.ui-toggle:checked + .opt .opt__mark--check svg { opacity: 1; }
+
+.ui-toggle:focus-visible + .opt {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+/* ---------- Alguma observação? ---------- */
+
+.item-note { padding: 24px var(--gutter) 0; }
+
+.item-note__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.item-note__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.item-note__count {
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+}
+
+/* 16px, e não 14px: abaixo disso o Safari do iPhone dá zoom na página
+   ao focar o campo, e o protótipo é aberto no celular. */
+.item-note__field {
+    display: block;
+    width: 100%;
+    min-height: 88px;
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--navy);
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.45;
+    resize: none;
+}
+
+.item-note__field::placeholder { color: var(--navy-300); }
+
+.item-note__field:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px var(--navy-050);
+}
+
+
+/* ---------- Também nestas lojas ---------- */
+/* .store-row com o preço daquela sede no __side. A sede sem estoque
+   usa .is-closed (apagada, como loja fechada no iFood) e o preço dela
+   perde o vermelho: não é uma oferta que dá para pegar. */
+
+.item-stores .store-row.is-closed .price { color: var(--navy-300); }
+
+
+/* ---------- Barra de adicionar ---------- */
+/* Fixa no rodapé, no padrão de 430px. Contador à esquerda e o botão
+   principal ocupando o resto, com a ação à esquerda e o total à
+   direita ("Adicionar  R$ 5,52"), como no iFood. Fica no z-index da
+   nav (30), que não existe nesta página. */
+
+.addbar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.addbar .stepper { flex: none; }
+
+.addbar__btn {
+    flex: 1;
+    min-width: 0;
+    justify-content: space-between;
+}
+
+.addbar__total {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}

@@ -24,7 +24,8 @@ se necessário.
 | `index.html` | Menu principal — cidade consultada, carrossel de ofertas das lojas em que o cliente é inscrito, busca, categorias e as três abas Produtos / Ofertas / Lojas |
 | `sede.html` | Perfil de uma sede — capa, endereço, assinatura, propagandas ativas, catálogo e horário de atendimento |
 | `produto.html` | Detalhe de um produto — preço efetivo com desconto, estoque, sede vendedora, especificações e outras sedes que vendem o mesmo item |
-| `styles.css` | Folha de estilo única, compartilhada pelas três páginas |
+| `styles.css` | Base compartilhada pelas três páginas: tokens, reset, `.app` e os componentes de uso geral no formato iFood |
+| `home.css` · `sede.css` · `produto.css` | O que só aquela página usa; cada página carrega `styles.css` e, logo depois, o seu |
 
 Navegação entre elas é por link direto (`<a href="...">`); não há roteador nem estado
 compartilhado entre páginas.

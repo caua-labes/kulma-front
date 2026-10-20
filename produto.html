@@ -2,140 +2,203 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kulma — Croissant de manteiga</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="produto.css">
 </head>
 <body>
+<!-- Página de item no formato do iFood: abre direto na foto, sem barra
+     de título e sem nav inferior; quem fecha a tela é o botão redondo,
+     e quem conclui é a barra fixa de adicionar. -->
 <main class="app app--action">
 
-    <header class="detail-bar">
-        <a class="icon-btn" href="sede.html" aria-label="Voltar">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-        </a>
-        <span class="detail-bar__title">Croissant de manteiga</span>
-        <!-- Nav de conta: só ícones, à direita. -->
-        <nav class="topnav" aria-label="Sua conta">
-            <span class="topnav__group">
-                <a class="topnav__btn" href="#" aria-label="Notificações, 2 não lidas">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-                    <span class="topnav__dot"></span>
+    <!-- Foto sangrando nas bordas, com os botões redondos por cima. -->
+    <div class="item-photo photo">
+        <span role="img" aria-label="Croissant de manteiga">🥐</span>
+        <div class="round-bar">
+            <div class="round-bar__group">
+                <a class="round-btn" href="sede.html" aria-label="Voltar para a loja">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
                 </a>
-                <a class="topnav__btn" href="#" aria-label="Carrinho, 3 itens">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h9.1a1.6 1.6 0 0 0 1.6-1.3L21 7H5"/></svg>
-                    <span class="topnav__count">3</span>
-                </a>
-                <a class="topnav__btn" href="#" aria-label="Pedidos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></a>
-            </span>
-            <a class="topnav__me" href="#" aria-label="Perfil"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></a>
-        </nav>
-    </header>
-
-    <div class="hero">
-        <span class="badge badge--discount badge--float">-20%</span>
-        <button class="float-btn is-on" type="button" aria-label="Remover dos favoritos" aria-pressed="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg>
-        </button>
-        🥐
+            </div>
+            <div class="round-bar__group">
+                <button class="round-btn" type="button" aria-label="Compartilhar">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+                </button>
+                <button class="round-btn is-on" type="button" aria-pressed="true" aria-label="Remover dos favoritos">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="product-head">
-        <span class="eyebrow">Padaria · Aurora Alimentos</span>
-        <h1 class="product-head__name">Croissant de manteiga</h1>
-
-        <div class="store-head__meta">
-            <span class="rating">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg>
-                4,7
-            </span>
-            <span>· 128 avaliações em todas as lojas da empresa</span>
-        </div>
-
-        <!-- Preço efetivo = preço da sede, quando existe; senão, o do catálogo.
-             O desconto vem da propaganda e incide sobre a oferta da sede. -->
-        <div class="price-block">
-            <span class="price price--lg">R$ 5,52</span>
-            <span class="price-old">R$ 6,90</span>
-            <span class="badge badge--urgent">Semana do café da manhã</span>
-        </div>
-        <p class="price-note">Preço desta loja · promoção válida até 31/08</p>
-
-        <p class="stock">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7 12 3 4 7v10l8 4 8-4Z"/><path d="M4 7l8 4 8-4M12 21V11"/></svg>
-            12 unidades em estoque nesta loja
-        </p>
-    </div>
-
-    <!-- Quem vende: a oferta pertence a uma sede específica. -->
-    <a class="sold-by" href="sede.html">
-        <div class="sold-by__mark">🥖</div>
-        <div class="sold-by__body">
-            <p class="sold-by__name">Panificadora Aurora · Vila Mariana</p>
-            <p class="sold-by__meta">800 m · entrega em rondas · retirada disponível</p>
-        </div>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-    </a>
-
-    <section class="section">
-        <h2 class="section__title">Descrição</h2>
-        <p class="prose">
+    <div class="item-head gutter">
+        <h1 class="item-head__name">Croissant de manteiga</h1>
+        <p class="item-head__by">Padaria · Aurora Alimentos</p>
+        <p class="item-head__desc">
             Massa folhada laminada com manteiga francesa, fermentação lenta de 18 horas
             e assado várias vezes ao dia. Vendido em unidade, embalado no balcão.
         </p>
 
-        <ul class="specs">
-            <li><span>Peso aproximado</span><span>80 g</span></li>
-            <li><span>Validade</span><span>2 dias</span></li>
-            <li><span>Reserva para retirada</span><span>Disponível · expira em 3 h</span></li>
-            <li><span>Presente</span><span>+ R$ 4,00 por item</span></li>
-        </ul>
+        <!-- Preço efetivo = preço da sede, quando existe; senão, o do catálogo
+             (regra 4.1). O desconto vem da propaganda e incide sobre a oferta
+             da sede, por isso as outras sedes, lá embaixo, mostram outro preço. -->
+        <p class="item-head__price">
+            <span class="price price--lg">R$ 5,52</span>
+            <span class="price-old">R$ 6,90</span>
+            <span class="badge badge--discount">-20%</span>
+        </p>
+        <p class="item-head__promo">
+            <span class="badge badge--urgent">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>
+                Semana do café da manhã · até 31/08
+            </span>
+        </p>
+
+        <!-- A nota é do produto e soma as avaliações de todas as sedes da
+             empresa que o vendem (regra 4.7); o estoque é só desta sede. -->
+        <p class="item-meta">
+            <span class="rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span>
+            <span>128 avaliações em todas as lojas da empresa</span>
+        </p>
+        <p class="item-meta">
+            <span>80 g</span>
+            <span>Validade 2 dias</span>
+            <span>12 em estoque</span>
+        </p>
+    </div>
+
+    <!-- Quem vende: a oferta pertence a uma sede específica. A linha
+         inteira leva ao perfil dela; a seta é só sinal visual. -->
+    <section class="item-seller" aria-label="Vendido por">
+        <article class="store-row">
+            <div class="store-row__logo">🥖</div>
+            <div class="store-row__body">
+                <p class="item-seller__label">Vendido por</p>
+                <p class="store-row__name"><a href="sede.html">Panificadora Aurora · Vila Mariana</a></p>
+                <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span><span>Padaria</span><span>800 m</span></p>
+                <p class="store-row__info"><span><strong>Aberta até 20h</strong></span><span>Entrega em rondas</span></p>
+            </div>
+            <div class="store-row__side" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+        </article>
     </section>
+
+    <!-- Grupos de opção do iFood. "Como receber" é obrigatório e já vem
+         com a entrega marcada; trocar para retirada muda o botão da barra
+         para "Reservar" (a reserva não vai para a sacola). Ela só aparece
+         porque esta sede permite reserva e tem estoque acima do mínimo
+         (regra 4.5). O cliente não escolhe o TIPO de entrega (sede ou
+         autônomo): isso o sistema resolve. -->
+    <section class="optg" role="radiogroup" aria-labelledby="optg-receber">
+        <header class="optg__head">
+            <div>
+                <h2 class="optg__title" id="optg-receber">Como receber</h2>
+                <p class="optg__sub">Escolha 1</p>
+            </div>
+            <span class="badge badge--navy">Obrigatório</span>
+        </header>
+
+        <input class="ui-toggle" type="radio" name="receber" id="receber-entrega" value="entrega" checked>
+        <label class="opt" for="receber-entrega">
+            <span class="opt__body">
+                <span class="opt__name">Entrega na próxima ronda</span>
+                <span class="opt__desc">Hoje às 14h</span>
+            </span>
+            <span class="opt__mark" aria-hidden="true"></span>
+        </label>
+
+        <input class="ui-toggle" type="radio" name="receber" id="receber-retirada" value="retirada">
+        <label class="opt" for="receber-retirada">
+            <span class="opt__body">
+                <span class="opt__name">Reservar para retirada</span>
+                <span class="opt__desc">Fica separado por 3 h na loja · sem custo</span>
+            </span>
+            <span class="opt__mark" aria-hidden="true"></span>
+        </label>
+    </section>
+
+    <!-- Presente: valor fixo por item, igual para todos os produtos da
+         empresa, e marcado item a item (regra 4.3). -->
+    <section class="optg" role="group" aria-labelledby="optg-adicionais">
+        <header class="optg__head">
+            <div>
+                <h2 class="optg__title" id="optg-adicionais">Adicionais</h2>
+                <p class="optg__sub">Escolha até 1</p>
+            </div>
+            <span class="badge badge--soft">Opcional</span>
+        </header>
+
+        <input class="ui-toggle" type="checkbox" id="add-presente" value="presente">
+        <label class="opt" for="add-presente">
+            <span class="opt__body">
+                <span class="opt__name">Embalar para presente</span>
+                <span class="opt__desc">Valor fixo por item</span>
+                <span class="opt__extra">+ R$ 4,00</span>
+            </span>
+            <span class="opt__mark opt__mark--check" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </span>
+        </label>
+    </section>
+
+    <div class="item-note">
+        <div class="item-note__head">
+            <label class="item-note__title" for="obs">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12Z"/></svg>
+                Alguma observação?
+            </label>
+            <span class="item-note__count" id="obs-count">0/140</span>
+        </div>
+        <textarea class="item-note__field" id="obs" name="obs" rows="3" maxlength="140" aria-describedby="obs-count" placeholder="Ex.: cortar ao meio, embalar separado etc."></textarea>
+    </div>
 
     <div class="route" role="presentation">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
     </div>
 
-    <!-- O produto é da empresa: outras sedes vendem o mesmo item,
-         cada uma com seu preço e estoque. -->
-    <section class="section">
-        <div class="section__head">
+    <!-- O produto é da empresa: outras sedes vendem o mesmo item, cada uma
+         com seu preço e estoque (branch_product). Em linhas, como a lista
+         de lojas do iFood; a sede sem estoque aparece apagada, não some. -->
+    <section class="sec item-stores">
+        <div class="sec-head">
             <div>
-                <h2 class="section__title">Também nestas lojas</h2>
-                <p class="section__sub">Mesmo produto, preço de cada sede</p>
+                <h2 class="sec-head__title">Também nestas lojas</h2>
+                <p class="sec-head__sub">Mesmo produto, preço e estoque de cada sede</p>
             </div>
         </div>
 
-        <div class="offers">
-            <a class="offer" href="sede.html">
-                <div class="sold-by__mark">🥖</div>
-                <div class="offer__body">
-                    <p class="offer__name">Aurora · Moema</p>
-                    <p class="offer__meta">3,2 km · 25 em estoque</p>
-                </div>
-                <span class="price price--sm">R$ 6,90</span>
-            </a>
+        <article class="store-row">
+            <div class="store-row__logo">🥖</div>
+            <div class="store-row__body">
+                <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Moema</a></h3>
+                <p class="store-row__meta"><span>3,2 km</span><span>25 em estoque</span></p>
+            </div>
+            <div class="store-row__side"><span class="price price--sm">R$ 6,90</span></div>
+        </article>
 
-            <a class="offer" href="sede.html">
-                <div class="sold-by__mark">🥖</div>
-                <div class="offer__body">
-                    <p class="offer__name">Aurora · Ipiranga</p>
-                    <p class="offer__meta">5,7 km · 8 em estoque</p>
-                </div>
-                <span class="price price--sm">R$ 6,50</span>
-            </a>
+        <article class="store-row">
+            <div class="store-row__logo">🥖</div>
+            <div class="store-row__body">
+                <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Ipiranga</a></h3>
+                <p class="store-row__meta"><span>5,7 km</span><span>8 em estoque</span></p>
+            </div>
+            <div class="store-row__side"><span class="price price--sm">R$ 6,50</span></div>
+        </article>
 
-            <a class="offer" href="sede.html">
-                <div class="sold-by__mark">🥖</div>
-                <div class="offer__body">
-                    <p class="offer__name">Aurora · Santo Amaro</p>
-                    <p class="offer__meta">9,1 km · sem estoque hoje</p>
-                </div>
-                <span class="price price--sm">R$ 6,90</span>
-            </a>
-        </div>
+        <article class="store-row is-closed">
+            <div class="store-row__logo">🥖</div>
+            <div class="store-row__body">
+                <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Santo Amaro</a></h3>
+                <p class="store-row__meta"><span>9,1 km</span><span>Sem estoque hoje</span></p>
+            </div>
+            <div class="store-row__side"><span class="price price--sm">R$ 6,90</span></div>
+        </article>
     </section>
 
     <p class="proto-foot">
@@ -144,15 +207,81 @@
         <a href="sede.html">perfil de sede</a>
     </p>
 
-    <!-- Barra de ação: comprar (vermelho) ou reservar para retirada. -->
-    <div class="actionbar">
-        <button class="btn btn--outline" type="button" aria-label="Reservar para retirada">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            Reservar
+    <!-- Barra de adicionar do iFood: quantidade à esquerda e o botão
+         principal (o único vermelho cheio da tela) com o total à direita. -->
+    <div class="addbar">
+        <div class="stepper" role="group" aria-label="Quantidade">
+            <button class="stepper__btn" id="qtd-menos" type="button" aria-label="Diminuir" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+            <span class="stepper__value" id="qtd-valor" aria-live="polite">1</span>
+            <button class="stepper__btn" id="qtd-mais" type="button" aria-label="Aumentar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+        <button class="btn btn--primary addbar__btn" type="button">
+            <span id="addbar-acao">Adicionar</span>
+            <span class="addbar__total" id="addbar-total">R$ 5,52</span>
         </button>
-        <button class="btn btn--primary" type="button">Adicionar · R$ 5,52</button>
     </div>
 
 </main>
+
+<script>
+/* Barra de adicionar e observação. É o que radio/checkbox não resolvem
+   sozinhos: contar (quantidade, caracteres) e refazer a conta do total.
+   O resto da página segue o padrão do protótipo, sem JS.
+   A conta é em centavos para não arrastar erro de ponto flutuante
+   (12 × 9,52 em reais dá 114,23999…). */
+(function () {
+    var UNIDADE  = 552;   // R$ 5,52: preço efetivo desta sede, já com o desconto
+    var PRESENTE = 400;   // R$ 4,00: fixo por item, definido pela empresa (4.3)
+    var MINIMO   = 1;
+    var MAXIMO   = 12;    // estoque desta sede: não deixa pedir o que não existe
+
+    var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    var $ = function (id) { return document.getElementById(id); };
+
+    var menos    = $('qtd-menos');
+    var mais     = $('qtd-mais');
+    var valor    = $('qtd-valor');
+    var presente = $('add-presente');
+    var retirada = $('receber-retirada');
+    var acao     = $('addbar-acao');
+    var total    = $('addbar-total');
+    var obs      = $('obs');
+    var obsConta = $('obs-count');
+
+    var qtd = MINIMO;
+
+    function atualizar() {
+        valor.textContent = qtd;
+        // No mínimo e no máximo o botão apaga, como no iFood.
+        menos.disabled = qtd <= MINIMO;
+        mais.disabled  = qtd >= MAXIMO;
+        // O presente é por item, então entra multiplicado pela quantidade.
+        total.textContent = brl.format(qtd * (UNIDADE + (presente.checked ? PRESENTE : 0)) / 100);
+        // Reservar não é compra: vai para "Minhas reservas", não para a sacola.
+        acao.textContent = retirada.checked ? 'Reservar' : 'Adicionar';
+    }
+
+    function contarObs() {
+        obsConta.textContent = obs.value.length + '/' + obs.maxLength;
+    }
+
+    menos.addEventListener('click', function () {
+        if (qtd > MINIMO) { qtd--; atualizar(); }
+    });
+    mais.addEventListener('click', function () {
+        if (qtd < MAXIMO) { qtd++; atualizar(); }
+    });
+    presente.addEventListener('change', atualizar);
+    document.querySelectorAll('input[name="receber"]').forEach(function (radio) {
+        radio.addEventListener('change', atualizar);
+    });
+    obs.addEventListener('input', contarObs);
+
+    // Ao voltar para a página, o navegador pode restaurar o presente, a
+    // retirada e o texto já marcados: a primeira conta lê o estado real.
+    atualizar();
+    contarObs();
+})();
+</script>
 </body>
 </html>
