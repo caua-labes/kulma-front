@@ -2,7 +2,7 @@
    Kulma — Perfil da sede (sede.html)
    Formato da página de loja do iFood: capa larga com botões redondos,
    logo mordendo a capa, alternância Entrega | Retirada, cupons, abas do
-   cardápio presas no topo, destaques em cartões e cardápio em linhas,
+   catálogo presas no topo, destaques em cartões e catálogo em linhas,
    com a sacola fixa no rodapé e sem nav inferior.
    Só o que esta página usa. Carrega depois de styles.css, que traz os
    tokens, o reset e os componentes compartilhados (.round-btn, .utabs,
@@ -11,75 +11,22 @@
    ===================================================================== */
 
 :root {
-    /* Altura da barra compacta do topo. O script lê este valor para
-       saber quando a capa passou por baixo dela, então o número mora
-       num lugar só. */
-    --sede-bar-h: 56px;
+    /* As abas do catálogo grudam logo abaixo da barra superior. */
+    --utabs-top: var(--topbar-h);
 
-    /* Folga das âncoras (abas do cardápio, "Ver mais"): barra compacta
-       (56) + abas presas (~43) + um respiro, para o título da seção não
+    /* Folga das âncoras (abas do catálogo, "Ver mais"): barra superior
+       (60) + abas presas (~43) + um respiro, para o título da seção não
        parar escondido atrás das duas. */
-    --anchor-offset: 104px;
+    --anchor-offset: 108px;
 }
 
-/* As abas do cardápio são âncoras: rolar até a seção, e não pular.
+/* As abas do catálogo são âncoras: rolar até a seção, e não pular.
    Quem pediu menos movimento no sistema continua com o pulo. */
 html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
 }
-
-
-/* ---------- Barra compacta (aparece ao rolar) ---------- */
-/* Como no iFood: enquanto a capa está na tela, quem navega são os
-   botões redondos dela; quando ela sai, desce uma barra branca com
-   voltar, o nome da loja e buscar. Fixa no padrão de 430px. Escondida
-   com visibility (além do transform), para os botões dela não entrarem
-   no Tab enquanto não estão à vista. O atraso no visibility deixa a
-   barra terminar de subir antes de sumir. */
-
-.sede-bar {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    z-index: 25;
-    width: 100%;
-    max-width: 430px;
-    height: calc(var(--sede-bar-h) + env(safe-area-inset-top, 0px));
-    display: grid;
-    grid-template-columns: 38px minmax(0, 1fr) 38px;
-    align-items: center;
-    gap: 8px;
-    padding: env(safe-area-inset-top, 0px) 10px 0;
-    border-bottom: 1px solid var(--line);
-    background: var(--surface);
-    transform: translate(-50%, -100%);
-    visibility: hidden;
-    transition: transform .2s ease, visibility 0s linear .2s;
-}
-
-.is-compact .sede-bar {
-    transform: translate(-50%, 0);
-    visibility: visible;
-    transition: transform .2s ease, visibility 0s;
-}
-
-.sede-bar__title {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: center;
-    font-family: var(--display);
-    font-size: 15.5px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    color: var(--navy);
-}
-
-/* Com a barra à vista, as abas do cardápio prendem logo abaixo dela
-   (o .utabs--sticky de styles.css lê --utabs-top). */
-.is-compact { --utabs-top: calc(var(--sede-bar-h) + env(safe-area-inset-top, 0px)); }
 
 
 /* ---------- Capa ---------- */
@@ -96,17 +43,9 @@ html { scroll-behavior: smooth; }
         linear-gradient(135deg, var(--navy) 0%, var(--navy-700) 100%);
 }
 
-.sede-cover__art {
-    position: absolute;
-    right: 18px;
-    bottom: -30px;
-    font-size: 150px;
-    line-height: 1;
-    opacity: .16;
-    transform: rotate(-14deg);
-    pointer-events: none;
-    user-select: none;
-}
+/* Foto da fachada da loja, com um véu navy por cima para os botões
+   redondos continuarem destacados. */
+.sede-cover__img { opacity: .55; }
 
 
 /* ---------- Identidade ---------- */
@@ -154,8 +93,8 @@ html { scroll-behavior: smooth; }
     color: var(--navy);
 }
 
-/* "★ 4,8 (312) • Padaria • 800 m" e "Aurora Alimentos • Sede Vila
-   Mariana". Como no .store-row, cada trecho vai num <span> e ganha o
+/* "★ 4,8 (312) • Informática • 800 m" e "Ponto Digital Eletrônicos • Sede
+   Centro". Como no .store-row, cada trecho vai num <span> e ganha o
    "•" sozinho. */
 .sede-id__meta,
 .sede-id__company {
@@ -377,7 +316,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* Até duas linhas: o nome da campanha é o que diz do que é o cupom,
-   e cortado em uma linha virava "Semana do café da…". */
+   e cortado em uma linha virava "Semana da tecnol…". */
 .sede-coupon__title {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -407,17 +346,17 @@ html { scroll-behavior: smooth; }
 
 .sede-coupon:hover { border-color: var(--navy-300); }
 
-#oferta-cafe:checked ~ .sede-coupons .sede-coupon[for="oferta-cafe"],
-#oferta-bolo:checked ~ .sede-coupons .sede-coupon[for="oferta-bolo"] { border-color: var(--navy); }
+#oferta-tec:checked ~ .sede-coupons .sede-coupon[for="oferta-tec"],
+#oferta-gamer:checked ~ .sede-coupons .sede-coupon[for="oferta-gamer"] { border-color: var(--navy); }
 
-#oferta-cafe:checked ~ .sede-coupons .sede-coupon[for="oferta-cafe"] .sede-coupon__chev,
-#oferta-bolo:checked ~ .sede-coupons .sede-coupon[for="oferta-bolo"] .sede-coupon__chev {
+#oferta-tec:checked ~ .sede-coupons .sede-coupon[for="oferta-tec"] .sede-coupon__chev,
+#oferta-gamer:checked ~ .sede-coupons .sede-coupon[for="oferta-gamer"] .sede-coupon__chev {
     color: var(--navy);
     transform: rotate(180deg);
 }
 
-#oferta-cafe:focus-visible ~ .sede-coupons .sede-coupon[for="oferta-cafe"],
-#oferta-bolo:focus-visible ~ .sede-coupons .sede-coupon[for="oferta-bolo"] {
+#oferta-tec:focus-visible ~ .sede-coupons .sede-coupon[for="oferta-tec"],
+#oferta-gamer:focus-visible ~ .sede-coupons .sede-coupon[for="oferta-gamer"] {
     outline: 2px solid var(--navy);
     outline-offset: 2px;
 }
@@ -425,8 +364,8 @@ html { scroll-behavior: smooth; }
 /* Lista de produtos da oferta: fechada até o cupom ser tocado. */
 .sede-offer { display: none; padding-top: 14px; }
 
-#oferta-cafe:checked ~ .sede-offer--cafe,
-#oferta-bolo:checked ~ .sede-offer--bolo { display: block; }
+#oferta-tec:checked ~ .sede-offer--tec,
+#oferta-gamer:checked ~ .sede-offer--gamer { display: block; }
 
 .sede-offer__head {
     margin: 0 0 10px;
@@ -459,13 +398,12 @@ html { scroll-behavior: smooth; }
 }
 
 
-/* ---------- Abas do cardápio ---------- */
-/* .utabs--sticky (styles.css) já prende no topo; aqui só a descida
-   junto com a barra compacta, quando --utabs-top muda. */
-.sede-tabs { transition: top .2s ease; }
+/* ---------- Abas do catálogo ---------- */
+/* .utabs--sticky (styles.css) já prende as abas logo abaixo da barra
+   superior (--utabs-top). */
 
 
-/* ---------- Cardápio em linhas ---------- */
+/* ---------- Catálogo em linhas ---------- */
 /* A linha de item do iFood: nome, descrição de até 2 linhas e preço à
    esquerda; foto quadrada à direita; divisória fina entre vizinhas,
    dentro das margens (o mesmo desenho do .store-row). O nome estica o
@@ -614,3 +552,16 @@ html { scroll-behavior: smooth; }
 .sede-hours li.is-today > span { color: var(--navy); font-weight: 600; }
 
 .sede-hours li.is-closed > span:last-child { color: var(--navy-300); font-weight: 400; }
+
+
+/* ---------- Sacola sobre a barra inferior ---------- */
+/* A barra inferior aparece em todas as telas, então a sacola sobe e
+   fica logo acima dela; o fim da página reserva espaço para as duas. */
+.cartbar {
+    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 10px;
+}
+
+.app--cartbar {
+    padding-bottom: calc(var(--tabbar-h) + var(--cartbar-h) + 24px + env(safe-area-inset-bottom, 0px));
+}

@@ -14,22 +14,19 @@
 <main class="app">
 
     <!-- Busca sempre à mão, presa no topo ao rolar. Um campo só, em
-         pílula: lupa, texto e, à direita, separados por um fio, o filtro
-         (abre o pop-up de filtros; o número diz quantos estão aplicados)
-         e o pin (abre o pop-up de troca de cidade — a busca é sempre
-         filtrada por cidade, seção 1). O JS usa a altura desta barra
+         traço: lupa, texto e, à direita, separados por um fio, o pin com
+         a cidade atual (abre o pop-up de troca de cidade — a busca é
+         sempre filtrada por cidade, seção 1). Os filtros ficam no chip
+         "Filtros", junto das abas. O JS usa a altura desta barra
          (.topbar) para encostar as abas da listagem logo abaixo dela. -->
     <div class="topbar">
         <div class="search search--bar" role="search">
             <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
             <input class="search__input" type="search" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
             <span class="search__sep" aria-hidden="true"></span>
-            <label class="search__action" for="modal-filtro" role="button" tabindex="0" aria-label="Filtros, 2 aplicados">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-                <span class="search__count" aria-hidden="true">2</span>
-            </label>
-            <label class="search__action" for="modal-cidade" role="button" tabindex="0" aria-label="Cidade: São Paulo, SP. Trocar cidade">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <label class="search__place" for="modal-cidade" role="button" tabindex="0" aria-label="Cidade: Blumenau, SC. Trocar cidade">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
             </label>
         </div>
     </div>
@@ -37,44 +34,44 @@
     <!-- Banners das sedes em que o cliente é inscrito (4.8): texto dentro
          do banner, à esquerda — sede, campanha, desconto e prazo — e a
          "foto" à direita. Troca sozinha a cada 5 s (JS, no fim). Os
-         números são os mesmos da aba Ofertas e da página da sede; a de
-         bolo é exclusiva de assinante e aparece como chamariz, como o
+         números são os mesmos da aba Ofertas e da página da sede; a linha
+         gamer é exclusiva de assinante e aparece como chamariz, como o
          cupom trancado da sede (o cliente é inscrito grátis). -->
     <section class="promos" aria-label="Ofertas das lojas em que você é inscrito">
         <article class="promo">
-            <p class="promo__store">Panificadora Aurora <span>· Vila Mariana</span></p>
-            <a class="promo__media" href="sede.html#ofertas" aria-label="Semana do café da manhã: 20% em 6 itens, Panificadora Aurora">
-                🥐
+            <p class="promo__store">Ponto Digital <span>· Centro</span></p>
+            <a class="promo__media has-img" href="propaganda.html" aria-label="Semana da tecnologia: 20% em 6 itens, Ponto Digital">
+                <img class="media-img" src="img/banners/tecnologia.jpg" alt="">
                 <span class="promo__tags"><span class="badge badge--discount">-20%</span><span class="badge badge--urgent">Termina em 2 dias</span></span>
             </a>
             <div class="promo__marquee">
-                <div class="promo__track" aria-hidden="true"><span>Semana do café da manhã: 20% em 6 itens</span><span>Semana do café da manhã: 20% em 6 itens</span></div>
+                <div class="promo__track" aria-hidden="true"><span>Semana da tecnologia: 20% em 6 itens</span><span>Semana da tecnologia: 20% em 6 itens</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Empório da Esquina <span>· Pinheiros</span></p>
-            <a class="promo__media" href="sede.html" aria-label="Frios selecionados: 15% em 7 itens, Empório da Esquina">
-                🧀
+            <p class="promo__store">Casa Firme <span>· Velha</span></p>
+            <a class="promo__media has-img" href="sede.html" aria-label="Mês da reforma: 15% em 7 itens, Casa Firme">
+                <img class="media-img" src="img/banners/reforma.jpg" alt="">
                 <span class="promo__tags"><span class="badge badge--discount">-15%</span><span class="badge badge--urgent">Termina em 5 dias</span></span>
             </a>
             <div class="promo__marquee">
-                <div class="promo__track" aria-hidden="true"><span>Frios selecionados: 15% em 7 itens</span><span>Frios selecionados: 15% em 7 itens</span></div>
+                <div class="promo__track" aria-hidden="true"><span>Mês da reforma: 15% em 7 itens</span><span>Mês da reforma: 15% em 7 itens</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Hortifrúti Bom Jardim <span>· Saúde</span></p>
-            <a class="promo__media" href="sede.html" aria-label="Feira da terça: 30% em folhas e legumes, Hortifrúti Bom Jardim">
-                🍅
+            <p class="promo__store">Ateliê Garcia <span>· Garcia</span></p>
+            <a class="promo__media has-img" href="sede.html" aria-label="Troca de estação: 30% em roupas e calçados, Ateliê Garcia">
+                <img class="media-img" src="img/banners/estacao.jpg" alt="">
                 <span class="promo__tags"><span class="badge badge--discount">-30%</span><span class="badge badge--urgent">Último dia</span></span>
             </a>
             <div class="promo__marquee">
-                <div class="promo__track" aria-hidden="true"><span>Feira da terça: 30% em folhas e legumes</span><span>Feira da terça: 30% em folhas e legumes</span></div>
+                <div class="promo__track" aria-hidden="true"><span>Troca de estação: 30% em roupas e calçados</span><span>Troca de estação: 30% em roupas e calçados</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Farmácia Vila Nova <span>· Ipiranga</span></p>
-            <a class="promo__media" href="sede.html" aria-label="Cuidado diário: 25% em dermocosméticos, Farmácia Vila Nova">
-                💊
+            <p class="promo__store">Farmácia Vila Nova <span>· Vila Nova</span></p>
+            <a class="promo__media has-img" href="sede.html" aria-label="Cuidado diário: 25% em dermocosméticos, Farmácia Vila Nova">
+                <img class="media-img" src="img/banners/cuidado.jpg" alt="">
                 <span class="promo__tags"><span class="badge badge--discount">-25%</span><span class="badge badge--urgent">Termina em 9 dias</span></span>
             </a>
             <div class="promo__marquee">
@@ -82,13 +79,13 @@
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Panificadora Aurora <span>· Vila Mariana</span></p>
-            <a class="promo__media" href="sede.html#ofertas" aria-label="Encomendas de bolo: 10% em 4 itens, Panificadora Aurora">
-                🎂
+            <p class="promo__store">Ponto Digital <span>· Centro</span></p>
+            <a class="promo__media has-img" href="sede.html#ofertas" aria-label="Linha gamer: 10% em 4 itens, Ponto Digital">
+                <img class="media-img" src="img/banners/gamer.jpg" alt="">
                 <span class="promo__tags"><span class="badge badge--discount">-10%</span><span class="badge badge--soft">Só para assinantes</span></span>
             </a>
             <div class="promo__marquee">
-                <div class="promo__track" aria-hidden="true"><span>Encomendas de bolo: 10% em 4 itens</span><span>Encomendas de bolo: 10% em 4 itens</span></div>
+                <div class="promo__track" aria-hidden="true"><span>Linha gamer: 10% em 4 itens</span><span>Linha gamer: 10% em 4 itens</span></div>
             </div>
         </article>
         <article class="promo promo--more">
@@ -124,27 +121,27 @@
         </div>
         <div class="hrail">
             <a class="proj proj--oferta" href="#" aria-label="Computador novo, 3 de 6 itens, 2 dos que faltam em oferta">
-                <span class="proj__offer" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg></span>
-                <span class="proj__art" aria-hidden="true">💻</span>
+                <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/computador.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Computador novo</span>
                 <span class="proj__meta">3 de 6 itens</span>
                 <span class="proj__bar" aria-hidden="true"><span style="width:50%"></span><span class="proj__bar-oferta" style="width:33.3%"></span></span>
+                <span class="proj__deal" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg> 2 itens em oferta</span>
             </a>
             <a class="proj proj--oferta" href="#" aria-label="Reforma da cozinha, 5 de 12 itens, 3 dos que faltam em oferta">
-                <span class="proj__offer" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg></span>
-                <span class="proj__art" aria-hidden="true">🍳</span>
+                <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/cozinha.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Reforma da cozinha</span>
                 <span class="proj__meta">5 de 12 itens</span>
                 <span class="proj__bar" aria-hidden="true"><span style="width:41.7%"></span><span class="proj__bar-oferta" style="width:25%"></span></span>
+                <span class="proj__deal" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg> 3 itens em oferta</span>
             </a>
             <a class="proj" href="#" aria-label="Aniversário da Ana, 8 de 9 itens">
-                <span class="proj__art" aria-hidden="true">🎂</span>
+                <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/aniversario.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Aniversário da Ana</span>
                 <span class="proj__meta">8 de 9 itens</span>
                 <span class="proj__bar" aria-hidden="true"><span style="width:89%"></span></span>
             </a>
             <a class="proj" href="#" aria-label="Varanda com plantas, 1 de 5 itens">
-                <span class="proj__art" aria-hidden="true">🪴</span>
+                <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/varanda.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Varanda com plantas</span>
                 <span class="proj__meta">1 de 5 itens</span>
                 <span class="proj__bar" aria-hidden="true"><span style="width:20%"></span></span>
@@ -187,92 +184,86 @@
         </div>
 
         <!-- Produtos: grade alinhada de duas colunas. Preço em vermelho
-             primeiro; favoritar e similares no canto de cima da foto, o
-             "+" de adicionar no de baixo; a nota fica presa no rodapé. -->
+             primeiro; no canto de baixo da foto, uma pílula só com buscar
+             similares e o "+" de adicionar; a nota fica presa no rodapé. -->
         <section class="pane" id="pane-produtos" aria-label="Produtos">
             <div class="gutter">
                 <div class="grid">
                     <article class="pcard">
-                        <div class="pcard__media">🥐
-                            <span class="badge badge--discount pcard__badge">-20%</span>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
-                                <button class="round-btn round-btn--sm is-on" type="button" aria-pressed="true" aria-label="Remover dos favoritos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></button>
-                                <button class="round-btn round-btn--sm" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                             </span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Croissant de manteiga à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Croissant de manteiga</a></h3>
-                        <p class="pcard__store">Panificadora Aurora · 800 m</p>
+                        <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
+                        <p class="pcard__store"><span class="pcard__store-name">Ponto Digital</span><span class="pcard__dist">800 m</span></p>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span> (128)</p>
+                        <a class="pcard__deal" href="propaganda.html" aria-label="Ver a oferta Semana da tecnologia"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg><span>Semana da tecnologia</span><svg class="pcard__deal-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">☕
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/lampada.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
-                                <button class="round-btn round-btn--sm" type="button" aria-pressed="false" aria-label="Favoritar produto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></button>
-                                <button class="round-btn round-btn--sm" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Adicionar Lâmpada LED 9 W à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                             </span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Café torrado e moído · 500 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 27,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Café torrado e moído · 500 g</a></h3>
-                        <p class="pcard__store">Empório da Esquina · 1,4 km</p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Lâmpada LED 9 W</span></a></h3>
+                        <p class="pcard__store"><span class="pcard__store-name">Casa Firme</span><span class="pcard__dist">1,4 km</span></p>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span> (86)</p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍅
-                            <span class="badge badge--discount pcard__badge">-30%</span>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/camiseta.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
-                                <button class="round-btn round-btn--sm" type="button" aria-pressed="false" aria-label="Favoritar produto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></button>
-                                <button class="round-btn round-btn--sm" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Adicionar Camiseta dry-fit à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                             </span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Tomate italiano · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 3,49</span><span class="price-old">R$ 4,99</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Tomate italiano · kg</a></h3>
-                        <p class="pcard__store">Hortifrúti Bom Jardim · 2,1 km</p>
+                        <p class="pcard__price"><span class="price price--sm">R$ 55,93</span><span class="price-old">R$ 79,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Camiseta dry-fit</span></a></h3>
+                        <p class="pcard__store"><span class="pcard__store-name">Ateliê Garcia</span><span class="pcard__dist">2,1 km</span></p>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,2</span> (41)</p>
+                        <a class="pcard__deal" href="sede.html#ofertas" aria-label="Ver a oferta Troca de estação"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg><span>Troca de estação</span><svg class="pcard__deal-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍞
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-hdmi.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
-                                <button class="round-btn round-btn--sm" type="button" aria-pressed="false" aria-label="Favoritar produto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></button>
-                                <button class="round-btn round-btn--sm" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Adicionar Cabo HDMI à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                             </span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de forma integral à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 12,50</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Pão de forma integral</a></h3>
-                        <p class="pcard__store">Panificadora Aurora · 800 m</p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo HDMI</span></a></h3>
+                        <p class="pcard__store"><span class="pcard__store-name">Ponto Digital</span><span class="pcard__dist">800 m</span></p>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span> (203)</p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥩
-                            <span class="badge badge--discount pcard__badge">-18%</span>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bolsa-transporte.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
-                                <button class="round-btn round-btn--sm" type="button" aria-pressed="false" aria-label="Favoritar produto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></button>
-                                <button class="round-btn round-btn--sm" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Adicionar Bolsa de transporte à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                             </span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Picanha bovina · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 79,90</span><span class="price-old">R$ 97,40</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Picanha bovina · kg</a></h3>
-                        <p class="pcard__store">Açougue Boi na Brasa · 2,4 km</p>
+                        <p class="pcard__price"><span class="price price--sm">R$ 79,90</span><span class="price-old">R$ 97,40</span><span class="badge badge--discount pcard__off">-18%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Bolsa de transporte</span></a></h3>
+                        <p class="pcard__store"><span class="pcard__store-name">Pet Itoupava</span><span class="pcard__dist">2,4 km</span></p>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,9</span> (57)</p>
+                        <a class="pcard__deal" href="sede.html#ofertas" aria-label="Ver a oferta Semana pet"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg><span>Semana pet</span><svg class="pcard__deal-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧀
-                            <span class="badge badge--discount pcard__badge">-15%</span>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/trena.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
-                                <button class="round-btn round-btn--sm" type="button" aria-pressed="false" aria-label="Favoritar produto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></button>
-                                <button class="round-btn round-btn--sm" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
+                                <button class="pcard__act" type="button" aria-label="Adicionar Trena à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                             </span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Queijo minas padrão · 400 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 32,30</span><span class="price-old">R$ 38,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Queijo minas padrão · 400 g</a></h3>
-                        <p class="pcard__store">Empório da Esquina · 1,4 km</p>
+                        <p class="pcard__price"><span class="price price--sm">R$ 32,30</span><span class="price-old">R$ 38,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Trena</span></a></h3>
+                        <p class="pcard__store"><span class="pcard__store-name">Casa Firme</span><span class="pcard__dist">1,4 km</span></p>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span> (72)</p>
+                        <a class="pcard__deal" href="sede.html#ofertas" aria-label="Ver a oferta Mês da reforma"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg><span>Mês da reforma</span><svg class="pcard__deal-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
                     </article>
                 </div>
             </div>
@@ -287,21 +278,21 @@
         <section class="pane" id="pane-ofertas" aria-label="Ofertas">
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">🥖</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
-                        <p class="deal__store"><a href="sede.html">Panificadora Aurora</a></p>
-                        <p class="deal__where">Vila Mariana</p>
+                        <p class="deal__store"><a href="sede.html">Ponto Digital</a></p>
+                        <p class="deal__where">Centro</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">-20%</span>
                         <span class="badge badge--urgent">Termina em 2 dias</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">🥐</div>
-                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-1" aria-label="Mostrar os produtos de Semana do café da manhã">
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/tecnologia.jpg" alt="" loading="lazy"></div>
+                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-1" aria-label="Mostrar os produtos de Semana da tecnologia">
                 <div class="deal__bar">
                     <div class="deal__text">
-                        <h3 class="deal__title">Semana do café da manhã</h3>
+                        <h3 class="deal__title"><a href="propaganda.html">Semana da tecnologia</a></h3>
                         <p class="deal__count">6 produtos em oferta</p>
                     </div>
                     <label class="deal__arrow" for="deal-toggle-1" aria-label="Ver produtos desta oferta">
@@ -311,57 +302,51 @@
                 <div class="deal__divider"></div>
                 <div class="deal__products hrail">
                     <article class="pcard">
-                        <div class="pcard__media">🥐
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Croissant de manteiga à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Croissant de manteiga</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧁
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Muffin de fubá à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Película de vidro para celular à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Muffin de fubá</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧀
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de queijo · 4 unidades à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pen drive à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 7,12</span><span class="price-old">R$ 8,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Pão de queijo · 4 unidades</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧈
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão na chapa à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mouse pad à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Pão na chapa</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">☕
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Café coado · 300 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cabo USB-C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Café coado · 300 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍊
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Suco de laranja · 500 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Limpa-telas à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Suco de laranja · 500 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
                     </article>
                     <a class="deal-more" href="sede.html#ofertas">
@@ -372,21 +357,21 @@
             </article>
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">🛒</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/casa-firme.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
-                        <p class="deal__store"><a href="sede.html">Empório da Esquina</a></p>
-                        <p class="deal__where">Pinheiros</p>
+                        <p class="deal__store"><a href="sede.html">Casa Firme</a></p>
+                        <p class="deal__where">Velha</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">-15%</span>
                         <span class="badge badge--urgent">Termina em 5 dias</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">🧀</div>
-                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-2" aria-label="Mostrar os produtos de Frios selecionados">
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/reforma.jpg" alt="" loading="lazy"></div>
+                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-2" aria-label="Mostrar os produtos de Mês da reforma">
                 <div class="deal__bar">
                     <div class="deal__text">
-                        <h3 class="deal__title">Frios selecionados</h3>
+                        <h3 class="deal__title">Mês da reforma</h3>
                         <p class="deal__count">7 produtos em oferta</p>
                     </div>
                     <label class="deal__arrow" for="deal-toggle-2" aria-label="Ver produtos desta oferta">
@@ -396,66 +381,59 @@
                 <div class="deal__divider"></div>
                 <div class="deal__products hrail">
                     <article class="pcard">
-                        <div class="pcard__media">🧀
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Queijo minas padrão · 400 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/trena.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Trena à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 32,30</span><span class="price-old">R$ 38,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Queijo minas padrão · 400 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 32,30</span><span class="price-old">R$ 38,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Trena</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧀
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Queijo parmesão · 200 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/chaves-fenda.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Jogo de chaves de fenda à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 39,10</span><span class="price-old">R$ 46,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Queijo parmesão · 200 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 39,10</span><span class="price-old">R$ 46,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Jogo de chaves de fenda</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍖
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Presunto parma · 100 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/nivel.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Nível de bolha à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 24,65</span><span class="price-old">R$ 29,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Presunto parma · 100 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 24,65</span><span class="price-old">R$ 29,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Nível de bolha</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥓
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Salame italiano · 150 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/chave-inglesa.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Chave inglesa à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 20,40</span><span class="price-old">R$ 24,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Salame italiano · 150 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 20,40</span><span class="price-old">R$ 24,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Chave inglesa</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🦃
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Peito de peru · 200 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/parafusos.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Caixa de parafusos à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 18,70</span><span class="price-old">R$ 22,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Peito de peru · 200 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 18,70</span><span class="price-old">R$ 22,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Caixa de parafusos</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🫒
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Azeitona preta · 200 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pinceis.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Kit de pincéis à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 15,30</span><span class="price-old">R$ 18,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Azeitona preta · 200 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 15,30</span><span class="price-old">R$ 18,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Kit de pincéis</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,3</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍞
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Torrada italiana · 160 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/rolo.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Rolo de pintura à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 10,20</span><span class="price-old">R$ 12,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Torrada italiana · 160 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 10,20</span><span class="price-old">R$ 12,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Rolo de pintura</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,2</span></p>
                     </article>
                     <a class="deal-more" href="sede.html">
@@ -466,21 +444,21 @@
             </article>
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">🥬</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/atelie-garcia.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
-                        <p class="deal__store"><a href="sede.html">Hortifrúti Bom Jardim</a></p>
-                        <p class="deal__where">Saúde</p>
+                        <p class="deal__store"><a href="sede.html">Ateliê Garcia</a></p>
+                        <p class="deal__where">Garcia</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">-30%</span>
                         <span class="badge badge--urgent">Último dia</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">🍅</div>
-                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-3" aria-label="Mostrar os produtos de Feira da terça">
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/estacao.jpg" alt="" loading="lazy"></div>
+                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-3" aria-label="Mostrar os produtos de Troca de estação">
                 <div class="deal__bar">
                     <div class="deal__text">
-                        <h3 class="deal__title">Feira da terça</h3>
+                        <h3 class="deal__title">Troca de estação</h3>
                         <p class="deal__count">8 produtos em oferta</p>
                     </div>
                     <label class="deal__arrow" for="deal-toggle-3" aria-label="Ver produtos desta oferta">
@@ -490,75 +468,67 @@
                 <div class="deal__divider"></div>
                 <div class="deal__products hrail">
                     <article class="pcard">
-                        <div class="pcard__media">🍅
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Tomate italiano · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/camiseta.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Camiseta dry-fit à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 3,49</span><span class="price-old">R$ 4,99</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Tomate italiano · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 55,93</span><span class="price-old">R$ 79,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Camiseta dry-fit</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,2</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥬
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Alface crespa · unidade à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/tenis.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Tênis de corrida à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 2,45</span><span class="price-old">R$ 3,50</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Alface crespa · unidade</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 209,30</span><span class="price-old">R$ 299,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Tênis de corrida</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,3</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥕
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cenoura · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/jaqueta.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Jaqueta corta-vento à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 4,13</span><span class="price-old">R$ 5,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Cenoura · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 174,30</span><span class="price-old">R$ 249,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Jaqueta corta-vento</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥦
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Brócolis · maço à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/calca.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Calça jeans à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 6,23</span><span class="price-old">R$ 8,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Brócolis · maço</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 132,93</span><span class="price-old">R$ 189,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Calça jeans</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,1</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥒
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pepino japonês · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bone.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Boné à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 5,25</span><span class="price-old">R$ 7,50</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Pepino japonês · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 41,93</span><span class="price-old">R$ 59,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Boné</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,0</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍠
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Batata-doce · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/meia.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Meia esportiva à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 4,83</span><span class="price-old">R$ 6,90</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Batata-doce · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 24,43</span><span class="price-old">R$ 34,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Meia esportiva</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧅
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cebola · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mochila.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mochila à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 3,50</span><span class="price-old">R$ 5,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Cebola · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 111,93</span><span class="price-old">R$ 159,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mochila</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,2</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🌽
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Milho verde · 3 espigas à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/oculos.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Óculos de sol à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 6,30</span><span class="price-old">R$ 9,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Milho verde · 3 espigas</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 90,93</span><span class="price-old">R$ 129,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Óculos de sol</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <a class="deal-more" href="sede.html">
@@ -569,17 +539,17 @@
             </article>
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">💊</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/farmacia-vila-nova.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
                         <p class="deal__store"><a href="sede.html">Farmácia Vila Nova</a></p>
-                        <p class="deal__where">Ipiranga</p>
+                        <p class="deal__where">Vila Nova</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">-25%</span>
                         <span class="badge badge--urgent">Termina em 9 dias</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">💊</div>
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/cuidado.jpg" alt="" loading="lazy"></div>
                 <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-4" aria-label="Mostrar os produtos de Cuidado diário">
                 <div class="deal__bar">
                     <div class="deal__text">
@@ -593,57 +563,51 @@
                 <div class="deal__divider"></div>
                 <div class="deal__products hrail">
                     <article class="pcard">
-                        <div class="pcard__media">🧴
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Protetor solar FPS 50 · 200 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/protetor-solar.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Protetor solar FPS 50 à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 65,70</span><span class="price-old">R$ 87,60</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Protetor solar FPS 50 · 200 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 65,70</span><span class="price-old">R$ 87,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Protetor solar FPS 50</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">💧
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Sérum de vitamina C · 30 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/serum.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Sérum de vitamina C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 44,70</span><span class="price-old">R$ 59,60</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Sérum de vitamina C · 30 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 44,70</span><span class="price-old">R$ 59,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Sérum de vitamina C</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧴
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Hidratante corporal · 400 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/hidratante.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Hidratante corporal à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 29,70</span><span class="price-old">R$ 39,60</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Hidratante corporal · 400 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 29,70</span><span class="price-old">R$ 39,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Hidratante corporal</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🫧
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Sabonete facial · 150 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/sabonete-facial.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Sabonete facial à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 23,70</span><span class="price-old">R$ 31,60</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Sabonete facial · 150 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 23,70</span><span class="price-old">R$ 31,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Sabonete facial</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">💦
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Água micelar · 200 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/agua-micelar.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Água micelar à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 35,70</span><span class="price-old">R$ 47,60</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Água micelar · 200 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 35,70</span><span class="price-old">R$ 47,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Água micelar</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">💄
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Protetor labial FPS 15 à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/hidratante-labial.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Hidratante labial à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 17,70</span><span class="price-old">R$ 23,60</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Protetor labial FPS 15</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 17,70</span><span class="price-old">R$ 23,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Hidratante labial</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span></p>
                     </article>
                     <a class="deal-more" href="sede.html">
@@ -654,21 +618,21 @@
             </article>
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">🥖</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
-                        <p class="deal__store"><a href="sede.html">Panificadora Aurora</a></p>
-                        <p class="deal__where">Vila Mariana</p>
+                        <p class="deal__store"><a href="sede.html">Ponto Digital</a></p>
+                        <p class="deal__where">Centro</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">-10%</span>
                         <span class="badge badge--soft">Só para assinantes</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">🎂</div>
-                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-5" aria-label="Mostrar os produtos de Encomendas de bolo">
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/gamer.jpg" alt="" loading="lazy"></div>
+                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-5" aria-label="Mostrar os produtos de Linha gamer">
                 <div class="deal__bar">
                     <div class="deal__text">
-                        <h3 class="deal__title">Encomendas de bolo</h3>
+                        <h3 class="deal__title">Linha gamer</h3>
                         <p class="deal__count">4 produtos em oferta</p>
                     </div>
                     <label class="deal__arrow" for="deal-toggle-5" aria-label="Ver produtos desta oferta">
@@ -684,21 +648,21 @@
             </article>
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">🛒</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/casa-firme.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
-                        <p class="deal__store"><a href="sede.html">Empório da Esquina</a></p>
-                        <p class="deal__where">Pinheiros</p>
+                        <p class="deal__store"><a href="sede.html">Casa Firme</a></p>
+                        <p class="deal__where">Velha</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">até 25%</span>
                         <span class="badge badge--urgent">Termina em 4 dias</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">🍷</div>
-                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-6" aria-label="Mostrar os produtos de Adega da semana">
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/jardim.jpg" alt="" loading="lazy"></div>
+                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-6" aria-label="Mostrar os produtos de Jardim e varanda">
                 <div class="deal__bar">
                     <div class="deal__text">
-                        <h3 class="deal__title">Adega da semana</h3>
+                        <h3 class="deal__title">Jardim e varanda</h3>
                         <p class="deal__count">5 produtos em oferta</p>
                     </div>
                     <label class="deal__arrow" for="deal-toggle-6" aria-label="Ver produtos desta oferta">
@@ -708,48 +672,43 @@
                 <div class="deal__divider"></div>
                 <div class="deal__products hrail">
                     <article class="pcard">
-                        <div class="pcard__media">🍷
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Vinho tinto Malbec · 750 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mangueira.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mangueira de jardim à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 48,00</span><span class="price-old">R$ 64,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Vinho tinto Malbec · 750 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 48,00</span><span class="price-old">R$ 64,00</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mangueira de jardim</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍾
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Espumante brut · 750 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/tesoura-poda.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Tesoura de poda à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 54,00</span><span class="price-old">R$ 72,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Espumante brut · 750 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 54,00</span><span class="price-old">R$ 72,00</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Tesoura de poda</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥂
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Vinho branco Sauvignon Blanc · 750 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/regador.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Regador à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 44,80</span><span class="price-old">R$ 56,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Vinho branco Sauvignon Blanc · 750 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 44,80</span><span class="price-old">R$ 56,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Regador</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍷
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Vinho rosé · 750 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/vaso.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Vaso de cerâmica à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 38,40</span><span class="price-old">R$ 48,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Vinho rosé · 750 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 38,40</span><span class="price-old">R$ 48,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Vaso de cerâmica</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍺
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cerveja artesanal IPA · 500 ml à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/terra.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Terra adubada à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 15,30</span><span class="price-old">R$ 18,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Cerveja artesanal IPA · 500 ml</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 15,30</span><span class="price-old">R$ 18,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Terra adubada</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <a class="deal-more" href="sede.html">
@@ -760,21 +719,21 @@
             </article>
             <article class="deal">
                 <header class="deal__head">
-                    <span class="deal__logo" aria-hidden="true">🥩</span>
+                    <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/pet-itoupava.jpg" alt="" loading="lazy"></span>
                     <div class="deal__who">
-                        <p class="deal__store"><a href="sede.html">Açougue Boi na Brasa</a></p>
-                        <p class="deal__where">Saúde</p>
+                        <p class="deal__store"><a href="sede.html">Pet Itoupava</a></p>
+                        <p class="deal__where">Itoupava Seca</p>
                     </div>
                     <div class="deal__tags">
                         <span class="badge badge--discount">até 30%</span>
                         <span class="badge badge--urgent">Termina em 6 dias</span>
                     </div>
                 </header>
-                <div class="deal__media photo" aria-hidden="true">🥩</div>
-                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-7" aria-label="Mostrar os produtos de Terça do churrasco">
+                <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/pet.jpg" alt="" loading="lazy"></div>
+                <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-7" aria-label="Mostrar os produtos de Semana pet">
                 <div class="deal__bar">
                     <div class="deal__text">
-                        <h3 class="deal__title">Terça do churrasco</h3>
+                        <h3 class="deal__title">Semana pet</h3>
                         <p class="deal__count">7 produtos em oferta</p>
                     </div>
                     <label class="deal__arrow" for="deal-toggle-7" aria-label="Ver produtos desta oferta">
@@ -784,66 +743,59 @@
                 <div class="deal__divider"></div>
                 <div class="deal__products hrail">
                     <article class="pcard">
-                        <div class="pcard__media">🥩
-                            <span class="badge badge--discount pcard__badge">-18%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Picanha bovina · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bolsa-transporte.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Bolsa de transporte à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 79,90</span><span class="price-old">R$ 97,40</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Picanha bovina · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 79,90</span><span class="price-old">R$ 97,40</span><span class="badge badge--discount pcard__off">-18%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Bolsa de transporte</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,9</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍢
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Coração de frango · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mordedor.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Brinquedo mordedor à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 19,60</span><span class="price-old">R$ 28,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Coração de frango · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 19,60</span><span class="price-old">R$ 28,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Brinquedo mordedor</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🧄
-                            <span class="badge badge--discount pcard__badge">-30%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de alho · 300 g à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bolinha.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Bolinha de borracha à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 12,60</span><span class="price-old">R$ 18,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Pão de alho · 300 g</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 12,60</span><span class="price-old">R$ 18,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Bolinha de borracha</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🌭
-                            <span class="badge badge--discount pcard__badge">-25%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Linguiça toscana · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/coleira.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Coleira ajustável à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 24,00</span><span class="price-old">R$ 32,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Linguiça toscana · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 24,00</span><span class="price-old">R$ 32,00</span><span class="badge badge--discount pcard__off">-25%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Coleira ajustável</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🥩
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fraldinha · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cama-pet.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cama para pets à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 49,60</span><span class="price-old">R$ 62,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Fraldinha · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 49,60</span><span class="price-old">R$ 62,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cama para pets</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🍖
-                            <span class="badge badge--discount pcard__badge">-20%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Costela bovina · kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/arranhador.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Arranhador para gatos à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 35,20</span><span class="price-old">R$ 44,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Costela bovina · kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 35,20</span><span class="price-old">R$ 44,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Arranhador para gatos</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span></p>
                     </article>
                     <article class="pcard">
-                        <div class="pcard__media">🔥
-                            <span class="badge badge--discount pcard__badge">-15%</span>
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Carvão vegetal · 3 kg à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <div class="pcard__media has-img"><img class="media-img" src="img/produtos/comedouro.jpg" alt="" loading="lazy">
+                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Comedouro de cerâmica à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                         </div>
-                        <p class="pcard__price"><span class="price price--sm">R$ 22,10</span><span class="price-old">R$ 26,00</span></p>
-                        <h3 class="pcard__name"><a href="produto.html">Carvão vegetal · 3 kg</a></h3>
+                        <p class="pcard__price"><span class="price price--sm">R$ 22,10</span><span class="price-old">R$ 26,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
+                        <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Comedouro de cerâmica</span></a></h3>
                         <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,3</span></p>
                     </article>
                     <a class="deal-more" href="sede.html">
@@ -856,73 +808,73 @@
 
         <!-- Lojas: linhas sem cartão, como a lista de lojas do iFood. Anel
              vermelho no logo = novidade; fechada aparece apagada, no fim,
-             em vez de sumir. À direita, inscrever-se na sede (navy cheio
-             quando já inscrito). -->
+             em vez de sumir. À direita, inscrever-se na sede: "+" num
+             círculo navy; já inscrito, o "+" vira um visto, no mesmo navy. -->
         <section class="pane" id="pane-lojas" aria-label="Lojas">
             <article class="store-row">
-                <div class="store-row__logo story-ring" aria-hidden="true">🥖</div>
+                <div class="store-row__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
                 <div class="store-row__body">
-                    <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora</a></h3>
-                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span><span>Padaria</span><span>800 m</span></p>
+                    <h3 class="store-row__name"><a href="sede.html">Ponto Digital</a></h3>
+                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span><span>Informática</span><span>800 m</span></p>
                     <p class="store-row__info"><span><strong>Aberta até 20h</strong></span><span>Entrega em rondas</span></p>
                 </div>
                 <div class="store-row__side">
-                    <button class="icon-btn icon-btn--sm is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                    <button class="icon-btn icon-btn--sm store-sub is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
                 </div>
             </article>
             <article class="store-row">
-                <div class="store-row__logo" aria-hidden="true">🛒</div>
+                <div class="store-row__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/casa-firme.jpg" alt="" loading="lazy"></div>
                 <div class="store-row__body">
-                    <h3 class="store-row__name"><a href="sede.html">Empório da Esquina</a></h3>
-                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span><span>Mercado</span><span>1,4 km</span></p>
+                    <h3 class="store-row__name"><a href="sede.html">Casa Firme</a></h3>
+                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span><span>Construção</span><span>1,4 km</span></p>
                     <p class="store-row__info"><span><strong>Aberta até 22h</strong></span><span>Reserva para retirada</span></p>
                 </div>
                 <div class="store-row__side">
-                    <button class="icon-btn icon-btn--sm is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                    <button class="icon-btn icon-btn--sm store-sub is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
                 </div>
             </article>
             <article class="store-row">
-                <div class="store-row__logo story-ring" aria-hidden="true">🥩</div>
+                <div class="store-row__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/pet-itoupava.jpg" alt="" loading="lazy"></div>
                 <div class="store-row__body">
-                    <h3 class="store-row__name"><a href="sede.html">Açougue Boi na Brasa</a></h3>
-                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span><span>Açougue</span><span>2,4 km</span></p>
+                    <h3 class="store-row__name"><a href="sede.html">Pet Itoupava</a></h3>
+                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span><span>Pet shop</span><span>2,4 km</span></p>
                     <p class="store-row__info"><span><strong>Aberta até 19h</strong></span><span>Entrega em rondas</span></p>
                 </div>
                 <div class="store-row__side">
-                    <button class="icon-btn icon-btn--sm is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                    <button class="icon-btn icon-btn--sm store-sub is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
                 </div>
             </article>
             <article class="store-row">
-                <div class="store-row__logo" aria-hidden="true">💊</div>
+                <div class="store-row__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/farmacia-vila-nova.jpg" alt="" loading="lazy"></div>
                 <div class="store-row__body">
                     <h3 class="store-row__name"><a href="sede.html">Farmácia Vila Nova</a></h3>
                     <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,9</span><span>Farmácia</span><span>2,6 km</span></p>
                     <p class="store-row__info"><span><strong>Aberta 24h</strong></span><span>Entrega em rondas</span></p>
                 </div>
                 <div class="store-row__side">
-                    <button class="icon-btn icon-btn--sm is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                    <button class="icon-btn icon-btn--sm store-sub is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
                 </div>
             </article>
             <article class="store-row">
-                <div class="store-row__logo" aria-hidden="true">🥖</div>
+                <div class="store-row__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
                 <div class="store-row__body">
-                    <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Ipiranga</a></h3>
-                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span><span>Padaria</span><span>5,7 km</span></p>
+                    <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Garcia</a></h3>
+                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span><span>Informática</span><span>5,7 km</span></p>
                     <p class="store-row__info"><span><strong>Aberta até 20h</strong></span><span>Reserva para retirada</span></p>
                 </div>
                 <div class="store-row__side">
-                    <button class="icon-btn icon-btn--sm" type="button" aria-pressed="false" aria-label="Inscrever-se nesta loja"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                    <button class="icon-btn icon-btn--sm store-sub" type="button" aria-pressed="false" aria-label="Inscrever-se nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                 </div>
             </article>
             <article class="store-row is-closed">
-                <div class="store-row__logo story-ring" aria-hidden="true">🥬</div>
+                <div class="store-row__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/atelie-garcia.jpg" alt="" loading="lazy"></div>
                 <div class="store-row__body">
-                    <h3 class="store-row__name"><a href="sede.html">Hortifrúti Bom Jardim</a></h3>
-                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span><span>Hortifrúti</span><span>2,1 km</span></p>
+                    <h3 class="store-row__name"><a href="sede.html">Ateliê Garcia</a></h3>
+                    <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,4</span><span>Moda</span><span>2,1 km</span></p>
                     <p class="store-row__info"><span><strong>Fechada</strong></span><span>Abre às 7h</span></p>
                 </div>
                 <div class="store-row__side">
-                    <button class="icon-btn icon-btn--sm is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                    <button class="icon-btn icon-btn--sm store-sub is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
                 </div>
             </article>
         </section>
@@ -969,12 +921,6 @@
                 <span class="sheet__label">Meus pedidos</span>
                 <svg class="sheet__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
             </button>
-            <button class="sheet__row" type="button">
-                <span class="sheet__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg></span>
-                <span class="sheet__label">Favoritos</span>
-                <span class="sheet__value">9 produtos</span>
-                <svg class="sheet__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
 
             <div class="sheet__sep"></div>
 
@@ -983,7 +929,7 @@
             <label class="sheet__row" for="modal-cidade" role="button" tabindex="0">
                 <span class="sheet__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
                 <span class="sheet__label">Cidade</span>
-                <span class="sheet__value">São Paulo, SP</span>
+                <span class="sheet__value">Blumenau, SC</span>
                 <svg class="sheet__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
             </label>
             <button class="sheet__row" type="button">
@@ -1038,7 +984,7 @@
                         <button class="city-opt is-current" type="button" aria-current="true">
                             <span class="city-opt__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
                             <span class="city-opt__body">
-                                <span class="city-opt__name">São Paulo, SP</span>
+                                <span class="city-opt__name">Blumenau, SC</span>
                                 <span class="city-opt__meta">12 lojas abertas agora</span>
                             </span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12.5 5 5L20 6.5"/></svg>
@@ -1048,7 +994,7 @@
                         <button class="city-opt" type="button">
                             <span class="city-opt__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
                             <span class="city-opt__body">
-                                <span class="city-opt__name">Guarulhos, SP</span>
+                                <span class="city-opt__name">Pomerode, SC</span>
                                 <span class="city-opt__meta">5 lojas</span>
                             </span>
                         </button>
@@ -1057,7 +1003,7 @@
                         <button class="city-opt" type="button">
                             <span class="city-opt__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
                             <span class="city-opt__body">
-                                <span class="city-opt__name">Santo André, SP</span>
+                                <span class="city-opt__name">Gaspar, SC</span>
                                 <span class="city-opt__meta">4 lojas</span>
                             </span>
                         </button>
@@ -1066,7 +1012,7 @@
                         <button class="city-opt" type="button">
                             <span class="city-opt__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
                             <span class="city-opt__body">
-                                <span class="city-opt__name">Campinas, SP</span>
+                                <span class="city-opt__name">Brusque, SC</span>
                                 <span class="city-opt__meta">8 lojas</span>
                             </span>
                         </button>
@@ -1245,47 +1191,47 @@
                 </div>
                 <div class="filtro__cats">
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-0">
-                    <label class="chip" for="f-cat-0">Padaria</label>
+                    <label class="chip" for="f-cat-0">Informática</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-1" checked>
-                    <label class="chip" for="f-cat-1">Mercado</label>
+                    <label class="chip" for="f-cat-1">Eletrônicos</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-2">
-                    <label class="chip" for="f-cat-2">Hortifrúti</label>
+                    <label class="chip" for="f-cat-2">Celulares</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-3">
-                    <label class="chip" for="f-cat-3">Açougue</label>
+                    <label class="chip" for="f-cat-3">Construção</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-4">
-                    <label class="chip" for="f-cat-4">Peixaria</label>
+                    <label class="chip" for="f-cat-4">Ferramentas</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-5">
-                    <label class="chip" for="f-cat-5">Farmácia</label>
+                    <label class="chip" for="f-cat-5">Casa e decoração</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-6">
-                    <label class="chip" for="f-cat-6">Bebidas</label>
+                    <label class="chip" for="f-cat-6">Móveis</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-7">
-                    <label class="chip" for="f-cat-7">Adega</label>
+                    <label class="chip" for="f-cat-7">Eletrodomésticos</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-8">
-                    <label class="chip" for="f-cat-8">Pet</label>
+                    <label class="chip" for="f-cat-8">Moda</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-9">
-                    <label class="chip" for="f-cat-9">Doces</label>
+                    <label class="chip" for="f-cat-9">Calçados</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-10">
-                    <label class="chip" for="f-cat-10">Congelados</label>
+                    <label class="chip" for="f-cat-10">Esportes</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-11">
-                    <label class="chip" for="f-cat-11">Limpeza</label>
+                    <label class="chip" for="f-cat-11">Brinquedos</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-12">
                     <label class="chip" for="f-cat-12">Papelaria</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-13">
-                    <label class="chip" for="f-cat-13">Café</label>
+                    <label class="chip" for="f-cat-13">Livros</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-14">
-                    <label class="chip" for="f-cat-14">Lanches</label>
+                    <label class="chip" for="f-cat-14">Farmácia</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-15">
-                    <label class="chip" for="f-cat-15">Massas</label>
+                    <label class="chip" for="f-cat-15">Beleza</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-16">
-                    <label class="chip" for="f-cat-16">Naturais</label>
+                    <label class="chip" for="f-cat-16">Pet</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-17">
-                    <label class="chip" for="f-cat-17">Cosméticos</label>
+                    <label class="chip" for="f-cat-17">Jardim</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-18">
-                    <label class="chip" for="f-cat-18">Bazar</label>
+                    <label class="chip" for="f-cat-18">Automotivo</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-19">
-                    <label class="chip" for="f-cat-19">Floricultura</label>
+                    <label class="chip" for="f-cat-19">Bebês</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-20">
-                    <label class="chip" for="f-cat-20">Eletrônicos</label>
+                    <label class="chip" for="f-cat-20">Presentes</label>
                     <input class="chip-toggle" type="checkbox" name="f-cat" id="f-cat-21">
                     <label class="chip" for="f-cat-21">Livraria</label>
                 </div>
@@ -1461,11 +1407,15 @@
     });
 
     /* Chegando de outra página pela nav: #busca leva até a listagem e
-       #conta já abre o painel da conta. Roda no pageshow porque o
+       #conta já abre o painel da conta e #cidade, o pop-up de cidade. Roda no pageshow porque o
        navegador restaura o estado dos checkboxes da visita anterior
        depois do script — e desmarcaria o painel. */
     window.addEventListener('pageshow', () => {
         if (location.hash === '#busca') focarBusca();
+        if (location.hash === '#cidade') {
+            const popup = document.getElementById('modal-cidade');
+            if (popup) popup.checked = true;
+        }
         if (location.hash === '#conta') {
             const painel = document.getElementById('sheet-conta');
             if (painel) painel.checked = true;

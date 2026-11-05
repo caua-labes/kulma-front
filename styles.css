@@ -49,6 +49,8 @@
        barra e quem reserva espaço no fim da página (.app, .app--cartbar)
        precisam do mesmo número. */
     --tabbar-h:    60px;
+    /* Barra de busca presa no topo, a mesma em todas as telas. */
+    --topbar-h:    60px;
     --cartbar-h:   73px;
 
     /* "Foto" do protótipo: não há arquivos de imagem, então todo lugar
@@ -86,7 +88,7 @@ button { font: inherit; color: inherit; }
 a, button, label { -webkit-tap-highlight-color: transparent; }
 
 /* Âncora não para escondida atrás de barra fixa. Cada página ajusta o
-   valor ao que fica preso no topo dela (ex.: abas do cardápio). */
+   valor ao que fica preso no topo dela (ex.: abas do catálogo). */
 [id] { scroll-margin-top: var(--anchor-offset, 64px); }
 
 /* O cliente é mobile-first (React Native); no desktop a tela vira um
@@ -122,8 +124,24 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     line-height: 1;
 }
 
+/* Foto de verdade (img/) no lugar onde antes havia emoji: preenche a
+   caixa inteira, cortando o excesso, e acompanha o raio dela. Quem tem
+   foto ganha .has-img; os selos e botões vêm depois da <img> no HTML e
+   ficam por cima. */
+.has-img { position: relative; }
+
+.media-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
 /* Faixa cinza entre blocos grandes, como o iFood separa o cabeçalho
-   da loja do cardápio. Use com moderação: o padrão é separar por
+   da loja do catálogo. Use com moderação: o padrão é separar por
    espaço, não por linha. */
 .band {
     height: 8px;
@@ -246,8 +264,8 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     box-shadow: 0 0 0 2px var(--surface);
 }
 
-/* Botão redondo branco sobre imagem: voltar, buscar, compartilhar e
-   favoritar na capa da loja e na foto do item. Sem borda e com sombra
+/* Botão redondo branco sobre imagem: voltar, buscar e compartilhar na
+   capa da loja e na foto do item. Sem borda e com sombra
    curta, porque a foto pode ser clara ou escura. */
 .round-btn {
     position: relative;
@@ -273,16 +291,9 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 /* Versão do cartão de produto: o cartão é pequeno, o botão também. */
 .round-btn--sm { width: 30px; height: 30px; }
 
-/* Favoritado: o coração fica preenchido em navy. No iFood ele é
-   vermelho, mas favoritar é estado ativo, e o ativo do Kulma é navy —
-   o vermelho fica com preço, compra e urgência. O fill no <svg> vence
-   o fill="none" do atributo e desce para o <path>. */
-.round-btn.is-on { color: var(--navy); }
-.round-btn.is-on svg { fill: currentColor; }
-
 /* Fileira de botões redondos presa ao topo de uma capa ou foto: um
    grupo à esquerda (voltar) e outro à direita (buscar, compartilhar,
-   favoritar). A faixa deixa o toque passar; só os botões o recebem.
+   compartilhar). A faixa deixa o toque passar; só os botões o recebem.
    O pai precisa de position: relative. */
 .round-bar {
     position: absolute;
@@ -301,6 +312,134 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 .round-bar > * { pointer-events: auto; }
 
 .round-bar__group { display: flex; gap: 8px; }
+
+
+/* ---------- Barra superior (busca + cidade) ---------- */
+/* REGRA: as barras de cima (.topbar) e de baixo (.tabbar) aparecem em
+   TODAS as telas, com a mesma marcação e o mesmo visual. Telas internas
+   podem acrescentar coisas abaixo delas (capa, galeria, sacola), nunca
+   trocá-las por outra barra. */
+/* Primeira coisa da tela: um campo só, sublinhado em navy, com a lupa
+   à esquerda e o pin com a cidade dentro, à direita (a busca é
+   sempre filtrada por cidade, seção 1).
+   Altura fixa (--topbar-h) porque o JS e as abas sticky contam com ela.
+   Abaixo das camadas do painel de conta (44/45) e dos pop-ups (50/51),
+   que precisam cobri-la. */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: var(--topbar-h);
+    padding: 0 var(--gutter);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: 0 4px 12px -6px rgba(19, 42, 69, .18); /* leve sombra embaixo */
+}
+
+/* Também serve aos pop-ups de cidade e idioma, dentro de .modal__search. */
+.search {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    background: var(--navy-050);
+    color: var(--navy);
+    font-size: 14.5px;
+}
+
+.search:focus-within { box-shadow: inset 0 0 0 1px var(--navy-300); }
+
+.search__icon { flex: none; }
+
+.search__input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+}
+
+.search__input::placeholder { color: var(--muted); opacity: 1; }
+
+/* O "x" nativo do type=search some: o campo é curto e o teclado do
+   aparelho já apaga. */
+.search__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* Na barra do topo o campo fica limpo: sem fundo, só um traço navy
+   embaixo, que engrossa no foco. Pouco respiro nas pontas: os botões
+   têm o próprio alvo de toque. */
+.search--bar {
+    height: 44px;
+    padding: 0 0 0 2px;
+    border-radius: 0;
+    border-bottom: 1.5px solid var(--navy);
+    background: transparent;
+}
+
+.search--bar:focus-within { box-shadow: inset 0 -1px 0 var(--navy); }
+
+.search__sep {
+    flex: none;
+    width: 1px;
+    height: 20px;
+    background: var(--navy-300);
+    opacity: .5;
+}
+
+/* Cidade atual: pin e, ao lado, a cidade em cima e o estado embaixo,
+   mais claro. Sem caixa — o fundo aparece no toque. */
+.search__place {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    max-width: 40%;
+    height: 38px;
+    padding: 0 8px 0 6px;
+    border-radius: 10px;
+    color: var(--navy);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.search__place svg { flex: none; }
+
+.search__place-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.15;
+}
+
+.search__place-text > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search__place-text > span:first-child {
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.search__place-uf {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.search__place:hover { background: var(--navy-050); }
 
 
 /* ---------- Badges ---------- */
@@ -566,7 +705,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 .utabs--fill { gap: 0; }
 .utabs--fill .utabs__item { flex: 1; }
 
-/* Presa no topo ao rolar (cardápio da sede). A página diz a altura do
+/* Presa no topo ao rolar (catálogo da sede). A página diz a altura do
    que já estiver preso acima, se houver. */
 .utabs--sticky {
     position: sticky;
@@ -681,7 +820,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     inset: 0;
 }
 
-/* "★ 4,8 • Padaria • 800 m" e, embaixo, entrega / estado. */
+/* "★ 4,8 • Informática • 800 m" e, embaixo, entrega / estado. */
 .store-row__meta,
 .store-row__info {
     display: flex;
@@ -719,6 +858,15 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 /* Fechada: o iFood apaga a loja em vez de escondê-la. */
 .store-row.is-closed .store-row__logo { filter: grayscale(1); opacity: .55; }
 .store-row.is-closed .store-row__name { color: var(--muted); }
+
+/* Inscrever-se: sempre círculo navy com ícone branco — "+" para
+   inscrever, visto quando já inscrito. */
+.store-sub,
+.store-sub:hover {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: #fff;
+}
 
 
 /* ---------- Grade e cartão de produto ---------- */
@@ -759,25 +907,43 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     line-height: 1;
 }
 
-.pcard__badge {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-}
-
-/* Favoritar · buscar similares, empilhados no canto. Acima do link
-   esticado do nome (z-index), para receberem o toque. */
+/* Buscar similares e adicionar à sacola juntos numa pílula branca no
+   canto de baixo da foto, à direita: a lupa e o "+", os dois no mesmo
+   navy. Acima do link esticado do nome (z-index), para
+   receberem o toque. */
 .pcard__acts {
     position: absolute;
-    top: 6px;
     right: 6px;
+    bottom: 6px;
     z-index: 2;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: var(--shadow-float);
 }
 
-/* O "+" de adicionar à sacola, no canto de baixo da foto. */
+.pcard__act {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: none;
+    color: var(--navy);
+    cursor: pointer;
+    transition: transform .12s ease;
+}
+
+.pcard__act:hover { background: var(--navy-050); }
+.pcard__act:active { transform: scale(.92); }
+.pcard__act:focus-visible { outline: 2px solid var(--navy); outline-offset: 1px; }
+
+/* O "+" sozinho (cartões sem buscar similares), no mesmo canto. */
 .pcard__add {
     position: absolute;
     right: 6px;
@@ -788,21 +954,47 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 .pcard__price {
     display: flex;
     align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0 6px;
+    gap: 5px;
     margin: 0;
     line-height: 1.25;
+    white-space: nowrap;
 }
 
-.pcard__price .price-old { margin-right: 0; }
+/* Valor sem desconto: menor e mais claro, ao lado do preço com
+   desconto, sem riscar. */
+.pcard__price .price-old {
+    margin-right: 0;
+    font-size: 11px;
+    text-decoration: none;
+}
 
+/* Desconto no fim da linha, depois do valor sem desconto. */
+.pcard__off {
+    align-self: center;
+    margin-left: auto;
+    padding: 1px 5px;
+    font-size: 10px;
+}
+
+/* Cartão estreito (celular pequeno, trilho): preço, valor sem desconto e
+   porcentagem encolhem um pouco para continuarem numa linha só. */
+.pcard { container-type: inline-size; }
+
+@container (max-width: 170px) {
+    .pcard__price { gap: 3px; }
+    .pcard__price .price { font-size: 13.5px; letter-spacing: -.02em; }
+    .pcard__price .price-old { font-size: 10px; }
+    .pcard__off { padding: 1px 4px; font-size: 9.5px; }
+}
+
+/* Na listagem, vermelho só quando o produto está com desconto (tem o
+   preço antigo riscado ao lado); sem desconto, o preço fica em navy. */
+.pcard__price .price { color: var(--navy); }
+.pcard__price:has(.price-old) .price { color: var(--red); }
+
+/* Uma linha só: o nome encolhe com "..." quando não cabe. */
 .pcard__name {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    min-height: 2.7em;
     margin: 3px 0 0;
-    overflow: hidden;
     font-family: var(--body);
     font-size: 13.5px;
     font-weight: 500;
@@ -810,7 +1002,20 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     color: var(--navy);
 }
 
-.pcard__name a { color: inherit; }
+.pcard__name a {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    min-width: 0;
+    color: inherit;
+}
+
+.pcard__title {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
 .pcard__name a::after {
     content: "";
@@ -818,13 +1023,28 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     inset: 0;
 }
 
+/* A loja encolhe com "..." e a distância fica
+   sempre inteira, presa logo depois, mais clara. */
 .pcard__store {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
     margin: 3px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.pcard__store-name {
+    min-width: 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: 12px;
-    color: var(--muted);
+}
+
+.pcard__dist {
+    flex: none;
+    color: var(--navy-300);
+    white-space: nowrap;
 }
 
 /* Nota do produto: agrega as avaliações de todas as sedes da empresa
@@ -841,8 +1061,39 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 
 .pcard__rating .rating { font-size: 12px; }
 
-/* No trilho horizontal (Destaques) o cartão tem largura fixa. */
-.hrail > .pcard { width: 132px; }
+/* Só nos produtos com desconto: acesso à oferta (propaganda) de que o
+   produto faz parte. Fica no rodapé do cartão, em vermelho claro, como
+   os selos de urgência. Acima do link esticado do nome, para receber o
+   toque. */
+.pcard__deal {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    background: var(--red-050);
+    color: var(--red-700);
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.pcard__deal svg { flex: none; }
+
+.pcard__deal span {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* No trilho horizontal o cartão tem largura fixa, a que cabe preço,
+   valor sem desconto e porcentagem numa linha só. */
+.hrail > .pcard { width: 156px; }
 
 
 /* ---------- Contador de quantidade ---------- */

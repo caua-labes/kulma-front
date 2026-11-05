@@ -1,0 +1,95 @@
+/* =====================================================================
+   Kulma — Tela da propaganda (propaganda.html)
+   Imagem da campanha em 16:9 no topo, com os botões redondos por cima e
+   desconto/prazo no rodapé dela; título e regras logo abaixo; a sede que
+   anuncia; e os produtos da promoção em cartões brancos sobre cinza.
+   Barras de cima e de baixo iguais às de todas as telas.
+   Carrega depois de styles.css, que traz tokens, reset e os componentes
+   compartilhados usados aqui (.photo, .round-btn, .store-row, .pcard,
+   .badge, .price, .sec-head, .grid).
+   ===================================================================== */
+
+/* O cinza dos produtos desce até a barra inferior: a folga dela sai do
+   .app e vai para o fim da seção. */
+.app--ad { padding-bottom: 0; }
+
+
+/* ---------- Imagem ---------- */
+
+.ad-photo {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    font-size: 84px;
+}
+
+/* Desconto e prazo dentro da imagem, no rodapé, como no carrossel. */
+.ad-photo__tags {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 12px;
+    display: flex;
+    gap: 6px;
+}
+
+.ad-photo__tags .badge--urgent { background: #fff; }
+
+
+/* ---------- Título ---------- */
+
+.ad-head { padding-top: 18px; }
+
+.ad-head__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    color: var(--navy);
+}
+
+.ad-head__sub {
+    margin: 4px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy-300);
+}
+
+.ad-head__desc {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+
+/* ---------- Loja ---------- */
+/* Cartão com borda fina, para separar a sede do texto da campanha. */
+
+.ad-store { padding: 16px var(--gutter) 20px; }
+
+.ad-store .store-row {
+    --gutter: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+
+/* ---------- Produtos ---------- */
+/* Mesmo tratamento da aba Produtos da Início: fundo cinza e cada
+   produto num cartão branco. */
+
+.ad-products {
+    padding: 20px 0 calc(var(--tabbar-h) + 24px + env(safe-area-inset-bottom, 0px));
+    background: var(--surface-alt);
+}
+
+.ad-products .grid { gap: 10px; align-items: stretch; }
+
+.ad-products .pcard {
+    padding: 8px 8px 10px;
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.ad-products .pcard__media { border-color: transparent; }

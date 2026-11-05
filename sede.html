@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kulma — Panificadora Aurora</title>
+<title>Kulma — Ponto Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -11,28 +11,29 @@
 <link rel="stylesheet" href="sede.css">
 </head>
 <body>
-<!-- Página da loja no formato do iFood: abre na capa, sem barra de topo
-     e sem nav inferior; quem leva de volta é o botão redondo da capa e,
-     depois de rolar, a barra compacta. No rodapé fica só a sacola. -->
+<!-- Página da loja no formato do iFood, entre as barras de cima e de
+     baixo de todas as telas. Quem leva de volta é o botão redondo da
+     capa; a sacola fica presa logo acima da barra inferior. -->
 <main class="app app--cartbar">
 
-    <!-- Barra compacta: escondida até a capa sair da tela (o script no
-         fim da página liga .is-compact no .app). Sem JS ela nunca aparece
-         e a página continua inteira. -->
-    <header class="sede-bar">
-        <a class="icon-btn icon-btn--plain" href="index.html" aria-label="Voltar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-        </a>
-        <span class="sede-bar__title">Panificadora Aurora</span>
-        <button class="icon-btn icon-btn--plain" type="button" aria-label="Buscar na loja">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        </button>
-    </header>
+    <!-- Barra superior: a mesma da Início em todas as telas (regra do
+         protótipo). A cidade leva ao pop-up de troca, na Início. -->
+    <div class="topbar">
+        <div class="search search--bar" role="search">
+            <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input class="search__input" type="search" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <span class="search__sep" aria-hidden="true"></span>
+            <a class="search__place" href="index.html#cidade" aria-label="Cidade: Blumenau, SC. Trocar cidade">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
+            </a>
+        </div>
+    </div>
 
     <!-- Capa: navy com o pontilhado de rota da identidade e o emoji como
          marca d'água. Os botões redondos flutuam sobre ela. -->
     <div class="sede-cover">
-        <span class="sede-cover__art" aria-hidden="true">🥖</span>
+        <img class="media-img sede-cover__img" src="img/banners/capa-ponto-digital.jpg" alt="">
         <div class="round-bar">
             <div class="round-bar__group">
                 <a class="round-btn" href="index.html" aria-label="Voltar">
@@ -46,20 +47,17 @@
                 <button class="round-btn" type="button" aria-label="Compartilhar">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
                 </button>
-                <button class="round-btn" type="button" aria-pressed="false" aria-label="Favoritar loja">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg>
-                </button>
             </div>
         </div>
     </div>
 
     <!-- Identidade da sede. O logo morde a base da capa, como no iFood, e
-         leva o anel de novidade: a Aurora tem oferta nova ainda não vista
+         leva o anel de novidade: a Ponto Digital tem oferta nova ainda não vista
          (a mesma marca que ela tem em "Minhas lojas", na home). -->
     <section class="sede-id" aria-labelledby="sede-nome">
-        <div class="sede-id__logo story-ring" role="img" aria-label="Panificadora Aurora, com novidade">🥖</div>
+        <div class="sede-id__logo story-ring has-img" role="img" aria-label="Ponto Digital, com novidade"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt=""></div>
         <div class="sede-id__top">
-            <h1 class="sede-id__name" id="sede-nome">Panificadora Aurora</h1>
+            <h1 class="sede-id__name" id="sede-nome">Ponto Digital</h1>
             <a class="sec-head__link" href="#sobre">
                 Ver mais
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
@@ -68,10 +66,10 @@
         <!-- A nota é da sede, não da empresa (4.7). -->
         <p class="sede-id__meta">
             <span><span class="rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span> (312)</span>
-            <span>Padaria</span>
+            <span>Informática</span>
             <span>800 m</span>
         </p>
-        <p class="sede-id__company"><span>Aurora Alimentos</span><span>Sede Vila Mariana</span></p>
+        <p class="sede-id__company"><span>Ponto Digital Eletrônicos</span><span>Sede Centro</span></p>
     </section>
 
     <!-- Entrega | Retirada, como a alternância do iFood. Dois radios
@@ -102,7 +100,7 @@
             <svg class="sede-mode__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 4.5 4h15L21 9.5"/><path d="M3 9.5a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12.5V20h14v-7.5"/><path d="M10 20v-5h4v5"/></svg>
             <div>
                 <p class="sede-mode__title">Retire no balcão · reserva vale 3 h</p>
-                <p class="sede-mode__sub">Rua Domingos de Morais, 1420 · 800 m</p>
+                <p class="sede-mode__sub">Rua XV de Novembro, 1050 · 800 m</p>
             </div>
         </div>
     </section>
@@ -119,7 +117,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4.5 4L12 5l4.5 7L21 8l-2 11H5Z"/></svg>
         </span>
         <div class="sede-plan__body">
-            <h2 class="sede-plan__title" id="sede-plan-titulo">Assine a Panificadora Aurora</h2>
+            <h2 class="sede-plan__title" id="sede-plan-titulo">Assine a Ponto Digital</h2>
             <p class="sede-plan__text">Ofertas exclusivas · <strong>R$ 9,90/mês</strong></p>
         </div>
         <div class="sede-plan__acts">
@@ -144,30 +142,30 @@
             </div>
         </div>
 
-        <input class="ui-toggle" type="checkbox" id="oferta-cafe" aria-controls="oferta-cafe-lista" aria-label="Ver os produtos da oferta Semana do café da manhã">
-        <input class="ui-toggle" type="checkbox" id="oferta-bolo" aria-controls="oferta-bolo-lista" aria-label="Ver os produtos da oferta Encomendas de bolo">
+        <input class="ui-toggle" type="checkbox" id="oferta-tec" aria-controls="oferta-tec-lista" aria-label="Ver os produtos da oferta Semana da tecnologia">
+        <input class="ui-toggle" type="checkbox" id="oferta-gamer" aria-controls="oferta-gamer-lista" aria-label="Ver os produtos da oferta Linha gamer">
 
         <div class="hrail sede-coupons">
-            <label class="sede-coupon" for="oferta-cafe">
+            <label class="sede-coupon" for="oferta-tec">
                 <span class="sede-coupon__stub">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg>
                     <span class="badge badge--discount">-20%</span>
                 </span>
                 <span class="sede-coupon__body">
-                    <span class="sede-coupon__title">Semana do café da manhã</span>
+                    <span class="sede-coupon__title">Semana da tecnologia</span>
                     <span class="sede-coupon__meta">Até 31/08 · 6 produtos</span>
                     <span class="badge badge--urgent">Termina em 2 dias</span>
                 </span>
                 <svg class="sede-coupon__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </label>
 
-            <label class="sede-coupon" for="oferta-bolo">
+            <label class="sede-coupon" for="oferta-gamer">
                 <span class="sede-coupon__stub">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg>
                     <span class="badge badge--discount">-10%</span>
                 </span>
                 <span class="sede-coupon__body">
-                    <span class="sede-coupon__title">Encomendas de bolo</span>
+                    <span class="sede-coupon__title">Linha gamer</span>
                     <span class="sede-coupon__meta">Sem data de término · 4 produtos</span>
                     <span class="badge badge--soft">Só para assinantes</span>
                 </span>
@@ -176,63 +174,57 @@
         </div>
 
         <!-- Produtos da oferta aberta. A mais barata dá o "a partir de". -->
-        <div class="sede-offer sede-offer--cafe" id="oferta-cafe-lista">
-            <p class="sede-offer__head">20% off em 6 produtos · a partir de <span class="price price--sm">R$ 5,52</span></p>
+        <div class="sede-offer sede-offer--tec" id="oferta-tec-lista">
+            <p class="sede-offer__head">20% off em 6 produtos · a partir de <span class="price price--sm">R$ 5,60</span></p>
             <div class="hrail">
                 <article class="pcard">
-                    <div class="pcard__media">🥐
-                        <span class="badge badge--discount pcard__badge">-20%</span>
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Croissant de manteiga à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span></p>
-                    <h3 class="pcard__name"><a href="produto.html">Croissant de manteiga</a></h3>
+                    <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
                 </article>
                 <article class="pcard">
-                    <div class="pcard__media">🧁
-                        <span class="badge badge--discount pcard__badge">-20%</span>
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Muffin de fubá à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Película de vidro para celular à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span></p>
-                    <h3 class="pcard__name"><a href="produto.html">Muffin de fubá</a></h3>
+                    <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
                 </article>
                 <article class="pcard">
-                    <div class="pcard__media">🧀
-                        <span class="badge badge--discount pcard__badge">-20%</span>
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de queijo à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pen drive à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 7,12</span><span class="price-old">R$ 8,90</span></p>
-                    <h3 class="pcard__name"><a href="produto.html">Pão de queijo · 4 unidades</a></h3>
+                    <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
                 </article>
                 <article class="pcard">
-                    <div class="pcard__media">🧈
-                        <span class="badge badge--discount pcard__badge">-20%</span>
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão na chapa à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mouse pad à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span></p>
-                    <h3 class="pcard__name"><a href="produto.html">Pão na chapa</a></h3>
+                    <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
                 </article>
                 <article class="pcard">
-                    <div class="pcard__media">☕
-                        <span class="badge badge--discount pcard__badge">-20%</span>
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Café coado à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cabo USB-C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span></p>
-                    <h3 class="pcard__name"><a href="produto.html">Café coado · 300 ml</a></h3>
+                    <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
                 </article>
                 <article class="pcard">
-                    <div class="pcard__media">🍊
-                        <span class="badge badge--discount pcard__badge">-20%</span>
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Suco de laranja à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Limpa-telas à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                     </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span></p>
-                    <h3 class="pcard__name"><a href="produto.html">Suco de laranja · 500 ml</a></h3>
+                    <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
                 </article>
             </div>
         </div>
 
         <!-- Oferta exclusiva: quem não assina vê o cupom, mas não os itens
              nem o preço com desconto (só assinantes pagos, 4.8). -->
-        <div class="sede-offer sede-offer--bolo" id="oferta-bolo-lista">
+        <div class="sede-offer sede-offer--gamer" id="oferta-gamer-lista">
             <div class="sede-offer__lock">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
                 <p class="sede-offer__lock-text">Os 4 produtos desta oferta aparecem para quem assina a loja.</p>
@@ -243,16 +235,16 @@
 
     <div class="band" role="presentation"></div>
 
-    <!-- Abas do cardápio: presas no topo ao rolar e rolando de lado. São
+    <!-- Abas do catálogo: presas no topo ao rolar e rolando de lado. São
          âncoras para as seções abaixo; o script marca a aba da seção que
          está passando sob elas. Ficam como filhas diretas do .app para o
          sticky valer na página inteira. -->
-    <nav class="utabs utabs--sticky sede-tabs" aria-label="Cardápio">
+    <nav class="utabs utabs--sticky sede-tabs" aria-label="Catálogo">
         <a class="utabs__item is-active" href="#cat-destaques" aria-current="true">Destaques</a>
-        <a class="utabs__item" href="#cat-paes">Pães</a>
-        <a class="utabs__item" href="#cat-doces">Doces e bolos</a>
-        <a class="utabs__item" href="#cat-salgados">Salgados</a>
-        <a class="utabs__item" href="#cat-bebidas">Bebidas</a>
+        <a class="utabs__item" href="#cat-audio">Áudio e vídeo</a>
+        <a class="utabs__item" href="#cat-celular">Celular</a>
+        <a class="utabs__item" href="#cat-perifericos">Periféricos e energia</a>
+        <a class="utabs__item" href="#cat-cabos">Cabos e organização</a>
     </nav>
 
     <!-- Catálogo desta sede: só o que ela puxou do catálogo da empresa,
@@ -263,201 +255,199 @@
         </div>
         <div class="hrail">
             <article class="pcard">
-                <div class="pcard__media">🥐
-                    <span class="badge badge--discount pcard__badge">-20%</span>
-                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Croissant de manteiga à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                 </div>
-                <p class="pcard__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span></p>
-                <h3 class="pcard__name"><a href="produto.html">Croissant de manteiga</a></h3>
+                <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
             </article>
             <article class="pcard">
-                <div class="pcard__media">🍞
-                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pão de forma integral à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-hdmi.jpg" alt="" loading="lazy">
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cabo HDMI à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                 </div>
                 <p class="pcard__price"><span class="price price--sm">R$ 12,50</span></p>
-                <h3 class="pcard__name"><a href="produto.html">Pão de forma integral</a></h3>
+                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo HDMI</span></a></h3>
             </article>
             <article class="pcard">
-                <div class="pcard__media">🧁
-                    <span class="badge badge--discount pcard__badge">-20%</span>
-                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Muffin de fubá à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Película de vidro para celular à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                 </div>
-                <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span></p>
-                <h3 class="pcard__name"><a href="produto.html">Muffin de fubá</a></h3>
+                <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
             </article>
             <article class="pcard">
-                <div class="pcard__media">🥧
-                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Torta de frango à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/teclado.jpg" alt="" loading="lazy">
+                    <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Teclado sem fio à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
                 </div>
-                <p class="pcard__price"><span class="price price--sm">R$ 14,90</span></p>
-                <h3 class="pcard__name"><a href="produto.html">Torta de frango · fatia</a></h3>
+                <p class="pcard__price"><span class="price price--sm">R$ 129,90</span></p>
+                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Teclado sem fio</span></a></h3>
             </article>
         </div>
     </section>
 
-    <!-- Daqui em diante, o cardápio em linhas, como no iFood: texto à
+    <!-- Daqui em diante, o catálogo em linhas, como no iFood: texto à
          esquerda (nome, descrição de 2 linhas, preço) e foto à direita.
          O nome estica o link por cima da linha inteira. -->
-    <section class="sec" id="cat-paes" aria-labelledby="cat-paes-titulo">
+    <section class="sec" id="cat-audio" aria-labelledby="cat-audio-titulo">
         <div class="sec-head">
-            <h2 class="sec-head__title" id="cat-paes-titulo">Pães</h2>
+            <h2 class="sec-head__title" id="cat-audio-titulo">Áudio e vídeo</h2>
         </div>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Croissant de manteiga</a></h3>
-                <p class="sede-item__desc">Massa folhada com manteiga francesa e fermentação lenta de 18 horas. Assado várias vezes ao dia.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 5,52</span><span class="price-old">R$ 6,90</span><span class="badge badge--discount">-20%</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Fone Bluetooth com cancelamento de ruído</a></h3>
+                <p class="sede-item__desc">Cancelamento ativo de ruído, 30 h de bateria com o estojo e carregamento USB-C. Garantia de 12 meses.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount">-20%</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🥐</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Pão de forma integral</a></h3>
-                <p class="sede-item__desc">Fatiado, 500 g. Farinha integral, aveia e linhaça, sem conservantes.</p>
+                <h3 class="sede-item__name"><a href="produto.html">Cabo HDMI</a></h3>
+                <p class="sede-item__desc">HDMI 2.0 com suporte a 4K a 60 Hz. Conectores banhados a ouro.</p>
                 <p class="sede-item__price"><span class="price price--sm">R$ 12,50</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🍞</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/cabo-hdmi.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Pão francês · 6 unidades</a></h3>
-                <p class="sede-item__desc">Casca crocante e miolo macio. Sai do forno de hora em hora, das 7h às 19h.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 5,40</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Caixa de som portátil</a></h3>
+                <p class="sede-item__desc">Bluetooth 5.3, resistente a respingos (IPX5) e 12 h de bateria.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 149,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🥖</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/caixa-som.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Baguete tradicional</a></h3>
-                <p class="sede-item__desc">Fermentação natural de 24 horas, casca fina e estalando. Cerca de 250 g.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 9,90</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Microfone de lapela</a></h3>
+                <p class="sede-item__desc">Com fio de 1,5 m e entrada P2. Para chamadas, aulas e gravações.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 59,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🥖</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/microfone.jpg" alt="" loading="lazy"></div>
         </article>
     </section>
 
-    <section class="sec" id="cat-doces" aria-labelledby="cat-doces-titulo">
+    <section class="sec" id="cat-celular" aria-labelledby="cat-celular-titulo">
         <div class="sec-head">
-            <h2 class="sec-head__title" id="cat-doces-titulo">Doces e bolos</h2>
+            <h2 class="sec-head__title" id="cat-celular-titulo">Celular</h2>
         </div>
 
         <!-- Estoque baixo vira urgência, em vermelho claro. -->
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Muffin de fubá</a></h3>
-                <p class="sede-item__desc">Fubá cremoso com pedaços de goiabada. Massa úmida, assado no dia.</p>
+                <h3 class="sede-item__name"><a href="produto.html">Película de vidro para celular</a></h3>
+                <p class="sede-item__desc">Vidro temperado 9H, bordas arredondadas. Informe o modelo do aparelho no pedido.</p>
                 <p class="sede-item__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount">-20%</span></p>
                 <p class="sede-item__flag"><span class="badge badge--urgent">Últimas 3 unidades</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🧁</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Bolo de cenoura · fatia</a></h3>
-                <p class="sede-item__desc">Cobertura de brigadeiro feita na casa. Fatia de cerca de 120 g.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 9,50</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Capinha de silicone</a></h3>
+                <p class="sede-item__desc">Silicone com interior de microfibra e proteção nas bordas da câmera.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 29,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🍰</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/capinha.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Sonho de creme</a></h3>
-                <p class="sede-item__desc">Massa frita na hora, recheio de creme de baunilha e açúcar de confeiteiro.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 7,90</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Suporte de celular para mesa</a></h3>
+                <p class="sede-item__desc">Alumínio dobrável, altura e ângulo ajustáveis.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 24,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🍩</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/suporte-celular.jpg" alt="" loading="lazy"></div>
         </article>
 
         <!-- Item da oferta exclusiva: quem não assina vê o preço cheio e,
              ao lado, o que pagaria assinando. -->
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Encomenda de bolo · 1 kg</a></h3>
-                <p class="sede-item__desc">Escolha massa, recheio e cobertura. Fica pronto em 24 h para retirar ou receber na ronda.</p>
+                <h3 class="sede-item__name"><a href="produto.html">Carregador turbo 20 W</a></h3>
+                <p class="sede-item__desc">Carregamento rápido USB-C (PD 3.0). Bivolt.</p>
                 <p class="sede-item__price"><span class="price price--sm">R$ 69,00</span><span class="badge badge--soft">Assinante: R$ 62,10</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🎂</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/carregador.jpg" alt="" loading="lazy"></div>
         </article>
     </section>
 
-    <section class="sec" id="cat-salgados" aria-labelledby="cat-salgados-titulo">
+    <section class="sec" id="cat-perifericos" aria-labelledby="cat-perifericos-titulo">
         <div class="sec-head">
-            <h2 class="sec-head__title" id="cat-salgados-titulo">Salgados</h2>
+            <h2 class="sec-head__title" id="cat-perifericos-titulo">Periféricos e energia</h2>
         </div>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Torta de frango · fatia</a></h3>
-                <p class="sede-item__desc">Frango desfiado com requeijão e milho, em massa podre amanteigada.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 14,90</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Teclado sem fio</a></h3>
+                <p class="sede-item__desc">Layout ABNT2, receptor USB e pilhas inclusas. Silencioso.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 129,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🥧</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/teclado.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Pão de queijo · 4 unidades</a></h3>
-                <p class="sede-item__desc">Polvilho azedo e queijo meia-cura de Minas. Sai quentinho do forno.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 7,12</span><span class="price-old">R$ 8,90</span><span class="badge badge--discount">-20%</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Pen drive</a></h3>
+                <p class="sede-item__desc">USB 3.2, 64 GB, com tampa e argola para chaveiro.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount">-20%</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🧀</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Pão na chapa</a></h3>
-                <p class="sede-item__desc">Pão francês na chapa com manteiga, feito na hora do pedido.</p>
+                <h3 class="sede-item__name"><a href="produto.html">Mouse pad</a></h3>
+                <p class="sede-item__desc">Base de borracha antiderrapante e bordas costuradas. 25 × 21 cm.</p>
                 <p class="sede-item__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount">-20%</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🧈</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Coxinha de frango</a></h3>
-                <p class="sede-item__desc">Massa de batata e recheio de frango com requeijão cremoso. Cerca de 110 g.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 7,50</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Mouse sem fio</a></h3>
+                <p class="sede-item__desc">1600 DPI, receptor USB nano e clique silencioso.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 69,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🍗</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/mouse.jpg" alt="" loading="lazy"></div>
         </article>
     </section>
 
-    <section class="sec" id="cat-bebidas" aria-labelledby="cat-bebidas-titulo">
+    <section class="sec" id="cat-cabos" aria-labelledby="cat-cabos-titulo">
         <div class="sec-head">
-            <h2 class="sec-head__title" id="cat-bebidas-titulo">Bebidas</h2>
+            <h2 class="sec-head__title" id="cat-cabos-titulo">Cabos e organização</h2>
         </div>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Café coado · 300 ml</a></h3>
-                <p class="sede-item__desc">Grãos do sul de Minas, torra média, coado na hora.</p>
+                <h3 class="sede-item__name"><a href="produto.html">Cabo USB-C</a></h3>
+                <p class="sede-item__desc">Carrega e transfere dados. Revestimento de nylon trançado.</p>
                 <p class="sede-item__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount">-20%</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">☕</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Suco de laranja · 500 ml</a></h3>
-                <p class="sede-item__desc">Laranja-pera espremida na hora, sem açúcar e sem gelo.</p>
+                <h3 class="sede-item__name"><a href="produto.html">Limpa-telas</a></h3>
+                <p class="sede-item__desc">Spray para telas de celular, notebook e TV, com flanela de microfibra.</p>
                 <p class="sede-item__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount">-20%</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🍊</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy"></div>
         </article>
 
         <article class="sede-item">
             <div class="sede-item__body">
-                <h3 class="sede-item__name"><a href="produto.html">Cappuccino · 240 ml</a></h3>
-                <p class="sede-item__desc">Espresso, leite vaporizado, cacau e uma pitada de canela.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 9,50</span></p>
+                <h3 class="sede-item__name"><a href="produto.html">Organizador de cabos</a></h3>
+                <p class="sede-item__desc">Kit com 10 velcros reutilizáveis e 2 canaletas adesivas.</p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 19,90</span></p>
             </div>
-            <div class="sede-item__photo" aria-hidden="true">🥛</div>
+            <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/organizador-cabos.jpg" alt="" loading="lazy"></div>
         </article>
     </section>
 
@@ -471,22 +461,22 @@
         <div class="sec-head">
             <div>
                 <h2 class="sec-head__title" id="sobre-titulo">Sobre a loja</h2>
-                <p class="sec-head__sub">Aurora Alimentos Ltda. · Sede Vila Mariana</p>
+                <p class="sec-head__sub">Ponto Digital Eletrônicos Ltda. · Sede Centro</p>
             </div>
         </div>
 
         <div class="gutter">
             <p class="sede-about">
-                Padaria de bairro desde 1998. Produção própria de pães e confeitaria,
-                com entrega em rondas ao longo do dia e retirada no balcão.
+                Loja de informática e eletrônicos desde 2009. Acessórios, periféricos e
+                áudio, com entrega em rondas ao longo do dia e retirada no balcão.
             </p>
 
             <!-- A sede tem um único endereço (1:1 com address). -->
             <div class="sede-addr">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
                 <div>
-                    <p class="sede-addr__line">Rua Domingos de Morais, 1420 — Vila Mariana</p>
-                    <p class="sede-addr__sub">São Paulo, SP · 800 m de você</p>
+                    <p class="sede-addr__line">Rua XV de Novembro, 1050 — Centro</p>
+                    <p class="sede-addr__sub">Blumenau, SC · 800 m de você</p>
                 </div>
             </div>
 
@@ -508,54 +498,59 @@
         <a href="produto.html">produto</a>
     </p>
 
-    <!-- Sacola presa no rodapé, sem a nav inferior: na loja o iFood troca
-         a navegação pela sacola. 3 itens: 1 croissant e 2 pães de forma. -->
+    <!-- Sacola presa logo acima da barra inferior. 3 itens: 1 fone
+         e 2 cabos HDMI. -->
     <div class="cartbar">
-        <a class="cartbar__btn" href="#" aria-label="Ver sacola, 3 itens, R$ 30,52">
+        <a class="cartbar__btn" href="#" aria-label="Ver sacola, 3 itens, R$ 344,20">
             <span class="cartbar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbar__count">3</span></span>
             <span class="cartbar__label">Ver sacola</span>
-            <span class="cartbar__total">R$ 30,52</span>
+            <span class="cartbar__total">R$ 344,20</span>
         </a>
     </div>
+
+    <!-- Barra inferior: a mesma da Início em todas as telas (regra do
+         protótipo). -->
+    <nav class="tabbar" aria-label="Navegação principal">
+        <a class="tab is-active" href="index.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
+            Início
+        </a>
+        <a class="tab" href="index.html#busca">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
+            Explorar
+        </a>
+        <a class="tab" href="#" aria-label="Sacola, 3 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">3</span></span>
+            Sacola
+        </a>
+        <a class="tab" href="#">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
+            Pedidos
+        </a>
+        <a class="tab" href="index.html#conta" aria-label="Conta, 2 notificações não lidas">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span class="tab__dot"></span></span>
+            Conta
+        </a>
+    </nav>
 
 </main>
 
 <script>
-/* Dois comportamentos que dependem da posição de rolagem em tempo real,
-   coisa que checkbox e radio não resolvem:
-   1. Barra compacta. Quando a capa (com os botões redondos) sai por
-      baixo da barra, liga .is-compact no .app: a barra desce e as abas
-      do cardápio passam a prender logo abaixo dela (--utabs-top, no
-      sede.css). Um IntersectionObserver na capa decide, sem ouvir scroll.
-   2. Aba ativa do cardápio. A pergunta é "qual seção já passou da linha
-      das abas", e não "qual está visível": com seções curtas, duas
-      aparecem ao mesmo tempo e o IntersectionObserver não diz qual
-      vale. Por isso aqui é scroll + requestAnimationFrame, uma leitura
-      por quadro.
-   Sem JS a página continua inteira: a barra não aparece, as abas
-   prendem em top: 0 e "Destaques" fica marcada. */
+/* Aba ativa do catálogo: depende da posição de rolagem em tempo real,
+   coisa que checkbox e radio não resolvem. A pergunta é "qual seção já
+   passou da linha das abas", e não "qual está visível": com seções
+   curtas, duas aparecem ao mesmo tempo e o IntersectionObserver não diz
+   qual vale. Por isso aqui é scroll + requestAnimationFrame, uma leitura
+   por quadro. Sem JS a página continua inteira e "Destaques" fica
+   marcada. */
 (function () {
-    var app = document.querySelector('.app');
-    var cover = document.querySelector('.sede-cover');
     var tabs = document.querySelector('.sede-tabs');
-    if (!app || !cover || !tabs) return;
+    if (!tabs) return;
 
-    // Os dois números moram no CSS. A capa "sai" quando a base dela passa
-    // por baixo da barra (--sede-bar-h), não do topo da tela. A linha que
-    // decide a aba ativa é a mesma folga das âncoras (--anchor-offset),
-    // e não a base das abas medida ao vivo: as abas descem 56 px com
-    // transição quando a barra aparece, e nesse meio-tempo não há evento
-    // de scroll para corrigir a leitura (ao tocar "Pães" lá do topo, a
-    // aba ficava em "Destaques").
+    // A linha que decide a aba ativa é a folga das âncoras
+    // (--anchor-offset, no sede.css): barra superior + abas presas.
     var rootStyle = getComputedStyle(document.documentElement);
-    var barH = parseFloat(rootStyle.getPropertyValue('--sede-bar-h')) || 56;
-    var line = (parseFloat(rootStyle.getPropertyValue('--anchor-offset')) || 104) + 8;
-
-    if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (entries) {
-            app.classList.toggle('is-compact', !entries[0].isIntersecting);
-        }, { rootMargin: '-' + barH + 'px 0px 0px 0px' }).observe(cover);
-    }
+    var line = (parseFloat(rootStyle.getPropertyValue('--anchor-offset')) || 108) + 8;
 
     var links = Array.prototype.slice.call(tabs.querySelectorAll('.utabs__item'));
     var sections = links.map(function (a) {

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kulma — Semana da tecnologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="propaganda.css">
+</head>
+<body>
+<!-- Tela de uma propaganda (4.8), aberta pelo banner do carrossel ou pelo
+     título da oferta na aba Ofertas. Como a página de item: abre direto na
+     imagem, entre as barras de cima e de baixo de todas as telas; quem
+     volta é o botão redondo. Embaixo da imagem, o título da campanha, a sede que anuncia
+     e os produtos em promoção. -->
+<main class="app app--ad">
+
+    <!-- Barra superior: a mesma da Início em todas as telas (regra do
+         protótipo). A cidade leva ao pop-up de troca, na Início. -->
+    <div class="topbar">
+        <div class="search search--bar" role="search">
+            <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input class="search__input" type="search" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <span class="search__sep" aria-hidden="true"></span>
+            <a class="search__place" href="index.html#cidade" aria-label="Cidade: Blumenau, SC. Trocar cidade">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Imagem da propaganda em 16:9, sangrando nas bordas. Desconto e
+         prazo dentro dela, no rodapé, como no carrossel. -->
+    <div class="ad-photo photo has-img">
+        <img class="media-img" src="img/banners/tecnologia.jpg" alt="Fones, celular e acessórios">
+        <div class="round-bar">
+            <div class="round-bar__group">
+                <a class="round-btn" href="index.html" aria-label="Voltar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+            </div>
+            <div class="round-bar__group">
+                <button class="round-btn" type="button" aria-label="Compartilhar">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+                </button>
+            </div>
+        </div>
+        <span class="ad-photo__tags">
+            <span class="badge badge--discount">-20%</span>
+            <span class="badge badge--urgent">Termina em 2 dias</span>
+        </span>
+    </div>
+
+    <!-- Título da campanha e as regras dela. O desconto incide sobre o
+         preço da sede (regra 4.1) e vale só nos itens listados abaixo. -->
+    <div class="ad-head gutter">
+        <h1 class="ad-head__title">Semana da tecnologia</h1>
+        <p class="ad-head__sub">20% de desconto em 6 itens · até 31/08</p>
+        <p class="ad-head__desc">
+            Fones, cabos, carregadores e acessórios com desconto na Ponto Digital.
+            Vale para entrega na próxima ronda e para reserva com retirada na loja.
+        </p>
+    </div>
+
+    <!-- A sede que anuncia. A linha leva ao perfil dela; à direita, a
+         inscrição (visto em navy: o cliente já é inscrito). -->
+    <section class="ad-store" aria-label="Loja da promoção">
+        <article class="store-row">
+            <div class="store-row__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
+            <div class="store-row__body">
+                <h2 class="store-row__name"><a href="sede.html">Ponto Digital</a></h2>
+                <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span><span>Informática</span><span>Centro</span><span>800 m</span></p>
+                <p class="store-row__info"><span><strong>Aberta até 20h</strong></span><span>Entrega em rondas</span></p>
+            </div>
+            <div class="store-row__side">
+                <button class="icon-btn icon-btn--sm store-sub is-on" type="button" aria-pressed="true" aria-label="Inscrito nesta loja"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></button>
+            </div>
+        </article>
+    </section>
+
+    <!-- Produtos da promoção: fundo cinza e cada produto num cartão
+         branco, como a aba Produtos da Início. -->
+    <section class="ad-products" aria-labelledby="ad-produtos-titulo">
+        <div class="sec-head">
+            <div>
+                <h2 class="sec-head__title" id="ad-produtos-titulo">Produtos da promoção</h2>
+                <p class="sec-head__sub">6 itens com 20% de desconto</p>
+            </div>
+        </div>
+        <div class="gutter">
+            <div class="grid">
+                <article class="pcard">
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
+                    <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Película de vidro para celular à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
+                    <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pen drive à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
+                    <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span></p>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mouse pad à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
+                    <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cabo USB-C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
+                    <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
+                </article>
+                <article class="pcard">
+                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
+                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Limpa-telas à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+                    <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
+                    <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra inferior: a mesma da Início em todas as telas (regra do
+         protótipo). -->
+    <nav class="tabbar" aria-label="Navegação principal">
+        <a class="tab is-active" href="index.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
+            Início
+        </a>
+        <a class="tab" href="index.html#busca">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
+            Explorar
+        </a>
+        <a class="tab" href="#" aria-label="Sacola, 3 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">3</span></span>
+            Sacola
+        </a>
+        <a class="tab" href="#">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
+            Pedidos
+        </a>
+        <a class="tab" href="index.html#conta" aria-label="Conta, 2 notificações não lidas">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span class="tab__dot"></span></span>
+            Conta
+        </a>
+    </nav>
+
+</main>
+</body>
+</html>

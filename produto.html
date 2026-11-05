@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kulma — Croissant de manteiga</title>
+<title>Kulma — Fone Bluetooth com cancelamento de ruído</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -11,160 +11,251 @@
 <link rel="stylesheet" href="produto.css">
 </head>
 <body>
-<!-- Página de item no formato do iFood: abre direto na foto, sem barra
-     de título e sem nav inferior; quem fecha a tela é o botão redondo,
-     e quem conclui é a barra fixa de adicionar. -->
-<main class="app app--action">
+<!-- Página de item no formato do Mercado Livre, entre as barras de cima
+     e de baixo de todas as telas: título e nota antes da galeria, galeria com várias fotos e contador,
+     preço, entrega/retirada, estoque e os dois botões de compra no fluxo
+     da página (sem barra fixa). Depois, quem vende, o que saber,
+     características, descrição, opiniões e as outras sedes. -->
+<main class="app">
 
-    <!-- Foto sangrando nas bordas, com os botões redondos por cima. -->
-    <div class="item-photo photo">
-        <span role="img" aria-label="Croissant de manteiga">🥐</span>
-        <div class="round-bar">
-            <div class="round-bar__group">
-                <a class="round-btn" href="sede.html" aria-label="Voltar para a loja">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-                </a>
+    <!-- Barra superior: a mesma da Início em todas as telas (regra do
+         protótipo). A cidade leva ao pop-up de troca, na Início. -->
+    <div class="topbar">
+        <div class="search search--bar" role="search">
+            <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input class="search__input" type="search" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <span class="search__sep" aria-hidden="true"></span>
+            <a class="search__place" href="index.html#cidade" aria-label="Cidade: Blumenau, SC. Trocar cidade">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="item-intro gutter">
+        <a class="item-intro__brand" href="sede.html">Ver mais produtos da Ponto Digital</a>
+        <!-- Condição e vendidos à esquerda, como no Mercado Livre; a nota é
+             do produto e soma as avaliações de todas as sedes da empresa
+             que o vendem (regra 4.7). -->
+        <div class="item-intro__meta">
+            <span>Novo <span class="item-intro__sep">|</span> +500 vendidos</span>
+            <a class="item-intro__rating" href="#opinioes" aria-label="Nota 4,7 de 5, 128 avaliações">
+                4,7
+                <span class="stars" aria-hidden="true">★★★★★</span>
+                (128)
+            </a>
+        </div>
+        <h1 class="item-intro__name">Fone Bluetooth com cancelamento de ruído</h1>
+    </div>
+
+    <!-- Galeria: várias fotos, arrastando para o lado (scroll-snap). O
+         contador "1/5" e as bolinhas acompanham a foto visível (JS, no fim).
+         Voltar em cima à esquerda, o contador embaixo à esquerda e
+         compartilhar embaixo à direita. -->
+    <section class="gallery" aria-label="Fotos do produto">
+        <div class="gallery__track" id="galeria" tabindex="0">
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 1 de 5: fone de frente"><img class="media-img" src="img/produtos/fone.jpg" alt=""></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 2 de 5: fone sobre a mesa"><img class="media-img" src="img/produtos/fone-2.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 3 de 5: fone com teclado e mouse"><img class="media-img" src="img/produtos/fone-3.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 4 de 5: fone sobre um livro"><img class="media-img" src="img/produtos/fone-4.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 5 de 5: detalhe do acabamento"><img class="media-img" src="img/produtos/fone-5.jpg" alt="" loading="lazy"></div>
+        </div>
+        <a class="round-btn gallery__back" href="sede.html" aria-label="Voltar para a loja">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <span class="gallery__count" aria-hidden="true"><span id="galeria-atual">1</span>/5</span>
+        <button class="gallery__fab gallery__fab--share" type="button" aria-label="Compartilhar">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
+        </button>
+        <div class="gallery__dots" id="galeria-dots" aria-hidden="true">
+            <span class="is-active"></span><span></span><span></span><span></span><span></span>
+        </div>
+    </section>
+
+    <!-- Variação, como "Voltagem" no Mercado Livre: serve a qualquer
+         produto — o nome do atributo (Cor, Tamanho, Voltagem…) e as
+         opções vêm do catálogo, e só aparece quando o produto tem
+         variação. Botões contornados, o escolhido em navy; o valor
+         escolhido aparece ao lado do nome (JS, no fim). -->
+    <fieldset class="item-var gutter" data-variacao>
+        <legend class="item-var__label">Cor: <strong data-variacao-valor>Preto</strong></legend>
+        <div class="item-var__opts">
+            <input class="ui-toggle" type="radio" name="variacao" id="var-preto" value="Preto" checked>
+            <label class="item-var__opt" for="var-preto">Preto</label>
+            <input class="ui-toggle" type="radio" name="variacao" id="var-branco" value="Branco">
+            <label class="item-var__opt" for="var-branco">Branco</label>
+            <input class="ui-toggle" type="radio" name="variacao" id="var-azul" value="Azul">
+            <label class="item-var__opt" for="var-azul">Azul</label>
+        </div>
+    </fieldset>
+
+    <!-- Preço efetivo = preço da sede, quando existe; senão, o do catálogo
+         (regra 4.1). Com desconto, o preço vai em vermelho e o antigo
+         riscado em cima; a campanha que dá o desconto leva à propaganda. -->
+    <div class="item-price gutter">
+        <span class="price-old">R$ 399,00</span>
+        <p class="item-price__now">
+            <span class="price price--lg">R$ 319,20</span>
+            <span class="badge badge--discount">20% OFF</span>
+        </p>
+        <a class="item-price__promo" href="propaganda.html">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>
+            Semana da tecnologia · até 31/08
+        </a>
+    </div>
+
+    <!-- Como receber, em linhas de texto como o frete do Mercado Livre.
+         O cliente não escolhe o TIPO de entrega (sede ou autônomo): isso
+         o sistema resolve. A retirada só aparece porque esta sede permite
+         reserva e tem estoque acima do mínimo (regra 4.5). -->
+    <div class="item-ship gutter">
+        <div class="item-ship__row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+            <div>
+                <p class="item-ship__title">Chega <strong>hoje às 14h</strong>, na próxima ronda</p>
+                <a class="item-ship__link" href="#">Mais detalhes e formas de entrega</a>
             </div>
-            <div class="round-bar__group">
-                <button class="round-btn" type="button" aria-label="Compartilhar">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
-                </button>
-                <button class="round-btn is-on" type="button" aria-pressed="true" aria-label="Remover dos favoritos">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 4.2 13a4.8 4.8 0 0 1 6.8-6.8l1 1 1-1A4.8 4.8 0 0 1 19.8 13Z"/></svg>
-                </button>
+        </div>
+        <div class="item-ship__row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16l-1-5H5ZM5 10v10h14V10M10 20v-5h4v5"/></svg>
+            <div>
+                <p class="item-ship__title">Reserve e retire na loja <strong>sem custo</strong></p>
+                <p class="item-ship__sub">Fica separado por 3 h · Centro, a 800 m</p>
+                <a class="item-ship__link" href="#">Ver no mapa</a>
             </div>
         </div>
     </div>
 
-    <div class="item-head gutter">
-        <h1 class="item-head__name">Croissant de manteiga</h1>
-        <p class="item-head__by">Padaria · Aurora Alimentos</p>
-        <p class="item-head__desc">
-            Massa folhada laminada com manteiga francesa, fermentação lenta de 18 horas
-            e assado várias vezes ao dia. Vendido em unidade, embalado no balcão.
-        </p>
+    <!-- Estoque desta sede, e a quantidade não passa dele. -->
+    <div class="item-buy gutter">
+        <p class="item-buy__stock">Estoque disponível</p>
+        <div class="item-qty">
+            <span class="item-qty__label">Quantidade: <strong id="qtd-valor" aria-live="polite">1</strong> <span class="item-qty__max">(12 disponíveis)</span></span>
+            <div class="stepper" role="group" aria-label="Quantidade">
+                <button class="stepper__btn" id="qtd-menos" type="button" aria-label="Diminuir" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+                <button class="stepper__btn" id="qtd-mais" type="button" aria-label="Aumentar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+        </div>
 
-        <!-- Preço efetivo = preço da sede, quando existe; senão, o do catálogo
-             (regra 4.1). O desconto vem da propaganda e incide sobre a oferta
-             da sede, por isso as outras sedes, lá embaixo, mostram outro preço. -->
-        <p class="item-head__price">
-            <span class="price price--lg">R$ 5,52</span>
-            <span class="price-old">R$ 6,90</span>
-            <span class="badge badge--discount">-20%</span>
-        </p>
-        <p class="item-head__promo">
-            <span class="badge badge--urgent">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>
-                Semana do café da manhã · até 31/08
-            </span>
-        </p>
+        <!-- Presente: valor fixo por item, igual para todos os produtos da
+             empresa, e marcado item a item (regra 4.3). -->
+        <input class="ui-toggle" type="checkbox" id="add-presente">
+        <label class="item-gift" for="add-presente">
+            <span class="item-gift__mark" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+            Embalar para presente <span class="item-gift__extra">+ R$ 4,00 por item</span>
+        </label>
 
-        <!-- A nota é do produto e soma as avaliações de todas as sedes da
-             empresa que o vendem (regra 4.7); o estoque é só desta sede. -->
-        <p class="item-meta">
-            <span class="rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span>
-            <span>128 avaliações em todas as lojas da empresa</span>
-        </p>
-        <p class="item-meta">
-            <span>80 g</span>
-            <span>Validade 2 dias</span>
-            <span>12 em estoque</span>
-        </p>
+        <!-- Comprar agora é o único vermelho cheio da tela; adicionar à
+             sacola fica em navy claro. Reservar não é compra: vai para
+             "Minhas reservas", não para a sacola. -->
+        <div class="item-buy__actions">
+            <button class="btn btn--primary btn--block" type="button">Comprar agora · <span id="total">R$ 319,20</span></button>
+            <button class="btn btn--quiet btn--block" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><path d="M12 12v5M9.5 14.5h5"/></svg>
+                Adicionar à sacola
+            </button>
+            <button class="btn btn--outline btn--block" type="button">Reservar para retirada</button>
+        </div>
     </div>
 
-    <!-- Quem vende: a oferta pertence a uma sede específica. A linha
-         inteira leva ao perfil dela; a seta é só sinal visual. -->
-    <section class="item-seller" aria-label="Vendido por">
-        <article class="store-row">
-            <div class="store-row__logo">🥖</div>
-            <div class="store-row__body">
-                <p class="item-seller__label">Vendido por</p>
-                <p class="store-row__name"><a href="sede.html">Panificadora Aurora · Vila Mariana</a></p>
-                <p class="store-row__meta"><span class="rating"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span><span>Padaria</span><span>800 m</span></p>
-                <p class="store-row__info"><span><strong>Aberta até 20h</strong></span><span>Entrega em rondas</span></p>
+    <!-- Quem vende: a oferta pertence a uma sede específica. -->
+    <section class="item-seller gutter" aria-label="Vendido por">
+        <a class="item-seller__who" href="sede.html">
+            <span class="item-seller__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
+            <span>
+                <span class="item-seller__name">Vendido por <strong>Ponto Digital</strong></span>
+                <span class="item-seller__sales">Centro · +2 mil vendas</span>
+            </span>
+        </a>
+        <ul class="item-trust">
+            <li>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="m16 11 2 2 4-4"/></svg>
+                <span><strong>Você é inscrito.</strong> Recebe as ofertas desta loja primeiro.</span>
+            </li>
+            <li>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span><strong>Compra garantida.</strong> Se não chegar como pediu, você recebe o dinheiro de volta.</span>
+            </li>
+        </ul>
+        <div class="item-share">
+            <button type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg> Compartilhar</button>
+        </div>
+    </section>
+
+    <section class="item-block gutter">
+        <h2 class="item-block__title">O que você precisa saber sobre este produto</h2>
+        <ul class="item-facts">
+            <li>Cancelamento ativo de ruído com modo ambiente.</li>
+            <li>Até 30 h de bateria com o estojo; 10 min de carga dão 2 h de uso.</li>
+            <li>Bluetooth 5.3, conecta em dois aparelhos ao mesmo tempo.</li>
+            <li>Microfone para chamadas e controles por toque.</li>
+            <li>Garantia de 12 meses e devolução em até 7 dias.</li>
+        </ul>
+    </section>
+
+    <section class="item-block gutter">
+        <h2 class="item-block__title">Características</h2>
+        <!-- Principais: as linhas que todo produto tem, de qualquer
+             categoria. Embaixo, as que dependem da categoria (aqui,
+             áudio); outro produto troca só essa segunda tabela. -->
+        <h3 class="item-specs__group">Principais</h3>
+        <table class="item-specs">
+            <tr><th scope="row">Marca</th><td>Sonora</td></tr>
+            <tr><th scope="row">Modelo</th><td>Pulse ANC 300</td></tr>
+            <tr><th scope="row">Categoria</th><td>Eletrônicos › Áudio › Fones</td></tr>
+            <tr><th scope="row">Condição</th><td>Novo</td></tr>
+            <tr><th scope="row">Cor</th><td>Preto, branco ou azul</td></tr>
+            <tr><th scope="row">Garantia</th><td>12 meses, pela loja</td></tr>
+            <tr><th scope="row">Dimensões da embalagem</th><td>18 × 16 × 6 cm</td></tr>
+            <tr><th scope="row">Peso</th><td>250 g</td></tr>
+            <tr><th scope="row">Código de barras</th><td>7891234567895</td></tr>
+        </table>
+        <h3 class="item-specs__group">Da categoria</h3>
+        <table class="item-specs">
+            <tr><th scope="row">Conexão</th><td>Bluetooth 5.3</td></tr>
+            <tr><th scope="row">Autonomia</th><td>30 h com o estojo</td></tr>
+            <tr><th scope="row">Cancelamento de ruído</th><td>Ativo (ANC)</td></tr>
+            <tr><th scope="row">Itens inclusos</th><td>Fone, estojo e cabo USB-C</td></tr>
+        </table>
+    </section>
+
+    <section class="item-block gutter">
+        <h2 class="item-block__title">Descrição</h2>
+        <p class="item-desc">
+            Fone sem fio com cancelamento ativo de ruído, para ônibus, trabalho e academia.
+            O estojo recarrega o fone e garante até 30 horas de uso. Acompanha cabo USB-C.
+            Produto novo, lacrado na caixa, com nota fiscal e garantia de 12 meses pela loja.
+        </p>
+    </section>
+
+    <!-- Opiniões: nota geral e distribuição por estrelas, como no
+         Mercado Livre. -->
+    <section class="item-block gutter" id="opinioes">
+        <h2 class="item-block__title">Opiniões do produto</h2>
+        <div class="reviews">
+            <div class="reviews__score">
+                <p class="reviews__num">4,7</p>
+                <p class="stars" aria-hidden="true">★★★★★</p>
+                <p class="reviews__total">128 avaliações</p>
             </div>
-            <div class="store-row__side" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </div>
+            <ul class="reviews__bars" aria-label="Distribuição das notas">
+                <li><span class="reviews__bar"><span style="width:78%"></span></span><span>5 ★</span></li>
+                <li><span class="reviews__bar"><span style="width:14%"></span></span><span>4 ★</span></li>
+                <li><span class="reviews__bar"><span style="width:5%"></span></span><span>3 ★</span></li>
+                <li><span class="reviews__bar"><span style="width:2%"></span></span><span>2 ★</span></li>
+                <li><span class="reviews__bar"><span style="width:1%"></span></span><span>1 ★</span></li>
+            </ul>
+        </div>
+        <article class="review">
+            <p class="stars" aria-label="5 de 5">★★★★★</p>
+            <p class="review__text">O cancelamento de ruído funciona bem no ônibus. Chegou na ronda das 14h, bem embalado.</p>
+            <p class="review__when">Há 2 semanas</p>
         </article>
     </section>
 
-    <!-- Grupos de opção do iFood. "Como receber" é obrigatório e já vem
-         com a entrega marcada; trocar para retirada muda o botão da barra
-         para "Reservar" (a reserva não vai para a sacola). Ela só aparece
-         porque esta sede permite reserva e tem estoque acima do mínimo
-         (regra 4.5). O cliente não escolhe o TIPO de entrega (sede ou
-         autônomo): isso o sistema resolve. -->
-    <section class="optg" role="radiogroup" aria-labelledby="optg-receber">
-        <header class="optg__head">
-            <div>
-                <h2 class="optg__title" id="optg-receber">Como receber</h2>
-                <p class="optg__sub">Escolha 1</p>
-            </div>
-            <span class="badge badge--navy">Obrigatório</span>
-        </header>
-
-        <input class="ui-toggle" type="radio" name="receber" id="receber-entrega" value="entrega" checked>
-        <label class="opt" for="receber-entrega">
-            <span class="opt__body">
-                <span class="opt__name">Entrega na próxima ronda</span>
-                <span class="opt__desc">Hoje às 14h</span>
-            </span>
-            <span class="opt__mark" aria-hidden="true"></span>
-        </label>
-
-        <input class="ui-toggle" type="radio" name="receber" id="receber-retirada" value="retirada">
-        <label class="opt" for="receber-retirada">
-            <span class="opt__body">
-                <span class="opt__name">Reservar para retirada</span>
-                <span class="opt__desc">Fica separado por 3 h na loja · sem custo</span>
-            </span>
-            <span class="opt__mark" aria-hidden="true"></span>
-        </label>
-    </section>
-
-    <!-- Presente: valor fixo por item, igual para todos os produtos da
-         empresa, e marcado item a item (regra 4.3). -->
-    <section class="optg" role="group" aria-labelledby="optg-adicionais">
-        <header class="optg__head">
-            <div>
-                <h2 class="optg__title" id="optg-adicionais">Adicionais</h2>
-                <p class="optg__sub">Escolha até 1</p>
-            </div>
-            <span class="badge badge--soft">Opcional</span>
-        </header>
-
-        <input class="ui-toggle" type="checkbox" id="add-presente" value="presente">
-        <label class="opt" for="add-presente">
-            <span class="opt__body">
-                <span class="opt__name">Embalar para presente</span>
-                <span class="opt__desc">Valor fixo por item</span>
-                <span class="opt__extra">+ R$ 4,00</span>
-            </span>
-            <span class="opt__mark opt__mark--check" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
-            </span>
-        </label>
-    </section>
-
-    <div class="item-note">
-        <div class="item-note__head">
-            <label class="item-note__title" for="obs">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12Z"/></svg>
-                Alguma observação?
-            </label>
-            <span class="item-note__count" id="obs-count">0/140</span>
-        </div>
-        <textarea class="item-note__field" id="obs" name="obs" rows="3" maxlength="140" aria-describedby="obs-count" placeholder="Ex.: cortar ao meio, embalar separado etc."></textarea>
-    </div>
-
-    <div class="route" role="presentation">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-    </div>
-
     <!-- O produto é da empresa: outras sedes vendem o mesmo item, cada uma
-         com seu preço e estoque (branch_product). Em linhas, como a lista
-         de lojas do iFood; a sede sem estoque aparece apagada, não some. -->
+         com seu preço e estoque (branch_product). A sede sem estoque
+         aparece apagada, não some. -->
     <section class="sec item-stores">
         <div class="sec-head">
             <div>
@@ -174,113 +265,120 @@
         </div>
 
         <article class="store-row">
-            <div class="store-row__logo">🥖</div>
+            <div class="store-row__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
             <div class="store-row__body">
-                <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Moema</a></h3>
+                <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Itoupava</a></h3>
                 <p class="store-row__meta"><span>3,2 km</span><span>25 em estoque</span></p>
             </div>
-            <div class="store-row__side"><span class="price price--sm">R$ 6,90</span></div>
+            <div class="store-row__side"><span class="price price--sm">R$ 399,00</span></div>
         </article>
 
         <article class="store-row">
-            <div class="store-row__logo">🥖</div>
+            <div class="store-row__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
             <div class="store-row__body">
-                <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Ipiranga</a></h3>
+                <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Garcia</a></h3>
                 <p class="store-row__meta"><span>5,7 km</span><span>8 em estoque</span></p>
             </div>
-            <div class="store-row__side"><span class="price price--sm">R$ 6,50</span></div>
+            <div class="store-row__side"><span class="price price--sm">R$ 389,90</span></div>
         </article>
 
         <article class="store-row is-closed">
-            <div class="store-row__logo">🥖</div>
+            <div class="store-row__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
             <div class="store-row__body">
-                <h3 class="store-row__name"><a href="sede.html">Panificadora Aurora · Santo Amaro</a></h3>
+                <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Velha</a></h3>
                 <p class="store-row__meta"><span>9,1 km</span><span>Sem estoque hoje</span></p>
             </div>
-            <div class="store-row__side"><span class="price price--sm">R$ 6,90</span></div>
+            <div class="store-row__side"><span class="price price--sm">R$ 399,00</span></div>
         </article>
     </section>
 
-    <p class="proto-foot">
-        Protótipo estático · Tela de produto —
-        <a href="index.html">menu principal</a> ·
-        <a href="sede.html">perfil de sede</a>
-    </p>
-
-    <!-- Barra de adicionar do iFood: quantidade à esquerda e o botão
-         principal (o único vermelho cheio da tela) com o total à direita. -->
-    <div class="addbar">
-        <div class="stepper" role="group" aria-label="Quantidade">
-            <button class="stepper__btn" id="qtd-menos" type="button" aria-label="Diminuir" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
-            <span class="stepper__value" id="qtd-valor" aria-live="polite">1</span>
-            <button class="stepper__btn" id="qtd-mais" type="button" aria-label="Aumentar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-        </div>
-        <button class="btn btn--primary addbar__btn" type="button">
-            <span id="addbar-acao">Adicionar</span>
-            <span class="addbar__total" id="addbar-total">R$ 5,52</span>
-        </button>
-    </div>
+    <!-- Barra inferior: a mesma da Início em todas as telas (regra do
+         protótipo). -->
+    <nav class="tabbar" aria-label="Navegação principal">
+        <a class="tab is-active" href="index.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
+            Início
+        </a>
+        <a class="tab" href="index.html#busca">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
+            Explorar
+        </a>
+        <a class="tab" href="#" aria-label="Sacola, 3 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">3</span></span>
+            Sacola
+        </a>
+        <a class="tab" href="#">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
+            Pedidos
+        </a>
+        <a class="tab" href="index.html#conta" aria-label="Conta, 2 notificações não lidas">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span class="tab__dot"></span></span>
+            Conta
+        </a>
+    </nav>
 
 </main>
 
 <script>
-/* Barra de adicionar e observação. É o que radio/checkbox não resolvem
-   sozinhos: contar (quantidade, caracteres) e refazer a conta do total.
-   O resto da página segue o padrão do protótipo, sem JS.
-   A conta é em centavos para não arrastar erro de ponto flutuante
-   (12 × 9,52 em reais dá 114,23999…). */
+/* O que radio/checkbox não resolvem sozinhos: acompanhar a foto visível
+   da galeria (contador e bolinhas), mostrar a variação escolhida e contar
+   a quantidade, refazendo o total do botão. A conta é em centavos para não arrastar erro de ponto
+   flutuante (12 × 9,52 em reais dá 114,23999…). */
 (function () {
-    var UNIDADE  = 552;   // R$ 5,52: preço efetivo desta sede, já com o desconto
+    var $ = function (id) { return document.getElementById(id); };
+
+    // Galeria: cada foto tem a largura do trilho, então a atual sai da
+    // posição de rolagem. Recalcula a cada rolagem e ao carregar.
+    var trilho = $('galeria');
+    var atual  = $('galeria-atual');
+    var dots   = $('galeria-dots').children;
+    function marcarFoto() {
+        var i = Math.round(trilho.scrollLeft / (trilho.clientWidth || 1));
+        i = Math.max(0, Math.min(dots.length - 1, i));
+        atual.textContent = i + 1;
+        for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('is-active', d === i);
+    }
+    trilho.addEventListener('scroll', marcarFoto, { passive: true });
+    marcarFoto();
+
+    // Quantidade e total.
+    var UNIDADE  = 31920; // R$ 319,20: preço efetivo desta sede, já com o desconto
     var PRESENTE = 400;   // R$ 4,00: fixo por item, definido pela empresa (4.3)
     var MINIMO   = 1;
     var MAXIMO   = 12;    // estoque desta sede: não deixa pedir o que não existe
 
     var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-    var $ = function (id) { return document.getElementById(id); };
-
-    var menos    = $('qtd-menos');
-    var mais     = $('qtd-mais');
-    var valor    = $('qtd-valor');
-    var presente = $('add-presente');
-    var retirada = $('receber-retirada');
-    var acao     = $('addbar-acao');
-    var total    = $('addbar-total');
-    var obs      = $('obs');
-    var obsConta = $('obs-count');
-
+    var menos = $('qtd-menos'), mais = $('qtd-mais'), valor = $('qtd-valor');
+    var presente = $('add-presente'), total = $('total');
     var qtd = MINIMO;
 
     function atualizar() {
         valor.textContent = qtd;
-        // No mínimo e no máximo o botão apaga, como no iFood.
         menos.disabled = qtd <= MINIMO;
         mais.disabled  = qtd >= MAXIMO;
         // O presente é por item, então entra multiplicado pela quantidade.
         total.textContent = brl.format(qtd * (UNIDADE + (presente.checked ? PRESENTE : 0)) / 100);
-        // Reservar não é compra: vai para "Minhas reservas", não para a sacola.
-        acao.textContent = retirada.checked ? 'Reservar' : 'Adicionar';
     }
 
-    function contarObs() {
-        obsConta.textContent = obs.value.length + '/' + obs.maxLength;
-    }
-
-    menos.addEventListener('click', function () {
-        if (qtd > MINIMO) { qtd--; atualizar(); }
-    });
-    mais.addEventListener('click', function () {
-        if (qtd < MAXIMO) { qtd++; atualizar(); }
-    });
+    menos.addEventListener('click', function () { if (qtd > MINIMO) { qtd--; atualizar(); } });
+    mais.addEventListener('click',  function () { if (qtd < MAXIMO) { qtd++; atualizar(); } });
     presente.addEventListener('change', atualizar);
-    document.querySelectorAll('input[name="receber"]').forEach(function (radio) {
-        radio.addEventListener('change', atualizar);
-    });
-    obs.addEventListener('input', contarObs);
 
-    // Ao voltar para a página, o navegador pode restaurar o presente, a
-    // retirada e o texto já marcados: a primeira conta lê o estado real.
+    // Variação: o valor escolhido aparece ao lado do nome do atributo.
+    var variacao = document.querySelector('[data-variacao]');
+    if (variacao) {
+        var valorVar = variacao.querySelector('[data-variacao-valor]');
+        var marcarVar = function () {
+            var marcado = variacao.querySelector('input:checked');
+            if (marcado) valorVar.textContent = marcado.value;
+        };
+        variacao.addEventListener('change', marcarVar);
+        marcarVar();
+    }
+
+    // Ao voltar para a página, o navegador pode restaurar o presente e a
+    // variação já marcados: a primeira conta lê o estado real.
     atualizar();
-    contarObs();
 })();
 </script>
 </body>

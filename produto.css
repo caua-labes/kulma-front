@@ -1,343 +1,522 @@
 /* =====================================================================
    Kulma — Tela do item (produto.html)
-   Formato da página de item do iFood: foto grande no topo com botões
-   redondos flutuando, nome, descrição e preço, a sede que vende, grupos
-   de opção com cabeçalho cinza e rádio/checkbox à direita, "Alguma
-   observação?" e a barra fixa com contador e "Adicionar". Sem barra de
-   título e sem nav inferior, como lá.
+   Formato da página de produto do Mercado Livre, entre a barra superior
+   e a inferior de todas as telas (styles.css): título e nota antes da galeria de várias fotos (contador "1/5" e
+   bolinhas), preço com o antigo riscado em cima, entrega e retirada em
+   linhas de texto, estoque e quantidade, os botões de compra no fluxo da
+   página, quem vende, o que saber, características, descrição, opiniões
+   e as outras sedes.
    Carrega depois de styles.css, que traz tokens, reset e os componentes
-   compartilhados usados aqui (.photo, .round-btn, .store-row, .stepper,
-   .btn, .badge, .price, .sec-head). Este arquivo só posiciona e acrescenta
+   compartilhados usados aqui (.photo, .store-row, .stepper, .btn, .badge,
+   .price, .sec-head, .story-ring). Este arquivo só posiciona e acrescenta
    o que é exclusivo do item.
    ===================================================================== */
 
-:root {
-    /* Altura real da barra de adicionar: 1px de linha + 12px + botão de
-       48px + 12px. O fim da página reserva esse mesmo espaço. */
-    --addbar-h: 73px;
-}
+/* ---------- Título ---------- */
 
-/* Sem nav inferior: o respiro do fim é o da barra de adicionar. */
-.app--action {
-    padding-bottom: calc(var(--addbar-h) + 24px + env(safe-area-inset-bottom, 0px));
-}
+.item-intro { padding-top: 14px; }
 
-
-/* ---------- Foto ---------- */
-/* Sangra até as bordas, sem raio nem borda, como a foto do item no
-   iFood. Os botões redondos (.round-bar) ficam por cima dela. */
-
-.item-photo {
-    position: relative;
-    height: 260px;
-    font-size: 96px;
-}
-
-
-/* ---------- Cabeçalho do item ---------- */
-
-.item-head { padding-top: 18px; }
-
-.item-head__name {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 21px;
-    font-weight: 700;
-    letter-spacing: -.02em;
-    line-height: 1.25;
+.item-intro__brand {
+    display: inline-block;
+    margin-bottom: 12px;
     color: var(--navy);
-}
-
-/* Categoria e empresa dona do catálogo, discretas sob o nome. */
-.item-head__by {
-    margin: 3px 0 0;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--navy-300);
-}
-
-/* Descrição inteira, sem cortar: na página do item ela é o conteúdo. */
-.item-head__desc {
-    margin: 10px 0 0;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--muted);
-}
-
-.item-head__price {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 4px 8px;
-    margin: 14px 0 0;
-    line-height: 1.1;
-}
-
-/* O espaço vem do gap, como em .pcard__price. */
-.item-head__price .price-old { margin-right: 0; font-size: 14px; }
-
-.item-head__promo { margin: 10px 0 0; }
-
-/* Linhas de apoio: nota e "80 g • validade • estoque". Cada trecho num
-   <span>, que ganha o "•" sozinho, no mesmo desenho de .store-row__meta. */
-.item-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 10px 0 0;
-    font-size: 12.5px;
-    line-height: 1.4;
-    color: var(--muted);
-}
-
-.item-meta + .item-meta { margin-top: 4px; }
-
-.item-meta > * + *::before {
-    content: "•";
-    margin: 0 6px;
-    font-size: .8em;
-    color: var(--navy-300);
-}
-
-
-/* ---------- Vendido por ---------- */
-/* Uma .store-row entre duas linhas finas. Toda a linha é o link do nome
-   (esticado); a seta à direita não recebe toque, senão o __side, que
-   fica acima do link, engoliria o clique naquele canto. */
-
-.item-seller {
-    margin-top: 20px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-}
-
-.item-seller__label {
-    margin: 0 0 1px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: .06em;
-    line-height: 1.3;
-    text-transform: uppercase;
-    color: var(--navy-300);
+    text-decoration: underline;
+    text-decoration-color: var(--navy-300);
+    text-underline-offset: 3px;
 }
 
-.item-seller .store-row__side,
-.item-stores .store-row__side { pointer-events: none; }
-
-.item-seller .store-row__side { color: var(--navy-300); }
-
-
-/* ---------- Grupos de opção ---------- */
-/* Cabeçalho cinza-claro de ponta a ponta com título, regra ("Escolha 1")
-   e selo à direita; embaixo, linhas com o indicador à direita. Dois
-   grupos seguidos não ganham espaço entre si: o próprio cabeçalho cinza
-   separa, como no iFood. O input escondido (.ui-toggle) vem logo antes
-   do <label class="opt">, no mesmo pai, e comanda o indicador. */
-
-.optg { margin-top: 24px; }
-.optg + .optg { margin-top: 0; }
-
-.optg__head {
+.item-intro__meta {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 12px var(--gutter);
-    background: var(--navy-050);
-}
-
-.optg__title {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -.01em;
-    line-height: 1.25;
-    color: var(--navy);
-}
-
-.optg__sub {
-    margin: 1px 0 0;
-    font-size: 12.5px;
+    font-size: 12px;
     color: var(--muted);
 }
 
-/* O selo suave ("Opcional") tem o mesmo navy-050 do cabeçalho e
-   sumiria nele; aqui ele vira pílula branca. */
-.optg__head .badge--soft { background: var(--surface); }
+.item-intro__sep { margin: 0 4px; color: var(--line); }
 
-/* A divisória fica dentro das margens porque a margem lateral é do
-   próprio label, não de um wrapper. */
-.opt {
-    display: flex;
+.item-intro__rating {
+    display: inline-flex;
     align-items: center;
-    gap: 14px;
-    margin: 0 var(--gutter);
-    padding: 14px 0;
+    gap: 4px;
+    color: var(--muted);
+}
+
+.stars {
+    margin: 0;
+    color: var(--navy);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.item-intro__name {
+    margin: 6px 0 0;
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    line-height: 1.3;
+    color: var(--navy);
+}
+
+
+/* ---------- Galeria ---------- */
+/* Fotos lado a lado, uma por vez, arrastando (scroll-snap). Voltar em
+   cima à esquerda, contador embaixo à esquerda e compartilhar embaixo
+   à direita. */
+
+.gallery {
+    position: relative;
+    margin-top: 14px;
+}
+
+.gallery__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    outline: none;
+}
+
+.gallery__track::-webkit-scrollbar { display: none; }
+
+.gallery__slide {
+    flex: 0 0 100%;
+    aspect-ratio: 1 / 1;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    font-size: 120px;
+}
+
+.gallery__back {
+    position: absolute;
+    top: 12px;
+    left: var(--gutter);
+}
+
+.gallery__count {
+    position: absolute;
+    bottom: 40px;
+    left: var(--gutter);
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--navy-050);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.gallery__fab {
+    position: absolute;
+    right: var(--gutter);
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: var(--shadow-float);
+    color: var(--navy);
     cursor: pointer;
 }
 
-.opt ~ .opt { border-top: 1px solid var(--line); }
+.gallery__fab--share { bottom: 40px; }
 
-.opt__body {
-    flex: 1;
+.gallery__dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 0 2px;
+}
+
+.gallery__dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line);
+    transition: background .2s, transform .2s;
+}
+
+.gallery__dots span.is-active { background: var(--navy); transform: scale(1.25); }
+
+
+/* ---------- Variação ---------- */
+
+.item-var {
+    margin: 16px 0 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
     min-width: 0;
-    display: grid;
-    gap: 2px;
 }
 
-.opt__name {
-    font-size: 14.5px;
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--navy);
-}
-
-.opt__desc {
-    font-size: 12.5px;
-    line-height: 1.4;
+.item-var__label {
+    padding: 0;
+    margin-bottom: 8px;
+    font-size: 13.5px;
     color: var(--muted);
 }
 
-/* Preço do adicional em navy, não vermelho: é acréscimo, não oferta. */
-.opt__extra {
-    margin-top: 2px;
+.item-var__label strong { color: var(--navy); }
+
+.item-var__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.item-var__opt {
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--navy);
     font-size: 13.5px;
+    cursor: pointer;
+}
+
+.ui-toggle:checked + .item-var__opt {
+    border-color: var(--navy);
+    box-shadow: inset 0 0 0 1px var(--navy);
+    font-weight: 600;
+}
+
+.ui-toggle:focus-visible + .item-var__opt { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+
+/* ---------- Preço ---------- */
+
+.item-price { padding-top: 18px; }
+
+.item-price .price-old { font-size: 13px; }
+
+.item-price__now {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 2px 0 0;
+    line-height: 1.1;
+}
+
+.item-price__promo {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    color: var(--red-700);
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+
+/* ---------- Entrega e retirada ---------- */
+
+.item-ship {
+    display: grid;
+    gap: 14px;
+    padding-top: 18px;
+}
+
+.item-ship__row {
+    display: flex;
+    gap: 10px;
+    color: var(--navy);
+}
+
+.item-ship__row > svg { flex: none; margin-top: 1px; }
+
+.item-ship__title { margin: 0; font-size: 14px; line-height: 1.35; }
+
+.item-ship__sub { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+
+.item-ship__link {
+    display: inline-block;
+    margin-top: 3px;
+    color: var(--navy);
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--navy-300);
+    text-underline-offset: 3px;
+}
+
+
+/* ---------- Estoque, quantidade e compra ---------- */
+
+.item-buy { padding-top: 22px; }
+
+.item-buy__stock {
+    margin: 0 0 8px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--navy);
 }
 
-/* Indicador: círculo (rádio) ou quadrado arredondado (checkbox).
-   Ligado fica navy — onde o iFood pinta de vermelho. */
-.opt__mark {
+.item-qty {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 8px 8px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+    color: var(--navy);
+    font-size: 14px;
+}
+
+.item-qty__max { color: var(--muted); font-size: 12.5px; }
+
+.item-gift {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin-top: 12px;
+    color: var(--navy);
+    font-size: 13.5px;
+    cursor: pointer;
+}
+
+.item-gift__extra { color: var(--muted); font-size: 12.5px; }
+
+.item-gift__mark {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--navy-300);
+    border-radius: 6px;
+    color: #fff;
+}
+
+.item-gift__mark svg { opacity: 0; }
+
+.ui-toggle:checked + .item-gift .item-gift__mark { border-color: var(--navy); background: var(--navy); }
+.ui-toggle:checked + .item-gift .item-gift__mark svg { opacity: 1; }
+.ui-toggle:focus-visible + .item-gift { outline: 2px solid var(--navy); outline-offset: 4px; border-radius: 4px; }
+
+.item-buy__actions {
+    display: grid;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+
+/* ---------- Quem vende ---------- */
+
+.item-seller {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+
+.item-seller__who {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--navy);
+}
+
+.item-seller__logo {
     flex: none;
     display: grid;
     place-items: center;
-    width: 22px;
-    height: 22px;
-    border: 2px solid var(--navy-300);
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background: var(--surface);
-    color: #fff;
-    transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+    background: var(--photo);
+    font-size: 22px;
 }
 
-.opt__mark--check { border-radius: 6px; }
+.item-seller__name  { display: block; font-size: 14px; }
+.item-seller__sales { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); }
 
-.opt__mark svg { opacity: 0; }
-
-.ui-toggle:checked + .opt .opt__mark { border-color: var(--navy); }
-
-/* Rádio marcado: um vão branco dentro do anel deixa o miolo navy. */
-.ui-toggle:checked + .opt .opt__mark:not(.opt__mark--check) {
-    background: var(--navy);
-    box-shadow: inset 0 0 0 4px var(--surface);
-}
-
-.ui-toggle:checked + .opt .opt__mark--check { background: var(--navy); }
-.ui-toggle:checked + .opt .opt__mark--check svg { opacity: 1; }
-
-.ui-toggle:focus-visible + .opt {
-    outline: 2px solid var(--navy);
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-
-/* ---------- Alguma observação? ---------- */
-
-.item-note { padding: 24px var(--gutter) 0; }
-
-.item-note__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.item-trust {
+    display: grid;
     gap: 12px;
-    margin-bottom: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
 }
 
-.item-note__title {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--navy);
-}
-
-.item-note__count {
-    font-size: 12.5px;
-    font-variant-numeric: tabular-nums;
+.item-trust li {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.4;
     color: var(--muted);
 }
 
-/* 16px, e não 14px: abaixo disso o Safari do iPhone dá zoom na página
-   ao focar o campo, e o protótipo é aberto no celular. */
-.item-note__field {
-    display: block;
-    width: 100%;
-    min-height: 88px;
-    margin: 0;
-    padding: 12px 14px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
+.item-trust svg { flex: none; color: var(--navy); }
+.item-trust strong { color: var(--navy); font-weight: 600; }
+
+.item-share {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.item-share button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 0;
+    border: none;
+    background: none;
     color: var(--navy);
     font: inherit;
-    font-size: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* ---------- Blocos de informação ---------- */
+/* Separados por linha fina, como as seções do Mercado Livre. */
+
+.item-block {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+}
+
+.item-block__title {
+    margin: 0 0 12px;
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+.item-facts {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
     line-height: 1.45;
-    resize: none;
+    color: var(--navy);
 }
 
-.item-note__field::placeholder { color: var(--navy-300); }
+.item-facts li::marker { color: var(--navy-300); }
 
-.item-note__field:focus {
-    outline: none;
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px var(--navy-050);
+/* Subtítulo de cada tabela: "Principais" vale para qualquer produto;
+   "Da categoria" muda conforme o tipo de item. */
+.item-specs__group {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
 }
+
+.item-specs + .item-specs__group { margin-top: 18px; }
+
+/* Tabela listrada, como "Características gerais". */
+.item-specs {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+}
+
+.item-specs tr:nth-child(odd) { background: var(--surface-alt); }
+
+.item-specs th,
+.item-specs td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.item-specs th { width: 45%; font-weight: 600; color: var(--navy); }
+.item-specs td { color: var(--muted); }
+
+.item-desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted);
+}
+
+
+/* ---------- Opiniões ---------- */
+
+.reviews {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.reviews__score { flex: none; text-align: center; }
+
+.reviews__num {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy);
+}
+
+.reviews__score .stars { margin-top: 4px; font-size: 13px; }
+
+.reviews__total { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+
+.reviews__bars {
+    flex: 1;
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.reviews__bars li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--muted);
+}
+
+.reviews__bar {
+    flex: 1;
+    height: 5px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--navy-050);
+}
+
+.reviews__bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--navy);
+}
+
+.review {
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.review__text { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: var(--navy); }
+.review__when { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
 
 
 /* ---------- Também nestas lojas ---------- */
-/* .store-row com o preço daquela sede no __side. A sede sem estoque
-   usa .is-closed (apagada, como loja fechada no iFood) e o preço dela
-   perde o vermelho: não é uma oferta que dá para pegar. */
 
-.item-stores .store-row.is-closed .price { color: var(--navy-300); }
-
-
-/* ---------- Barra de adicionar ---------- */
-/* Fixa no rodapé, no padrão de 430px. Contador à esquerda e o botão
-   principal ocupando o resto, com a ação à esquerda e o total à
-   direita ("Adicionar  R$ 5,52"), como no iFood. Fica no z-index da
-   nav (30), que não existe nesta página. */
-
-.addbar {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 430px;
-    z-index: 30;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+.item-stores {
+    margin-top: 24px;
     border-top: 1px solid var(--line);
-    background: var(--surface);
 }
 
-.addbar .stepper { flex: none; }
+.item-stores .store-row__side { pointer-events: none; }
 
-.addbar__btn {
-    flex: 1;
-    min-width: 0;
-    justify-content: space-between;
-}
-
-.addbar__total {
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
+/* Sem desconto nestas sedes: preço em navy, como na listagem. */
+.item-stores .price { color: var(--navy); }
+.item-stores .store-row.is-closed .price { color: var(--navy-300); }
