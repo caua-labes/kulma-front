@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* =====================================================================
    Kulma — App do cliente · protótipo HTML/CSS
    Identidade (seção 7 do documento de projeto):
@@ -467,13 +468,18 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 
 /* ---------- Preço ---------- */
 
+/* REGRA DE PREÇO (vale em todo o app): sem desconto, o preço é navy;
+   com desconto — quando o mesmo bloco traz o valor antigo (.price-old)
+   — o preço vai em vermelho. */
 .price {
     font-family: var(--display);
     font-size: 17px;
     font-weight: 700;
-    color: var(--red);
+    color: var(--navy);
     letter-spacing: -.01em;
 }
+
+:has(> .price-old) .price { color: var(--red); }
 
 .price--lg { font-size: 27px; }
 .price--sm { font-size: 15px; }
@@ -859,11 +865,17 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 .store-row.is-closed .store-row__logo { filter: grayscale(1); opacity: .55; }
 .store-row.is-closed .store-row__name { color: var(--muted); }
 
-/* Inscrever-se: sempre círculo navy com ícone branco — "+" para
-   inscrever, visto quando já inscrito. */
+/* Inscrever-se: "+" num círculo de contorno navy, fundo transparente;
+   já inscrito (.is-on), o círculo fica navy cheio com o visto branco. */
 .store-sub,
 .store-sub:hover {
     border-color: var(--navy);
+    background: transparent;
+    color: var(--navy);
+}
+
+.store-sub.is-on,
+.store-sub.is-on:hover {
     background: var(--navy);
     color: #fff;
 }
@@ -987,10 +999,6 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     .pcard__off { padding: 1px 4px; font-size: 9.5px; }
 }
 
-/* Na listagem, vermelho só quando o produto está com desconto (tem o
-   preço antigo riscado ao lado); sem desconto, o preço fica em navy. */
-.pcard__price .price { color: var(--navy); }
-.pcard__price:has(.price-old) .price { color: var(--red); }
 
 /* Uma linha só: o nome encolhe com "..." quando não cabe. */
 .pcard__name {
@@ -1358,3 +1366,400 @@ label.tab { cursor: pointer; }
 }
 
 .proto-foot a { color: var(--navy); font-weight: 600; }
+
+
+/* ---------- Pop-ups (cidade, idioma, filtros) ---------- */
+/* Bottom sheets do iFood: sobem da base, com alça, cantos de cima
+   arredondados e no máximo 85% da tela, rolando por dentro. Abrem e
+   fecham sem JavaScript: um checkbox escondido (.ui-toggle) antes de
+   cada um comanda o estado. Aparecem por display, então a subida é
+   uma animação (transição não roda saindo de display: none). */
+
+.modal { display: none; }
+
+/* Escopado por modificador: sem isso, qualquer .modal irmã abriria
+   junto com a de cidade. */
+#modal-cidade:checked ~ .modal--cidade { display: block; }
+#modal-idioma:checked ~ .modal--idioma { display: block; }
+#modal-filtro:checked ~ .modal--filtro { display: block; }
+#modal-add:checked    ~ .modal--add    { display: block; }
+
+/* Acima do painel de conta (45): a cidade pode ser aberta de dentro
+   dele, e precisa ficar por cima, não atrás. */
+.modal__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(19, 42, 69, .45);
+    cursor: pointer;
+    animation: modal-fade .2s ease;
+}
+
+/* Alça de arrasto, cabeçalho (título à esquerda, X à direita) e
+   título: o mesmo desenho do painel da conta da Início. */
+.modal__box::before {
+    content: "";
+    flex: none;
+    display: block;
+    width: 36px;
+    height: 4px;
+    margin: 0 auto 6px;
+    border-radius: 999px;
+    background: var(--line);
+}
+
+.modal__head {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 8px 6px var(--gutter);
+}
+
+.modal__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--navy);
+}
+
+.modal__box {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    z-index: 51;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 430px;
+    max-height: 85vh;
+    padding-top: 8px;
+    border-radius: 20px 20px 0 0;
+    background: var(--surface);
+    box-shadow: 0 -10px 34px rgba(19, 42, 69, .22);
+    transform: translateX(-50%);
+    animation: modal-up .26s ease;
+}
+
+@keyframes modal-up {
+    from { transform: translate(-50%, 100%); }
+    to   { transform: translate(-50%, 0); }
+}
+
+@keyframes modal-fade {
+    from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal__box,
+    .modal__backdrop { animation: none; }
+    .sheet,
+    .sheet__scrim { transition: none; }
+}
+
+/* Busca da lista (cidade, idioma): fica parada enquanto a lista rola. */
+.modal__search {
+    flex: none;
+    padding: 4px var(--gutter) 6px;
+}
+
+.modal__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--gutter) 16px;
+}
+
+/* Sem rodapé (idioma), o fim da lista respeita a área segura. */
+.modal__body:last-child { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+
+.modal__foot {
+    flex: none;
+    display: flex;
+    gap: 10px;
+    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+}
+
+.modal__foot .btn { flex: 1; }
+
+/* Linha de cidade ou idioma: ícone (pin ou bandeira), nome e detalhe,
+   e o check navy na escolha atual. */
+.city-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 58px;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.modal__list li:last-child .city-opt { border-bottom: none; }
+
+.city-opt:hover .city-opt__name { text-decoration: underline; text-underline-offset: 3px; }
+
+.city-opt__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    color: var(--navy-300);
+}
+
+.city-opt__body { flex: 1; min-width: 0; }
+
+.city-opt__name {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.city-opt__meta {
+    display: block;
+    margin-top: 1px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.city-opt.is-current .city-opt__name { font-weight: 700; }
+.city-opt.is-current .city-opt__icon,
+.city-opt.is-current > svg { color: var(--navy); }
+
+
+/* ---------- Pop-up de filtros ---------- */
+
+.filtro__legend {
+    margin: 18px 0 10px;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--navy);
+}
+
+.modal__body > .filtro__legend:first-child { margin-top: 4px; }
+
+/* Categorias: duas linhas que correm para a direita, em vez de
+   empilhar onze linhas na vertical. Vai até a borda do pop-up, como
+   os trilhos da página. Sem mask-image aqui: dentro do pop-up fixed ela
+   apagava o painel inteiro. O chip cortado na borda já sinaliza que há
+   mais ao lado. Os inputs (fixed) não ocupam célula da grade. */
+.filtro__cats {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+    justify-content: start;
+    gap: 8px;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 2px var(--gutter) 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.filtro__cats::-webkit-scrollbar { display: none; }
+
+/* Lupa ao lado do título Categoria: colapsada mostra só o círculo com
+   contorno navy; ao tocar, o campo se estende para a esquerda a partir
+   dele e o botão vira navy cheio, o de confirmar a busca. */
+.cat-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 0 10px;
+}
+
+.cat-head .filtro__legend { margin: 0; }
+
+.cat-search {
+    position: relative;
+    flex: none;
+    margin-left: auto;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: transparent;
+    transition: width .22s ease, background .22s ease;
+}
+
+#cat-busca:checked ~ .cat-search {
+    width: 214px;
+    background: var(--navy-050);
+}
+
+.cat-search__go {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+    cursor: pointer;
+    transition: background .22s ease, color .22s ease;
+}
+
+.cat-search__go:hover { background: var(--navy-050); }
+
+#cat-busca:checked ~ .cat-search .cat-search__go {
+    background: var(--navy);
+    color: #fff;
+}
+
+#cat-busca:checked ~ .cat-search .cat-search__go:hover { background: var(--navy-700); }
+
+/* Escondido quando fechado: com o botão sem preenchimento, o texto
+   apareceria por baixo dele dentro do círculo. */
+.cat-search__text {
+    display: block;
+    padding: 8px 42px 8px 14px;
+    font-size: 12.5px;
+    line-height: 18px;
+    color: var(--muted);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .18s ease;
+}
+
+#cat-busca:checked ~ .cat-search .cat-search__text { opacity: 1; }
+
+.filtro__note {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Interruptores de sim/não, em linhas com divisória. */
+.filtro__switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+/* Só o rótulo estica; a pista do interruptor mantém a largura. */
+.filtro__switch > span:first-child { flex: 1; }
+
+.switch-track {
+    flex: none;
+    width: 40px;
+    height: 23px;
+    padding: 3px;
+    border-radius: 999px;
+    background: var(--line);
+    transition: background .18s ease;
+}
+
+.switch-track::after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .18s ease;
+}
+
+.ui-toggle:checked + .filtro__switch .switch-track { background: var(--navy); }
+.ui-toggle:checked + .filtro__switch .switch-track::after { transform: translateX(17px); }
+.ui-toggle:focus-visible + .filtro__switch .switch-track { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+
+/* ---------- Pop-up "Adicionar a…" (o "+" do cartão) ---------- */
+/* Sacola em cima, em destaque; embaixo, os projetos do cliente e criar
+   um novo, em linhas com foto. */
+
+.add-head { min-width: 0; }
+
+.add-head__item {
+    margin: 2px 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.add-head__item:empty { display: none; }
+
+.add-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.add-opt:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: 8px; }
+
+/* Sacola: cartão navy claro, separado da lista de projetos. */
+.add-opt--sacola {
+    margin-top: 4px;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--navy-050);
+}
+
+.add-opt__thumb {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--photo);
+}
+
+.add-opt__thumb--icon {
+    display: grid;
+    place-items: center;
+    border: none;
+    background: var(--navy);
+    color: #fff;
+}
+
+.add-opt__thumb--novo {
+    display: grid;
+    place-items: center;
+    border-style: dashed;
+    background: none;
+    font-family: var(--display);
+    font-size: 24px;
+}
+
+.add-opt__body { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.add-opt__name { font-size: 14.5px; font-weight: 600; }
+.add-opt__meta { font-size: 12.5px; color: var(--muted); }
+.add-opt__chev { flex: none; color: var(--navy-300); }
+
+.add-sec {
+    margin: 18px 0 2px;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.add-opt--novo { border-bottom: none; }

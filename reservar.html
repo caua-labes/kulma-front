@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kulma — Reservar produto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fluxo.css">
+</head>
+<body>
+<!-- Reservar para retirar na loja. Só aparece se a sede permite reserva e tem estoque acima do mínimo (4.5). Prazo de retirada e janela de cancelamento são da empresa; falha conta para suspensão e multa (4.6). -->
+<main class="app app--fluxo">
+
+    <div class="topbar">
+        <form class="search search--bar" role="search" action="busca.html">
+            <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input class="search__input" type="search" name="q" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <span class="search__sep" aria-hidden="true"></span>
+            <a class="search__place" href="index.html#cidade" aria-label="Cidade: Blumenau, SC. Trocar cidade">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
+            </a>
+        </form>
+    </div>
+
+    <header class="page-head">
+        <a class="page-head__back" href="produto.html" aria-label="Voltar para o produto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a>
+        <div>
+            <h1 class="page-head__title">Reservar para retirada</h1>
+            <p class="page-head__sub">Separado na loja, sem custo</p>
+        </div>
+    </header>
+
+    <section class="box" aria-label="Produto">
+        <article class="line" style="border-top:none;padding-top:0">
+            <span class="line__photo has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy"></span>
+            <div class="line__body">
+                <p class="line__name"><a href="produto.html">Fone Bluetooth com cancelamento de ruído</a></p>
+                <p class="line__meta">Cor: Preto · 12 em estoque nesta loja</p>
+                <p class="line__price"><span class="price">R$ 319,20</span><span class="price-old">R$ 399,00</span></p>
+            </div>
+            <div class="line__side">
+                <div class="stepper stepper--sm" role="group" aria-label="Quantidade de Fone Bluetooth">
+                        <button class="stepper__btn" type="button" aria-label="Diminuir" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+                        <span class="stepper__value">1</span>
+                        <button class="stepper__btn" type="button" aria-label="Aumentar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                    </div>
+            </div>
+        </article>
+        <div class="info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16l-1-5H5ZM5 10v10h14V10M10 20v-5h4v5"/></svg>
+            <div>
+                <p><strong>Ponto Digital</strong> · Rua XV de Novembro, 1050</p>
+                <p class="info-row__sub">Centro, a 800 m · aberta até 20h</p>
+            </div>
+        </div>
+        <div class="info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div>
+                <p>Fica separado por <strong>3 h</strong> depois de confirmar</p>
+                <p class="info-row__sub">Cancele sem custo em até 1 h.</p>
+            </div>
+        </div>
+        <div class="info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20Z"/><path d="M12 10v4M12 17.5v.01"/></svg>
+            <div>
+                <p>Se não retirar no prazo, conta como falha</p>
+                <p class="info-row__sub">Falhas seguidas suspendem suas reservas nesta empresa por um tempo; depois de algumas, viram multa.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="actions">
+        <a class="btn btn--primary" href="reserva.html">Confirmar reserva</a>
+    </div>
+
+    <nav class="tabbar" aria-label="Navegação principal">
+        <a class="tab is-active" href="index.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
+            Início
+        </a>
+        <a class="tab" href="busca.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
+            Explorar
+        </a>
+        <a class="tab" href="carrinho.html" aria-label="Sacola, 4 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">4</span></span>
+            Sacola
+        </a>
+        <a class="tab" href="pedidos.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
+            Pedidos
+        </a>
+        <a class="tab" href="index.html#conta" aria-label="Conta, 2 notificações não lidas">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span class="tab__dot"></span></span>
+            Conta
+        </a>
+    </nav>
+
+</main>
+</body>
+</html>

@@ -25,6 +25,15 @@ se necessário.
 | `sede.html` | Perfil de uma sede — capa, endereço, assinatura, propagandas ativas, catálogo e horário de atendimento |
 | `produto.html` | Detalhe de um produto, no formato do Mercado Livre e válido para qualquer item — galeria com várias fotos, variação, preço com desconto, entrega/retirada, estoque, compra, sede vendedora, características (principais e da categoria), opiniões e outras sedes |
 | `propaganda.html` | Tela de uma propaganda — imagem da campanha, título, loja que anuncia e produtos da promoção |
+| `splash.html` · `login.html` · `cadastro.html` | Entrada: abertura (segue sozinha para o login), login por CPF e criação de conta — as únicas telas sem as barras |
+| `busca.html` | Resultado da busca: produtos e lojas da cidade para o termo digitado na barra superior |
+| `carrinho.html` | Sacola com itens de várias lojas, agrupados por loja, e presente item a item |
+| `checkout.html` · `endereco.html` · `confirmacao.html` | Finalizar pedido (um endereço por loja), escolher/adicionar endereço e pedido enviado |
+| `pedidos.html` · `pedido.html` | Atividade › Pedidos e o detalhe com o status de cada item |
+| `reservar.html` · `reservas.html` · `reserva.html` | Reservar para retirada, Atividade › Reservas e o detalhe com o código do balcão |
+| `avaliacao.html` | Avaliar loja, produto e motorista depois da entrega |
+| `perfil.html` | Dados da conta, atalhos e sair |
+| `fluxo.css` | O que só as telas do fluxo acima usam (cabeçalho de página, caixas, linhas de item, resumo, formulário, status, estrelas, entrada) |
 | `styles.css` | Base compartilhada pelas páginas: tokens, reset, `.app` e os componentes de uso geral, incluindo as barras superior e inferior |
 | `home.css` · `sede.css` · `produto.css` · `propaganda.css` | O que só aquela página usa; cada página carrega `styles.css` e, logo depois, o seu |
 
@@ -61,6 +70,19 @@ O CSS das duas mora em `styles.css`. Uma tela pode acrescentar coisas entre elas
 a sacola da sede logo acima da barra inferior), mas nunca trocá-las por uma barra própria. O
 voltar das telas internas é o botão redondo sobre a capa ou a foto.
 
+## Navegação entre as telas
+
+Tudo é mockado, mas dá para percorrer o app de ponta a ponta:
+
+- **Entrada:** `splash` → `login` (↔ `cadastro`) → Início.
+- **Compra:** produto → *Comprar agora* (`checkout`) ou *Adicionar à sacola* (`carrinho` → `checkout`)
+  → *Trocar endereço* (`endereco`) → *Confirmar pedido* (`confirmacao`) → *Acompanhar* (`pedido`)
+  → *Avaliar* (`avaliacao`).
+- **Reserva:** produto → *Reservar para retirada* (`reservar`) → `reserva` → `reservas`.
+- **Barra inferior:** Início, Explorar (`busca`), Sacola (`carrinho`), Pedidos (`pedidos` ↔
+  `reservas`) e Conta (painel da Início, que leva a `perfil`). A busca da barra superior abre
+  `busca.html?q=…` — o resultado é sempre o mesmo mock, só o termo muda no título.
+
 Navegação entre elas é por link direto (`<a href="...">`); não há roteador nem estado
 compartilhado entre páginas.
 
@@ -75,6 +97,10 @@ texto, ícones, bordas e estado ativo.
 | `--navy` | `#132A45` | Texto, ícones, bordas, estado ativo, botão de busca |
 | `--red` | `#D6293B` | Preço, botão principal, badge de urgência, contador do carrinho |
 | `--surface` / `--canvas` | `#FFFFFF` / `#E9EDF2` | Fundo dos cartões / fundo da página fora do "aparelho" |
+
+**Regra de preço:** sem desconto, o preço é **navy**; com desconto (o valor antigo aparece ao lado,
+em `.price-old`), o preço é **vermelho**. Vale em todas as telas — `.price` é navy por padrão e a
+regra `:has(> .price-old) .price`, em `styles.css`, pinta de vermelho.
 
 Tipografia: **Space Grotesk** (títulos, `--display`) + **Inter** (corpo, `--body`), via Google
 Fonts. Assinaturas visuais: pin de localização na marca e divisor pontilhado sugerindo rota entre
@@ -108,10 +134,10 @@ em tempo real.
   controle, mas não filtra de fato os cartões abaixo.
 - **Botões de ação** (Adicionar ao carrinho, Reservar, Assinar) não têm efeito —
   não existe carrinho, sessão ou persistência.
-- **3 de 18 telas** do fluxo do cliente mapeadas no documento de projeto (seção 7). Faltam
-  Splash, Cadastro, Login, Resultado da Busca, Carrinho, Checkout, Adicionar Endereço,
-  Confirmação, Meus Pedidos, Detalhe do Pedido, Reservar Produto, Minhas Reservas, Detalhe da
-  Reserva, Avaliação e Perfil.
+- **As 18 telas do cliente** mapeadas no documento de projeto (seção 7) existem, mais a de
+  propaganda. Ficaram de fora telas que a especificação não descreve (notificações, denúncia,
+  inscrições) e o painel da empresa.
+- **Pagamento** não aparece no checkout: está fora do escopo desta versão (seção 8).
 
 ## Referência
 

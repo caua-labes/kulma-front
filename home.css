@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* =====================================================================
    Kulma — Início (index.html)
    Formato da Início do iFood: cabeçalho com a cidade e o sino, busca
@@ -39,17 +40,28 @@
     scroll-snap-align: center;
 }
 
+/* Loja e bairro à esquerda; prazo da campanha no fim da linha. */
 .promo__store {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
     margin: 0 0 8px 2px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     font-size: 13px;
     font-weight: 600;
     color: var(--navy);
 }
 
-.promo__store span { font-weight: 400; color: var(--muted); }
+.promo__who {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.promo__who span { font-weight: 400; color: var(--muted); }
+
+.promo__store .badge { flex: none; }
 
 .promo__media {
     position: relative;
@@ -62,19 +74,6 @@
     font-size: 68px;
     line-height: 1;
 }
-
-/* Desconto (vermelho cheio) e prazo (vermelho suave), no rodapé da
-   imagem. O prazo ganha fundo branco para não sumir sobre a textura. */
-.promo__tags {
-    position: absolute;
-    left: 12px;
-    bottom: 12px;
-    display: flex;
-    gap: 6px;
-}
-
-.promo__tags .badge--urgent,
-.promo__tags .badge--soft { background: var(--surface); }
 
 /* Título da promoção rolando da esquerda, abaixo da imagem. */
 .promo__marquee {
@@ -297,12 +296,13 @@
 
 .proj__deal svg { flex: none; }
 
-/* Adicionar projeto: tracejado, sem progresso. */
-.proj--novo { border-style: dashed; border-color: var(--navy-300); }
+/* Adicionar projeto: tracejado, sem progresso, na mesma cor clara de
+   borda dos outros cartões. */
+.proj--novo { border-style: dashed; border-color: var(--line); }
 
 .proj--novo .proj__art {
     background: none;
-    border: 1px dashed var(--navy-300);
+    border: 1px dashed var(--line);
     font-family: var(--display);
     font-size: 26px;
     color: var(--navy);
@@ -356,6 +356,82 @@
     padding-top: 12px;
     padding-bottom: 4px;
 }
+
+/* Logo abaixo das abas (Início e busca): quantos resultados a aba
+   aberta tem, à esquerda, e o filtro à direita, numa linha só. Sobre
+   o mesmo cinza dos chips e dos painéis. */
+.lista-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px var(--gutter) 0;
+    background: var(--surface-alt);
+}
+
+.lista-total__text {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.lista-total__text strong { color: var(--navy); font-weight: 600; }
+
+/* Filtro: contorno navy com o número de filtros aplicados em navy
+   cheio (vermelho fica com preço, compra, urgência, sacola e
+   notificação). */
+.lista-total__filter {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 10px 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.lista-total__filter:hover { border-color: var(--navy-300); }
+.lista-total__filter:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+.lista-total__count {
+    display: grid;
+    place-items: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Contagem e ordenação mudam com a aba: cada aba tem a sua versão no
+   HTML e só a da aba marcada aparece. */
+.tabsw .por-aba { display: none; }
+
+.tabsw #aba-produtos:checked ~ .lista-total .por-aba--produtos,
+.tabsw #aba-ofertas:checked  ~ .lista-total .por-aba--ofertas,
+.tabsw #aba-lojas:checked    ~ .lista-total .por-aba--lojas { display: block; }
+
+.tabsw #aba-produtos:checked ~ .por-aba--produtos,
+.tabsw #aba-ofertas:checked  ~ .por-aba--ofertas,
+.tabsw #aba-lojas:checked    ~ .por-aba--lojas { display: flex; }
+
+/* Com a linha de resultados em cima, os chips não precisam de tanto
+   respiro no topo. */
+.lista-total ~ .tabsw__chips { padding-top: 14px; }
 
 .pane { display: none; padding-top: 14px; }
 
@@ -652,9 +728,8 @@
     transition: transform .26s ease;
 }
 
-/* Alça de arrasto, no painel e nos pop-ups. */
-.sheet::before,
-.modal__box::before {
+/* Alça de arrasto do painel (a dos pop-ups mora em styles.css). */
+.sheet::before {
     content: "";
     flex: none;
     display: block;
@@ -665,10 +740,9 @@
     background: var(--line);
 }
 
-/* Cabeçalho comum do painel e dos pop-ups: título à esquerda, X navy
-   à direita (.icon-btn--plain). */
-.sheet__head,
-.modal__head {
+/* Cabeçalho do painel: título à esquerda, X navy à direita
+   (.icon-btn--plain). Os pop-ups usam o mesmo desenho, em styles.css. */
+.sheet__head {
     flex: none;
     display: flex;
     align-items: center;
@@ -677,8 +751,7 @@
     padding: 0 8px 6px var(--gutter);
 }
 
-.sheet__title,
-.modal__title {
+.sheet__title {
     margin: 0;
     font-family: var(--display);
     font-size: 18px;
@@ -807,288 +880,3 @@
     line-height: 1;
     text-align: center;
 }
-
-
-/* ---------- Pop-ups (cidade, idioma, filtros) ---------- */
-/* Bottom sheets do iFood: sobem da base, com alça, cantos de cima
-   arredondados e no máximo 85% da tela, rolando por dentro. Abrem e
-   fecham sem JavaScript: um checkbox escondido (.ui-toggle) antes de
-   cada um comanda o estado. Aparecem por display, então a subida é
-   uma animação (transição não roda saindo de display: none). */
-
-.modal { display: none; }
-
-/* Escopado por modificador: sem isso, qualquer .modal irmã abriria
-   junto com a de cidade. */
-#modal-cidade:checked ~ .modal--cidade { display: block; }
-#modal-idioma:checked ~ .modal--idioma { display: block; }
-#modal-filtro:checked ~ .modal--filtro { display: block; }
-
-/* Acima do painel de conta (45): a cidade pode ser aberta de dentro
-   dele, e precisa ficar por cima, não atrás. */
-.modal__backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    background: rgba(19, 42, 69, .45);
-    cursor: pointer;
-    animation: modal-fade .2s ease;
-}
-
-.modal__box {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    z-index: 51;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 430px;
-    max-height: 85vh;
-    padding-top: 8px;
-    border-radius: 20px 20px 0 0;
-    background: var(--surface);
-    box-shadow: 0 -10px 34px rgba(19, 42, 69, .22);
-    transform: translateX(-50%);
-    animation: modal-up .26s ease;
-}
-
-@keyframes modal-up {
-    from { transform: translate(-50%, 100%); }
-    to   { transform: translate(-50%, 0); }
-}
-
-@keyframes modal-fade {
-    from { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .modal__box,
-    .modal__backdrop { animation: none; }
-    .sheet,
-    .sheet__scrim { transition: none; }
-}
-
-/* Busca da lista (cidade, idioma): fica parada enquanto a lista rola. */
-.modal__search {
-    flex: none;
-    padding: 4px var(--gutter) 6px;
-}
-
-.modal__body {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 0 var(--gutter) 16px;
-}
-
-/* Sem rodapé (idioma), o fim da lista respeita a área segura. */
-.modal__body:last-child { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
-
-.modal__foot {
-    flex: none;
-    display: flex;
-    gap: 10px;
-    padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
-    border-top: 1px solid var(--line);
-}
-
-.modal__foot .btn { flex: 1; }
-
-/* Linha de cidade ou idioma: ícone (pin ou bandeira), nome e detalhe,
-   e o check navy na escolha atual. */
-.city-opt {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    min-height: 58px;
-    padding: 10px 0;
-    border: none;
-    border-bottom: 1px solid var(--line);
-    background: none;
-    text-align: left;
-    cursor: pointer;
-}
-
-.modal__list li:last-child .city-opt { border-bottom: none; }
-
-.city-opt:hover .city-opt__name { text-decoration: underline; text-underline-offset: 3px; }
-
-.city-opt__icon {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 24px;
-    color: var(--navy-300);
-}
-
-.city-opt__body { flex: 1; min-width: 0; }
-
-.city-opt__name {
-    display: block;
-    font-size: 14.5px;
-    font-weight: 500;
-    color: var(--navy);
-}
-
-.city-opt__meta {
-    display: block;
-    margin-top: 1px;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.city-opt.is-current .city-opt__name { font-weight: 700; }
-.city-opt.is-current .city-opt__icon,
-.city-opt.is-current > svg { color: var(--navy); }
-
-
-/* ---------- Pop-up de filtros ---------- */
-
-.filtro__legend {
-    margin: 18px 0 10px;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -.01em;
-    color: var(--navy);
-}
-
-.modal__body > .filtro__legend:first-child { margin-top: 4px; }
-
-/* Categorias: duas linhas que correm para a direita, em vez de
-   empilhar onze linhas na vertical. Vai até a borda do pop-up, como
-   os trilhos da página. Sem mask-image aqui: dentro do pop-up fixed ela
-   apagava o painel inteiro. O chip cortado na borda já sinaliza que há
-   mais ao lado. Os inputs (fixed) não ocupam célula da grade. */
-.filtro__cats {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(2, auto);
-    justify-content: start;
-    gap: 8px;
-    margin: 0 calc(-1 * var(--gutter));
-    padding: 2px var(--gutter) 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.filtro__cats::-webkit-scrollbar { display: none; }
-
-/* Lupa ao lado do título Categoria: colapsada mostra só o círculo com
-   contorno navy; ao tocar, o campo se estende para a esquerda a partir
-   dele e o botão vira navy cheio, o de confirmar a busca. */
-.cat-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 18px 0 10px;
-}
-
-.cat-head .filtro__legend { margin: 0; }
-
-.cat-search {
-    position: relative;
-    flex: none;
-    margin-left: auto;
-    width: 34px;
-    height: 34px;
-    overflow: hidden;
-    border-radius: 999px;
-    background: transparent;
-    transition: width .22s ease, background .22s ease;
-}
-
-#cat-busca:checked ~ .cat-search {
-    width: 214px;
-    background: var(--navy-050);
-}
-
-.cat-search__go {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    width: 34px;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--navy);
-    border-radius: 50%;
-    background: var(--surface);
-    color: var(--navy);
-    cursor: pointer;
-    transition: background .22s ease, color .22s ease;
-}
-
-.cat-search__go:hover { background: var(--navy-050); }
-
-#cat-busca:checked ~ .cat-search .cat-search__go {
-    background: var(--navy);
-    color: #fff;
-}
-
-#cat-busca:checked ~ .cat-search .cat-search__go:hover { background: var(--navy-700); }
-
-/* Escondido quando fechado: com o botão sem preenchimento, o texto
-   apareceria por baixo dele dentro do círculo. */
-.cat-search__text {
-    display: block;
-    padding: 8px 42px 8px 14px;
-    font-size: 12.5px;
-    line-height: 18px;
-    color: var(--muted);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity .18s ease;
-}
-
-#cat-busca:checked ~ .cat-search .cat-search__text { opacity: 1; }
-
-.filtro__note {
-    margin: 8px 0 0;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-/* Interruptores de sim/não, em linhas com divisória. */
-.filtro__switch {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 52px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 14.5px;
-    color: var(--navy);
-    cursor: pointer;
-}
-
-/* Só o rótulo estica; a pista do interruptor mantém a largura. */
-.filtro__switch > span:first-child { flex: 1; }
-
-.switch-track {
-    flex: none;
-    width: 40px;
-    height: 23px;
-    padding: 3px;
-    border-radius: 999px;
-    background: var(--line);
-    transition: background .18s ease;
-}
-
-.switch-track::after {
-    content: "";
-    display: block;
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    background: #fff;
-    transition: transform .18s ease;
-}
-
-.ui-toggle:checked + .filtro__switch .switch-track { background: var(--navy); }
-.ui-toggle:checked + .filtro__switch .switch-track::after { transform: translateX(17px); }
-.ui-toggle:focus-visible + .filtro__switch .switch-track { outline: 2px solid var(--navy); outline-offset: 2px; }

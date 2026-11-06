@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kulma — Entrar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fluxo.css">
+</head>
+<body>
+<!-- Login: o cliente entra com o documento (CPF), como no modelo de dados (client). Sem as barras. Os campos não têm "name": o protótipo não envia nada. -->
+<main class="app app--entrada">
+
+    <section class="auth">
+        <p class="brand"><svg class="brand__pin" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Kulma</p>
+        <h1 class="auth__title">Entrar</h1>
+        <p class="auth__text">Use seu CPF e a senha da sua conta.</p>
+        <form class="form" action="index.html">
+            <label class="field">
+                <span class="field__label">CPF</span>
+                <input class="field__input" type="text" inputmode="numeric" placeholder="000.000.000-00" autocomplete="off">
+            </label>
+            <label class="field">
+                <span class="field__label">Senha</span>
+                <input class="field__input" type="password" placeholder="Sua senha" autocomplete="off">
+            </label>
+            <button class="btn btn--primary btn--block" type="submit">Entrar</button>
+        </form>
+        <p class="auth__alt">Ainda não tem conta? <a href="cadastro.html">Criar conta</a></p>
+    </section>
+
+</main>
+</body>
+</html>

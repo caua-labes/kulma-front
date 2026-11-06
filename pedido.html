@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kulma — Pedido nº 4821</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fluxo.css">
+</head>
+<body>
+<!-- Detalhe do pedido: cada item tem o próprio endereço e o próprio fluxo de status (4.3), na lista padrão de entrega da empresa (4.12). Item entregue libera a avaliação (4.7). -->
+<main class="app app--fluxo">
+
+    <div class="topbar">
+        <form class="search search--bar" role="search" action="busca.html">
+            <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input class="search__input" type="search" name="q" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <span class="search__sep" aria-hidden="true"></span>
+            <a class="search__place" href="index.html#cidade" aria-label="Cidade: Blumenau, SC. Trocar cidade">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
+            </a>
+        </form>
+    </div>
+
+    <header class="page-head">
+        <a class="page-head__back" href="pedidos.html" aria-label="Voltar para meus pedidos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a>
+        <div>
+            <h1 class="page-head__title">Pedido nº 4821</h1>
+            <p class="page-head__sub">Feito hoje às 11h20 · R$ 376,50</p>
+        </div>
+    </header>
+
+    <section class="box" aria-labelledby="pd-pd">
+        <header class="box__head">
+            <span class="box__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
+            <div style="flex:1;min-width:0">
+                <h2 class="box__title" id="pd-pd">Ponto Digital</h2>
+                <p class="box__sub">Ronda de hoje às 14h · Casa, Rua das Palmeiras, 210</p>
+            </div>
+        </header>
+        <article class="line">
+            <span class="line__photo has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy"></span>
+            <div class="line__body">
+                <p class="line__name">Fone Bluetooth com cancelamento de ruído</p>
+                <p class="line__meta">1 un. · R$ 319,20</p>
+                <ol class="steps"><li class="is-done">Solicitação enviada</li><li class="is-now">Em preparação</li><li>Aguardando ronda</li><li>Em rota de entrega</li><li>Entregue</li></ol>
+            </div>
+        </article>
+        <article class="line">
+            <span class="line__photo has-img"><img class="media-img" src="img/produtos/cabo-hdmi.jpg" alt="" loading="lazy"></span>
+            <div class="line__body">
+                <p class="line__name">Cabo HDMI</p>
+                <p class="line__meta">2 un. · R$ 25,00</p>
+                <ol class="steps"><li class="is-done">Solicitação enviada</li><li class="is-done">Em preparação</li><li class="is-now">Aguardando ronda</li><li>Em rota de entrega</li><li>Entregue</li></ol>
+            </div>
+        </article>
+    </section>
+
+    <section class="box" aria-labelledby="pd-cf">
+        <header class="box__head">
+            <span class="box__logo has-img"><img class="media-img" src="img/lojas/casa-firme.jpg" alt="" loading="lazy"></span>
+            <div style="flex:1;min-width:0">
+                <h2 class="box__title" id="pd-cf">Casa Firme</h2>
+                <p class="box__sub">Entregue hoje às 10h40 · Casa, Rua das Palmeiras, 210</p>
+            </div>
+        </header>
+        <article class="line">
+            <span class="line__photo has-img"><img class="media-img" src="img/produtos/trena.jpg" alt="" loading="lazy"></span>
+            <div class="line__body">
+                <p class="line__name">Trena</p>
+                <p class="line__meta">1 un. · R$ 32,30</p>
+                <ol class="steps"><li class="is-done">Solicitação enviada</li><li class="is-done">Em preparação</li><li class="is-done">Aguardando ronda</li><li class="is-done">Em rota de entrega</li><li class="is-done">Entregue</li></ol>
+                <a class="btn btn--outline btn--sm" href="avaliacao.html" style="margin-top:10px">Avaliar</a>
+            </div>
+        </article>
+    </section>
+
+    <section class="box" aria-label="Resumo">
+        <dl class="sum">
+            <div class="sum__row"><dt>Produtos</dt><dd>R$ 376,50</dd></div>
+            <div class="sum__row sum__row--total"><dt>Total</dt><dd>R$ 376,50</dd></div>
+        </dl>
+    </section>
+
+    <nav class="tabbar" aria-label="Navegação principal">
+        <a class="tab" href="index.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
+            Início
+        </a>
+        <a class="tab" href="busca.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
+            Explorar
+        </a>
+        <a class="tab" href="carrinho.html" aria-label="Sacola, 4 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">4</span></span>
+            Sacola
+        </a>
+        <a class="tab is-active" href="pedidos.html">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
+            Pedidos
+        </a>
+        <a class="tab" href="index.html#conta" aria-label="Conta, 2 notificações não lidas">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span class="tab__dot"></span></span>
+            Conta
+        </a>
+    </nav>
+
+</main>
+</body>
+</html>

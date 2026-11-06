@@ -20,15 +20,15 @@
          "Filtros", junto das abas. O JS usa a altura desta barra
          (.topbar) para encostar as abas da listagem logo abaixo dela. -->
     <div class="topbar">
-        <div class="search search--bar" role="search">
+        <form class="search search--bar" role="search" action="busca.html">
             <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-            <input class="search__input" type="search" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <input class="search__input" type="search" name="q" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
             <span class="search__sep" aria-hidden="true"></span>
             <label class="search__place" for="modal-cidade" role="button" tabindex="0" aria-label="Cidade: Blumenau, SC. Trocar cidade">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
             </label>
-        </div>
+        </form>
     </div>
 
     <!-- Banners das sedes em que o cliente é inscrito (4.8): texto dentro
@@ -39,50 +39,45 @@
          cupom trancado da sede (o cliente é inscrito grátis). -->
     <section class="promos" aria-label="Ofertas das lojas em que você é inscrito">
         <article class="promo">
-            <p class="promo__store">Ponto Digital <span>· Centro</span></p>
+            <p class="promo__store"><span class="promo__who">Ponto Digital <span>· Centro</span></span><span class="badge badge--urgent">Termina em 2 dias</span></p>
             <a class="promo__media has-img" href="propaganda.html" aria-label="Semana da tecnologia: 20% em 6 itens, Ponto Digital">
                 <img class="media-img" src="img/banners/tecnologia.jpg" alt="">
-                <span class="promo__tags"><span class="badge badge--discount">-20%</span><span class="badge badge--urgent">Termina em 2 dias</span></span>
             </a>
             <div class="promo__marquee">
                 <div class="promo__track" aria-hidden="true"><span>Semana da tecnologia: 20% em 6 itens</span><span>Semana da tecnologia: 20% em 6 itens</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Casa Firme <span>· Velha</span></p>
+            <p class="promo__store"><span class="promo__who">Casa Firme <span>· Velha</span></span><span class="badge badge--urgent">Termina em 5 dias</span></p>
             <a class="promo__media has-img" href="sede.html" aria-label="Mês da reforma: 15% em 7 itens, Casa Firme">
                 <img class="media-img" src="img/banners/reforma.jpg" alt="">
-                <span class="promo__tags"><span class="badge badge--discount">-15%</span><span class="badge badge--urgent">Termina em 5 dias</span></span>
             </a>
             <div class="promo__marquee">
                 <div class="promo__track" aria-hidden="true"><span>Mês da reforma: 15% em 7 itens</span><span>Mês da reforma: 15% em 7 itens</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Ateliê Garcia <span>· Garcia</span></p>
+            <p class="promo__store"><span class="promo__who">Ateliê Garcia <span>· Garcia</span></span><span class="badge badge--urgent">Último dia</span></p>
             <a class="promo__media has-img" href="sede.html" aria-label="Troca de estação: 30% em roupas e calçados, Ateliê Garcia">
                 <img class="media-img" src="img/banners/estacao.jpg" alt="">
-                <span class="promo__tags"><span class="badge badge--discount">-30%</span><span class="badge badge--urgent">Último dia</span></span>
             </a>
             <div class="promo__marquee">
                 <div class="promo__track" aria-hidden="true"><span>Troca de estação: 30% em roupas e calçados</span><span>Troca de estação: 30% em roupas e calçados</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Farmácia Vila Nova <span>· Vila Nova</span></p>
+            <p class="promo__store"><span class="promo__who">Farmácia Vila Nova <span>· Vila Nova</span></span><span class="badge badge--urgent">Termina em 9 dias</span></p>
             <a class="promo__media has-img" href="sede.html" aria-label="Cuidado diário: 25% em dermocosméticos, Farmácia Vila Nova">
                 <img class="media-img" src="img/banners/cuidado.jpg" alt="">
-                <span class="promo__tags"><span class="badge badge--discount">-25%</span><span class="badge badge--urgent">Termina em 9 dias</span></span>
             </a>
             <div class="promo__marquee">
                 <div class="promo__track" aria-hidden="true"><span>Cuidado diário: 25% em dermocosméticos</span><span>Cuidado diário: 25% em dermocosméticos</span></div>
             </div>
         </article>
         <article class="promo">
-            <p class="promo__store">Ponto Digital <span>· Centro</span></p>
+            <p class="promo__store"><span class="promo__who">Ponto Digital <span>· Centro</span></span><span class="badge badge--soft">Só para assinantes</span></p>
             <a class="promo__media has-img" href="sede.html#ofertas" aria-label="Linha gamer: 10% em 4 itens, Ponto Digital">
                 <img class="media-img" src="img/banners/gamer.jpg" alt="">
-                <span class="promo__tags"><span class="badge badge--discount">-10%</span><span class="badge badge--soft">Só para assinantes</span></span>
             </a>
             <div class="promo__marquee">
                 <div class="promo__track" aria-hidden="true"><span>Linha gamer: 10% em 4 itens</span><span>Linha gamer: 10% em 4 itens</span></div>
@@ -157,8 +152,9 @@
     <!-- Listagem: três abas sublinhadas comandando a lista — Produtos,
          Ofertas ou Lojas. Os radios vêm antes das abas e dos painéis, no
          mesmo pai, para os seletores "#aba-x:checked ~" alcançarem os
-         dois. As abas grudam logo abaixo da busca ao rolar. Os chips
-         embaixo delas são filtros rápidos (visuais, como o pop-up). -->
+         dois. As abas grudam logo abaixo da busca ao rolar. Embaixo delas,
+         a contagem e o filtro, e as tags de ordenação de cada aba (só as
+         da aba marcada aparecem; visuais, como o pop-up). -->
     <div class="tabsw" id="busca">
         <input class="ui-toggle" type="radio" name="aba-home" id="aba-produtos" checked>
         <input class="ui-toggle" type="radio" name="aba-home" id="aba-ofertas">
@@ -170,17 +166,51 @@
             <label class="utabs__item" for="aba-lojas">Lojas</label>
         </div>
 
-        <div class="chips-row tabsw__chips" role="group" aria-label="Filtros rápidos">
-            <label class="chip chip--sort" for="modal-filtro" role="button" tabindex="0">Ordenar <svg class="chip__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></label>
-            <input class="chip-toggle" type="checkbox" id="q-abertas" checked>
-            <label class="chip" for="q-abertas">Abertas agora</label>
-            <input class="chip-toggle" type="checkbox" id="q-desconto">
-            <label class="chip" for="q-desconto">Com desconto</label>
-            <input class="chip-toggle" type="checkbox" id="q-5km">
-            <label class="chip" for="q-5km">Até 5 km</label>
-            <input class="chip-toggle" type="checkbox" id="q-retirada">
-            <label class="chip" for="q-retirada">Retirada</label>
-            <label class="chip" for="modal-filtro" role="button" tabindex="0" aria-label="Filtros, 2 aplicados"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filtros <span class="chip__count" aria-hidden="true">2</span></label>
+        <!-- Quantos resultados a aba aberta tem e, à direita, o filtro. As três contagens ficam no HTML e o CSS mostra só a da aba marcada. -->
+        <div class="lista-total">
+            <p class="lista-total__text por-aba por-aba--produtos"><strong>6 produtos</strong> em Blumenau</p>
+            <p class="lista-total__text por-aba por-aba--ofertas"><strong>7 ofertas</strong> em Blumenau</p>
+            <p class="lista-total__text por-aba por-aba--lojas"><strong>6 lojas</strong> em Blumenau</p>
+            <label class="lista-total__filter" for="modal-filtro" role="button" tabindex="0" aria-label="Filtros, 2 aplicados">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+                Filtros
+                <span class="lista-total__count" aria-hidden="true">2</span>
+            </label>
+        </div>
+
+        <!-- Ordenação de cada aba: escolha única (radio) e, no fim, um
+             filtro rápido. O CSS mostra só a linha da aba marcada. -->
+        <div class="chips-row tabsw__chips por-aba por-aba--produtos" role="group" aria-label="Ordenar produtos">
+            <input class="chip-toggle" type="radio" name="ord-produtos" id="op-relev" checked>
+            <label class="chip" for="op-relev">Mais relevantes</label>
+            <input class="chip-toggle" type="radio" name="ord-produtos" id="op-menor">
+            <label class="chip" for="op-menor">Menor preço</label>
+            <input class="chip-toggle" type="radio" name="ord-produtos" id="op-maior">
+            <label class="chip" for="op-maior">Maior preço</label>
+            <input class="chip-toggle" type="radio" name="ord-produtos" id="op-vendidos">
+            <label class="chip" for="op-vendidos">Mais vendidos</label>
+            <input class="chip-toggle" type="checkbox" id="fp-desconto">
+            <label class="chip" for="fp-desconto">Com desconto</label>
+        </div>
+        <div class="chips-row tabsw__chips por-aba por-aba--ofertas" role="group" aria-label="Ordenar ofertas">
+            <input class="chip-toggle" type="radio" name="ord-ofertas" id="oo-desconto" checked>
+            <label class="chip" for="oo-desconto">Maior desconto</label>
+            <input class="chip-toggle" type="radio" name="ord-ofertas" id="oo-termina">
+            <label class="chip" for="oo-termina">Termina antes</label>
+            <input class="chip-toggle" type="radio" name="ord-ofertas" id="oo-recentes">
+            <label class="chip" for="oo-recentes">Mais recentes</label>
+            <input class="chip-toggle" type="checkbox" id="fo-exclusivas">
+            <label class="chip" for="fo-exclusivas">Só assinantes</label>
+        </div>
+        <div class="chips-row tabsw__chips por-aba por-aba--lojas" role="group" aria-label="Ordenar lojas">
+            <input class="chip-toggle" type="radio" name="ord-lojas" id="ol-perto" checked>
+            <label class="chip" for="ol-perto">Mais perto</label>
+            <input class="chip-toggle" type="radio" name="ord-lojas" id="ol-nota">
+            <label class="chip" for="ol-nota">Melhor avaliadas</label>
+            <input class="chip-toggle" type="radio" name="ord-lojas" id="ol-ofertas">
+            <label class="chip" for="ol-ofertas">Mais ofertas</label>
+            <input class="chip-toggle" type="checkbox" id="fl-abertas" checked>
+            <label class="chip" for="fl-abertas">Abertas agora</label>
         </div>
 
         <!-- Produtos: grade alinhada de duas colunas. Preço em vermelho
@@ -193,7 +223,7 @@
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
                                 <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
-                                <button class="pcard__act" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                                <label class="pcard__act" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído" data-add="Fone Bluetooth com cancelamento de ruído"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                             </span>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
@@ -206,7 +236,7 @@
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/lampada.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
                                 <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
-                                <button class="pcard__act" type="button" aria-label="Adicionar Lâmpada LED 9 W à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                                <label class="pcard__act" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Lâmpada LED 9 W" data-add="Lâmpada LED 9 W"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                             </span>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 27,90</span></p>
@@ -218,7 +248,7 @@
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/camiseta.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
                                 <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
-                                <button class="pcard__act" type="button" aria-label="Adicionar Camiseta dry-fit à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                                <label class="pcard__act" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Camiseta dry-fit" data-add="Camiseta dry-fit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                             </span>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 55,93</span><span class="price-old">R$ 79,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
@@ -231,7 +261,7 @@
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-hdmi.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
                                 <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
-                                <button class="pcard__act" type="button" aria-label="Adicionar Cabo HDMI à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                                <label class="pcard__act" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Cabo HDMI" data-add="Cabo HDMI"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                             </span>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 12,50</span></p>
@@ -243,7 +273,7 @@
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bolsa-transporte.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
                                 <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
-                                <button class="pcard__act" type="button" aria-label="Adicionar Bolsa de transporte à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                                <label class="pcard__act" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Bolsa de transporte" data-add="Bolsa de transporte"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                             </span>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 79,90</span><span class="price-old">R$ 97,40</span><span class="badge badge--discount pcard__off">-18%</span></p>
@@ -256,7 +286,7 @@
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/trena.jpg" alt="" loading="lazy">
                             <span class="pcard__acts">
                                 <button class="pcard__act" type="button" aria-label="Buscar itens similares"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></button>
-                                <button class="pcard__act" type="button" aria-label="Adicionar Trena à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                                <label class="pcard__act" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Trena" data-add="Trena"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                             </span>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 32,30</span><span class="price-old">R$ 38,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
@@ -303,7 +333,7 @@
                 <div class="deal__products hrail">
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído" data-add="Fone Bluetooth com cancelamento de ruído"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
@@ -311,7 +341,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Película de vidro para celular à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Película de vidro para celular" data-add="Película de vidro para celular"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
@@ -319,7 +349,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pen drive à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Pen drive" data-add="Pen drive"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
@@ -327,7 +357,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mouse pad à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Mouse pad" data-add="Mouse pad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
@@ -335,7 +365,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cabo USB-C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Cabo USB-C" data-add="Cabo USB-C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
@@ -343,7 +373,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Limpa-telas à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Limpa-telas" data-add="Limpa-telas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
@@ -382,7 +412,7 @@
                 <div class="deal__products hrail">
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/trena.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Trena à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Trena" data-add="Trena"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 32,30</span><span class="price-old">R$ 38,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Trena</span></a></h3>
@@ -390,7 +420,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/chaves-fenda.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Jogo de chaves de fenda à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Jogo de chaves de fenda" data-add="Jogo de chaves de fenda"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 39,10</span><span class="price-old">R$ 46,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Jogo de chaves de fenda</span></a></h3>
@@ -398,7 +428,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/nivel.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Nível de bolha à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Nível de bolha" data-add="Nível de bolha"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 24,65</span><span class="price-old">R$ 29,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Nível de bolha</span></a></h3>
@@ -406,7 +436,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/chave-inglesa.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Chave inglesa à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Chave inglesa" data-add="Chave inglesa"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 20,40</span><span class="price-old">R$ 24,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Chave inglesa</span></a></h3>
@@ -414,7 +444,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/parafusos.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Caixa de parafusos à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Caixa de parafusos" data-add="Caixa de parafusos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 18,70</span><span class="price-old">R$ 22,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Caixa de parafusos</span></a></h3>
@@ -422,7 +452,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pinceis.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Kit de pincéis à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Kit de pincéis" data-add="Kit de pincéis"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 15,30</span><span class="price-old">R$ 18,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Kit de pincéis</span></a></h3>
@@ -430,7 +460,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/rolo.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Rolo de pintura à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Rolo de pintura" data-add="Rolo de pintura"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 10,20</span><span class="price-old">R$ 12,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Rolo de pintura</span></a></h3>
@@ -469,7 +499,7 @@
                 <div class="deal__products hrail">
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/camiseta.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Camiseta dry-fit à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Camiseta dry-fit" data-add="Camiseta dry-fit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 55,93</span><span class="price-old">R$ 79,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Camiseta dry-fit</span></a></h3>
@@ -477,7 +507,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/tenis.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Tênis de corrida à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Tênis de corrida" data-add="Tênis de corrida"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 209,30</span><span class="price-old">R$ 299,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Tênis de corrida</span></a></h3>
@@ -485,7 +515,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/jaqueta.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Jaqueta corta-vento à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Jaqueta corta-vento" data-add="Jaqueta corta-vento"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 174,30</span><span class="price-old">R$ 249,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Jaqueta corta-vento</span></a></h3>
@@ -493,7 +523,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/calca.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Calça jeans à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Calça jeans" data-add="Calça jeans"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 132,93</span><span class="price-old">R$ 189,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Calça jeans</span></a></h3>
@@ -501,7 +531,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bone.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Boné à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Boné" data-add="Boné"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 41,93</span><span class="price-old">R$ 59,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Boné</span></a></h3>
@@ -509,7 +539,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/meia.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Meia esportiva à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Meia esportiva" data-add="Meia esportiva"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 24,43</span><span class="price-old">R$ 34,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Meia esportiva</span></a></h3>
@@ -517,7 +547,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mochila.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mochila à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Mochila" data-add="Mochila"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 111,93</span><span class="price-old">R$ 159,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mochila</span></a></h3>
@@ -525,7 +555,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/oculos.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Óculos de sol à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Óculos de sol" data-add="Óculos de sol"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 90,93</span><span class="price-old">R$ 129,90</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Óculos de sol</span></a></h3>
@@ -564,7 +594,7 @@
                 <div class="deal__products hrail">
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/protetor-solar.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Protetor solar FPS 50 à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Protetor solar FPS 50" data-add="Protetor solar FPS 50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 65,70</span><span class="price-old">R$ 87,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Protetor solar FPS 50</span></a></h3>
@@ -572,7 +602,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/serum.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Sérum de vitamina C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Sérum de vitamina C" data-add="Sérum de vitamina C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 44,70</span><span class="price-old">R$ 59,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Sérum de vitamina C</span></a></h3>
@@ -580,7 +610,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/hidratante.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Hidratante corporal à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Hidratante corporal" data-add="Hidratante corporal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 29,70</span><span class="price-old">R$ 39,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Hidratante corporal</span></a></h3>
@@ -588,7 +618,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/sabonete-facial.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Sabonete facial à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Sabonete facial" data-add="Sabonete facial"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 23,70</span><span class="price-old">R$ 31,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Sabonete facial</span></a></h3>
@@ -596,7 +626,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/agua-micelar.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Água micelar à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Água micelar" data-add="Água micelar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 35,70</span><span class="price-old">R$ 47,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Água micelar</span></a></h3>
@@ -604,7 +634,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/hidratante-labial.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Hidratante labial à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Hidratante labial" data-add="Hidratante labial"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 17,70</span><span class="price-old">R$ 23,60</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Hidratante labial</span></a></h3>
@@ -673,7 +703,7 @@
                 <div class="deal__products hrail">
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mangueira.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mangueira de jardim à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Mangueira de jardim" data-add="Mangueira de jardim"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 48,00</span><span class="price-old">R$ 64,00</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mangueira de jardim</span></a></h3>
@@ -681,7 +711,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/tesoura-poda.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Tesoura de poda à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Tesoura de poda" data-add="Tesoura de poda"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 54,00</span><span class="price-old">R$ 72,00</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Tesoura de poda</span></a></h3>
@@ -689,7 +719,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/regador.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Regador à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Regador" data-add="Regador"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 44,80</span><span class="price-old">R$ 56,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Regador</span></a></h3>
@@ -697,7 +727,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/vaso.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Vaso de cerâmica à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Vaso de cerâmica" data-add="Vaso de cerâmica"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 38,40</span><span class="price-old">R$ 48,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Vaso de cerâmica</span></a></h3>
@@ -705,7 +735,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/terra.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Terra adubada à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Terra adubada" data-add="Terra adubada"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 15,30</span><span class="price-old">R$ 18,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Terra adubada</span></a></h3>
@@ -744,7 +774,7 @@
                 <div class="deal__products hrail">
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bolsa-transporte.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Bolsa de transporte à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Bolsa de transporte" data-add="Bolsa de transporte"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 79,90</span><span class="price-old">R$ 97,40</span><span class="badge badge--discount pcard__off">-18%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Bolsa de transporte</span></a></h3>
@@ -752,7 +782,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mordedor.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Brinquedo mordedor à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Brinquedo mordedor" data-add="Brinquedo mordedor"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 19,60</span><span class="price-old">R$ 28,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Brinquedo mordedor</span></a></h3>
@@ -760,7 +790,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/bolinha.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Bolinha de borracha à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Bolinha de borracha" data-add="Bolinha de borracha"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 12,60</span><span class="price-old">R$ 18,00</span><span class="badge badge--discount pcard__off">-30%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Bolinha de borracha</span></a></h3>
@@ -768,7 +798,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/coleira.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Coleira ajustável à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Coleira ajustável" data-add="Coleira ajustável"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 24,00</span><span class="price-old">R$ 32,00</span><span class="badge badge--discount pcard__off">-25%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Coleira ajustável</span></a></h3>
@@ -776,7 +806,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cama-pet.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cama para pets à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Cama para pets" data-add="Cama para pets"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 49,60</span><span class="price-old">R$ 62,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cama para pets</span></a></h3>
@@ -784,7 +814,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/arranhador.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Arranhador para gatos à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Arranhador para gatos" data-add="Arranhador para gatos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 35,20</span><span class="price-old">R$ 44,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Arranhador para gatos</span></a></h3>
@@ -792,7 +822,7 @@
                     </article>
                     <article class="pcard">
                         <div class="pcard__media has-img"><img class="media-img" src="img/produtos/comedouro.jpg" alt="" loading="lazy">
-                            <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Comedouro de cerâmica à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Comedouro de cerâmica" data-add="Comedouro de cerâmica"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                         </div>
                         <p class="pcard__price"><span class="price price--sm">R$ 22,10</span><span class="price-old">R$ 26,00</span><span class="badge badge--discount pcard__off">-15%</span></p>
                         <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Comedouro de cerâmica</span></a></h3>
@@ -905,22 +935,22 @@
                 </div>
             </div>
 
-            <button class="sheet__row" type="button">
+            <a class="sheet__row" href="perfil.html">
                 <span class="sheet__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span>
                 <span class="sheet__label">Meu perfil</span>
                 <svg class="sheet__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
+            </a>
             <button class="sheet__row" type="button">
                 <span class="sheet__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
                 <span class="sheet__label">Notificações</span>
                 <span class="badge badge--discount">2</span>
                 <svg class="sheet__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
             </button>
-            <button class="sheet__row" type="button">
+            <a class="sheet__row" href="pedidos.html">
                 <span class="sheet__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
                 <span class="sheet__label">Meus pedidos</span>
                 <svg class="sheet__chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
+            </a>
 
             <div class="sheet__sep"></div>
 
@@ -946,10 +976,10 @@
         </div>
 
         <div class="sheet__foot">
-            <button class="btn btn--quiet btn--sm" type="button">
+            <a class="btn btn--quiet btn--sm" href="login.html">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
                 Sair da conta
-            </button>
+            </a>
 
             <!-- Idioma do cliente: herdado do país no cadastro (seção 5). -->
             <label class="btn btn--outline btn--sm sheet__lang" for="modal-idioma" role="button" tabindex="0" aria-label="Trocar idioma, atual Português">
@@ -1245,7 +1275,7 @@
                     <input class="chip-toggle" type="radio" name="f-dist" id="f-dist-1" checked>
                     <label class="chip" for="f-dist-1">Toda a cidade</label>
                     <input class="chip-toggle" type="radio" name="f-dist" id="f-dist-2">
-                    <label class="chip" for="f-dist-2">Cidades vizinhas · SP</label>
+                    <label class="chip" for="f-dist-2">Cidades vizinhas · SC</label>
                 </div>
                 <p class="filtro__note">Vizinhas cobre outras cidades do mesmo estado.</p>
 
@@ -1273,22 +1303,73 @@
     <!-- Navegação inferior na ordem do iFood: Início · Explorar · Sacola
          · Pedidos · Conta. "Sacola" é o carrinho da especificação, com o
          nome que o iFood usa (o mesmo da barra "Ver sacola" da sede, que
-         também conta 3 itens). Explorar leva até a listagem; Conta abre
+         também conta 4 itens). Explorar leva até a listagem; Conta abre
          o painel da conta. -->
+    <!-- "+" do cartão de produto: escolher para onde vai o item. Em cima,
+         a sacola (compra agora); embaixo, os projetos do cliente (lista do
+         que ele quer comprar) e criar um novo. Abre por checkbox; um JS
+         mínimo só escreve o nome do produto no título. -->
+    <input class="ui-toggle" type="checkbox" id="modal-add">
+    <div class="modal modal--add">
+        <label class="modal__backdrop" for="modal-add" aria-label="Fechar"></label>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-add-titulo">
+            <div class="modal__head">
+                <div class="add-head">
+                    <h2 class="modal__title" id="modal-add-titulo">Adicionar a…</h2>
+                    <p class="add-head__item" data-add-produto></p>
+                </div>
+                <label class="icon-btn icon-btn--plain" for="modal-add" role="button" tabindex="0" aria-label="Fechar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+            </div>
+            <div class="modal__body">
+                <a class="add-opt add-opt--sacola" href="carrinho.html">
+                    <span class="add-opt__thumb add-opt__thumb--icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Sacola</span><span class="add-opt__meta">4 itens · R$ 376,50</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+
+                <p class="add-sec">Seus projetos</p>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/computador.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Computador novo</span><span class="add-opt__meta">3 de 6 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/cozinha.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Reforma da cozinha</span><span class="add-opt__meta">5 de 12 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/aniversario.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Aniversário da Ana</span><span class="add-opt__meta">8 de 9 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/varanda.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Varanda com plantas</span><span class="add-opt__meta">1 de 5 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt add-opt--novo" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb add-opt__thumb--novo" aria-hidden="true">+</span>
+                    <span class="add-opt__body"><span class="add-opt__name">Novo projeto</span><span class="add-opt__meta">Junte o que precisa comprar</span></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
     <nav class="tabbar" aria-label="Navegação principal">
         <a class="tab is-active" href="index.html" aria-current="page">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
             Início
         </a>
-        <a class="tab" href="#busca" data-explorar>
+        <a class="tab" href="busca.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
             Explorar
         </a>
-        <a class="tab" href="#" aria-label="Sacola, 3 itens">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">3</span></span>
+        <a class="tab" href="carrinho.html" aria-label="Sacola, 4 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">4</span></span>
             Sacola
         </a>
-        <a class="tab" href="#">
+        <a class="tab" href="pedidos.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
             Pedidos
         </a>
@@ -1397,15 +1478,6 @@
 
     tabs.addEventListener('click', focarBusca);
 
-    /* Link (#busca) não deve pular sozinho para a âncora; <label> precisa
-       do clique para marcar a aba Lojas, então não é cancelado. */
-    document.querySelectorAll('[data-explorar]').forEach((el) => {
-        el.addEventListener('click', (e) => {
-            if (el.tagName === 'A') e.preventDefault();
-            focarBusca();
-        });
-    });
-
     /* Chegando de outra página pela nav: #busca leva até a listagem e
        #conta já abre o painel da conta e #cidade, o pop-up de cidade. Roda no pageshow porque o
        navegador restaura o estado dos checkboxes da visita anterior
@@ -1434,6 +1506,17 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     alvo.click();
 });
+</script>
+<script>
+/* "+" dos cartões: o pop-up "Adicionar a…" mostra o nome do produto. */
+(function () {
+    var alvo = document.querySelector('[data-add-produto]');
+    if (!alvo) return;
+    document.addEventListener('click', function (e) {
+        var botao = e.target.closest && e.target.closest('[data-add]');
+        if (botao) alvo.textContent = botao.getAttribute('data-add');
+    });
+})();
 </script>
 </body>
 </html>

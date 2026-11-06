@@ -21,15 +21,15 @@
     <!-- Barra superior: a mesma da Início em todas as telas (regra do
          protótipo). A cidade leva ao pop-up de troca, na Início. -->
     <div class="topbar">
-        <div class="search search--bar" role="search">
+        <form class="search search--bar" role="search" action="busca.html">
             <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-            <input class="search__input" type="search" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
+            <input class="search__input" type="search" name="q" placeholder="Buscar na sua cidade" aria-label="Buscar produtos, lojas ou ofertas na sua cidade">
             <span class="search__sep" aria-hidden="true"></span>
             <a class="search__place" href="index.html#cidade" aria-label="Cidade: Blumenau, SC. Trocar cidade">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 <span class="search__place-text"><span>Blumenau</span><span class="search__place-uf">SC</span></span>
             </a>
-        </div>
+        </form>
     </div>
 
     <!-- Imagem da propaganda em 16:9, sangrando nas bordas. Desconto e
@@ -94,7 +94,7 @@
             <div class="grid">
                 <article class="pcard">
                     <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído" data-add="Fone Bluetooth com cancelamento de ruído"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                     </div>
                     <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                     <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
@@ -102,7 +102,7 @@
                 </article>
                 <article class="pcard">
                     <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Película de vidro para celular à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Película de vidro para celular" data-add="Película de vidro para celular"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                     </div>
                     <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                     <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
@@ -110,7 +110,7 @@
                 </article>
                 <article class="pcard">
                     <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Pen drive à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Pen drive" data-add="Pen drive"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                     </div>
                     <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
                     <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
@@ -118,7 +118,7 @@
                 </article>
                 <article class="pcard">
                     <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Mouse pad à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Mouse pad" data-add="Mouse pad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                     </div>
                     <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
                     <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
@@ -126,7 +126,7 @@
                 </article>
                 <article class="pcard">
                     <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Cabo USB-C à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Cabo USB-C" data-add="Cabo USB-C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                     </div>
                     <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
                     <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
@@ -134,7 +134,7 @@
                 </article>
                 <article class="pcard">
                     <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
-                        <button class="round-btn round-btn--sm pcard__add" type="button" aria-label="Adicionar Limpa-telas à sacola"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Limpa-telas" data-add="Limpa-telas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
                     </div>
                     <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
                     <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
@@ -146,20 +146,71 @@
 
     <!-- Barra inferior: a mesma da Início em todas as telas (regra do
          protótipo). -->
+    <!-- "+" do cartão de produto: escolher para onde vai o item. Em cima,
+         a sacola (compra agora); embaixo, os projetos do cliente (lista do
+         que ele quer comprar) e criar um novo. Abre por checkbox; um JS
+         mínimo só escreve o nome do produto no título. -->
+    <input class="ui-toggle" type="checkbox" id="modal-add">
+    <div class="modal modal--add">
+        <label class="modal__backdrop" for="modal-add" aria-label="Fechar"></label>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-add-titulo">
+            <div class="modal__head">
+                <div class="add-head">
+                    <h2 class="modal__title" id="modal-add-titulo">Adicionar a…</h2>
+                    <p class="add-head__item" data-add-produto></p>
+                </div>
+                <label class="icon-btn icon-btn--plain" for="modal-add" role="button" tabindex="0" aria-label="Fechar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
+            </div>
+            <div class="modal__body">
+                <a class="add-opt add-opt--sacola" href="carrinho.html">
+                    <span class="add-opt__thumb add-opt__thumb--icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Sacola</span><span class="add-opt__meta">4 itens · R$ 376,50</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+
+                <p class="add-sec">Seus projetos</p>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/computador.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Computador novo</span><span class="add-opt__meta">3 de 6 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/cozinha.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Reforma da cozinha</span><span class="add-opt__meta">5 de 12 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/aniversario.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Aniversário da Ana</span><span class="add-opt__meta">8 de 9 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb has-img"><img class="media-img" src="img/projetos/varanda.jpg" alt="" loading="lazy"></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Varanda com plantas</span><span class="add-opt__meta">1 de 5 itens</span></span>
+                    <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </label>
+                <label class="add-opt add-opt--novo" for="modal-add" role="button" tabindex="0">
+                    <span class="add-opt__thumb add-opt__thumb--novo" aria-hidden="true">+</span>
+                    <span class="add-opt__body"><span class="add-opt__name">Novo projeto</span><span class="add-opt__meta">Junte o que precisa comprar</span></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
     <nav class="tabbar" aria-label="Navegação principal">
         <a class="tab is-active" href="index.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
             Início
         </a>
-        <a class="tab" href="index.html#busca">
+        <a class="tab" href="busca.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
             Explorar
         </a>
-        <a class="tab" href="#" aria-label="Sacola, 3 itens">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">3</span></span>
+        <a class="tab" href="carrinho.html" aria-label="Sacola, 4 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">4</span></span>
             Sacola
         </a>
-        <a class="tab" href="#">
+        <a class="tab" href="pedidos.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
             Pedidos
         </a>
@@ -170,5 +221,26 @@
     </nav>
 
 </main>
+<script>
+/* <label role="button"> só abre com clique: Enter e espaço também. */
+document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var alvo = e.target.closest && e.target.closest('label[role="button"]');
+    if (!alvo) return;
+    e.preventDefault();
+    alvo.click();
+});
+</script>
+<script>
+/* "+" dos cartões: o pop-up "Adicionar a…" mostra o nome do produto. */
+(function () {
+    var alvo = document.querySelector('[data-add-produto]');
+    if (!alvo) return;
+    document.addEventListener('click', function (e) {
+        var botao = e.target.closest && e.target.closest('[data-add]');
+        if (botao) alvo.textContent = botao.getAttribute('data-add');
+    });
+})();
+</script>
 </body>
 </html>

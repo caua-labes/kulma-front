@@ -1,0 +1,685 @@
+@charset "UTF-8";
+/* =====================================================================
+   Kulma — Telas do fluxo (busca, sacola, checkout, pedidos, reservas,
+   avaliação, perfil, entrada)
+   Componentes que só essas telas usam: cabeçalho de página, caixas,
+   linhas de item, resumo de valores, formulário, linha do tempo de
+   status, estrelas e as telas de entrada (splash, login, cadastro).
+   Carrega depois de styles.css, que traz tokens, reset, as barras de
+   cima e de baixo e os componentes gerais (.btn, .badge, .price,
+   .stepper, .utabs, .pcard, .store-row, .sec-head).
+   ===================================================================== */
+
+/* Fundo cinza claro, com o conteúdo em caixas brancas, como a listagem
+   da Início. */
+.app--fluxo { background: var(--surface-alt); }
+
+
+/* ---------- Cabeçalho da página ---------- */
+/* Voltar redondo à esquerda e o título da tela. */
+
+.page-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px var(--gutter) 4px;
+}
+
+.page-head__back {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--navy);
+}
+
+.page-head__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    color: var(--navy);
+}
+
+.page-head__sub {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* Pedidos | Reservas: as duas listas são páginas irmãs. */
+.page-tabs { margin-top: 12px; }
+
+
+/* ---------- Caixas ---------- */
+
+.box {
+    margin: 12px var(--gutter) 0;
+    padding: 14px;
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.box__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.box__logo {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--photo);
+}
+
+.box__title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-family: var(--display);
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.box__title a { color: inherit; }
+
+.box__sub { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+
+.box__link {
+    flex: none;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--navy-300);
+    text-underline-offset: 3px;
+}
+
+.box__note {
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--muted);
+}
+
+/* Linha de informação com ícone (endereço, ronda, prazo). */
+.info-row {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    color: var(--navy);
+    font-size: 13.5px;
+    line-height: 1.4;
+}
+
+.info-row > svg { flex: none; margin-top: 1px; }
+.info-row > div { flex: 1; min-width: 0; }
+.info-row p { margin: 0; }
+.info-row .info-row__sub { margin-top: 2px; font-size: 12.5px; color: var(--muted); }
+
+
+/* ---------- Linha de item ---------- */
+/* Foto, nome, preço e, à direita, quantidade ou status. */
+
+.line {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+}
+
+.box__head + .line { border-top: none; padding-top: 2px; }
+
+.line__photo {
+    flex: none;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--photo);
+}
+
+.line__body { flex: 1; min-width: 0; }
+
+.line__name {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.line__name a { color: inherit; }
+
+.line__meta { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+
+.line__price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 4px 0 0;
+}
+
+.line__price .price { font-size: 15px; }
+.line__price .price-old { margin: 0; font-size: 11px; text-decoration: none; }
+
+.line__side {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.line__qty { font-size: 13px; color: var(--muted); }
+
+/* Item em oferta: o prazo da campanha embaixo da quantidade, no mesmo
+   selo do carrossel da Início. */
+.line__deadline { margin-top: auto; }
+
+.stepper--sm .stepper__btn { width: 30px; height: 30px; }
+.stepper--sm .stepper__value { min-width: 20px; font-size: 14px; }
+
+/* Presente, item a item (4.3). */
+.gift {
+    display: inline-flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    color: var(--navy);
+    font-size: 12.5px;
+    cursor: pointer;
+}
+
+.gift__mark {
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--navy-300);
+    border-radius: 5px;
+    color: #fff;
+}
+
+.gift__mark svg { opacity: 0; }
+.ui-toggle:checked + .gift .gift__mark { border-color: var(--navy); background: var(--navy); }
+.ui-toggle:checked + .gift .gift__mark svg { opacity: 1; }
+.ui-toggle:focus-visible + .gift { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 4px; }
+
+
+/* ---------- Resumo de valores ---------- */
+
+.sum { margin: 0; }
+
+.sum__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 5px 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.sum__row dd { margin: 0; color: var(--navy); }
+
+.sum__row--total {
+    margin-top: 6px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.sum__row--total dd { color: var(--navy); }
+
+
+/* ---------- Ações no fim da página ---------- */
+
+.actions {
+    display: grid;
+    gap: 8px;
+    margin: 16px var(--gutter) 0;
+}
+
+.actions .btn { width: 100%; }
+
+/* Botão que é link: mesma aparência do <button>. */
+a.btn { text-decoration: none; }
+
+
+/* ---------- Formulário ---------- */
+
+.form { display: grid; gap: 14px; }
+
+.field { display: grid; gap: 6px; }
+
+.field__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.field__input {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--navy);
+    font: inherit;
+    font-size: 15px;
+}
+
+.field__input::placeholder { color: var(--navy-300); }
+.field__input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); }
+
+textarea.field__input { height: auto; min-height: 96px; padding: 12px 14px; resize: vertical; }
+
+.field__hint { font-size: 12px; color: var(--muted); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Apelido do endereço: chips de escolha única. */
+.pick { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.pick__opt {
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--navy);
+    font-size: 13.5px;
+    cursor: pointer;
+}
+
+.ui-toggle:checked + .pick__opt { border-color: var(--navy); background: var(--navy); color: #fff; }
+.ui-toggle:focus-visible + .pick__opt { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+
+/* ---------- Status do item (linha do tempo) ---------- */
+/* Cada item do pedido tem o próprio fluxo (4.3); a lista de status é
+   configurável pela empresa (4.12) — aqui, o padrão de entrega. */
+
+.steps {
+    display: grid;
+    gap: 0;
+    margin: 6px 0 2px;
+    padding: 0;
+    list-style: none;
+}
+
+.steps li {
+    position: relative;
+    padding: 0 0 12px 22px;
+    font-size: 13px;
+    color: var(--navy-300);
+}
+
+.steps li:last-child { padding-bottom: 0; }
+
+.steps li::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+}
+
+.steps li::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    bottom: 0;
+    left: 6px;
+    width: 2px;
+    background: var(--line);
+}
+
+.steps li:last-child::after { display: none; }
+
+.steps .is-done { color: var(--navy); }
+.steps .is-done::before { border-color: var(--navy); background: var(--navy); }
+.steps .is-done::after { background: var(--navy); }
+
+.steps .is-now { color: var(--navy); font-weight: 600; }
+.steps .is-now::before { border-color: var(--navy); box-shadow: 0 0 0 3px var(--navy-050); }
+
+/* Etiqueta curta de status, nas listas. */
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--navy-050);
+    color: var(--navy);
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status--ok   { background: var(--navy); color: #fff; }
+.status--off  { background: var(--surface-alt); color: var(--muted); }
+.status--warn { background: var(--red-050); color: var(--red-700); }
+
+
+/* ---------- Listas de pedidos e reservas ---------- */
+
+/* Título de grupo entre caixas ("Anteriores"). */
+.list-title { margin: 18px var(--gutter) 0; font-size: 16px; }
+
+.order {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    color: var(--navy);
+}
+
+.box > .order:first-child { border-top: none; padding-top: 0; }
+.box > .order:last-child { padding-bottom: 0; }
+
+.order__photo {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--photo);
+}
+
+.order__body { flex: 1; min-width: 0; }
+.order__title { margin: 0; font-size: 14px; font-weight: 600; }
+.order__meta { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+.order__side { flex: none; display: grid; justify-items: end; gap: 6px; }
+.order__chev { color: var(--navy-300); }
+
+
+/* ---------- Estrelas ---------- */
+/* Cinco radios por nota; marcar uma pinta ela e as anteriores. Os
+   radios vêm na ordem 5 → 1 com row-reverse, para o "~" alcançar as
+   estrelas de menor valor. */
+
+.rate {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+.rate label {
+    font-size: 28px;
+    line-height: 1;
+    color: var(--line);
+    cursor: pointer;
+}
+
+.rate input:checked ~ label,
+.rate label:hover,
+.rate label:hover ~ label { color: var(--navy); }
+
+.rate input:focus-visible + label { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: 4px; }
+
+.rate-block + .rate-block { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.rate-block__who { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.rate-block__name { margin: 0; font-size: 14px; font-weight: 600; color: var(--navy); }
+.rate-block__role { margin: 1px 0 0; font-size: 12px; color: var(--muted); }
+
+
+/* ---------- Destaque (confirmação, código de retirada) ---------- */
+
+.hero {
+    margin: 12px var(--gutter) 0;
+    padding: 24px 18px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-align: center;
+}
+
+.hero__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+}
+
+.hero__title {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.hero__text { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: var(--muted); }
+
+.code {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 18px;
+    border: 1.5px dashed var(--navy-300);
+    border-radius: var(--radius-sm);
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--navy);
+}
+
+
+/* ---------- Perfil ---------- */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.profile__avatar {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.profile__name { margin: 0; font-family: var(--display); font-size: 17px; font-weight: 700; color: var(--navy); }
+.profile__mail { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+
+.menu-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+    color: var(--navy);
+    font-size: 14.5px;
+}
+
+.box > .menu-row:first-child { border-top: none; padding-top: 0; }
+.box > .menu-row:last-child { padding-bottom: 0; }
+.menu-row > svg:first-child { flex: none; }
+.menu-row__label { flex: 1; min-width: 0; }
+.menu-row__value { font-size: 13px; color: var(--muted); }
+.menu-row__chev { flex: none; color: var(--navy-300); }
+
+
+/* ---------- Entrada: splash, login e cadastro ---------- */
+/* Sem as barras de cima e de baixo (o cliente ainda não entrou). */
+
+.app--entrada {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 32px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--navy);
+    font-family: var(--display);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+}
+
+.brand__pin { color: var(--red); }
+
+.splash {
+    flex: 1;
+    display: grid;
+    place-content: center;
+    gap: 14px;
+    min-height: 100vh;
+    padding: 0 var(--gutter);
+    background:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.14) 1px, transparent 1.6px) 0 0 / 14px 14px,
+        linear-gradient(160deg, var(--navy) 0%, var(--navy-700) 100%);
+    text-align: center;
+}
+
+.splash .brand { color: #fff; font-size: 40px; }
+.splash__tag { margin: 0; color: rgba(255,255,255,.75); font-size: 15px; }
+.splash__go { margin-top: 18px; justify-self: center; }
+
+.auth { padding: 48px var(--gutter) 0; }
+.auth__title { margin: 28px 0 4px; font-family: var(--display); font-size: 24px; font-weight: 700; color: var(--navy); }
+.auth__text { margin: 0 0 22px; font-size: 14px; color: var(--muted); }
+.auth__alt { margin: 18px 0 0; text-align: center; font-size: 14px; color: var(--muted); }
+.auth__alt a { color: var(--navy); font-weight: 600; }
+
+
+/* ---------- Resultado da busca ---------- */
+/* As abas Produtos / Ofertas / Lojas e os painéis vêm da Início
+   (home.css). Os painéis já reservam a folga da barra inferior, então a
+   página não soma outra. */
+.app--busca { padding-bottom: 0; }
+
+/* Sem cabeçalho de página: as abas encostam direto na busca e ficam
+   presas ali ao rolar (o .utabs--sticky já prende em --topbar-h). */
+.app--busca .tabsw { margin-top: 0; }
+
+/* A barra das abas já tem respiro embaixo: a contagem encosta nela. */
+.app--busca .lista-total { padding-top: 0; }
+
+/* Fim da página: folga da barra inferior. */
+.app--fluxo:not(.app--busca) { padding-bottom: calc(var(--tabbar-h) + 24px + env(safe-area-inset-bottom, 0px)); }
+
+.checkout-split { margin: 10px 0 0; }
+
+
+/* ---------- Abas da busca em pílula ---------- */
+/* Na busca, Produtos / Ofertas / Lojas viram um seletor segmentado
+   direto sobre o cinza da página (sem faixa branca): um trilho branco
+   arredondado (o ::before da barra, atrás das abas) com a aba ativa numa
+   pílula navy cheia e texto branco. A pílula ganha um contorno branco
+   por dentro, que faz o respiro em volta. */
+.app--busca .tabsw__bar {
+    gap: 0;
+    padding: 8px var(--gutter) 10px;
+    border-bottom: none;
+    background: var(--surface-alt);
+}
+
+.app--busca .tabsw__bar::before {
+    content: "";
+    position: absolute;
+    inset: 8px var(--gutter) 10px;
+    z-index: -1;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+}
+
+.app--busca .tabsw__bar .utabs__item {
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 999px;
+    color: var(--navy-700);
+    font-weight: 600;
+    transition: background .15s ease, color .15s ease;
+}
+
+.app--busca .tabsw__bar .utabs__item::after { display: none; }
+
+.app--busca #aba-produtos:checked ~ .tabsw__bar label[for="aba-produtos"],
+.app--busca #aba-ofertas:checked  ~ .tabsw__bar label[for="aba-ofertas"],
+.app--busca #aba-lojas:checked    ~ .tabsw__bar label[for="aba-lojas"] {
+    background: var(--navy);
+    box-shadow: inset 0 0 0 3px var(--surface);
+    color: #fff;
+    font-weight: 700;
+}
+
+.app--busca #aba-produtos:focus-visible ~ .tabsw__bar label[for="aba-produtos"],
+.app--busca #aba-ofertas:focus-visible  ~ .tabsw__bar label[for="aba-ofertas"],
+.app--busca #aba-lojas:focus-visible    ~ .tabsw__bar label[for="aba-lojas"] {
+    outline-offset: 2px;
+    border-radius: 999px;
+}
+
+
+/* ---------- Presente ao confirmar (checkout) ---------- */
+
+#modal-presente:checked ~ .modal--presente { display: block; }
+
+.presente__intro { margin: 2px 0 4px; font-size: 13px; line-height: 1.45; color: var(--muted); }
+
+.presente__loja {
+    margin: 14px 0 2px;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* Uma unidade por linha, com o valor do presente à direita. */
+.gift--row {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    white-space: normal;
+}
+
+.gift--row .gift__name { flex: 1; min-width: 0; }
+.gift__price { flex: none; color: var(--muted); font-size: 13px; }
+
+.presente__off { margin: 6px 0 0; font-size: 13px; color: var(--muted); }

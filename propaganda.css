@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* =====================================================================
    Kulma — Tela da propaganda (propaganda.html)
    Imagem da campanha em 16:9 no topo, com os botões redondos por cima e
@@ -32,6 +33,9 @@
 }
 
 .ad-photo__tags .badge--urgent { background: #fff; }
+
+/* O desconto ganha um contorno branco, como no carrossel. */
+.ad-photo__tags .badge--discount { box-shadow: 0 0 0 2px #fff; }
 
 
 /* ---------- Título ---------- */
