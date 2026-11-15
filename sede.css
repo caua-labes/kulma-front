@@ -4,10 +4,10 @@
    Formato da página de loja do iFood: capa larga com botões redondos,
    logo mordendo a capa, alternância Entrega | Retirada, cupons, abas do
    catálogo presas no topo, destaques em cartões e catálogo em linhas,
-   com a sacola fixa no rodapé e sem nav inferior.
+   sem nav inferior: só um botão redondo de Início, em vidro, flutuando.
    Só o que esta página usa. Carrega depois de styles.css, que traz os
    tokens, o reset e os componentes compartilhados (.round-btn, .utabs,
-   .pcard, .cartbar, .sec-head...). Tudo que é daqui leva o prefixo
+   .pcard, .sec-head...). Tudo que é daqui leva o prefixo
    "sede-", para não colidir com o que as outras páginas definem.
    ===================================================================== */
 
@@ -31,22 +31,40 @@ html { scroll-behavior: smooth; }
 
 
 /* ---------- Capa ---------- */
-/* Navy com o pontilhado de rota da identidade, no lugar da foto de
-   fachada do iFood. O emoji vira marca d'água, grande e apagado, à
-   direita: à esquerda fica o logo, que morde a base da capa. */
+/* Foto da loja parada no fundo: fica presa logo abaixo da busca
+   (sticky) enquanto a folha de conteúdo rola por cima dela. Navy por
+   baixo da foto, para os botões redondos continuarem destacados. */
 
 .sede-cover {
-    position: relative;
-    height: calc(170px + env(safe-area-inset-top, 0px));
+    position: sticky;
+    top: var(--topbar-h);
+    z-index: 0;
+    height: 230px;
     overflow: hidden;
     background:
         radial-gradient(circle at 1px 1px, rgba(255,255,255,.16) 1px, transparent 1.6px) 0 0 / 14px 14px,
         linear-gradient(135deg, var(--navy) 0%, var(--navy-700) 100%);
 }
 
-/* Foto da fachada da loja, com um véu navy por cima para os botões
-   redondos continuarem destacados. */
-.sede-cover__img { opacity: .55; }
+.sede-cover__img { opacity: .6; }
+
+
+/* ---------- Folha de conteúdo ---------- */
+/* A div que rola: branca, com os cantos de cima arredondados, subindo
+   um pouco sobre a capa. Sem overflow: hidden, para as abas do catálogo
+   continuarem presas (sticky) e o logo poder morder a borda de cima.
+   flow-root impede a margem negativa do logo de puxar a folha inteira. */
+
+.sede-sheet {
+    position: relative;
+    z-index: 1;
+    display: flow-root;
+    margin-top: -28px;
+    padding-bottom: 8px;
+    border-radius: 24px 24px 0 0;
+    background: var(--surface);
+    box-shadow: 0 -8px 20px rgba(19, 42, 69, .14);
+}
 
 
 /* ---------- Identidade ---------- */
@@ -194,207 +212,6 @@ html { scroll-behavior: smooth; }
     margin: 2px 0 0;
     font-size: 12.5px;
     line-height: 1.35;
-    color: var(--muted);
-}
-
-
-/* ---------- Assinatura da sede ---------- */
-/* Cartão compacto em navy claro, como o de clube do iFood. O botão
-   "Assinar" é o vermelho cheio da página (a sacola é navy); embaixo
-   dele, "Inscrito grátis" é o estado da inscrição gratuita que o
-   cliente já tem — texto navy com check, para não disputar com o botão.
-   É um botão (aria-pressed) porque é por ali que se cancela. */
-
-.sede-plan {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 12px;
-    margin: 16px var(--gutter) 0;
-    padding: 14px;
-    border-radius: var(--radius);
-    background: var(--navy-050);
-}
-
-.sede-plan__icon {
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--surface);
-    color: var(--navy);
-}
-
-/* min-width 0: a coluna do meio encolhe e o título quebra linha, em vez
-   de empurrar o botão para fora do cartão em telas de 360px. */
-.sede-plan__body { min-width: 0; }
-
-.sede-plan__title {
-    margin: 0;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    line-height: 1.25;
-    color: var(--navy);
-}
-
-.sede-plan__text {
-    margin: 3px 0 0;
-    font-size: 12.5px;
-    line-height: 1.35;
-    color: var(--muted);
-}
-
-/* nowrap: em 360 px o preço quebrava entre "R$" e "9,90/mês". */
-.sede-plan__text strong { font-weight: 600; color: var(--navy); white-space: nowrap; }
-
-.sede-plan__acts {
-    display: grid;
-    justify-items: center;
-    gap: 2px;
-}
-
-.sede-plan__free {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding: 2px 4px;
-    border: none;
-    background: none;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    color: var(--navy);
-    cursor: pointer;
-}
-
-.sede-plan__free:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: 4px; }
-
-
-/* ---------- Ofertas da loja (cupons) ---------- */
-/* Cartão horizontal do formato de cupom do iFood: canhoto com o ícone
-   de tíquete e o selo de desconto, separado do texto por um pontilhado.
-   Cada cupom é o <label> de um checkbox escondido; ligado, a borda
-   fica navy, a seta vira e a lista de produtos abre abaixo do trilho. */
-
-/* Folga embaixo para o contorno de foco não ser cortado pelo overflow. */
-.sede-coupons { padding-bottom: 4px; }
-
-.sede-coupon {
-    display: flex;
-    align-items: stretch;
-    width: 272px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface);
-    cursor: pointer;
-    transition: border-color .15s ease;
-}
-
-.sede-coupon__stub {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 74px;
-    border-right: 1.5px dashed var(--line);
-    border-radius: var(--radius) 0 0 var(--radius);
-    background: var(--navy-050);
-    color: var(--navy);
-}
-
-.sede-coupon__body {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 12px 4px 12px 12px;
-}
-
-/* Até duas linhas: o nome da campanha é o que diz do que é o cupom,
-   e cortado em uma linha virava "Semana da tecnol…". */
-.sede-coupon__title {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-family: var(--display);
-    font-size: 14.5px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--navy);
-}
-
-.sede-coupon__meta {
-    margin: 2px 0 8px;
-    font-size: 12px;
-    line-height: 1.35;
-    color: var(--muted);
-}
-
-.sede-coupon__chev {
-    flex: none;
-    align-self: center;
-    margin-right: 10px;
-    color: var(--navy-300);
-    transition: transform .2s ease;
-}
-
-.sede-coupon:hover { border-color: var(--navy-300); }
-
-#oferta-tec:checked ~ .sede-coupons .sede-coupon[for="oferta-tec"],
-#oferta-gamer:checked ~ .sede-coupons .sede-coupon[for="oferta-gamer"] { border-color: var(--navy); }
-
-#oferta-tec:checked ~ .sede-coupons .sede-coupon[for="oferta-tec"] .sede-coupon__chev,
-#oferta-gamer:checked ~ .sede-coupons .sede-coupon[for="oferta-gamer"] .sede-coupon__chev {
-    color: var(--navy);
-    transform: rotate(180deg);
-}
-
-#oferta-tec:focus-visible ~ .sede-coupons .sede-coupon[for="oferta-tec"],
-#oferta-gamer:focus-visible ~ .sede-coupons .sede-coupon[for="oferta-gamer"] {
-    outline: 2px solid var(--navy);
-    outline-offset: 2px;
-}
-
-/* Lista de produtos da oferta: fechada até o cupom ser tocado. */
-.sede-offer { display: none; padding-top: 14px; }
-
-#oferta-tec:checked ~ .sede-offer--tec,
-#oferta-gamer:checked ~ .sede-offer--gamer { display: block; }
-
-.sede-offer__head {
-    margin: 0 0 10px;
-    padding: 0 var(--gutter);
-    font-size: 13px;
-    color: var(--muted);
-}
-
-/* Exclusiva de assinante, vista por quem não assina: o aviso no lugar
-   dos itens, com o caminho até o cartão de assinatura. */
-.sede-offer__lock {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 var(--gutter);
-    padding: 12px 14px;
-    border: 1px dashed var(--navy-300);
-    border-radius: var(--radius);
-    color: var(--navy);
-}
-
-.sede-offer__lock svg { flex: none; }
-
-.sede-offer__lock-text {
-    flex: 1;
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.4;
     color: var(--muted);
 }
 
@@ -555,14 +372,44 @@ html { scroll-behavior: smooth; }
 .sede-hours li.is-closed > span:last-child { color: var(--navy-300); font-weight: 400; }
 
 
-/* ---------- Sacola sobre a barra inferior ---------- */
-/* A barra inferior aparece em todas as telas, então a sacola sobe e
-   fica logo acima dela; o fim da página reserva espaço para as duas. */
-.cartbar {
-    bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
-    padding-bottom: 10px;
+/* ---------- Início flutuante, em vidro ---------- */
+/* Nesta tela não há barra inferior: só este botão redondo, preso no
+   canto esquerdo de baixo (alinhado à coluna de 430px no desktop). É
+   "vidro" no estilo da Apple: fundo quase transparente que desfoca e
+   satura o que passa por trás, borda clara, brilho por dentro em cima e
+   uma sombra macia por fora. Onde o navegador não tem backdrop-filter,
+   o fundo fica um pouco mais opaco, para o ícone continuar legível. */
+.sede-home {
+    position: fixed;
+    left: max(12px, calc(50% - 215px + 12px));
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index: 31;
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border: 1px solid rgba(255, 255, 255, .6);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .72);
+    box-shadow:
+        0 10px 28px rgba(19, 42, 69, .20),
+        0 2px 6px rgba(19, 42, 69, .10),
+        inset 0 1px 0 rgba(255, 255, 255, .85),
+        inset 0 -1px 0 rgba(19, 42, 69, .06);
+    color: var(--navy);
+    transition: transform .12s ease, background .15s ease;
 }
 
-.app--cartbar {
-    padding-bottom: calc(var(--tabbar-h) + var(--cartbar-h) + 24px + env(safe-area-inset-bottom, 0px));
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .sede-home {
+        background: linear-gradient(145deg, rgba(255, 255, 255, .42), rgba(255, 255, 255, .16));
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        backdrop-filter: blur(16px) saturate(180%);
+    }
 }
+
+.sede-home:active { transform: scale(.94); }
+.sede-home:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+/* Fim da página: folga para o último conteúdo passar do botão. */
+.app--sede { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }

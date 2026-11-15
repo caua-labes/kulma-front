@@ -8,13 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="home.css">
 <link rel="stylesheet" href="sede.css">
 </head>
 <body>
-<!-- Página da loja no formato do iFood, entre as barras de cima e de
-     baixo de todas as telas. Quem leva de volta é o botão redondo da
-     capa; a sacola fica presa logo acima da barra inferior. -->
-<main class="app app--cartbar">
+<!-- Página da loja no formato do iFood, com a barra de busca de todas as
+     telas em cima. Aqui a barra inferior não aparece: fica só um botão
+     redondo de Início, em vidro, flutuando no canto esquerdo. -->
+<main class="app app--sede">
 
     <!-- Barra superior: a mesma da Início em todas as telas (regra do
          protótipo). A cidade leva ao pop-up de troca, na Início. -->
@@ -30,8 +31,9 @@
         </form>
     </div>
 
-    <!-- Capa: navy com o pontilhado de rota da identidade e o emoji como
-         marca d'água. Os botões redondos flutuam sobre ela. -->
+    <!-- Capa: foto da loja parada no fundo (sticky, logo abaixo da busca);
+         o conteúdo rola por cima dela. Os botões redondos flutuam sobre
+         a foto. -->
     <div class="sede-cover">
         <img class="media-img sede-cover__img" src="img/banners/capa-ponto-digital.jpg" alt="">
         <div class="round-bar">
@@ -50,6 +52,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Folha de conteúdo: tudo da loja fica nesta div branca, de cantos
+         arredondados em cima, que rola por cima da capa. A capa fica
+         parada no fundo, presa logo abaixo da busca. -->
+    <div class="sede-sheet">
 
     <!-- Identidade da sede. O logo morde a base da capa, como no iFood, e
          leva o anel de novidade: a Ponto Digital tem oferta nova ainda não vista
@@ -105,30 +112,6 @@
         </div>
     </section>
 
-    <!-- Assinatura: conceito do Kulma sem par no iFood, vestido como o
-         cartão de clube dele. É sempre por sede e o valor vem da empresa
-         (4.8). A inscrição grátis já traz as propagandas normais para o
-         feed; a assinatura paga libera também as exclusivas. O cliente
-         já é inscrito grátis nesta sede (ela está em "Suas lojas" e na
-         aba Lojas da Início), então o cartão oferece só o passo pago, e
-         o estado da inscrição grátis fica embaixo do botão. -->
-    <section class="sede-plan" id="assinatura" aria-labelledby="sede-plan-titulo">
-        <span class="sede-plan__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4.5 4L12 5l4.5 7L21 8l-2 11H5Z"/></svg>
-        </span>
-        <div class="sede-plan__body">
-            <h2 class="sede-plan__title" id="sede-plan-titulo">Assine a Ponto Digital</h2>
-            <p class="sede-plan__text">Ofertas exclusivas · <strong>R$ 9,90/mês</strong></p>
-        </div>
-        <div class="sede-plan__acts">
-            <button class="btn btn--primary btn--sm" type="button">Assinar</button>
-            <button class="sede-plan__free" type="button" aria-pressed="true" aria-label="Inscrito grátis nesta loja">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
-                Inscrito grátis
-            </button>
-        </div>
-    </section>
-
     <!-- Propagandas ativas desta sede, no formato dos cupons do iFood.
          Cada cupom é o <label> de um checkbox escondido que abre, abaixo
          do trilho, a lista de produtos da oferta (o mesmo conceito dos
@@ -138,100 +121,106 @@
         <div class="sec-head">
             <div>
                 <h2 class="sec-head__title" id="ofertas-titulo">Ofertas da loja</h2>
-                <p class="sec-head__sub">2 campanhas nesta sede</p>
+                <p class="sec-head__sub">1 campanha nesta sede</p>
             </div>
         </div>
 
-        <input class="ui-toggle" type="checkbox" id="oferta-tec" aria-controls="oferta-tec-lista" aria-label="Ver os produtos da oferta Semana da tecnologia">
-        <input class="ui-toggle" type="checkbox" id="oferta-gamer" aria-controls="oferta-gamer-lista" aria-label="Ver os produtos da oferta Linha gamer">
+        <article class="deal">
+                        <header class="deal__head">
+                            <span class="deal__logo has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
+                            <div class="deal__who">
+                                <p class="deal__store"><a href="sede.html">Ponto Digital</a></p>
+                                <p class="deal__where">Centro</p>
+                            </div>
+                            <div class="deal__tags">
+                                <span class="badge badge--discount">-20%</span>
+                                <span class="badge badge--urgent">Termina em 2 dias</span>
+                            </div>
+                        </header>
+                        <div class="deal__media photo has-img" aria-hidden="true"><img class="media-img" src="img/banners/tecnologia.jpg" alt="" loading="lazy"></div>
+                        <input class="deal-toggle ui-toggle" type="checkbox" id="deal-toggle-sede" aria-label="Mostrar os produtos de Semana da tecnologia">
+                        <div class="deal__bar">
+                            <div class="deal__text">
+                                <h3 class="deal__title"><a href="propaganda.html">Semana da tecnologia</a></h3>
+                                <p class="deal__count">6 produtos em oferta</p>
+                            </div>
+                            <label class="deal__arrow" for="deal-toggle-sede" aria-label="Ver produtos desta oferta">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                            </label>
+                        </div>
+                        <div class="deal__divider"></div>
+                        <div class="deal__products hrail">
+                            <article class="pcard">
+                                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
+                                    <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído" data-add="Fone Bluetooth com cancelamento de ruído"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
+                                </div>
+                                <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
+                                <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
+                            </article>
+                            <article class="pcard">
+                                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
+                                    <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Película de vidro para celular" data-add="Película de vidro para celular"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
+                                </div>
+                                <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
+                                <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
+                            </article>
+                            <article class="pcard">
+                                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
+                                    <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Pen drive" data-add="Pen drive"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
+                                </div>
+                                <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
+                                <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span></p>
+                            </article>
+                            <article class="pcard">
+                                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
+                                    <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Mouse pad" data-add="Mouse pad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
+                                </div>
+                                <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
+                                <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
+                            </article>
+                            <article class="pcard">
+                                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
+                                    <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Cabo USB-C" data-add="Cabo USB-C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
+                                </div>
+                                <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
+                                <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
+                            </article>
+                            <article class="pcard">
+                                <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
+                                    <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Limpa-telas" data-add="Limpa-telas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
+                                </div>
+                                <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
+                                <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
+                            </article>
+                            <a class="deal-more" href="sede.html#ofertas">
+                                Ver mais
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                            </a>
+                        </div>
+                    </article>
 
-        <div class="hrail sede-coupons">
-            <label class="sede-coupon" for="oferta-tec">
-                <span class="sede-coupon__stub">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg>
-                    <span class="badge badge--discount">-20%</span>
-                </span>
-                <span class="sede-coupon__body">
-                    <span class="sede-coupon__title">Semana da tecnologia</span>
-                    <span class="sede-coupon__meta">Até 31/08 · 6 produtos</span>
-                    <span class="badge badge--urgent">Termina em 2 dias</span>
-                </span>
-                <svg class="sede-coupon__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </label>
-
-            <label class="sede-coupon" for="oferta-gamer">
-                <span class="sede-coupon__stub">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></svg>
-                    <span class="badge badge--discount">-10%</span>
-                </span>
-                <span class="sede-coupon__body">
-                    <span class="sede-coupon__title">Linha gamer</span>
-                    <span class="sede-coupon__meta">Sem data de término · 4 produtos</span>
-                    <span class="badge badge--soft">Só para assinantes</span>
-                </span>
-                <svg class="sede-coupon__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </label>
-        </div>
-
-        <!-- Produtos da oferta aberta. A mais barata dá o "a partir de". -->
-        <div class="sede-offer sede-offer--tec" id="oferta-tec-lista">
-            <p class="sede-offer__head">20% off em 6 produtos · a partir de <span class="price price--sm">R$ 5,60</span></p>
-            <div class="hrail">
-                <article class="pcard">
-                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/fone.jpg" alt="" loading="lazy">
-                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Fone Bluetooth com cancelamento de ruído" data-add="Fone Bluetooth com cancelamento de ruído"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
-                    </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 319,20</span><span class="price-old">R$ 399,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
-                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Fone Bluetooth com cancelamento de ruído</span></a></h3>
-                </article>
-                <article class="pcard">
-                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
-                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Película de vidro para celular" data-add="Película de vidro para celular"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
-                    </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
-                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
-                </article>
-                <article class="pcard">
-                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
-                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Pen drive" data-add="Pen drive"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
-                    </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
-                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
-                </article>
-                <article class="pcard">
-                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
-                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Mouse pad" data-add="Mouse pad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
-                    </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
-                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
-                </article>
-                <article class="pcard">
-                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
-                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Cabo USB-C" data-add="Cabo USB-C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
-                    </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
-                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
-                </article>
-                <article class="pcard">
-                    <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
-                        <label class="round-btn round-btn--sm pcard__add" for="modal-add" role="button" tabindex="0" aria-label="Adicionar Limpa-telas" data-add="Limpa-telas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></label>
-                    </div>
-                    <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
-                    <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
-                </article>
-            </div>
-        </div>
-
-        <!-- Oferta exclusiva: quem não assina vê o cupom, mas não os itens
-             nem o preço com desconto (só assinantes pagos, 4.8). -->
-        <div class="sede-offer sede-offer--gamer" id="oferta-gamer-lista">
-            <div class="sede-offer__lock">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                <p class="sede-offer__lock-text">Os 4 produtos desta oferta aparecem para quem assina a loja.</p>
-                <a class="sec-head__link" href="#assinatura">Assinar</a>
-            </div>
-        </div>
+        <!-- Carrossel da loja: as campanhas dela, no mesmo tamanho e formato do
+             carrossel da Início. Aqui só há a campanha da própria loja. -->
+        <section class="promos sede-promos" aria-label="Campanhas da loja">
+            <article class="promo">
+                <p class="promo__store"><span class="promo__who">Ponto Digital <span>· Centro</span></span><span class="promo__badges"><span class="badge badge--urgent">Termina em 2 dias</span><span class="badge badge--soft">6 produtos</span></span></p>
+                <a class="promo__media has-img" href="propaganda.html" aria-label="Semana da tecnologia: 20% em 6 itens, Ponto Digital">
+                    <img class="media-img" src="img/banners/tecnologia.jpg" alt="">
+                </a>
+                <div class="promo__marquee">
+                    <div class="promo__track" aria-hidden="true"><span>Semana da tecnologia: 20% em 6 itens</span><span>Semana da tecnologia: 20% em 6 itens</span></div>
+                </div>
+            </article>
+        </section>
     </section>
+
+
 
     <div class="band" role="presentation"></div>
 
@@ -364,13 +353,11 @@
             <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/suporte-celular.jpg" alt="" loading="lazy"></div>
         </article>
 
-        <!-- Item da oferta exclusiva: quem não assina vê o preço cheio e,
-             ao lado, o que pagaria assinando. -->
         <article class="sede-item">
             <div class="sede-item__body">
                 <h3 class="sede-item__name"><a href="produto.html">Carregador turbo 20 W</a></h3>
                 <p class="sede-item__desc">Carregamento rápido USB-C (PD 3.0). Bivolt.</p>
-                <p class="sede-item__price"><span class="price price--sm">R$ 69,00</span><span class="badge badge--soft">Assinante: R$ 62,10</span></p>
+                <p class="sede-item__price"><span class="price price--sm">R$ 69,00</span></p>
             </div>
             <div class="sede-item__photo has-img" aria-hidden="true"><img class="media-img" src="img/produtos/carregador.jpg" alt="" loading="lazy"></div>
         </article>
@@ -498,21 +485,17 @@
         <a href="produto.html">produto</a>
     </p>
 
-    <!-- Sacola presa logo acima da barra inferior. Mostra a sacola
-         inteira (4 itens de 2 lojas: 1 fone e 2 cabos HDMI daqui, trena da
-         Casa Firme), a mesma da tela de sacola. -->
-    <div class="cartbar">
-        <a class="cartbar__btn" href="carrinho.html" aria-label="Ver sacola, 4 itens, R$ 376,50">
-            <span class="cartbar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartbar__count">4</span></span>
-            <span class="cartbar__label">Ver sacola</span>
-            <span class="cartbar__total">R$ 376,50</span>
-        </a>
     </div>
 
-    <!-- Barra inferior: a mesma da Início em todas as telas (regra do
-         protótipo). -->
+    <!-- Sem barra inferior nem "Ver carrinho" nesta tela: só um botão
+         redondo de Início flutuando no canto esquerdo, em vidro fosco (o
+         conteúdo passa por trás dele, desfocado). -->
+    <a class="sede-home" href="index.html" aria-label="Início">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg>
+    </a>
+
     <!-- "+" do cartão de produto: escolher para onde vai o item. Em cima,
-         a sacola (compra agora); embaixo, os projetos do cliente (lista do
+         o carrinho (compra agora); embaixo, os projetos do cliente (lista do
          que ele quer comprar) e criar um novo. Abre por checkbox; um JS
          mínimo só escreve o nome do produto no título. -->
     <input class="ui-toggle" type="checkbox" id="modal-add">
@@ -527,9 +510,9 @@
                 <label class="icon-btn icon-btn--plain" for="modal-add" role="button" tabindex="0" aria-label="Fechar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></label>
             </div>
             <div class="modal__body">
-                <a class="add-opt add-opt--sacola" href="carrinho.html">
-                    <span class="add-opt__thumb add-opt__thumb--icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
-                    <span class="add-opt__body"><span class="add-opt__name">Sacola</span><span class="add-opt__meta">4 itens · R$ 376,50</span></span>
+                <a class="add-opt add-opt--carrinho" href="carrinho.html">
+                    <span class="add-opt__thumb add-opt__thumb--icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 11.6a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.2L20.5 7H6"/></svg></span>
+                    <span class="add-opt__body"><span class="add-opt__name">Carrinho</span><span class="add-opt__meta">4 itens · R$ 376,50</span></span>
                     <svg class="add-opt__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
                 </a>
 
@@ -561,29 +544,6 @@
             </div>
         </div>
     </div>
-
-    <nav class="tabbar" aria-label="Navegação principal">
-        <a class="tab is-active" href="index.html">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
-            Início
-        </a>
-        <a class="tab" href="busca.html">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
-            Explorar
-        </a>
-        <a class="tab" href="carrinho.html" aria-label="Sacola, 4 itens">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">4</span></span>
-            Sacola
-        </a>
-        <a class="tab" href="pedidos.html">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
-            Pedidos
-        </a>
-        <a class="tab" href="index.html#conta" aria-label="Conta, 2 notificações não lidas">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span class="tab__dot"></span></span>
-            Conta
-        </a>
-    </nav>
 
 </main>
 

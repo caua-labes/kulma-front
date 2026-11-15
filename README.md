@@ -22,12 +22,12 @@ se necessário.
 | Arquivo | Tela |
 |---|---|
 | `index.html` | Menu principal — cidade consultada, carrossel de ofertas das lojas em que o cliente é inscrito, busca, categorias e as três abas Produtos / Ofertas / Lojas |
-| `sede.html` | Perfil de uma sede — capa, endereço, assinatura, propagandas ativas, catálogo e horário de atendimento |
-| `produto.html` | Detalhe de um produto, no formato do Mercado Livre e válido para qualquer item — galeria com várias fotos, variação, preço com desconto, entrega/retirada, estoque, compra, sede vendedora, características (principais e da categoria), opiniões e outras sedes |
+| `sede.html` | Perfil de uma sede — capa, endereço, propagandas ativas, catálogo e horário de atendimento |
+| `produto.html` | Detalhe de um produto, no formato do Mercado Livre e válido para qualquer item — galeria com várias fotos, variação, preço com desconto, entrega/retirada, estoque, compra, sede vendedora, avaliações e outras sedes |
 | `propaganda.html` | Tela de uma propaganda — imagem da campanha, título, loja que anuncia e produtos da promoção |
 | `splash.html` · `login.html` · `cadastro.html` | Entrada: abertura (segue sozinha para o login), login por CPF e criação de conta — as únicas telas sem as barras |
 | `busca.html` | Resultado da busca: produtos e lojas da cidade para o termo digitado na barra superior |
-| `carrinho.html` | Sacola com itens de várias lojas, agrupados por loja, e presente item a item |
+| `carrinho.html` | Carrinho com itens de várias lojas, agrupados por loja, e presente item a item |
 | `checkout.html` · `endereco.html` · `confirmacao.html` | Finalizar pedido (um endereço por loja), escolher/adicionar endereço e pedido enviado |
 | `pedidos.html` · `pedido.html` | Atividade › Pedidos e o detalhe com o status de cada item |
 | `reservar.html` · `reservas.html` · `reserva.html` | Reservar para retirada, Atividade › Reservas e o detalhe com o código do balcão |
@@ -45,9 +45,6 @@ Os dados mockados seguem isso (lojas de Blumenau como Ponto Digital, Casa Firme,
 Farmácia Vila Nova e Pet Itoupava), e a tela de produto é **genérica**, válida para qualquer item:
 
 - **Variação** opcional, com o nome do atributo vindo do produto (Cor, Tamanho, Voltagem…).
-- **Características** em duas tabelas: as *principais*, que todo produto tem (marca, modelo,
-  categoria, condição, garantia, dimensões, peso, código de barras), e as *da categoria*, que mudam
-  conforme o tipo de item.
 - Nada específico de alimento (validade, ingredientes, alergênicos).
 
 ## Imagens
@@ -60,14 +57,16 @@ e a `<img class="media-img">` preenche a caixa (CSS em `styles.css`).
 
 ## Regra: barras em todas as telas
 
-**Toda tela tem a mesma barra superior e a mesma barra inferior**, sem exceção:
+**Toda tela tem a mesma barra superior e a mesma barra inferior**, com as exceções abaixo:
 
 - **Superior (`.topbar`)** — busca sublinhada em navy e, à direita, o pin com a cidade
   (Blumenau / SC), que abre o pop-up de troca de cidade.
-- **Inferior (`.tabbar`)** — Início, Explorar, Sacola, Pedidos e Conta.
+- **Inferior (`.tabbar`)** — Início, Explorar, Carrinho, Pedidos e Conta.
+  - **Exceções:** Splash, Login e Cadastro não têm as barras; na **tela da loja** a barra inferior
+    dá lugar a um único botão redondo de Início, em vidro fosco, flutuando no canto esquerdo.
 
 O CSS das duas mora em `styles.css`. Uma tela pode acrescentar coisas entre elas (capa, galeria,
-a sacola da sede logo acima da barra inferior), mas nunca trocá-las por uma barra própria. O
+a folha de conteúdo da loja), mas nunca trocá-las por uma barra própria. O
 voltar das telas internas é o botão redondo sobre a capa ou a foto.
 
 ## Navegação entre as telas
@@ -75,11 +74,11 @@ voltar das telas internas é o botão redondo sobre a capa ou a foto.
 Tudo é mockado, mas dá para percorrer o app de ponta a ponta:
 
 - **Entrada:** `splash` → `login` (↔ `cadastro`) → Início.
-- **Compra:** produto → *Comprar agora* (`checkout`) ou *Adicionar à sacola* (`carrinho` → `checkout`)
+- **Compra:** produto → *Comprar agora* (`checkout`) ou *Adicionar ao carrinho* (`carrinho` → `checkout`)
   → *Trocar endereço* (`endereco`) → *Confirmar pedido* (`confirmacao`) → *Acompanhar* (`pedido`)
   → *Avaliar* (`avaliacao`).
 - **Reserva:** produto → *Reservar para retirada* (`reservar`) → `reserva` → `reservas`.
-- **Barra inferior:** Início, Explorar (`busca`), Sacola (`carrinho`), Pedidos (`pedidos` ↔
+- **Barra inferior:** Início, Explorar (`busca`), Carrinho (`carrinho`), Pedidos (`pedidos` ↔
   `reservas`) e Conta (painel da Início, que leva a `perfil`). A busca da barra superior abre
   `busca.html?q=…` — o resultado é sempre o mesmo mock, só o termo muda no título.
 
@@ -132,7 +131,7 @@ em tempo real.
   API, banco ou integração com o backend `kulma-core`.
 - **Filtros são só visuais.** Marcar uma categoria ou trocar de cidade muda a aparência do
   controle, mas não filtra de fato os cartões abaixo.
-- **Botões de ação** (Adicionar ao carrinho, Reservar, Assinar) não têm efeito —
+- **Botões de ação** (Adicionar ao carrinho, Reservar) não têm efeito —
   não existe carrinho, sessão ou persistência.
 - **As 18 telas do cliente** mapeadas no documento de projeto (seção 7) existem, mais a de
   propaganda. Ficaram de fora telas que a especificação não descreve (notificações, denúncia,

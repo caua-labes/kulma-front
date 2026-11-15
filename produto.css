@@ -5,13 +5,28 @@
    e a inferior de todas as telas (styles.css): título e nota antes da galeria de várias fotos (contador "1/5" e
    bolinhas), preço com o antigo riscado em cima, entrega e retirada em
    linhas de texto, estoque e quantidade, os botões de compra no fluxo da
-   página, quem vende, o que saber, características, descrição, opiniões
+   página, quem vende, descrição, avaliações
    e as outras sedes.
    Carrega depois de styles.css, que traz tokens, reset e os componentes
    compartilhados usados aqui (.photo, .store-row, .stepper, .btn, .badge,
    .price, .sec-head, .story-ring). Este arquivo só posiciona e acrescenta
    o que é exclusivo do item.
    ===================================================================== */
+
+/* Nesta tela, textos, bordas e ícones usam o navy mais claro do projeto
+   (--navy-700), que lê como azul e não como preto. A busca do topo e a
+   barra de baixo, iguais em todas as telas, ficam no navy de sempre. */
+.app--item {
+    --navy: var(--navy-700);
+    --ink: var(--navy-700);
+}
+
+.app--item .topbar,
+.app--item .tabbar,
+.app--item .modal {
+    --navy: #132A45;
+    --ink: #132A45;
+}
 
 /* ---------- Título ---------- */
 
@@ -63,7 +78,6 @@
     color: var(--navy);
 }
 
-
 /* ---------- Galeria ---------- */
 /* Fotos lado a lado, uma por vez, arrastando (scroll-snap). Voltar em
    cima à esquerda, contador embaixo à esquerda e compartilhar embaixo
@@ -98,18 +112,6 @@
     left: var(--gutter);
 }
 
-.gallery__count {
-    position: absolute;
-    bottom: 40px;
-    left: var(--gutter);
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: var(--navy-050);
-    color: var(--navy);
-    font-size: 12px;
-    font-weight: 600;
-}
-
 .gallery__fab {
     position: absolute;
     right: var(--gutter);
@@ -126,7 +128,8 @@
     cursor: pointer;
 }
 
-.gallery__fab--share { bottom: 40px; }
+.gallery__fab--share { bottom: 82px; }
+.gallery__fab--zoom  { bottom: 130px; }
 
 .gallery__dots {
     display: flex;
@@ -144,7 +147,6 @@
 }
 
 .gallery__dots span.is-active { background: var(--navy); transform: scale(1.25); }
-
 
 /* ---------- Variação ---------- */
 
@@ -184,7 +186,6 @@
 
 .ui-toggle:focus-visible + .item-var__opt { outline: 2px solid var(--navy); outline-offset: 2px; }
 
-
 /* ---------- Preço ---------- */
 
 .item-price { padding-top: 18px; }
@@ -200,31 +201,68 @@
 }
 
 .item-price__promo {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 5px;
-    margin-top: 8px;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--red-050);
     color: var(--red-700);
     font-size: 12.5px;
     font-weight: 600;
+    transition: background .15s ease;
 }
 
+.item-price__promo:hover { background: #FBE0E3; }
+.item-price__promo:active { background: #F8D2D7; }
+.item-price__promo:focus-visible { outline: 2px solid var(--red-700); outline-offset: 2px; }
+
+.item-price__promo > svg { flex: none; }
+.item-price__promo-text { flex: 1; min-width: 0; display: grid; gap: 1px; line-height: 1.3; }
+.item-price__promo-text strong { font-weight: 700; }
+.item-price__promo-text span { font-weight: 500; }
+
+.item-price__promo-go {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 700;
+    white-space: nowrap;
+}
 
 /* ---------- Entrega e retirada ---------- */
 
 .item-ship {
     display: grid;
-    gap: 14px;
-    padding-top: 18px;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    padding-top: 14px;
 }
 
 .item-ship__row {
     display: flex;
-    gap: 10px;
+    align-items: stretch;
+    gap: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
     color: var(--navy);
 }
 
-.item-ship__row > svg { flex: none; margin-top: 1px; }
+.item-ship__row > div { flex: 1; min-width: 0; padding: 12px 14px 12px 0; align-self: center; }
+.item-ship__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    background: var(--navy-050);
+    color: var(--navy);
+}
+
+.item-ship__icon svg { width: 34px; height: 34px; }
 
 .item-ship__title { margin: 0; font-size: 14px; line-height: 1.35; }
 
@@ -240,7 +278,6 @@
     text-decoration-color: var(--navy-300);
     text-underline-offset: 3px;
 }
-
 
 /* ---------- Estoque, quantidade e compra ---------- */
 
@@ -302,7 +339,6 @@
     margin-top: 18px;
 }
 
-
 /* ---------- Quem vende ---------- */
 
 .item-seller {
@@ -311,12 +347,30 @@
     border-top: 1px solid var(--line);
 }
 
+.item-seller__label {
+    margin: 0 0 12px;
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.item-seller__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .item-seller__who {
+    flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 12px;
     color: var(--navy);
 }
+
+.item-seller__follow { flex: none; }
 
 .item-seller__logo {
     flex: none;
@@ -330,26 +384,11 @@
 }
 
 .item-seller__name  { display: block; font-size: 14px; }
+.item-seller__open { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); }
+.item-seller__open svg { vertical-align: -1px; color: var(--navy); }
+.item-seller__open strong { color: var(--navy); font-weight: 600; }
+
 .item-seller__sales { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); }
-
-.item-trust {
-    display: grid;
-    gap: 12px;
-    margin: 18px 0 0;
-    padding: 0;
-    list-style: none;
-}
-
-.item-trust li {
-    display: flex;
-    gap: 10px;
-    font-size: 13px;
-    line-height: 1.4;
-    color: var(--muted);
-}
-
-.item-trust svg { flex: none; color: var(--navy); }
-.item-trust strong { color: var(--navy); font-weight: 600; }
 
 .item-share {
     display: flex;
@@ -371,7 +410,6 @@
     font-weight: 600;
     cursor: pointer;
 }
-
 
 /* ---------- Blocos de informação ---------- */
 /* Separados por linha fina, como as seções do Mercado Livre. */
@@ -403,38 +441,6 @@
 
 .item-facts li::marker { color: var(--navy-300); }
 
-/* Subtítulo de cada tabela: "Principais" vale para qualquer produto;
-   "Da categoria" muda conforme o tipo de item. */
-.item-specs__group {
-    margin: 0 0 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-}
-
-.item-specs + .item-specs__group { margin-top: 18px; }
-
-/* Tabela listrada, como "Características gerais". */
-.item-specs {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-}
-
-.item-specs tr:nth-child(odd) { background: var(--surface-alt); }
-
-.item-specs th,
-.item-specs td {
-    padding: 12px 14px;
-    text-align: left;
-    vertical-align: top;
-}
-
-.item-specs th { width: 45%; font-weight: 600; color: var(--navy); }
-.item-specs td { color: var(--muted); }
-
 .item-desc {
     margin: 0;
     font-size: 14px;
@@ -442,8 +448,7 @@
     color: var(--muted);
 }
 
-
-/* ---------- Opiniões ---------- */
+/* ---------- Avaliações ---------- */
 
 .reviews {
     display: flex;
@@ -506,8 +511,9 @@
 }
 
 .review__text { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: var(--navy); }
-.review__when { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+.review-more { margin-top: 12px; }
 
+.review__when { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
 
 /* ---------- Também nestas lojas ---------- */
 
@@ -516,8 +522,157 @@
     border-top: 1px solid var(--line);
 }
 
-.item-stores .store-row__side { pointer-events: none; }
+/* ---------- Miniaturas e zoom ---------- */
+/* Lista de fotos embaixo da galeria (no lugar das bolinhas): toque numa
+   miniatura para ir àquela foto; a ativa ganha contorno navy. Tocar na
+   foto (ou na lupa) abre a foto ampliada, com + e −, duplo toque e
+   rolagem para arrastar. */
 
-/* Sem desconto nestas sedes: preço em navy, como na listagem. */
-.item-stores .price { color: var(--navy); }
-.item-stores .store-row.is-closed .price { color: var(--navy-300); }
+.gallery__thumbs {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    padding: 12px 28px 2px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gallery__thumbs::-webkit-scrollbar { display: none; }
+.gallery__thumbs.is-arrastando { cursor: grabbing; scroll-snap-type: none; }
+
+.gallery__thumb {
+    flex: none;
+    scroll-snap-align: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 -2px;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: var(--photo);
+    cursor: pointer;
+    opacity: .75;
+    transform: scale(.72);
+    transition: opacity .15s ease, border-color .15s ease, transform .2s ease;
+}
+
+.gallery__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gallery__thumb:hover { opacity: 1; }
+.gallery__thumb.is-active { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy-050); opacity: 1; transform: scale(1); }
+.gallery__thumb:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+.gallery__slide { cursor: zoom-in; }
+
+.zoom-aberto { overflow: hidden; }
+
+.zoom {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 20, 33, .96);
+}
+
+.zoom[hidden] { display: none; }
+
+.zoom__bar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 430px;
+    width: 100%;
+    margin: 0 auto;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 12px 12px;
+}
+
+.zoom__count { color: #fff; font-size: 13px; font-weight: 600; }
+
+.zoom__btns { display: flex; gap: 8px; }
+
+.zoom__btn {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+    cursor: pointer;
+}
+
+.zoom__btn:hover { background: rgba(255, 255, 255, .26); }
+.zoom__btn:disabled { opacity: .35; cursor: default; }
+.zoom__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.zoom__stage {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    cursor: zoom-in;
+}
+
+.zoom__stage.is-zoom { cursor: grab; }
+
+.zoom__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.gallery__dots { display: none; }
+
+.gallery__count {
+    position: absolute;
+    bottom: 88px;
+    left: var(--gutter);
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--navy-050);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Filtro por estrelas das avaliações. A faixa sangra até as bordas da
+   tela e rola de lado; o chip marcado é o navy cheio de sempre. Cada
+   avaliação traz data-nota; as que não batem com a nota marcada somem. */
+.rev-filter { margin: 16px calc(-1 * var(--gutter)) 0; }
+
+#avaliacoes .review { display: block; }
+
+#av-5:checked ~ .review:not([data-nota="5"]),
+#av-4:checked ~ .review:not([data-nota="4"]),
+#av-3:checked ~ .review:not([data-nota="3"]),
+#av-2:checked ~ .review:not([data-nota="2"]),
+#av-1:checked ~ .review:not([data-nota="1"]) { display: none; }
+
+#av-todas:checked ~ .rev-filter label[for="av-todas"],
+#av-5:checked ~ .rev-filter label[for="av-5"],
+#av-4:checked ~ .rev-filter label[for="av-4"],
+#av-3:checked ~ .rev-filter label[for="av-3"],
+#av-2:checked ~ .rev-filter label[for="av-2"],
+#av-1:checked ~ .rev-filter label[for="av-1"] {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
+}
+
+#avaliacoes input:focus-visible ~ .rev-filter label { outline: none; }
+.review + .review { margin-top: 10px; }

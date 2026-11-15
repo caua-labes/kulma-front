@@ -12,11 +12,11 @@
 </head>
 <body>
 <!-- Página de item no formato do Mercado Livre, entre as barras de cima
-     e de baixo de todas as telas: título e nota antes da galeria, galeria com várias fotos e contador,
+     e de baixo de todas as telas: título e nota antes da galeria, galeria com várias fotos e miniaturas,
      preço, entrega/retirada, estoque e os dois botões de compra no fluxo
      da página (sem barra fixa). Depois, quem vende, o que saber,
-     características, descrição, opiniões e as outras sedes. -->
-<main class="app">
+     descrição, avaliações e mais produtos da loja. -->
+<main class="app app--item">
 
     <!-- Barra superior: a mesma da Início em todas as telas (regra do
          protótipo). A cidade leva ao pop-up de troca, na Início. -->
@@ -33,13 +33,12 @@
     </div>
 
     <div class="item-intro gutter">
-        <a class="item-intro__brand" href="sede.html">Ver mais produtos da Ponto Digital</a>
-        <!-- Condição e vendidos à esquerda, como no Mercado Livre; a nota é
+        <!-- Vendidos à esquerda, como no Mercado Livre; a nota é
              do produto e soma as avaliações de todas as sedes da empresa
              que o vendem (regra 4.7). -->
         <div class="item-intro__meta">
-            <span>Novo <span class="item-intro__sep">|</span> +500 vendidos</span>
-            <a class="item-intro__rating" href="#opinioes" aria-label="Nota 4,7 de 5, 128 avaliações">
+            <span>+500 vendidos</span>
+            <a class="item-intro__rating" href="#avaliacoes" aria-label="Nota 4,7 de 5, 128 avaliações">
                 4,7
                 <span class="stars" aria-hidden="true">★★★★★</span>
                 (128)
@@ -54,22 +53,36 @@
          compartilhar embaixo à direita. -->
     <section class="gallery" aria-label="Fotos do produto">
         <div class="gallery__track" id="galeria" tabindex="0">
-            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 1 de 5: fone de frente"><img class="media-img" src="img/produtos/fone.jpg" alt=""></div>
-            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 2 de 5: fone sobre a mesa"><img class="media-img" src="img/produtos/fone-2.jpg" alt="" loading="lazy"></div>
-            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 3 de 5: fone com teclado e mouse"><img class="media-img" src="img/produtos/fone-3.jpg" alt="" loading="lazy"></div>
-            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 4 de 5: fone sobre um livro"><img class="media-img" src="img/produtos/fone-4.jpg" alt="" loading="lazy"></div>
-            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 5 de 5: detalhe do acabamento"><img class="media-img" src="img/produtos/fone-5.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 1 de 8: fone de frente"><img class="media-img" src="img/produtos/fone.jpg" alt=""></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 2 de 8: fone sobre a mesa"><img class="media-img" src="img/produtos/fone-2.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 3 de 8: fone com teclado e mouse"><img class="media-img" src="img/produtos/fone-3.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 4 de 8: fone sobre um livro"><img class="media-img" src="img/produtos/fone-4.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 5 de 8: detalhe do acabamento"><img class="media-img" src="img/produtos/fone-5.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 6 de 8: fone pendurado"><img class="media-img" src="img/produtos/fone-6.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 7 de 8: fone sobre uma mesa"><img class="media-img" src="img/produtos/fone-7.jpg" alt="" loading="lazy"></div>
+            <div class="gallery__slide photo has-img" role="img" aria-label="Foto 8 de 8: estojo de transporte"><img class="media-img" src="img/produtos/fone-8.jpg" alt="" loading="lazy"></div>
         </div>
         <a class="round-btn gallery__back" href="sede.html" aria-label="Voltar para a loja">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
         </a>
-        <span class="gallery__count" aria-hidden="true"><span id="galeria-atual">1</span>/5</span>
+        <div class="gallery__thumbs" id="galeria-thumbs" role="group" aria-label="Escolher foto">
+            <button class="gallery__thumb is-active" type="button" data-foto="0" aria-label="Ver foto 1 de 8" aria-current="true"><img src="img/produtos/fone.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="1" aria-label="Ver foto 2 de 8"><img src="img/produtos/fone-2.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="2" aria-label="Ver foto 3 de 8"><img src="img/produtos/fone-3.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="3" aria-label="Ver foto 4 de 8"><img src="img/produtos/fone-4.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="4" aria-label="Ver foto 5 de 8"><img src="img/produtos/fone-5.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="5" aria-label="Ver foto 6 de 8"><img src="img/produtos/fone-6.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="6" aria-label="Ver foto 7 de 8"><img src="img/produtos/fone-7.jpg" alt="" loading="lazy"></button>
+            <button class="gallery__thumb" type="button" data-foto="7" aria-label="Ver foto 8 de 8"><img src="img/produtos/fone-8.jpg" alt="" loading="lazy"></button>
+        </div>
+        <span class="gallery__count" aria-hidden="true"><span id="galeria-atual">1</span>/8</span>
+        <button class="gallery__fab gallery__fab--zoom" type="button" id="galeria-zoom" aria-label="Ampliar foto">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2M11 8v6M8 11h6"/></svg>
+        </button>
         <button class="gallery__fab gallery__fab--share" type="button" aria-label="Compartilhar">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg>
         </button>
-        <div class="gallery__dots" id="galeria-dots" aria-hidden="true">
-            <span class="is-active"></span><span></span><span></span><span></span><span></span>
-        </div>
+        <div class="gallery__dots" id="galeria-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </section>
 
     <!-- Variação, como "Voltagem" no Mercado Livre: serve a qualquer
@@ -77,8 +90,7 @@
          opções vêm do catálogo, e só aparece quando o produto tem
          variação. Botões contornados, o escolhido em navy; o valor
          escolhido aparece ao lado do nome (JS, no fim). -->
-    <fieldset class="item-var gutter" data-variacao>
-        <legend class="item-var__label">Cor: <strong data-variacao-valor>Preto</strong></legend>
+    <fieldset class="item-var gutter" data-variacao aria-label="Cor">
         <div class="item-var__opts">
             <input class="ui-toggle" type="radio" name="variacao" id="var-preto" value="Preto" checked>
             <label class="item-var__opt" for="var-preto">Preto</label>
@@ -91,42 +103,22 @@
 
     <!-- Preço efetivo = preço da sede, quando existe; senão, o do catálogo
          (regra 4.1). Com desconto, o preço vai em vermelho e o antigo
-         riscado em cima; a campanha que dá o desconto leva à propaganda. -->
+         riscado em cima; a campanha que dá o desconto aparece como um link discreto e leva à propaganda. -->
     <div class="item-price gutter">
         <span class="price-old">R$ 399,00</span>
         <p class="item-price__now">
             <span class="price price--lg">R$ 319,20</span>
             <span class="badge badge--discount">20% OFF</span>
         </p>
-        <a class="item-price__promo" href="propaganda.html">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>
-            Semana da tecnologia · até 31/08
+        <a class="item-price__promo" href="propaganda.html" aria-label="Ver a oferta Semana da tecnologia, termina em 2 dias">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg>
+            <span class="item-price__promo-text"><strong>Semana da tecnologia</strong><span>termina em 2 dias</span></span>
+            <span class="item-price__promo-go">Ver oferta
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
         </a>
     </div>
 
-    <!-- Como receber, em linhas de texto como o frete do Mercado Livre.
-         O cliente não escolhe o TIPO de entrega (sede ou autônomo): isso
-         o sistema resolve. A retirada só aparece porque esta sede permite
-         reserva e tem estoque acima do mínimo (regra 4.5). -->
-    <div class="item-ship gutter">
-        <div class="item-ship__row">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
-            <div>
-                <p class="item-ship__title">Chega <strong>hoje às 14h</strong>, na próxima ronda</p>
-                <a class="item-ship__link" href="#">Mais detalhes e formas de entrega</a>
-            </div>
-        </div>
-        <div class="item-ship__row">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16l-1-5H5ZM5 10v10h14V10M10 20v-5h4v5"/></svg>
-            <div>
-                <p class="item-ship__title">Reserve e retire na loja <strong>sem custo</strong></p>
-                <p class="item-ship__sub">Fica separado por 3 h · Centro, a 800 m</p>
-                <a class="item-ship__link" href="#">Ver no mapa</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Estoque desta sede, e a quantidade não passa dele. -->
     <div class="item-buy gutter">
         <p class="item-buy__stock">Estoque disponível</p>
         <div class="item-qty">
@@ -146,77 +138,60 @@
         </label>
 
         <!-- Comprar agora é o único vermelho cheio da tela; adicionar à
-             sacola fica em navy claro. Reservar não é compra: vai para
-             "Minhas reservas", não para a sacola. -->
+             carrinho fica em navy claro. Reservar não é compra: vai para
+             "Minhas reservas", não para o carrinho. -->
         <div class="item-buy__actions">
             <a class="btn btn--primary btn--block" href="checkout.html">Comprar agora · <span id="total">R$ 319,20</span></a>
             <a class="btn btn--quiet btn--block" href="carrinho.html">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><path d="M12 12v5M9.5 14.5h5"/></svg>
-                Adicionar à sacola
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 11.6a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.2L20.5 7H6"/><path d="M13.2 9v4M11.2 11h4"/></svg>
+                Adicionar ao carrinho
             </a>
             <a class="btn btn--outline btn--block" href="reservar.html">Reservar para retirada</a>
         </div>
     </div>
 
+    <!-- Como receber, em linhas de texto como o frete do Mercado Livre.
+         O cliente não escolhe o TIPO de entrega (sede ou autônomo): isso
+         o sistema resolve. A retirada só aparece porque esta sede permite
+         reserva e tem estoque acima do mínimo (regra 4.5). -->
+    <div class="item-ship gutter">
+        <div class="item-ship__row">
+            <span class="item-ship__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/></svg></span>
+            <div>
+                <p class="item-ship__title">Chega <strong>hoje às 14h</strong>, na próxima ronda</p>
+                <a class="item-ship__link" href="#">Mais detalhes e formas de entrega</a>
+            </div>
+        </div>
+        <div class="item-ship__row">
+            <span class="item-ship__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16l-1-5H5ZM5 10v10h14V10M10 20v-5h4v5"/></svg></span>
+            <div>
+                <p class="item-ship__title">Reserve e retire na loja <strong>sem custo</strong></p>
+                <p class="item-ship__sub">Fica separado por 3 h · Centro, a 800 m</p>
+                <a class="item-ship__link" href="#">Ver no mapa</a>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <!-- Estoque desta sede, e a quantidade não passa dele. -->
     <!-- Quem vende: a oferta pertence a uma sede específica. -->
     <section class="item-seller gutter" aria-label="Vendido por">
-        <a class="item-seller__who" href="sede.html">
-            <span class="item-seller__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
-            <span>
-                <span class="item-seller__name">Vendido por <strong>Ponto Digital</strong></span>
-                <span class="item-seller__sales">Centro · +2 mil vendas</span>
-            </span>
-        </a>
-        <ul class="item-trust">
-            <li>
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="3.6"/><path d="m16 11 2 2 4-4"/></svg>
-                <span><strong>Você é inscrito.</strong> Recebe as ofertas desta loja primeiro.</span>
-            </li>
-            <li>
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>
-                <span><strong>Compra garantida.</strong> Se não chegar como pediu, você recebe o dinheiro de volta.</span>
-            </li>
-        </ul>
+        <h2 class="item-seller__label">Vendido por:</h2>
+        <div class="item-seller__row">
+            <a class="item-seller__who" href="sede.html">
+                <span class="item-seller__logo story-ring has-img" aria-hidden="true"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></span>
+                <span>
+                    <span class="item-seller__name">Ponto Digital</span>
+                    <span class="item-seller__sales">Centro · Aberta até 20h</span>
+                    <span class="item-seller__open"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> <strong>4,8</strong> · +2 mil vendas</span>
+                </span>
+            </a>
+            <button class="icon-btn icon-btn--sm store-sub item-seller__follow" type="button" aria-pressed="false" aria-label="Seguir a loja Ponto Digital"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
         <div class="item-share">
             <button type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="m8.3 10.8 7.4-4.3M8.3 13.2l7.4 4.3"/></svg> Compartilhar</button>
         </div>
-    </section>
-
-    <section class="item-block gutter">
-        <h2 class="item-block__title">O que você precisa saber sobre este produto</h2>
-        <ul class="item-facts">
-            <li>Cancelamento ativo de ruído com modo ambiente.</li>
-            <li>Até 30 h de bateria com o estojo; 10 min de carga dão 2 h de uso.</li>
-            <li>Bluetooth 5.3, conecta em dois aparelhos ao mesmo tempo.</li>
-            <li>Microfone para chamadas e controles por toque.</li>
-            <li>Garantia de 12 meses e devolução em até 7 dias.</li>
-        </ul>
-    </section>
-
-    <section class="item-block gutter">
-        <h2 class="item-block__title">Características</h2>
-        <!-- Principais: as linhas que todo produto tem, de qualquer
-             categoria. Embaixo, as que dependem da categoria (aqui,
-             áudio); outro produto troca só essa segunda tabela. -->
-        <h3 class="item-specs__group">Principais</h3>
-        <table class="item-specs">
-            <tr><th scope="row">Marca</th><td>Sonora</td></tr>
-            <tr><th scope="row">Modelo</th><td>Pulse ANC 300</td></tr>
-            <tr><th scope="row">Categoria</th><td>Eletrônicos › Áudio › Fones</td></tr>
-            <tr><th scope="row">Condição</th><td>Novo</td></tr>
-            <tr><th scope="row">Cor</th><td>Preto, branco ou azul</td></tr>
-            <tr><th scope="row">Garantia</th><td>12 meses, pela loja</td></tr>
-            <tr><th scope="row">Dimensões da embalagem</th><td>18 × 16 × 6 cm</td></tr>
-            <tr><th scope="row">Peso</th><td>250 g</td></tr>
-            <tr><th scope="row">Código de barras</th><td>7891234567895</td></tr>
-        </table>
-        <h3 class="item-specs__group">Da categoria</h3>
-        <table class="item-specs">
-            <tr><th scope="row">Conexão</th><td>Bluetooth 5.3</td></tr>
-            <tr><th scope="row">Autonomia</th><td>30 h com o estojo</td></tr>
-            <tr><th scope="row">Cancelamento de ruído</th><td>Ativo (ANC)</td></tr>
-            <tr><th scope="row">Itens inclusos</th><td>Fone, estojo e cabo USB-C</td></tr>
-        </table>
     </section>
 
     <section class="item-block gutter">
@@ -228,10 +203,10 @@
         </p>
     </section>
 
-    <!-- Opiniões: nota geral e distribuição por estrelas, como no
+    <!-- Avaliações: nota geral e distribuição por estrelas, como no
          Mercado Livre. -->
-    <section class="item-block gutter" id="opinioes">
-        <h2 class="item-block__title">Opiniões do produto</h2>
+    <section class="item-block gutter" id="avaliacoes">
+        <h2 class="item-block__title">Avaliações do produto</h2>
         <div class="reviews">
             <div class="reviews__score">
                 <p class="reviews__num">4,7</p>
@@ -246,54 +221,128 @@
                 <li><span class="reviews__bar"><span style="width:1%"></span></span><span>1 ★</span></li>
             </ul>
         </div>
-        <article class="review">
+        <!-- Filtro por estrelas: radios antes das avaliações, no mesmo pai,
+             para o CSS esconder as que não têm a nota escolhida. -->
+        <input class="chip-toggle" type="radio" name="nota-filtro" id="av-todas" checked>
+        <input class="chip-toggle" type="radio" name="nota-filtro" id="av-5">
+        <input class="chip-toggle" type="radio" name="nota-filtro" id="av-4">
+        <input class="chip-toggle" type="radio" name="nota-filtro" id="av-3">
+        <input class="chip-toggle" type="radio" name="nota-filtro" id="av-2">
+        <input class="chip-toggle" type="radio" name="nota-filtro" id="av-1">
+        <div class="chips-row rev-filter" role="group" aria-label="Filtrar avaliações por estrelas">
+            <label class="chip" for="av-todas">Todas</label>
+            <label class="chip" for="av-5">5 ★</label>
+            <label class="chip" for="av-4">4 ★</label>
+            <label class="chip" for="av-3">3 ★</label>
+            <label class="chip" for="av-2">2 ★</label>
+            <label class="chip" for="av-1">1 ★</label>
+        </div>
+        <article class="review" data-nota="5">
             <p class="stars" aria-label="5 de 5">★★★★★</p>
             <p class="review__text">O cancelamento de ruído funciona bem no ônibus. Chegou na ronda das 14h, bem embalado.</p>
             <p class="review__when">Há 2 semanas</p>
         </article>
+        <article class="review" data-nota="5">
+            <p class="stars" aria-label="5 de 5">★★★★★</p>
+            <p class="review__text">Bateria dura o dia todo e o microfone é muito bom nas chamadas.</p>
+            <p class="review__when">Há 3 semanas</p>
+        </article>
+        <article class="review" data-nota="4">
+            <p class="stars" aria-label="4 de 5">★★★★☆</p>
+            <p class="review__text">Som muito bom pelo preço. A almofada esquenta um pouco depois de horas de uso.</p>
+            <p class="review__when">Há 1 mês</p>
+        </article>
+        <article class="review" data-nota="3">
+            <p class="stars" aria-label="3 de 5">★★★☆☆</p>
+            <p class="review__text">Funciona bem, mas o aplicativo demorou para reconhecer o fone na primeira vez.</p>
+            <p class="review__when">Há 2 meses</p>
+        </article>
+        <article class="review" data-nota="2">
+            <p class="stars" aria-label="2 de 5">★★☆☆☆</p>
+            <p class="review__text">O cancelamento de ruído é fraco em ambientes muito barulhentos.</p>
+            <p class="review__when">Há 3 meses</p>
+        </article>
+        <article class="review" data-nota="1">
+            <p class="stars" aria-label="1 de 5">★☆☆☆☆</p>
+            <p class="review__text">Chegou com o cabo USB-C faltando. A loja resolveu, mas demorou.</p>
+            <p class="review__when">Há 4 meses</p>
+        </article>
+        <a class="btn btn--outline btn--block review-more" href="#avaliacoes">Ver mais avaliações</a>
     </section>
 
-    <!-- O produto é da empresa: outras sedes vendem o mesmo item, cada uma
-         com seu preço e estoque (branch_product). A sede sem estoque
-         aparece apagada, não some. -->
-    <section class="sec item-stores">
+        <section class="sec item-stores" aria-labelledby="mais-loja">
         <div class="sec-head">
             <div>
-                <h2 class="sec-head__title">Também nestas lojas</h2>
-                <p class="sec-head__sub">Mesmo produto, preço e estoque de cada sede</p>
+                <h2 class="sec-head__title" id="mais-loja">Mais produtos da Ponto Digital</h2>
+                <p class="sec-head__sub">Outros itens da loja onde você está vendo este produto</p>
             </div>
+            <a class="sec-head__link" href="sede.html">Ver loja</a>
         </div>
-
-        <article class="store-row">
-            <div class="store-row__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
-            <div class="store-row__body">
-                <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Itoupava</a></h3>
-                <p class="store-row__meta"><span>3,2 km</span><span>25 em estoque</span></p>
-            </div>
-            <div class="store-row__side"><span class="price price--sm">R$ 399,00</span></div>
-        </article>
-
-        <article class="store-row">
-            <div class="store-row__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
-            <div class="store-row__body">
-                <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Garcia</a></h3>
-                <p class="store-row__meta"><span>5,7 km</span><span>8 em estoque</span></p>
-            </div>
-            <div class="store-row__side"><span class="price price--sm">R$ 389,90</span></div>
-        </article>
-
-        <article class="store-row is-closed">
-            <div class="store-row__logo has-img"><img class="media-img" src="img/lojas/ponto-digital.jpg" alt="" loading="lazy"></div>
-            <div class="store-row__body">
-                <h3 class="store-row__name"><a href="sede.html">Ponto Digital · Velha</a></h3>
-                <p class="store-row__meta"><span>9,1 km</span><span>Sem estoque hoje</span></p>
-            </div>
-            <div class="store-row__side"><span class="price price--sm">R$ 399,00</span></div>
-        </article>
+        <div class="hrail">
+            <article class="pcard">
+                                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pelicula.jpg" alt="" loading="lazy">
+                                            </div>
+                                            <p class="pcard__price"><span class="price price--sm">R$ 6,40</span><span class="price-old">R$ 8,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Película de vidro para celular</span></a></h3>
+                                            <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
+                                        </article>
+            <article class="pcard">
+                                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/pen-drive.jpg" alt="" loading="lazy">
+                                            </div>
+                                            <p class="pcard__price"><span class="price price--sm">R$ 31,92</span><span class="price-old">R$ 39,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Pen drive</span></a></h3>
+                                            <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,8</span></p>
+                                        </article>
+            <article class="pcard">
+                                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/mouse-pad.jpg" alt="" loading="lazy">
+                                            </div>
+                                            <p class="pcard__price"><span class="price price--sm">R$ 5,60</span><span class="price-old">R$ 7,00</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Mouse pad</span></a></h3>
+                                            <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,5</span></p>
+                                        </article>
+            <article class="pcard">
+                                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-usbc.jpg" alt="" loading="lazy">
+                                            </div>
+                                            <p class="pcard__price"><span class="price price--sm">R$ 6,00</span><span class="price-old">R$ 7,50</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo USB-C</span></a></h3>
+                                            <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,6</span></p>
+                                        </article>
+            <article class="pcard">
+                                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/limpa-telas.jpg" alt="" loading="lazy">
+                                            </div>
+                                            <p class="pcard__price"><span class="price price--sm">R$ 9,52</span><span class="price-old">R$ 11,90</span><span class="badge badge--discount pcard__off">-20%</span></p>
+                                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Limpa-telas</span></a></h3>
+                                            <p class="pcard__rating"><span class="rating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></svg> 4,7</span></p>
+                                        </article>
+            <article class="pcard">
+                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/cabo-hdmi.jpg" alt="" loading="lazy">
+                            </div>
+                            <p class="pcard__price"><span class="price price--sm">R$ 12,50</span></p>
+                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Cabo HDMI</span></a></h3>
+                        </article>
+            <article class="pcard">
+                            <div class="pcard__media has-img"><img class="media-img" src="img/produtos/teclado.jpg" alt="" loading="lazy">
+                            </div>
+                            <p class="pcard__price"><span class="price price--sm">R$ 129,90</span></p>
+                            <h3 class="pcard__name"><a href="produto.html"><span class="pcard__title">Teclado sem fio</span></a></h3>
+                        </article>
+        </div>
     </section>
 
     <!-- Barra inferior: a mesma da Início em todas as telas (regra do
          protótipo). -->
+    <div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+        <div class="zoom__bar">
+            <span class="zoom__count"><span id="zoom-atual">1</span>/8</span>
+            <div class="zoom__btns">
+                <button class="zoom__btn" type="button" id="zoom-menos" aria-label="Diminuir zoom"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+                <button class="zoom__btn" type="button" id="zoom-mais" aria-label="Aumentar zoom"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                <button class="zoom__btn" type="button" id="zoom-fechar" aria-label="Fechar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+            </div>
+        </div>
+        <div class="zoom__stage" id="zoom-stage"><img class="zoom__img" id="zoom-img" src="" alt=""></div>
+    </div>
+
     <nav class="tabbar" aria-label="Navegação principal">
         <a class="tab is-active" href="index.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></span>
@@ -303,9 +352,9 @@
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/></svg></span>
             Explorar
         </a>
-        <a class="tab" href="carrinho.html" aria-label="Sacola, 4 itens">
-            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="tab__count">4</span></span>
-            Sacola
+        <a class="tab" href="carrinho.html" aria-label="Carrinho, 4 itens">
+            <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 11.6a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.2L20.5 7H6"/></svg><span class="tab__count">4</span></span>
+            Carrinho
         </a>
         <a class="tab" href="pedidos.html">
             <span class="tab__icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6"/></svg></span>
@@ -321,7 +370,7 @@
 
 <script>
 /* O que radio/checkbox não resolvem sozinhos: acompanhar a foto visível
-   da galeria (contador e bolinhas), mostrar a variação escolhida e contar
+   da galeria (contador e bolinhas), contar
    a quantidade, refazendo o total do botão. A conta é em centavos para não arrastar erro de ponto
    flutuante (12 × 9,52 em reais dá 114,23999…). */
 (function () {
@@ -330,14 +379,110 @@
     // Galeria: cada foto tem a largura do trilho, então a atual sai da
     // posição de rolagem. Recalcula a cada rolagem e ao carregar.
     var trilho = $('galeria');
+    var thumbs = document.querySelectorAll('.gallery__thumb');
     var atual  = $('galeria-atual');
     var dots   = $('galeria-dots').children;
+    var faixa = $('galeria-thumbs');
+    var ultima = -1;
+    function centralizarMiniatura(i) {
+        var t = faixa.children[i];
+        if (!t) return;
+        faixa.scrollTo({ left: t.offsetLeft - (faixa.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' });
+    }
+    var arrasto = null;
+    faixa.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        arrasto = { x: e.clientX, left: faixa.scrollLeft, moveu: false };
+        faixa.classList.add('is-arrastando');
+    });
+    window.addEventListener('pointermove', function (e) {
+        if (!arrasto) return;
+        var dx = e.clientX - arrasto.x;
+        if (Math.abs(dx) > 4) arrasto.moveu = true;
+        faixa.scrollLeft = arrasto.left - dx;
+    });
+    window.addEventListener('pointerup', function () {
+        if (!arrasto) return;
+        faixa.classList.remove('is-arrastando');
+        var moveu = arrasto.moveu;
+        arrasto = null;
+        if (moveu) faixa.dataset.arrastou = '1';
+    });
+    faixa.addEventListener('click', function (e) {
+        if (faixa.dataset.arrastou) {
+            faixa.dataset.arrastou = '';
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    }, true);
     function marcarFoto() {
         var i = Math.round(trilho.scrollLeft / (trilho.clientWidth || 1));
         i = Math.max(0, Math.min(dots.length - 1, i));
         atual.textContent = i + 1;
         for (var d = 0; d < dots.length; d++) dots[d].classList.toggle('is-active', d === i);
+        for (var t = 0; t < thumbs.length; t++) {
+            thumbs[t].classList.toggle('is-active', t === i);
+            if (t === i) thumbs[t].setAttribute('aria-current', 'true'); else thumbs[t].removeAttribute('aria-current');
+        }
+        if (i !== ultima) { ultima = i; centralizarMiniatura(i); }
     }
+
+    var fotos = trilho.children;
+    thumbs.forEach(function (t, i) {
+        t.addEventListener('click', function () {
+            trilho.scrollTo({ left: i * trilho.clientWidth, behavior: 'smooth' });
+        });
+    });
+
+    var zoom = $('zoom'), zimg = $('zoom-img'), zstage = $('zoom-stage'), zatual = $('zoom-atual');
+    var nivel = 1, MIN = 1, MAX = 4;
+    function fotoAtual() {
+        return Math.max(0, Math.min(fotos.length - 1, Math.round(trilho.scrollLeft / (trilho.clientWidth || 1))));
+    }
+    function aplicarZoom(novo) {
+        var antes = nivel;
+        nivel = Math.max(MIN, Math.min(MAX, novo));
+        zimg.style.width = (nivel * 100) + '%';
+        zimg.style.height = (nivel * 100) + '%';
+        zstage.classList.toggle('is-zoom', nivel > 1);
+        var f = nivel / antes;
+        zstage.scrollLeft = (zstage.scrollLeft + zstage.clientWidth / 2) * f - zstage.clientWidth / 2;
+        zstage.scrollTop = (zstage.scrollTop + zstage.clientHeight / 2) * f - zstage.clientHeight / 2;
+        $('zoom-menos').disabled = nivel <= MIN;
+        $('zoom-mais').disabled = nivel >= MAX;
+    }
+    function abrirZoom() {
+        var i = fotoAtual();
+        zimg.src = fotos[i].querySelector('img').getAttribute('src');
+        zatual.textContent = i + 1;
+        nivel = 1;
+        zoom.hidden = false;
+        document.documentElement.classList.add('zoom-aberto');
+        aplicarZoom(1);
+        $('zoom-fechar').focus();
+    }
+    function fecharZoom() {
+        zoom.hidden = true;
+        document.documentElement.classList.remove('zoom-aberto');
+        $('galeria-zoom').focus();
+    }
+    $('galeria-zoom').addEventListener('click', abrirZoom);
+    Array.prototype.forEach.call(fotos, function (f) { f.addEventListener('click', abrirZoom); });
+    $('zoom-fechar').addEventListener('click', fecharZoom);
+    $('zoom-mais').addEventListener('click', function () { aplicarZoom(nivel + 1); });
+    $('zoom-menos').addEventListener('click', function () { aplicarZoom(nivel - 1); });
+    zimg.addEventListener('dblclick', function () { aplicarZoom(nivel > 1 ? 1 : 2); });
+    zstage.addEventListener('wheel', function (e) {
+        if (!e.ctrlKey && !e.metaKey) return;
+        e.preventDefault();
+        aplicarZoom(nivel + (e.deltaY < 0 ? 1 : -1));
+    }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+        if (zoom.hidden) return;
+        if (e.key === 'Escape') fecharZoom();
+        if (e.key === '+' || e.key === '=') aplicarZoom(nivel + 1);
+        if (e.key === '-') aplicarZoom(nivel - 1);
+    });
     trilho.addEventListener('scroll', marcarFoto, { passive: true });
     marcarFoto();
 
@@ -364,20 +509,8 @@
     mais.addEventListener('click',  function () { if (qtd < MAXIMO) { qtd++; atualizar(); } });
     presente.addEventListener('change', atualizar);
 
-    // Variação: o valor escolhido aparece ao lado do nome do atributo.
-    var variacao = document.querySelector('[data-variacao]');
-    if (variacao) {
-        var valorVar = variacao.querySelector('[data-variacao-valor]');
-        var marcarVar = function () {
-            var marcado = variacao.querySelector('input:checked');
-            if (marcado) valorVar.textContent = marcado.value;
-        };
-        variacao.addEventListener('change', marcarVar);
-        marcarVar();
-    }
-
-    // Ao voltar para a página, o navegador pode restaurar o presente e a
-    // variação já marcados: a primeira conta lê o estado real.
+    // Ao voltar para a página, o navegador pode restaurar o presente já
+    // marcado: a primeira conta lê o estado real.
     atualizar();
 })();
 </script>

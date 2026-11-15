@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* =====================================================================
-   Kulma — Telas do fluxo (busca, sacola, checkout, pedidos, reservas,
+   Kulma — Telas do fluxo (busca, carrinho, checkout, pedidos, reservas,
    avaliação, perfil, entrada)
    Componentes que só essas telas usam: cabeçalho de página, caixas,
    linhas de item, resumo de valores, formulário, linha do tempo de
@@ -54,7 +54,7 @@
 }
 
 /* Pedidos | Reservas: as duas listas são páginas irmãs. */
-.page-tabs { margin-top: 12px; }
+.page-tabs { margin-top: 0; }
 
 
 /* ---------- Caixas ---------- */
@@ -399,7 +399,8 @@ textarea.field__input { height: auto; min-height: 96px; padding: 12px 14px; resi
     color: var(--navy);
 }
 
-.box > .order:first-child { border-top: none; padding-top: 0; }
+.box__title { margin: 0 0 4px; font-size: 16px; }
+.box > .box__title + .order { border-top: none; padding-top: 8px; }
 .box > .order:last-child { padding-bottom: 0; }
 
 .order__photo {

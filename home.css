@@ -61,6 +61,8 @@
 
 .promo__who span { font-weight: 400; color: var(--muted); }
 
+.promo__badges { flex: none; display: flex; gap: 6px; }
+
 .promo__store .badge { flex: none; }
 
 .promo__media {
@@ -142,17 +144,6 @@
 /* Indicador em janela deslizante: mostra cinco vagas e a trilha desliza
    para manter a ativa sempre no centro — o o O o o. A seta do fim marca
    o slide de carregar mais. Cada vaga tem 18px: o JS conta com isso. */
-/* Faixa navy acima das bolinhas: da largura da janela de 5 bolinhas,
-   sumindo em degradê nas duas pontas. */
-.promos__line {
-    width: calc(5 * 18px);
-    height: 1.5px;
-    margin: 12px auto 0;
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent, var(--navy) 15%, var(--navy) 85%, transparent);
-    opacity: .25;
-}
-
 .promos__dots {
     width: calc(5 * 18px);
     margin: 8px auto 0;
@@ -382,7 +373,7 @@
 .lista-total__text strong { color: var(--navy); font-weight: 600; }
 
 /* Filtro: contorno navy com o número de filtros aplicados em navy
-   cheio (vermelho fica com preço, compra, urgência, sacola e
+   cheio (vermelho fica com preço, compra, urgência, carrinho e
    notificação). */
 .lista-total__filter {
     flex: none;
@@ -653,33 +644,6 @@
     width: 88px;
     height: 132px;
 }
-
-/* Exclusiva de assinante, vista por quem é inscrito grátis: no lugar
-   dos itens, o mesmo aviso tracejado do cupom trancado da sede, com o
-   caminho até a assinatura (4.8). Só abre com a seta, como os itens. */
-.deal__lock {
-    display: none;
-    align-items: center;
-    gap: 12px;
-    margin: 14px var(--gutter) 0;
-    padding: 12px 14px;
-    border: 1px dashed var(--navy-300);
-    border-radius: var(--radius);
-    color: var(--navy);
-}
-
-.deal-toggle:checked ~ .deal__lock { display: flex; }
-
-.deal__lock svg { flex: none; }
-
-.deal__lock-text {
-    flex: 1;
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.4;
-    color: var(--muted);
-}
-
 
 /* ---------- Conta: painel inferior ---------- */
 /* Aberto pelo sino, pela aba Conta da navegação inferior ou por

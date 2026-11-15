@@ -4,13 +4,13 @@
    Identidade (seção 7 do documento de projeto):
    fundo branco · detalhes em #132A45 (navy) e #D6293B (vermelho).
    O vermelho fica restrito a preço, botão principal, badge de desconto
-   ou urgência, contador da sacola, ponto de notificação e o anel de
+   ou urgência, contador do carrinho, ponto de notificação e o anel de
    "stories" das lojas com novidade. O navy carrega texto, ícones, bordas
    e o estado ativo — onde o iFood pinta o ativo de vermelho, aqui é navy.
 
    Formato: o do iFood (posição dos elementos, forma dos componentes,
    bottom sheets, abas sublinhadas, lojas em linha sem cartão, barra da
-   sacola). As cores e as fontes continuam as do Kulma.
+   carrinho). As cores e as fontes continuam as do Kulma.
 
    Este arquivo é só a base compartilhada pelas três páginas: tokens,
    reset, o "aparelho" (.app) e os componentes de uso geral. O que só
@@ -46,13 +46,12 @@
        componentes usam este token, para tudo alinhar na mesma coluna. */
     --gutter:      16px;
 
-    /* Alturas das barras fixas do rodapé. Moram aqui porque a própria
-       barra e quem reserva espaço no fim da página (.app, .app--cartbar)
-       precisam do mesmo número. */
+    /* Altura da barra fixa do rodapé. Mora aqui porque a própria barra e
+       quem reserva espaço no fim da página (.app) precisam do mesmo
+       número. */
     --tabbar-h:    60px;
     /* Barra de busca presa no topo, a mesma em todas as telas. */
     --topbar-h:    60px;
-    --cartbar-h:   73px;
 
     /* "Foto" do protótipo: não há arquivos de imagem, então todo lugar
        que teria foto mostra um emoji sobre navy claro com textura
@@ -94,8 +93,8 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 
 /* O cliente é mobile-first (React Native); no desktop a tela vira um
    aparelho centralizado sobre o canvas. O respiro no fim é o espaço da
-   nav inferior (Início); páginas com outra barra fixa trocam pelo
-   modificador (.app--cartbar na sede, .app--action no item). */
+   nav inferior (Início); páginas sem ela trocam a folga pelo próprio
+   modificador (.app--sede na loja). */
 .app {
     max-width: 430px;
     margin: 0 auto;
@@ -104,11 +103,6 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     box-shadow: var(--shadow);
     padding-bottom: 88px;
     position: relative;
-}
-
-/* Sem nav, só a barra da sacola (sede). */
-.app--cartbar {
-    padding-bottom: calc(var(--cartbar-h) + 24px + env(safe-area-inset-bottom, 0px));
 }
 
 
@@ -318,7 +312,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 /* ---------- Barra superior (busca + cidade) ---------- */
 /* REGRA: as barras de cima (.topbar) e de baixo (.tabbar) aparecem em
    TODAS as telas, com a mesma marcação e o mesmo visual. Telas internas
-   podem acrescentar coisas abaixo delas (capa, galeria, sacola), nunca
+   podem acrescentar coisas abaixo delas (capa, galeria, carrinho), nunca
    trocá-las por outra barra. */
 /* Primeira coisa da tela: um campo só, sublinhado em navy, com a lupa
    à esquerda e o pin com a cidade dentro, à direita (a busca é
@@ -461,7 +455,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 /* Vermelho: desconto e urgência. */
 .badge--discount { background: var(--red); color: #fff; }
 .badge--urgent   { background: var(--red-050); color: var(--red-700); }
-/* Navy: informação neutra, selo "Obrigatório" e exclusividade de assinante. */
+/* Navy: informação neutra e selo "Obrigatório". */
 .badge--navy     { background: var(--navy); color: #fff; }
 .badge--soft     { background: var(--navy-050); color: var(--navy-700); }
 
@@ -665,7 +659,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 .chip-toggle:checked + .chip .chip__chev { color: inherit; }
 
 /* Quantos filtros aplicados, no chip "Filtros". Navy, não vermelho —
-   vermelho é só para preço, ação principal, urgência e sacola. */
+   vermelho é só para preço, ação principal, urgência e carrinho. */
 .chip__count {
     display: grid;
     place-items: center;
@@ -919,7 +913,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     line-height: 1;
 }
 
-/* Buscar similares e adicionar à sacola juntos numa pílula branca no
+/* Buscar similares e adicionar ao carrinho juntos numa pílula branca no
    canto de baixo da foto, à direita: a lupa e o "+", os dois no mesmo
    navy. Acima do link esticado do nome (z-index), para
    receberem o toque. */
@@ -1146,94 +1140,10 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 }
 
 
-/* ---------- Barra da sacola ---------- */
-/* "Ver sacola" presa no rodapé: ícone com contador à esquerda, texto no
-   centro, total à direita. Navy, porque o vermelho cheio da tela é do
-   botão principal da página; o vermelho aqui fica no contador.
-   A faixa externa é a que fica fixa (padrão de 430px); o botão vai
-   dentro dela, com respiro, e respeita a área segura do aparelho. */
-
-.cartbar {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 430px;
-    z-index: 31;
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-    border-top: 1px solid var(--line);
-    background: var(--surface);
-}
-
-/* Três colunas, as das pontas iguais: assim "Ver sacola" fica no centro
-   da barra inteira, não no espaço que sobra entre ícone e total. */
-.cartbar__btn {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    min-height: 52px;
-    padding: 0 14px;
-    border: none;
-    border-radius: 12px;
-    background: var(--navy);
-    color: #fff;
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -.01em;
-    cursor: pointer;
-}
-
-.cartbar__btn:hover { background: var(--navy-700); }
-
-.cartbar__btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
-
-.cartbar__icon {
-    position: relative;
-    justify-self: start;
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-}
-
-/* Contorno navy, não branco: o contador está sobre a barra. */
-.cartbar__count {
-    position: absolute;
-    top: -3px;
-    right: -6px;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 5px;
-    display: grid;
-    place-items: center;
-    border-radius: 999px;
-    background: var(--red);
-    color: #fff;
-    font-family: var(--body);
-    font-size: 10.5px;
-    font-weight: 700;
-    line-height: 1;
-    box-shadow: 0 0 0 2px var(--navy);
-}
-
-.cartbar__label { text-align: center; white-space: nowrap; }
-
-.cartbar__total {
-    justify-self: end;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-
-
 /* ---------- Navegação inferior ---------- */
-/* Início · Explorar · Sacola · Pedidos · Conta, na ordem do iFood.
+/* Início · Explorar · Carrinho · Pedidos · Conta, na ordem do iFood.
    Ícone com rótulo embaixo; a aba ativa é navy (no iFood seria
-   vermelha). O vermelho aparece só no contador da sacola e no ponto de
+   vermelha). O vermelho aparece só no contador do carrinho e no ponto de
    notificação da conta. A altura vem do token, o mesmo que reserva o
    espaço do fim da página (.app). */
 
@@ -1277,7 +1187,7 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
 /* Conta é um <label> (abre o painel); herda o mesmo visual das <a>. */
 label.tab { cursor: pointer; }
 
-/* Contador da sacola. */
+/* Contador do carrinho. */
 .tab__count {
     position: absolute;
     top: -3px;
@@ -1332,7 +1242,7 @@ label.tab { cursor: pointer; }
 /* Pontilhado com o pin no meio — assinatura visual da identidade
    (seção 7). Separa blocos que não são seções de lista. O pin é navy:
    ele marca lugar, e lugar não está entre os usos do vermelho (preço,
-   compra, urgência, sacola, notificação, novidade). */
+   compra, urgência, carrinho, notificação, novidade). */
 
 .route {
     display: flex;
@@ -1686,7 +1596,7 @@ label.tab { cursor: pointer; }
 
 
 /* ---------- Pop-up "Adicionar a…" (o "+" do cartão) ---------- */
-/* Sacola em cima, em destaque; embaixo, os projetos do cliente e criar
+/* Carrinho em cima, em destaque; embaixo, os projetos do cliente e criar
    um novo, em linhas com foto. */
 
 .add-head { min-width: 0; }
@@ -1714,8 +1624,8 @@ label.tab { cursor: pointer; }
 
 .add-opt:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: 8px; }
 
-/* Sacola: cartão navy claro, separado da lista de projetos. */
-.add-opt--sacola {
+/* Carrinho: cartão navy claro, separado da lista de projetos. */
+.add-opt--carrinho {
     margin-top: 4px;
     padding: 12px;
     border: none;
