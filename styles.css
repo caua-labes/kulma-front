@@ -711,7 +711,14 @@ a, button, label { -webkit-tap-highlight-color: transparent; }
     position: sticky;
     top: var(--utabs-top, 0px);
     z-index: 20;
+    transition: top .25s ease;
 }
+
+/* Barra superior some ao rolar para baixo e volta ao rolar para cima (bars.js). */
+.topbar { transition: transform .25s ease, box-shadow .25s ease; }
+.topbar.is-hidden { transform: translateY(-100%); box-shadow: none; }
+html.bar-off { --utabs-top: 0px; --anchor-offset: 52px; }
+.sede-cover { transition: top .25s ease; }
 
 .utabs__item {
     position: relative;

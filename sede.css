@@ -37,7 +37,7 @@ html { scroll-behavior: smooth; }
 
 .sede-cover {
     position: sticky;
-    top: var(--topbar-h);
+    top: var(--utabs-top);
     z-index: 0;
     height: 230px;
     overflow: hidden;
@@ -413,3 +413,40 @@ html { scroll-behavior: smooth; }
 
 /* Fim da página: folga para o último conteúdo passar do botão. */
 .app--sede { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+
+.deal-rail {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding: 0 var(--gutter);
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--gutter);
+    scrollbar-width: none;
+}
+.deal-rail::-webkit-scrollbar { display: none; }
+.deal-rail > .deal {
+    flex: 0 0 88%;
+    min-width: 0;
+    padding: 6px 0 22px;
+    scroll-snap-align: start;
+}
+.deal-rail > .deal + .deal::before { display: none; }
+.deal-rail .deal__tags { flex-direction: row; align-items: center; gap: 6px; }
+
+.sede-ship { display: grid; grid-auto-rows: 1fr; gap: 10px; padding: 18px var(--gutter) 0; }
+.sede-ship .item-ship__row {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--navy);
+}
+.sede-ship .item-ship__row > div { flex: 1; min-width: 0; padding: 12px 14px 12px 0; align-self: center; }
+.sede-ship .item-ship__icon { flex: none; display: grid; place-items: center; width: 72px; background: var(--navy-050); color: var(--navy); }
+.sede-ship .item-ship__icon svg { width: 34px; height: 34px; }
+.sede-ship .item-ship__title { margin: 0; font-size: 14px; line-height: 1.35; }
+.sede-ship .item-ship__sub { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
