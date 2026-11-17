@@ -175,7 +175,6 @@
     border-radius: var(--radius-sm);
     color: var(--navy);
     font-size: 13.5px;
-    cursor: pointer;
 }
 
 .ui-toggle:checked + .item-var__opt {
@@ -307,31 +306,14 @@
 .item-gift {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 4px 10px;
-    margin-top: 12px;
+    gap: 8px;
+    margin: 12px 0 0;
     color: var(--navy);
-    font-size: 13.5px;
-    cursor: pointer;
+    font-size: 13px;
 }
+.item-gift > svg { flex: none; }
 
-.item-gift__extra { color: var(--muted); font-size: 12.5px; }
 
-.item-gift__mark {
-    display: grid;
-    place-items: center;
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid var(--navy-300);
-    border-radius: 6px;
-    color: #fff;
-}
-
-.item-gift__mark svg { opacity: 0; }
-
-.ui-toggle:checked + .item-gift .item-gift__mark { border-color: var(--navy); background: var(--navy); }
-.ui-toggle:checked + .item-gift .item-gift__mark svg { opacity: 1; }
-.ui-toggle:focus-visible + .item-gift { outline: 2px solid var(--navy); outline-offset: 4px; border-radius: 4px; }
 
 .item-buy__actions {
     display: grid;
