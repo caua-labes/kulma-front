@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="home.css">
 </head>
 <body>
-<main class="app">
+<main class="app app--home">
 
     <!-- Busca sempre à mão, presa no topo ao rolar. Um campo só, em
          traço: lupa, texto e, à direita, separados por um fio, o pin com
@@ -36,7 +36,7 @@
          "foto" à direita. Troca sozinha a cada 5 s (JS, no fim). Os
          números são os mesmos da aba Ofertas e da página da sede. -->
     <section class="promos" aria-label="Ofertas das lojas em que você é inscrito">
-        <article class="promo">
+        <article class="promo" style="--promo-tint:#d81b4f">
             <p class="promo__store"><span class="promo__who">Ponto Digital <span>· Centro</span></span><span class="promo__badges"><span class="badge badge--urgent">Termina em 2 dias</span><span class="badge badge--soft">6 produtos</span></span></p>
             <a class="promo__media has-img" href="propaganda.html" aria-label="Semana da tecnologia: 20% em 6 itens, Ponto Digital">
                 <img class="media-img" src="img/banners/tecnologia.jpg" alt="">
@@ -45,7 +45,7 @@
                 <div class="promo__track" aria-hidden="true"><span>Semana da tecnologia: 20% em 6 itens</span><span>Semana da tecnologia: 20% em 6 itens</span></div>
             </div>
         </article>
-        <article class="promo">
+        <article class="promo" style="--promo-tint:#a8774a">
             <p class="promo__store"><span class="promo__who">Casa Firme <span>· Velha</span></span><span class="promo__badges"><span class="badge badge--urgent">Termina em 5 dias</span><span class="badge badge--soft">7 produtos</span></span></p>
             <a class="promo__media has-img" href="sede.html" aria-label="Mês da reforma: 15% em 7 itens, Casa Firme">
                 <img class="media-img" src="img/banners/reforma.jpg" alt="">
@@ -54,7 +54,7 @@
                 <div class="promo__track" aria-hidden="true"><span>Mês da reforma: 15% em 7 itens</span><span>Mês da reforma: 15% em 7 itens</span></div>
             </div>
         </article>
-        <article class="promo">
+        <article class="promo" style="--promo-tint:#6f8f7a">
             <p class="promo__store"><span class="promo__who">Ateliê Garcia <span>· Garcia</span></span><span class="promo__badges"><span class="badge badge--urgent">Último dia</span><span class="badge badge--soft">8 produtos</span></span></p>
             <a class="promo__media has-img" href="sede.html" aria-label="Troca de estação: 30% em roupas e calçados, Ateliê Garcia">
                 <img class="media-img" src="img/banners/estacao.jpg" alt="">
@@ -63,7 +63,7 @@
                 <div class="promo__track" aria-hidden="true"><span>Troca de estação: 30% em roupas e calçados</span><span>Troca de estação: 30% em roupas e calçados</span></div>
             </div>
         </article>
-        <article class="promo">
+        <article class="promo" style="--promo-tint:#b5a698">
             <p class="promo__store"><span class="promo__who">Farmácia Vila Nova <span>· Vila Nova</span></span><span class="promo__badges"><span class="badge badge--urgent">Termina em 9 dias</span><span class="badge badge--soft">6 produtos</span></span></p>
             <a class="promo__media has-img" href="sede.html" aria-label="Cuidado diário: 25% em dermocosméticos, Farmácia Vila Nova">
                 <img class="media-img" src="img/banners/cuidado.jpg" alt="">
@@ -106,28 +106,28 @@
             <a class="proj proj--oferta" href="#" aria-label="Computador novo, 3 de 6 itens, 2 dos que faltam em oferta">
                 <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/computador.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Computador novo</span>
-                <span class="proj__meta">3 de 6 itens</span>
-                <span class="proj__bar" aria-hidden="true"><span style="width:50%"></span><span class="proj__bar-oferta" style="width:33.3%"></span></span>
-                <span class="proj__deal" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg> 2 itens em oferta</span>
+                
+                <span class="proj__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="of"></i><i class="of"></i><i></i></span>
+                <span class="proj__star" aria-hidden="true"><svg class="proj__star-ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg></span>
             </a>
             <a class="proj proj--oferta" href="#" aria-label="Reforma da cozinha, 5 de 12 itens, 3 dos que faltam em oferta">
                 <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/cozinha.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Reforma da cozinha</span>
-                <span class="proj__meta">5 de 12 itens</span>
-                <span class="proj__bar" aria-hidden="true"><span style="width:41.7%"></span><span class="proj__bar-oferta" style="width:25%"></span></span>
-                <span class="proj__deal" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg> 3 itens em oferta</span>
+                
+                <span class="proj__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="of"></i><i class="of"></i><i class="of"></i><i></i><i></i><i></i><i></i></span>
+                <span class="proj__star" aria-hidden="true"><svg class="proj__star-ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.4" cy="7.4" r="1.3" fill="currentColor"/></svg></span>
             </a>
             <a class="proj" href="#" aria-label="Aniversário da Ana, 8 de 9 itens">
                 <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/aniversario.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Aniversário da Ana</span>
-                <span class="proj__meta">8 de 9 itens</span>
-                <span class="proj__bar" aria-hidden="true"><span style="width:89%"></span></span>
+                
+                <span class="proj__bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
             </a>
             <a class="proj" href="#" aria-label="Varanda com plantas, 1 de 5 itens">
                 <span class="proj__art has-img" aria-hidden="true"><img class="media-img" src="img/projetos/varanda.jpg" alt="" loading="lazy"></span>
                 <span class="proj__name">Varanda com plantas</span>
-                <span class="proj__meta">1 de 5 itens</span>
-                <span class="proj__bar" aria-hidden="true"><span style="width:20%"></span></span>
+                
+                <span class="proj__bar" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span>
             </a>
             <a class="proj proj--novo" href="#">
                 <span class="proj__art" aria-hidden="true">+</span>
@@ -1472,5 +1472,6 @@ document.addEventListener('keydown', (e) => {
 })();
 </script>
 <script src="bars.js"></script>
+<script src="promo-tint.js"></script>
 </body>
 </html>

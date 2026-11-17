@@ -40,6 +40,31 @@
     scroll-snap-align: center;
 }
 
+/* Container do banner: cor sólida tirada da cor principal da foto
+   (--promo-tint, calculada pelo promo-tint.js ou definida à mão no style
+   do <article>). A cor do texto (--promo-ink) acompanha o brilho dela. */
+.promo:not(.promo--more) {
+    position: relative;
+    overflow: hidden;
+    padding: 12px;
+    border-radius: 22px;
+    background: var(--promo-tint, #c9d3df);
+    color: var(--promo-ink, var(--navy));
+    box-shadow: 0 8px 22px rgba(19, 42, 69, .14);
+}
+
+.promo:not(.promo--more) .promo__store { margin: 0 0 10px; }
+.promo:not(.promo--more) .promo__store,
+.promo:not(.promo--more) .promo__who span,
+.promo:not(.promo--more) .promo__track span { color: var(--promo-ink, var(--navy)); }
+.promo:not(.promo--more) .promo__who span { font-weight: 600; }
+.promo:not(.promo--more) .promo__media {
+    margin: 0 -12px;
+    border: none;
+    border-radius: 0;
+}
+.promo:not(.promo--more) .promo__marquee { margin: 10px 2px 2px; }
+
 /* Loja e bairro à esquerda; prazo da campanha no fim da linha. */
 .promo__store {
     display: flex;
@@ -264,7 +289,18 @@
 
 /* Espaçamento da seção: título colado no trilho, com 16px até os
    cartões. */
-.projects { padding-top: 16px; }
+/* Início no estilo do app Shop: fundo cinza e cada bloco num container
+   branco de cantos bem arredondados. */
+.app--home { background: var(--surface-alt); }
+
+.app--home .projects {
+    margin: 14px 12px 0;
+    padding: 18px 0 16px;
+    overflow: hidden;
+    border-radius: 26px;
+    background: var(--surface);
+    box-shadow: 0 1px 2px rgba(19, 42, 69, .05), 0 8px 24px rgba(19, 42, 69, .06);
+}
 .projects .sec-head { margin-bottom: 4px; }
 .projects .hrail { padding-top: 12px; }
 
@@ -300,6 +336,116 @@
 }
 
 .proj--novo .proj__name { min-height: 0; }
+
+
+/* Projetos no estilo do banner: foto grande ocupando o cartão todo, sem
+   borda, e um painel borrado na base com o nome e o progresso. */
+.app--home .proj {
+    width: 150px;
+    min-height: 214px;
+    padding: 0;
+    border: none;
+    border-radius: 22px;
+    overflow: hidden;
+    isolation: isolate;
+    clip-path: inset(0 round 22px); /* garante o canto redondo mesmo com a foto em zoom */
+    justify-content: flex-end;
+    background: var(--navy);
+    color: #fff;
+}
+
+.app--home .proj__art {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    aspect-ratio: auto;
+    border-radius: 0;
+}
+
+.app--home .proj::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 52%;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(19, 42, 69, 0), rgba(19, 42, 69, .62));
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 60%);
+    mask-image: linear-gradient(180deg, transparent, #000 60%);
+    pointer-events: none;
+}
+
+.app--home .proj__name,
+.app--home .proj__meta,
+.app--home .proj__bar,
+.app--home .proj__deal { position: relative; z-index: 2; }
+
+.app--home .proj__name { margin: 0 12px; color: #fff; }
+/* Barra de stories: um tracinho por item do projeto. Branco = já
+   comprado, vermelho = falta e está em oferta, apagado = falta. */
+.app--home .proj__bar {
+    gap: 3px;
+    height: 3px;
+    margin: 10px 12px 14px;
+    overflow: visible;
+    background: none;
+}
+.app--home .proj__bar i {
+    flex: 1 1 0;
+    min-width: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .35);
+}
+.app--home .proj__bar i.on { background: #fff; }
+.app--home .proj__bar i.of { background: var(--red); }
+
+.app--home .proj__art img { transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+.app--home .proj:hover .proj__art img,
+.app--home .proj:focus-visible .proj__art img { transform: scale(1.1); }
+.app--home .proj:active .proj__art img { transform: scale(1.14); }
+
+/* Selo redondo de desconto no canto da foto: aparece nos projetos que têm
+   itens em oferta. */
+.app--home .proj__star {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 3px 8px rgba(19, 42, 69, .3);
+    transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+}
+.app--home .proj__star-ic { position: relative; }
+.app--home .proj:hover .proj__star { transform: scale(1.12); }
+
+.app--home .proj--novo {
+    justify-content: center;
+    padding: 12px;
+    background: var(--surface-alt);
+    color: var(--navy);
+}
+.app--home .proj--novo::before { display: none; }
+.app--home .proj--novo .proj__art {
+    position: relative;
+    inset: auto;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    aspect-ratio: 1;
+    margin: 0 0 12px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+}
+.app--home .proj--novo .proj__name { margin: 0; color: var(--navy); }
+.app--home .proj--novo .proj__meta { margin: 4px 0 0; color: var(--muted); }
 
 
 /* ---------- Listagem: abas Produtos / Ofertas / Lojas ---------- */
@@ -844,3 +990,38 @@
     line-height: 1;
     text-align: center;
 }
+
+/* Zoom suave na foto das ofertas (banner do carrossel e cartão da aba
+   Ofertas) ao passar o mouse, no mesmo estilo dos projetos. */
+.promo__media,
+.deal__media { overflow: hidden; isolation: isolate; }
+
+.promo__media .media-img,
+.deal__media .media-img { transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+
+.promo:hover .promo__media .media-img,
+.promo__media:focus-visible .media-img,
+.deal:hover .deal__media .media-img { transform: scale(1.08); }
+
+.promo:active .promo__media .media-img,
+.deal:active .deal__media .media-img { transform: scale(1.12); }
+
+@media (prefers-reduced-motion: reduce) {
+    .promo__media .media-img,
+    .deal__media .media-img { transition: none; }
+}
+
+/* Listagem (Produtos / Ofertas / Lojas) dentro de um container cinza de
+   cantos arredondados, como os outros blocos da Início. */
+.app--home .tabsw {
+    margin: 14px 12px 0;
+    border-radius: 26px;
+    background: var(--canvas);
+}
+.app--home .tabsw__bar { border-radius: 26px 26px 0 0; }
+.app--home .tabsw .lista-total,
+.app--home .tabsw .pane,
+.app--home .tabsw .chips-row { background: transparent; }
+
+/* Lupa e "+" no canto superior direito da foto do produto. */
+#pane-produtos .pcard__acts { top: 6px; bottom: auto; }

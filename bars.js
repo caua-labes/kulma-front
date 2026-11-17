@@ -72,7 +72,7 @@
         return cv.toDataURL();
     }
 
-    function lente(el, id, bezel, scale) {
+    function lente(el, id, bezel, scale, soFiltro) {
         var b = el.getBoundingClientRect();
         var w = Math.round(b.width), h = Math.round(b.height);
         if (!w || !h) return;
@@ -87,9 +87,10 @@
         f.setAttribute('color-interpolation-filters', 'sRGB');
         f.innerHTML =
             '<feImage href="' + mapa(w, h, Math.min(r, h / 2), bezel) + '" x="0" y="0" width="' + w + '" height="' + h + '" result="mapa"/>' +
-            '<feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="suave"/>' +
+            '<feGaussianBlur in="SourceGraphic" stdDeviation="5.5" result="suave"/>' +
             '<feDisplacementMap in="suave" in2="mapa" scale="' + scale + '" xChannelSelector="R" yChannelSelector="G"/>';
         holder.appendChild(f);
+        if (soFiltro) return;
         el.style.webkitBackdropFilter = el.style.backdropFilter = 'url(#' + id + ') saturate(1.7) brightness(1.06)';
         el.style.background = 'rgba(255, 255, 255, .16)';
     }

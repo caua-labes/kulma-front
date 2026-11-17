@@ -1183,12 +1183,13 @@ html.bar-off { --utabs-top: 0px; --anchor-offset: 52px; }
 @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .tabbar {
         background: linear-gradient(180deg, rgba(255, 255, 255, .40), rgba(255, 255, 255, .22));
-        -webkit-backdrop-filter: blur(14px) saturate(170%);
-        backdrop-filter: blur(14px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        backdrop-filter: blur(20px) saturate(170%);
     }
 }
 
 .tab {
+    transition: transform .12s ease;
     display: grid;
     justify-items: center;
     gap: 0;
@@ -1199,6 +1200,8 @@ html.bar-off { --utabs-top: 0px; --anchor-offset: 52px; }
     letter-spacing: -.01em;
     color: var(--navy-300);
 }
+
+.tab:active { transform: scale(.88); }
 
 .tab__icon {
     position: relative;
