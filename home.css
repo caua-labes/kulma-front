@@ -40,30 +40,52 @@
     scroll-snap-align: center;
 }
 
-/* Container do banner: cor sólida tirada da cor principal da foto
-   (--promo-tint, calculada pelo promo-tint.js ou definida à mão no style
-   do <article>). A cor do texto (--promo-ink) acompanha o brilho dela. */
+/* Container do banner: a própria foto, bem maior e levemente borrada,
+   forma o fundo (o promo-tint.js põe a <img class="promo__bg">); a foto
+   principal fica por cima e o fundo só aparece nas bordas. Sem cores
+   chapadas. O texto é branco sobre um véu escuro. */
 .promo:not(.promo--more) {
     position: relative;
+    isolation: isolate;
     overflow: hidden;
-    padding: 12px;
+    padding: 8px;
     border-radius: 22px;
-    background: var(--promo-tint, #c9d3df);
-    color: var(--promo-ink, var(--navy));
+    background: var(--navy);
+    color: #fff;
     box-shadow: 0 8px 22px rgba(19, 42, 69, .14);
 }
 
-.promo:not(.promo--more) .promo__store { margin: 0 0 10px; }
+.promo__bg {
+    position: absolute;
+    top: -30px; left: -30px;
+    z-index: -2;
+    width: calc(100% + 60px);
+    height: calc(100% + 60px);
+    object-fit: cover;
+    filter: blur(var(--promo-blur, 10px)) saturate(1.2);
+    pointer-events: none;
+}
+
+.promo:not(.promo--more)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(19, 42, 69, .38);
+    pointer-events: none;
+}
+
+.promo:not(.promo--more) .promo__store { margin: 0 4px 8px; }
 .promo:not(.promo--more) .promo__store,
 .promo:not(.promo--more) .promo__who span,
-.promo:not(.promo--more) .promo__track span { color: var(--promo-ink, var(--navy)); }
+.promo:not(.promo--more) .promo__track span { color: #fff; }
 .promo:not(.promo--more) .promo__who span { font-weight: 600; }
 .promo:not(.promo--more) .promo__media {
-    margin: 0 -12px;
+    margin: 0 -8px;
     border: none;
     border-radius: 0;
 }
-.promo:not(.promo--more) .promo__marquee { margin: 10px 2px 2px; }
+.promo:not(.promo--more) .promo__marquee { margin: 8px 4px 2px; }
 
 /* Loja e bairro à esquerda; prazo da campanha no fim da linha. */
 .promo__store {
@@ -294,12 +316,8 @@
 .app--home { background: var(--surface-alt); }
 
 .app--home .projects {
-    margin: 14px 12px 0;
-    padding: 18px 0 16px;
-    overflow: hidden;
-    border-radius: 26px;
-    background: var(--surface);
-    box-shadow: 0 1px 2px rgba(19, 42, 69, .05), 0 8px 24px rgba(19, 42, 69, .06);
+    margin: 14px 0 0;
+    padding: 6px 0 0;
 }
 .projects .sec-head { margin-bottom: 4px; }
 .projects .hrail { padding-top: 12px; }
@@ -341,14 +359,14 @@
 /* Projetos no estilo do banner: foto grande ocupando o cartão todo, sem
    borda, e um painel borrado na base com o nome e o progresso. */
 .app--home .proj {
-    width: 150px;
-    min-height: 214px;
+    width: 124px;
+    min-height: 150px;
     padding: 0;
     border: none;
-    border-radius: 22px;
+    border-radius: 20px;
     overflow: hidden;
     isolation: isolate;
-    clip-path: inset(0 round 22px); /* garante o canto redondo mesmo com a foto em zoom */
+    clip-path: inset(0 round 20px); /* garante o canto redondo mesmo com a foto em zoom */
     justify-content: flex-end;
     background: var(--navy);
     color: #fff;
@@ -381,13 +399,13 @@
 .app--home .proj__bar,
 .app--home .proj__deal { position: relative; z-index: 2; }
 
-.app--home .proj__name { margin: 0 12px; color: #fff; }
+.app--home .proj__name { margin: 0 10px; color: #fff; font-size: 12px; min-height: 0; }
 /* Barra de stories: um tracinho por item do projeto. Branco = já
    comprado, vermelho = falta e está em oferta, apagado = falta. */
 .app--home .proj__bar {
     gap: 3px;
     height: 3px;
-    margin: 10px 12px 14px;
+    margin: 8px 10px 12px;
     overflow: visible;
     background: none;
 }
@@ -409,13 +427,13 @@
    itens em oferta. */
 .app--home .proj__star {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 7px;
+    right: 7px;
     z-index: 2;
     display: grid;
     place-items: center;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: var(--red);
     color: #fff;
@@ -1011,17 +1029,54 @@
     .deal__media .media-img { transition: none; }
 }
 
-/* Listagem (Produtos / Ofertas / Lojas) dentro de um container cinza de
-   cantos arredondados, como os outros blocos da Início. */
-.app--home .tabsw {
-    margin: 14px 12px 0;
-    border-radius: 26px;
-    background: var(--canvas);
+/* Abas da listagem iguais às da busca: seletor segmentado em pílula
+   direto sobre o cinza da página, sem container. */
+.app--home .tabsw { margin-top: 14px; }
+.app--home .tabsw__bar {
+    gap: 0;
+    padding: 8px var(--gutter) 10px;
+    border-bottom: none;
+    background: var(--surface-alt);
 }
-.app--home .tabsw__bar { border-radius: 26px 26px 0 0; }
-.app--home .tabsw .lista-total,
-.app--home .tabsw .pane,
-.app--home .tabsw .chips-row { background: transparent; }
+
+.app--home .tabsw__bar::before {
+    content: "";
+    position: absolute;
+    inset: 8px var(--gutter) 10px;
+    z-index: -1;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+}
+
+.app--home .tabsw__bar .utabs__item {
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 999px;
+    color: var(--navy-700);
+    font-weight: 600;
+    transition: background .15s ease, color .15s ease;
+}
+
+.app--home .tabsw__bar .utabs__item::after { display: none; }
+
+.app--home #aba-produtos:checked ~ .tabsw__bar label[for="aba-produtos"],
+.app--home #aba-ofertas:checked  ~ .tabsw__bar label[for="aba-ofertas"],
+.app--home #aba-lojas:checked    ~ .tabsw__bar label[for="aba-lojas"] {
+    background: var(--navy);
+    box-shadow: inset 0 0 0 3px var(--surface);
+    color: #fff;
+    font-weight: 700;
+}
+
+.app--home #aba-produtos:focus-visible ~ .tabsw__bar label[for="aba-produtos"],
+.app--home #aba-ofertas:focus-visible  ~ .tabsw__bar label[for="aba-ofertas"],
+.app--home #aba-lojas:focus-visible    ~ .tabsw__bar label[for="aba-lojas"] {
+    outline-offset: 2px;
+    border-radius: 999px;
+}
+
+.app--home .lista-total { padding-top: 0; }
 
 /* Lupa e "+" no canto superior direito da foto do produto. */
 #pane-produtos .pcard__acts { top: 6px; bottom: auto; }
